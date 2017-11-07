@@ -11,10 +11,6 @@ buildscript {
 apply plugin: 'org.springframework.boot'
 apply from: "$rootDir/gradle/versioning.gradle"
 
-springBoot {
-    buildInfo()
-}
-
 dependencies {
     compile 'org.projectlombok:lombok'
 }

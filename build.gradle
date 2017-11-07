@@ -5,15 +5,14 @@ buildscript {
 
     repositories {
         mavenLocal()
-        mavenCentral()
         maven { url 'http://repo.spring.io/plugins-release' }
+        mavenCentral()
     }
 
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:1.0.1.RELEASE"
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
-        classpath "org.projectlombok:lombok:1.16.16"
     }
 
 }

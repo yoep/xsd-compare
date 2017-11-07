@@ -9,4 +9,10 @@ allprojects {
             }
         }
     }
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://repo.spring.io/plugins-release' }
+        mavenCentral()
+    }
 }
