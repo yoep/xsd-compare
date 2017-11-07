@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.compare.xsd.views.MainView">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="30" minHeight="30" prefHeight="30" vgrow="NEVER"/>
+        <RowConstraints vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <MenuBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
+        <Menu text="File">
+            <MenuItem text="Load left side" onAction="#loadLeftTree"/>
+            <MenuItem text="Load right side" onAction="#loadRightTree"/>
+        </Menu>
+    </MenuBar>
+    <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"/>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"/>
+    </SplitPane>
+</GridPane>

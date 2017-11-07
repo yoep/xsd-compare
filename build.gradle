@@ -17,10 +17,13 @@ buildscript {
 
 }
 
-apply plugin: "org.sonarqube"
+apply plugin: 'application'
+apply plugin: 'org.sonarqube'
 apply from: "$rootDir/gradle/versioning.gradle"
 apply from: "$rootDir/gradle/allprojects.gradle"
 apply from: "$rootDir/gradle/subprojects.gradle"
+
+mainClassName = "com.compare.xsd.XsdCompareApplication"
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew scripts for unix and windows environments'
