@@ -22,11 +22,12 @@ public class XsdCompareApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         ViewConfiguration viewConfiguration = applicationContext.getBean(ViewConfiguration.class);
         ViewLoader loader = applicationContext.getBean(ViewLoader.class);
-        Parent root = loader.load("/views/main.fxml");
+        Parent root = loader.load("main.fxml");
         Scene scene = new Scene(root);
 
         viewConfiguration.init(primaryStage);
 
+        primaryStage.setTitle("XSD Compare");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
