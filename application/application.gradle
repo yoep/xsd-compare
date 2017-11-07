@@ -12,5 +12,6 @@ apply plugin: 'org.springframework.boot'
 apply from: "$rootDir/gradle/versioning.gradle"
 
 dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
     compile 'org.projectlombok:lombok'
 }
