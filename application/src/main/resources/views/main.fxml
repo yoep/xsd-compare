@@ -23,8 +23,6 @@
                 <Label/>
             </placeholder>
             <columns>
-                <TreeTableColumn text="Name" editable="false" sortable="false"/>
-                <TreeTableColumn text="Type"/>
             </columns>
         </TreeTableView>
         <TreeTableView id="rightTree" SplitPane.resizableWithParent="true">
@@ -32,8 +30,6 @@
                 <Label/>
             </placeholder>
             <columns>
-                <TreeTableColumn text="Name" editable="false" sortable="false"/>
-                <TreeTableColumn text="Type"/>
             </columns>
         </TreeTableView>
     </SplitPane>

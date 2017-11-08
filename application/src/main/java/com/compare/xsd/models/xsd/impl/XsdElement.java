@@ -7,6 +7,7 @@ import com.sun.org.apache.xerces.internal.impl.xs.XSModelGroupImpl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSParticleDecl;
 import com.sun.org.apache.xerces.internal.xs.XSObjectList;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
+import javafx.scene.image.Image;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.util.Assert;
@@ -21,12 +22,23 @@ public class XsdElement implements XsdNode {
     private final List<XsdElement> childElements = new ArrayList<>();
 
     private String name;
+    private String type;
 
+    /**
+     * Initialize a new {@link XsdElement}.
+     *
+     * @param element Set the element to process.
+     */
     public XsdElement(XSElementDecl element) {
         Assert.notNull(element, "element cannot be null");
         this.element = element;
 
         init();
+    }
+
+    @Override
+    public Image getIcon() {
+        return new Image(getClass().getResourceAsStream("/icons/element.png"));
     }
 
     private void init() {

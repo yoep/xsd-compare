@@ -1,11 +1,13 @@
 package com.compare.xsd.models.xsd.impl;
 
+import com.compare.xsd.models.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
 import com.sun.org.apache.xerces.internal.xs.XSConstants;
 import com.sun.org.apache.xerces.internal.xs.XSModel;
 import com.sun.org.apache.xerces.internal.xs.XSNamedMap;
 import com.sun.org.apache.xerces.internal.xs.XSObject;
+import javafx.scene.image.Image;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.util.Assert;
@@ -16,15 +18,32 @@ import java.util.List;
 
 @EqualsAndHashCode
 @Getter
-public class XsdDocument {
+public class XsdDocument implements XsdNode {
     private final File file;
     private final List<XsdElement> elements = new ArrayList<>();
 
+    private String name;
+
+    /**
+     * Initialize a new instance of {@link XsdDocument}.
+     *
+     * @param file Set the XSD file to load.
+     */
     public XsdDocument(File file) {
         Assert.notNull(file, "file cannot be null");
         this.file = file;
 
         init();
+    }
+
+    @Override
+    public String getType() {
+        return null;
+    }
+
+    @Override
+    public Image getIcon() {
+        return new Image(getClass().getResourceAsStream("/icons/file.png"));
     }
 
     /**
@@ -34,6 +53,8 @@ public class XsdDocument {
         XSLoaderImpl loader = new XSLoaderImpl();
         XSModel model = loader.loadURI(file.getAbsolutePath());
         XSNamedMap elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
+
+        this.name = file.getName();
 
         for (int i = 0; i < elements.getLength(); i++) {
             XSObject item = elements.item(i);
