@@ -1,12 +1,8 @@
 package com.compare.xsd.loaders;
 
-import com.compare.xsd.models.xsd.XsdDocument;
-import com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl;
-import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
-import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
-import com.sun.org.apache.xerces.internal.xs.*;
+import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.models.xsd.impl.XsdDocument;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -18,11 +14,11 @@ public class XsdLoader {
     private static final String EXTENSION = "*.xsd";
     private static final String EXTENSION_DESCRIPTION = "XML Schema Definition Language (XSD)";
 
-    private final Stage stage;
+    private final ViewManager viewManager;
     private final FileChooser fileChooser;
 
-    public XsdLoader(Stage stage) {
-        this.stage = stage;
+    public XsdLoader(ViewManager viewManager) {
+        this.viewManager = viewManager;
         this.fileChooser = new FileChooser();
     }
 
@@ -39,7 +35,7 @@ public class XsdLoader {
      * @return Returns the loaded XSD file.
      */
     public XsdDocument chooseAndLoad() {
-        File file = fileChooser.showOpenDialog(stage);
+        File file = fileChooser.showOpenDialog(viewManager.getStage());
 
         return load(file);
     }
@@ -52,26 +48,7 @@ public class XsdLoader {
      */
     public XsdDocument load(File file) {
         Assert.notNull(file, "file cannot be null");
-        XSLoaderImpl loader = new XSLoaderImpl();
-        XSModel model = loader.loadURI(file.getAbsolutePath());
-        XSNamedMap elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            XSObject item = elements.item(i);
-
-            if (item instanceof XSElementDecl) {
-                XSElementDecl element = (XSElementDecl) item;
-                XSTypeDefinition typeDefinition = element.getTypeDefinition();
-
-                if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
-                    XSComplexTypeDecl complexType = (XSComplexTypeDecl) typeDefinition;
-
-
-                }
-            }
-        }
-
-
-        return null;
+        return new XsdDocument(file);
     }
 }

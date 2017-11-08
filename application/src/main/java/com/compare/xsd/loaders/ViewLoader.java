@@ -1,7 +1,9 @@
 package com.compare.xsd.loaders;
 
+import com.compare.xsd.managers.ViewManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -16,9 +18,11 @@ public class ViewLoader {
     private static final String DIRECTORY = "/views/";
 
     private final ApplicationContext applicationContext;
+    private final ViewManager viewManager;
 
-    public ViewLoader(ApplicationContext applicationContext) {
+    public ViewLoader(ApplicationContext applicationContext, ViewManager viewManager) {
         this.applicationContext = applicationContext;
+        this.viewManager = viewManager;
     }
 
     /**
@@ -43,5 +47,20 @@ public class ViewLoader {
         }
 
         return null;
+    }
+
+    /**
+     * Load and show the given view.
+     *
+     * @param view Set the view to load and show.
+     */
+    public void show(String view) {
+        Assert.hasText(view, "view cannot be empty");
+        Parent loadedView = load(view);
+        Scene scene = new Scene(loadedView);
+
+        viewManager.setScene(scene);
+        viewManager.getStage().setScene(scene);
+        viewManager.getStage().show();
     }
 }

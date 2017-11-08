@@ -1,6 +1,7 @@
 package com.compare.xsd;
 
 import com.compare.xsd.loaders.ViewLoader;
+import com.compare.xsd.managers.ViewManager;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,15 +21,11 @@ public class XsdCompareApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ViewConfiguration viewConfiguration = applicationContext.getBean(ViewConfiguration.class);
+        ViewManager viewManager = applicationContext.getBean(ViewManager.class);
         ViewLoader loader = applicationContext.getBean(ViewLoader.class);
-        Parent root = loader.load("main.fxml");
-        Scene scene = new Scene(root);
 
-        viewConfiguration.init(primaryStage);
-
+        viewManager.setStage(primaryStage);
         primaryStage.setTitle("XSD Compare");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        loader.show("main.fxml");
     }
 }
