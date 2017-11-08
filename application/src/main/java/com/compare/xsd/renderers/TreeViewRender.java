@@ -91,8 +91,11 @@ public class TreeViewRender {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+                TreeItem<XsdNode> treeItem = getTreeTableRow().getTreeItem();
+                XsdNode xsdNode = treeItem != null ? treeItem.getValue() : null;
+
                 setText(empty ? null : item);
-                setGraphic(empty ? null : new ImageView(getTreeTableRow().getTreeItem().getValue().getIcon()));
+                setGraphic(empty || xsdNode == null ? null : new ImageView(xsdNode.getIcon()));
             }
         });
     }

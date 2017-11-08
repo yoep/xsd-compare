@@ -17,6 +17,11 @@ public class XsdLoader {
     private final ViewManager viewManager;
     private final FileChooser fileChooser;
 
+    /**
+     * Initialize a new instance of {@link XsdLoader}.
+     *
+     * @param viewManager Set the view manager.
+     */
     public XsdLoader(ViewManager viewManager) {
         this.viewManager = viewManager;
         this.fileChooser = new FileChooser();
@@ -27,6 +32,7 @@ public class XsdLoader {
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter(EXTENSION_DESCRIPTION, EXTENSION);
 
         this.fileChooser.getExtensionFilters().add(extensionFilter);
+        this.fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     }
 
     /**
@@ -37,7 +43,12 @@ public class XsdLoader {
     public XsdDocument chooseAndLoad() {
         File file = fileChooser.showOpenDialog(viewManager.getStage());
 
-        return load(file);
+        if (file != null) {
+            this.fileChooser.setInitialDirectory(file.getParentFile());
+            return load(file);
+        } else {
+            return null;
+        }
     }
 
     /**

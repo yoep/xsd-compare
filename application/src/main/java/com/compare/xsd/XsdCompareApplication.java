@@ -24,6 +24,7 @@ public class XsdCompareApplication extends Application {
 
         viewManager.setStage(primaryStage);
         primaryStage.setTitle("XSD Compare");
+        primaryStage.setMaximized(true);
         loader.show("main.fxml");
     }
 }
