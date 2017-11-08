@@ -24,6 +24,8 @@ public class XsdDocument implements XsdNode {
 
     private String name;
 
+    //region Constructors
+
     /**
      * Initialize a new instance of {@link XsdDocument}.
      *
@@ -36,6 +38,10 @@ public class XsdDocument implements XsdNode {
         init();
     }
 
+    //endregion
+
+    //region Getters & Setters
+
     @Override
     public String getType() {
         return null;
@@ -45,6 +51,10 @@ public class XsdDocument implements XsdNode {
     public Image getIcon() {
         return new Image(getClass().getResourceAsStream("/icons/file.png"));
     }
+
+    //endregion
+
+    //region Functions
 
     /**
      * Initialize the {@link XsdDocument} by loading the given file.
@@ -64,4 +74,6 @@ public class XsdDocument implements XsdNode {
             }
         }
     }
+
+    //endregion
 }

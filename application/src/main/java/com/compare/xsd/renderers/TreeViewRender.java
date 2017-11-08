@@ -20,6 +20,8 @@ import java.util.List;
 public class TreeViewRender {
     private final TreeTableView<XsdNode> treeView;
 
+    //region Constructors
+
     /**
      * Initialize a new instance of {@link TreeViewRender}.
      *
@@ -31,6 +33,10 @@ public class TreeViewRender {
 
         init();
     }
+
+    //endregion
+
+    //region Methods
 
     /**
      * Render the given {@link XsdDocument} in the tree view.
@@ -46,6 +52,10 @@ public class TreeViewRender {
         rootItem.setExpanded(true);
         treeView.setRoot(rootItem);
     }
+
+    //endregion
+
+    //region Functions
 
     private void init() {
         treeView.getColumns().clear();
@@ -109,4 +119,6 @@ public class TreeViewRender {
 
         return column;
     }
+
+    //endregion
 }

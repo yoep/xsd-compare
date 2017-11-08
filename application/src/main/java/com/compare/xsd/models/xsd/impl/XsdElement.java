@@ -24,6 +24,8 @@ public class XsdElement implements XsdNode {
     private String name;
     private String type;
 
+    //region Constructors
+
     /**
      * Initialize a new {@link XsdElement}.
      *
@@ -36,10 +38,18 @@ public class XsdElement implements XsdNode {
         init();
     }
 
+    //endregion
+
+    //region Getters & Setters
+
     @Override
     public Image getIcon() {
         return new Image(getClass().getResourceAsStream("/icons/element.png"));
     }
+
+    //endregion
+
+    //region Functions
 
     private void init() {
         XSTypeDefinition typeDefinition = element.getTypeDefinition();
@@ -65,4 +75,6 @@ public class XsdElement implements XsdNode {
             }
         }
     }
+
+    //endregion
 }
