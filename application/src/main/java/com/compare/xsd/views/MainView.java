@@ -1,36 +1,20 @@
 package com.compare.xsd.views;
 
-import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
-import com.sun.org.apache.xerces.internal.xs.XSConstants;
-import com.sun.org.apache.xerces.internal.xs.XSModel;
-import com.sun.org.apache.xerces.internal.xs.XSNamedMap;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import com.compare.xsd.loaders.XsdLoader;
+import com.compare.xsd.models.xsd.XsdDocument;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
-import java.io.File;
-
 @Component
 public class MainView {
-    private final Stage stage;
+    private final XsdLoader xsdLoader;
 
-    public MainView(Stage stage) {
-        this.stage = stage;
+    public MainView(XsdLoader xsdLoader) {
+        this.xsdLoader = xsdLoader;
     }
 
     public void loadLeftTree() throws SAXException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XSD file", "*.xsd"));
-        fileChooser.setTitle("Select XSD to load");
-
-        File file = fileChooser.showOpenDialog(stage);
-
-        XSLoaderImpl loader = new XSLoaderImpl();
-        XSModel model = loader.loadURI(file.getAbsolutePath());
-        XSNamedMap elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
-
-
+        XsdDocument xsdDocument = xsdLoader.chooseAndLoad();
     }
 
     public void loadRightTree() {
