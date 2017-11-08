@@ -62,6 +62,7 @@ public class TreeViewRender {
 
         addNameColumn();
         addTypeColumn();
+        addCardinalityColumn();
     }
 
     private void renderChildren(List<XsdElement> elements, TreeItem<XsdNode> parent) {
@@ -101,13 +102,24 @@ public class TreeViewRender {
     }
 
     private void addTypeColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("Type", 100);
+        TreeTableColumn<XsdNode, String> column = initNewColumn("Type", 80);
 
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();
             XsdNode node = treeItem.getValue();
 
             return new ReadOnlyStringWrapper(node.getType());
+        });
+    }
+
+    private void addCardinalityColumn() {
+        TreeTableColumn<XsdNode, String> column = initNewColumn("Type", 50);
+
+        column.setCellValueFactory(cellData -> {
+            TreeItem<XsdNode> treeItem = cellData.getValue();
+            XsdNode node = treeItem.getValue();
+
+            return new ReadOnlyStringWrapper(node.getCardinality());
         });
     }
 

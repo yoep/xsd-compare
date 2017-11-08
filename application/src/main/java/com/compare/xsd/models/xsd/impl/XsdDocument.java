@@ -48,6 +48,11 @@ public class XsdDocument implements XsdNode {
     }
 
     @Override
+    public String getCardinality() {
+        return null;
+    }
+
+    @Override
     public Image getIcon() {
         return new Image(getClass().getResourceAsStream("/icons/file.png"));
     }

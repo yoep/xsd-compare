@@ -25,9 +25,12 @@ public class XsdElement implements XsdNode {
 
     private final XSElementDecl element;
     private final List<XsdElement> childElements = new ArrayList<>();
+    private final List<XsdAttribute> attributes = new ArrayList<>();
 
     private String name;
     private String type;
+    private Integer minOccurrence;
+    private Integer maxOccurrence;
 
     //region Constructors
 
@@ -48,6 +51,11 @@ public class XsdElement implements XsdNode {
     //region Getters & Setters
 
     @Override
+    public String getCardinality() {
+        return minOccurrence + ".." + (maxOccurrence != null ? maxOccurrence : "*");
+    }
+
+    @Override
     public Image getIcon() {
         return new Image(getClass().getResourceAsStream("/icons/element.png"));
     }
@@ -60,6 +68,7 @@ public class XsdElement implements XsdNode {
         XSTypeDefinition typeDefinition = element.getTypeDefinition();
 
         this.name = element.getName();
+        log.fine("Processing element " + this.name);
 
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);
@@ -80,6 +89,9 @@ public class XsdElement implements XsdNode {
         if (particle != null) {
             XSModelGroupImpl group = (XSModelGroupImpl) particle.getTerm();
             XSObjectList children = group.getParticles();
+
+            this.minOccurrence = particle.getMinOccurs();
+            this.maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
 
             for (int i = 0; i < children.getLength(); i++) {
                 XSParticleDecl child = (XSParticleDecl) children.item(i);

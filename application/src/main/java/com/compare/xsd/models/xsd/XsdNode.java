@@ -7,5 +7,7 @@ public interface XsdNode {
 
     String getType();
 
+    String getCardinality();
+
     Image getIcon();
 }
