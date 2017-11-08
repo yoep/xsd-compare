@@ -22,8 +22,6 @@ public class MainView {
         XsdDocument xsdDocument = xsdLoader.chooseAndLoad();
 
         TreeTableView leftTree = (TreeTableView) viewManager.getScene().lookup("#leftTree");
-
-        leftTree.getColumns().add(new TreeTableColumn<>("test"));
     }
 
     public void loadRightTree() {

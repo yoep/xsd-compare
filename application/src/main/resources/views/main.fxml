@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121"
-          xmlns:fx="http://javafx.com/fxml/1"
+<GridPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.compare.xsd.views.MainView">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES"/>
@@ -14,12 +13,28 @@
     </rowConstraints>
     <MenuBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
         <Menu text="File">
-            <MenuItem text="Load left side" onAction="#loadLeftTree"/>
-            <MenuItem text="Load right side" onAction="#loadRightTree"/>
+            <MenuItem onAction="#loadLeftTree" text="Load left side"/>
+            <MenuItem onAction="#loadRightTree" text="Load right side"/>
         </Menu>
     </MenuBar>
     <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
-        <TreeTableView id="leftTree" SplitPane.resizableWithParent="true" />
-        <TreeTableView id="rightTree" SplitPane.resizableWithParent="true" />
+        <TreeTableView id="leftTree" SplitPane.resizableWithParent="true">
+            <placeholder>
+                <Label/>
+            </placeholder>
+            <columns>
+                <TreeTableColumn text="Name" editable="false" sortable="false"/>
+                <TreeTableColumn text="Type"/>
+            </columns>
+        </TreeTableView>
+        <TreeTableView id="rightTree" SplitPane.resizableWithParent="true">
+            <placeholder>
+                <Label/>
+            </placeholder>
+            <columns>
+                <TreeTableColumn text="Name" editable="false" sortable="false"/>
+                <TreeTableColumn text="Type"/>
+            </columns>
+        </TreeTableView>
     </SplitPane>
 </GridPane>
