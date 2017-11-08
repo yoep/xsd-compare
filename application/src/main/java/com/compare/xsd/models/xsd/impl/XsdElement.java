@@ -1,6 +1,7 @@
 package com.compare.xsd.models.xsd.impl;
 
 import com.compare.xsd.models.xsd.XsdNode;
+import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSComplexTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSModelGroupImpl;
@@ -10,14 +11,18 @@ import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.extern.java.Log;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Log
 @EqualsAndHashCode
 @Getter
 public class XsdElement implements XsdNode {
+    private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
+
     private final XSElementDecl element;
     private final List<XsdElement> childElements = new ArrayList<>();
 
@@ -58,7 +63,15 @@ public class XsdElement implements XsdNode {
 
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);
+        } else if (typeDefinition.getTypeCategory() == XSTypeDefinition.SIMPLE_TYPE) {
+            loadSimpleType((XSSimpleTypeDecl) typeDefinition);
+        } else {
+            log.warning("Unknown element type " + typeDefinition.getTypeCategory());
         }
+    }
+
+    private void loadSimpleType(XSSimpleTypeDecl simpleType) {
+        loadType(simpleType.getBaseType());
     }
 
     private void loadComplexType(XSComplexTypeDecl complexType) {
@@ -73,7 +86,17 @@ public class XsdElement implements XsdNode {
 
                 this.childElements.add(new XsdElement((XSElementDecl) child.getTerm()));
             }
+        } else {
+            loadType(complexType.getBaseType());
         }
+    }
+
+    private void loadType(XSTypeDefinition typeDefinition) {
+        while (typeDefinition.getBaseType() != null && !typeDefinition.getNamespace().equals(SCHEMA_DEFINITION)) {
+            typeDefinition = typeDefinition.getBaseType();
+        }
+
+        this.type = typeDefinition.getName();
     }
 
     //endregion
