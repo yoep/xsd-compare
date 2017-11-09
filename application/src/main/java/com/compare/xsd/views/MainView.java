@@ -65,20 +65,40 @@ public class MainView implements Initializable {
         loadTree(this.treeViewManager.getRightTreeRender());
     }
 
+    /**
+     * Handle a drag over event invoked on one of the tree views.
+     *
+     * @param event Set the event.
+     */
     public void onDragOver(DragEvent event) {
         event.acceptTransferModes(TransferMode.ANY);
     }
 
+    /**
+     * Handle a drag enter event invoked on one of the tree views.
+     *
+     * @param event Set the event.
+     */
     public void onDragEntered(DragEvent event) {
         viewManager.getScene().setCursor(Cursor.HAND);
         event.consume();
     }
 
+    /**
+     * Handle a drag exited event invoked on one of the tree views.
+     *
+     * @param event Set the event.
+     */
     public void onDragExited(DragEvent event) {
         viewManager.getScene().setCursor(Cursor.DEFAULT);
         event.consume();
     }
 
+    /**
+     * Handle a drag dropped event invoked on one of the tree views.
+     *
+     * @param event Set the event.
+     */
     public void onDragDropped(DragEvent event) {
         if (event.getSource() instanceof TreeTableView) {
             TreeTableView<XsdNode> source = (TreeTableView) event.getSource();
@@ -89,6 +109,13 @@ public class MainView implements Initializable {
         } else {
             log.severe("Unknown drag dropped source " + event.getSource().getClass());
         }
+    }
+
+    private void compare() {
+        XsdDocument originalDocument = treeViewManager.getLeftTreeRender().getDocument();
+        XsdDocument newDocument = treeViewManager.getRightTreeRender().getDocument();
+
+        originalDocument.compare(newDocument);
     }
 
     private void loadTree(TreeViewRender treeViewRender) {
@@ -107,6 +134,10 @@ public class MainView implements Initializable {
 
             if (xsdDocument != null) {
                 treeViewRender.render(xsdDocument);
+            }
+
+            if (treeViewManager.getLeftTreeRender().isRendering() && treeViewManager.getRightTreeRender().isRendering()) {
+                compare();
             }
         } catch (Exception ex) {
             log.log(Level.SEVERE, ex.getMessage(), ex);

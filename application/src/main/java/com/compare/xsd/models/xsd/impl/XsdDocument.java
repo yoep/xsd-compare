@@ -66,6 +66,19 @@ public class XsdDocument implements XsdNode {
 
     //endregion
 
+    //region Methods
+
+    /**
+     * Compare this document against the given document for changes.
+     *
+     * @param newDocument Set the new document.
+     */
+    public void compare(XsdDocument newDocument) {
+
+    }
+
+    //endregion
+
     //region Functions
 
     /**
