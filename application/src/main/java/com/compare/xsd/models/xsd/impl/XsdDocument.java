@@ -71,11 +71,13 @@ public class XsdDocument implements XsdNode {
 
         this.name = file.getName();
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            XSObject item = elements.item(i);
+        for (Object item : elements.values()) {
+            if (item instanceof XSObject) {
+                XSObject element = (XSObject) item;
 
-            if (item instanceof XSElementDecl) {
-                this.elements.add(new XsdElement((XSElementDecl) item));
+                if (element instanceof XSElementDecl) {
+                    this.elements.add(new XsdElement((XSElementDecl) item));
+                }
             }
         }
     }

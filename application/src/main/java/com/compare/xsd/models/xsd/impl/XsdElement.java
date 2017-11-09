@@ -7,6 +7,7 @@ import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSModelGroupImpl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSParticleDecl;
 import com.sun.org.apache.xerces.internal.xs.XSObjectList;
+import com.sun.org.apache.xerces.internal.xs.XSParticle;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.EqualsAndHashCode;
@@ -93,10 +94,12 @@ public class XsdElement implements XsdNode {
             this.minOccurrence = particle.getMinOccurs();
             this.maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
 
-            for (int i = 0; i < children.getLength(); i++) {
-                XSParticleDecl child = (XSParticleDecl) children.item(i);
+            for (Object childItem : children) {
+                if (childItem instanceof XSParticle) {
+                    XSParticleDecl child = (XSParticleDecl) childItem;
 
-                this.childElements.add(new XsdElement((XSElementDecl) child.getTerm()));
+                    this.childElements.add(new XsdElement((XSElementDecl) child.getTerm()));
+                }
             }
         } else {
             loadType(complexType.getBaseType());
