@@ -1,7 +1,7 @@
 package com.compare.xsd.loaders;
 
 import com.compare.xsd.managers.ViewManager;
-import com.compare.xsd.models.xsd.impl.XsdDocument;
+import com.compare.xsd.model.xsd.impl.XsdDocument;
 import javafx.stage.FileChooser;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;

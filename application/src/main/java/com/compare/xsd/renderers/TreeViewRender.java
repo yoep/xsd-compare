@@ -1,12 +1,11 @@
 package com.compare.xsd.renderers;
 
-import com.compare.xsd.models.xsd.XsdNode;
-import com.compare.xsd.models.xsd.impl.XsdDocument;
+import com.compare.xsd.model.xsd.XsdNode;
+import com.compare.xsd.model.xsd.impl.XsdDocument;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -84,6 +83,7 @@ public class TreeViewRender {
         addNameColumn();
         addTypeColumn();
         addCardinalityColumn();
+        addColorColumn();
     }
 
     private void renderChildren(List<XsdNode> elements, TreeItem<XsdNode> parent) {
@@ -131,6 +131,16 @@ public class TreeViewRender {
 
             return new ReadOnlyStringWrapper(node.getType());
         });
+
+        column.setCellFactory(treeColumn -> new TreeTableCell<XsdNode, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                setText(empty ? null : item);
+                setTooltip(new Tooltip(item));
+            }
+        });
     }
 
     private void addCardinalityColumn() {
@@ -141,6 +151,33 @@ public class TreeViewRender {
             XsdNode node = treeItem.getValue();
 
             return new ReadOnlyStringWrapper(node.getCardinality());
+        });
+
+        column.setCellFactory(treeColumn -> new TreeTableCell<XsdNode, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                setText(empty ? null : item);
+                setAlignment(Pos.CENTER);
+            }
+        });
+    }
+
+    private void addColorColumn() {
+        TreeTableColumn<XsdNode, String> column = initNewColumn("", 20);
+
+        column.setCellFactory(treeColumn -> new TreeTableCell<XsdNode, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                TreeItem<XsdNode> treeItem = getTreeTableRow().getTreeItem();
+                XsdNode xsdNode = treeItem != null ? treeItem.getValue() : null;
+                Image modificationColor = xsdNode != null ? xsdNode.getModificationColor() : null;
+
+                setGraphic(modificationColor == null ? null : new ImageView(modificationColor));
+                setAlignment(Pos.CENTER);
+            }
         });
     }
 

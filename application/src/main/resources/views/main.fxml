@@ -8,13 +8,16 @@
         <ColumnConstraints hgrow="SOMETIMES"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="30" minHeight="30" prefHeight="30" vgrow="NEVER"/>
+        <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
         <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
     </rowConstraints>
     <MenuBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
         <Menu text="File">
             <MenuItem onAction="#loadLeftTree" text="Load left side"/>
             <MenuItem onAction="#loadRightTree" text="Load right side"/>
+            <SeparatorMenuItem />
+            <MenuItem onAction="#exit" text="Exit" />
         </Menu>
     </MenuBar>
     <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">

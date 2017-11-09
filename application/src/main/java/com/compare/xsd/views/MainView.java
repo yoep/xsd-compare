@@ -3,9 +3,10 @@ package com.compare.xsd.views;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.TreeViewManager;
 import com.compare.xsd.managers.ViewManager;
-import com.compare.xsd.models.xsd.XsdNode;
-import com.compare.xsd.models.xsd.impl.XsdDocument;
+import com.compare.xsd.model.xsd.XsdNode;
+import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.TreeViewRender;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -109,6 +110,10 @@ public class MainView implements Initializable {
         } else {
             log.severe("Unknown drag dropped source " + event.getSource().getClass());
         }
+    }
+
+    public void exit() {
+        Platform.exit();
     }
 
     private void compare() {

@@ -1,19 +1,17 @@
-package com.compare.xsd.models.xsd.impl;
+package com.compare.xsd.model.xsd.impl;
 
-import com.compare.xsd.models.xsd.XsdNode;
+import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl;
 import com.sun.org.apache.xerces.internal.xs.XSAttributeDeclaration;
 import javafx.scene.image.Image;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString
-@Getter
+@Data
 public class XsdAttribute extends AbstractXsdNode {
     private final XSAttributeUseImpl attribute;
 
@@ -38,7 +36,7 @@ public class XsdAttribute extends AbstractXsdNode {
 
     @Override
     public Image getIcon() {
-        return new Image(getClass().getResourceAsStream("/icons/attribute.png"));
+        return loadResourceIcon("attribute.png");
     }
 
     @Override

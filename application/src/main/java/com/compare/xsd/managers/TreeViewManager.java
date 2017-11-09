@@ -1,6 +1,6 @@
 package com.compare.xsd.managers;
 
-import com.compare.xsd.models.xsd.XsdNode;
+import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.renderers.TreeViewRender;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TreeTableView;

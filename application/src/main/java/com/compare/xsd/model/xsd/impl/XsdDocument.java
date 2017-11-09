@@ -1,6 +1,5 @@
-package com.compare.xsd.models.xsd.impl;
+package com.compare.xsd.model.xsd.impl;
 
-import com.compare.xsd.models.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
 import com.sun.org.apache.xerces.internal.xs.XSConstants;
@@ -8,21 +7,18 @@ import com.sun.org.apache.xerces.internal.xs.XSModel;
 import com.sun.org.apache.xerces.internal.xs.XSNamedMap;
 import com.sun.org.apache.xerces.internal.xs.XSObject;
 import javafx.scene.image.Image;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 import org.springframework.util.Assert;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode
-@ToString
-@Getter
-public class XsdDocument implements XsdNode {
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class XsdDocument extends AbstractXsdElementNode {
     private final File file;
-    private final List<XsdElement> elements = new ArrayList<>();
 
     private String name;
 
@@ -56,25 +52,12 @@ public class XsdDocument implements XsdNode {
 
     @Override
     public Image getIcon() {
-        return new Image(getClass().getResourceAsStream("/icons/file.png"));
+        return loadResourceIcon("file.png");
     }
 
     @Override
-    public List<XsdNode> getNodes() {
-        return new ArrayList<>(elements);
-    }
-
-    //endregion
-
-    //region Methods
-
-    /**
-     * Compare this document against the given document for changes.
-     *
-     * @param newDocument Set the new document.
-     */
-    public void compare(XsdDocument newDocument) {
-
+    public Image getModificationColor() {
+        return null;
     }
 
     //endregion

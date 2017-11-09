@@ -1,4 +1,4 @@
-package com.compare.xsd.models.xsd;
+package com.compare.xsd.model.xsd;
 
 import javafx.scene.image.Image;
 
@@ -32,6 +32,13 @@ public interface XsdNode {
      * @return Returns the image icon of the node.
      */
     Image getIcon();
+
+    /**
+     * Get the image to display for the modification of the node.
+     *
+     * @return Returns the color image of the node.
+     */
+    Image getModificationColor();
 
     /**
      * Get the inner nodes of the node (optional).

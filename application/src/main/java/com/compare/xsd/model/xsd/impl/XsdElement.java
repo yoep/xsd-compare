@@ -1,6 +1,5 @@
-package com.compare.xsd.models.xsd.impl;
+package com.compare.xsd.model.xsd.impl;
 
-import com.compare.xsd.models.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.*;
 import com.sun.org.apache.xerces.internal.xs.XSElementDeclaration;
@@ -8,12 +7,10 @@ import com.sun.org.apache.xerces.internal.xs.XSObjectList;
 import com.sun.org.apache.xerces.internal.xs.XSParticle;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -21,12 +18,10 @@ import java.util.List;
 
 @Log
 @EqualsAndHashCode(callSuper = true)
-@ToString
-@Getter
-public class XsdElement extends AbstractXsdNode {
+@Data
+public class XsdElement extends AbstractXsdElementNode {
     private final XSElementDecl element;
     private final XSParticleDecl definition;
-    private final List<XsdElement> childElements = new ArrayList<>();
     private final List<XsdAttribute> attributes = new ArrayList<>();
 
     //region Constructors
@@ -67,12 +62,7 @@ public class XsdElement extends AbstractXsdNode {
 
     @Override
     public Image getIcon() {
-        return new Image(getClass().getResourceAsStream("/icons/element.png"));
-    }
-
-    @Override
-    public List<XsdNode> getNodes() {
-        return ListUtils.union(attributes, childElements);
+        return loadResourceIcon("element.png");
     }
 
     //endregion
@@ -111,7 +101,7 @@ public class XsdElement extends AbstractXsdNode {
                     XSParticleDecl child = (XSParticleDecl) childItem;
 
                     if (child.getTerm() instanceof XSElementDeclaration) {
-                        this.childElements.add(new XsdElement(child));
+                        this.elements.add(new XsdElement(child));
                     }
                 }
             }
