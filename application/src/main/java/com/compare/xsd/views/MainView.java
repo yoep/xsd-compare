@@ -1,67 +1,110 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.loaders.XsdLoader;
+import com.compare.xsd.managers.TreeViewManager;
 import com.compare.xsd.managers.ViewManager;
 import com.compare.xsd.models.xsd.XsdNode;
 import com.compare.xsd.models.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.TreeViewRender;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 @Log
 @Component
-public class MainView {
-    private static final String NODE_SELECTOR_LEFT_TREE = "#leftTree";
-    private static final String NODE_SELECTOR_RIGHT_TREE = "#rightTree";
-
+public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
     private final ViewManager viewManager;
+    private final TreeViewManager treeViewManager;
 
-    private TreeViewRender leftTreeViewRender;
-    private TreeViewRender rightTreeViewRender;
+    @FXML
+    private TreeTableView<XsdNode> leftTree;
+
+    @FXML
+    private TreeTableView<XsdNode> rightTree;
 
     /**
      * Initialize a new instance of {@link MainView}.
      * This view contains the main screen of the application including the tree renders.
      *
-     * @param xsdLoader   Set the XSD loader.
-     * @param viewManager Set the view manager.
+     * @param xsdLoader       Set the XSD loader.
+     * @param viewManager     Set the view manager.
+     * @param treeViewManager Set the tree view manager.
      */
-    public MainView(XsdLoader xsdLoader, ViewManager viewManager) {
+    public MainView(XsdLoader xsdLoader, ViewManager viewManager, TreeViewManager treeViewManager) {
         this.xsdLoader = xsdLoader;
         this.viewManager = viewManager;
+        this.treeViewManager = treeViewManager;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.treeViewManager.setLeftTreeRender(new TreeViewRender(leftTree));
+        this.treeViewManager.setRightTreeRender(new TreeViewRender(rightTree));
     }
 
     public void loadLeftTree() throws SAXException {
-        loadTree(NODE_SELECTOR_LEFT_TREE, leftTreeViewRender);
+        loadTree(this.treeViewManager.getLeftTreeRender());
     }
 
     public void loadRightTree() {
-        loadTree(NODE_SELECTOR_RIGHT_TREE, rightTreeViewRender);
+        loadTree(this.treeViewManager.getRightTreeRender());
     }
 
-    private void loadTree(String selector, TreeViewRender treeViewRender) {
+    public void onDragOver(DragEvent event) {
+        event.acceptTransferModes(TransferMode.ANY);
+    }
+
+    public void onDragEntered(DragEvent event) {
+        viewManager.getScene().setCursor(Cursor.HAND);
+        event.consume();
+    }
+
+    public void onDragExited(DragEvent event) {
+        viewManager.getScene().setCursor(Cursor.DEFAULT);
+        event.consume();
+    }
+
+    public void onDragDropped(DragEvent event) {
+        if (event.getSource() instanceof TreeTableView) {
+            TreeTableView<XsdNode> source = (TreeTableView) event.getSource();
+
+            loadTree(treeViewManager.getRenderer(source), event.getDragboard().getFiles().get(0));
+
+            event.consume();
+        } else {
+            log.severe("Unknown drag dropped source " + event.getSource().getClass());
+        }
+    }
+
+    private void loadTree(TreeViewRender treeViewRender) {
+        loadTree(treeViewRender, null);
+    }
+
+    private void loadTree(TreeViewRender treeViewRender, File file) {
+        XsdDocument xsdDocument;
+
         try {
-            XsdDocument xsdDocument = xsdLoader.chooseAndLoad();
+            if (file == null) {
+                xsdDocument = xsdLoader.chooseAndLoad();
+            } else {
+                xsdDocument = xsdLoader.load(file);
+            }
 
             if (xsdDocument != null) {
-                if (treeViewRender == null) {
-                    Node node = viewManager.getScene().lookup(selector);
-
-                    if (node != null && node instanceof TreeTableView) {
-                        treeViewRender = new TreeViewRender((TreeTableView<XsdNode>) node);
-                    } else {
-                        throw new ViewComponentNotFoundException(selector);
-                    }
-                }
-
                 treeViewRender.render(xsdDocument);
             }
         } catch (Exception ex) {

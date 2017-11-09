@@ -18,14 +18,16 @@
         </Menu>
     </MenuBar>
     <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
-        <TreeTableView id="leftTree" SplitPane.resizableWithParent="true">
+        <TreeTableView fx:id="leftTree" SplitPane.resizableWithParent="true" onDragEntered="#onDragEntered" onDragExited="#onDragExited"
+                       onDragDropped="#onDragDropped" onDragOver="#onDragOver">
             <placeholder>
                 <Label/>
             </placeholder>
             <columns>
             </columns>
         </TreeTableView>
-        <TreeTableView id="rightTree" SplitPane.resizableWithParent="true">
+        <TreeTableView fx:id="rightTree" SplitPane.resizableWithParent="true" onDragEntered="#onDragEntered" onDragExited="#onDragExited"
+                       onDragDropped="#onDragDropped" onDragOver="#onDragOver">
             <placeholder>
                 <Label/>
             </placeholder>

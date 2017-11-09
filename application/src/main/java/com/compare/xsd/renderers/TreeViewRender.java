@@ -8,6 +8,9 @@ import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.image.ImageView;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
 
@@ -16,8 +19,13 @@ import java.util.List;
 /**
  * Renders a {@link XsdDocument} within a {@link TreeTableView}.
  */
+@EqualsAndHashCode
+@ToString
+@Getter
 public class TreeViewRender {
     private final TreeTableView<XsdNode> treeView;
+
+    private XsdDocument document;
 
     //region Constructors
 
@@ -49,7 +57,8 @@ public class TreeViewRender {
         renderChildren(xsdDocument.getNodes(), rootItem);
 
         rootItem.setExpanded(true);
-        treeView.setRoot(rootItem);
+        this.treeView.setRoot(rootItem);
+        this.document = xsdDocument;
     }
 
     //endregion
