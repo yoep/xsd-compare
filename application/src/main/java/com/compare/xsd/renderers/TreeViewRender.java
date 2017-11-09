@@ -2,7 +2,6 @@ package com.compare.xsd.renderers;
 
 import com.compare.xsd.models.xsd.XsdNode;
 import com.compare.xsd.models.xsd.impl.XsdDocument;
-import com.compare.xsd.models.xsd.impl.XsdElement;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
@@ -47,7 +46,7 @@ public class TreeViewRender {
         Assert.notNull(xsdDocument, "xsdDocument cannot be null");
         TreeItem<XsdNode> rootItem = new TreeItem<>(xsdDocument);
 
-        renderChildren(xsdDocument.getElements(), rootItem);
+        renderChildren(xsdDocument.getNodes(), rootItem);
 
         rootItem.setExpanded(true);
         treeView.setRoot(rootItem);
@@ -65,12 +64,12 @@ public class TreeViewRender {
         addCardinalityColumn();
     }
 
-    private void renderChildren(List<XsdElement> elements, TreeItem<XsdNode> parent) {
-        for (XsdElement element : elements) {
+    private void renderChildren(List<XsdNode> elements, TreeItem<XsdNode> parent) {
+        for (XsdNode element : elements) {
             TreeItem<XsdNode> elementTree = new TreeItem<>(element);
 
-            if (CollectionUtils.isNotEmpty(element.getChildElements())) {
-                renderChildren(element.getChildElements(), elementTree);
+            if (CollectionUtils.isNotEmpty(element.getNodes())) {
+                renderChildren(element.getNodes(), elementTree);
             }
 
             elementTree.setExpanded(true);
@@ -113,7 +112,7 @@ public class TreeViewRender {
     }
 
     private void addCardinalityColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("Type", 50);
+        TreeTableColumn<XsdNode, String> column = initNewColumn("Cardinality", 50);
 
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();

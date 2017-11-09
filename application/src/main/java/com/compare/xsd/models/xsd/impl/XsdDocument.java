@@ -10,6 +10,7 @@ import com.sun.org.apache.xerces.internal.xs.XSObject;
 import javafx.scene.image.Image;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.util.Assert;
 
 import java.io.File;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode
+@ToString
 @Getter
 public class XsdDocument implements XsdNode {
     private final File file;
@@ -57,6 +59,11 @@ public class XsdDocument implements XsdNode {
         return new Image(getClass().getResourceAsStream("/icons/file.png"));
     }
 
+    @Override
+    public List<XsdNode> getNodes() {
+        return new ArrayList<>(elements);
+    }
+
     //endregion
 
     //region Functions
@@ -76,7 +83,9 @@ public class XsdDocument implements XsdNode {
                 XSObject element = (XSObject) item;
 
                 if (element instanceof XSElementDecl) {
-                    this.elements.add(new XsdElement((XSElementDecl) item));
+                    XsdElement rootElement = new XsdElement((XSElementDecl) item);
+
+                    this.elements.add(rootElement);
                 }
             }
         }
