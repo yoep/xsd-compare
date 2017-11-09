@@ -43,6 +43,19 @@ public class TreeViewRender {
 
     //endregion
 
+    //region Getters & Setters
+
+    /**
+     * Get if a document is currently being rendered.
+     *
+     * @return Returns true if a document is being rendered, else false.
+     */
+    public boolean isRendering() {
+        return this.document != null;
+    }
+
+    //endregion
+
     //region Methods
 
     /**

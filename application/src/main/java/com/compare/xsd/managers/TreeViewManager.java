@@ -2,6 +2,7 @@ package com.compare.xsd.managers;
 
 import com.compare.xsd.models.xsd.XsdNode;
 import com.compare.xsd.renderers.TreeViewRender;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TreeTableView;
 import lombok.Data;
 import lombok.extern.java.Log;
@@ -32,5 +33,16 @@ public class TreeViewManager {
         } else {
             throw new UnknownNodeException(node);
         }
+    }
+
+    /**
+     * Synchronize the scrolling between the 2 tree views.
+     */
+    public void synchronize() {
+        ScrollBar leftScrollBar = (ScrollBar) leftTreeRender.getTreeView().lookup(".scroll-bar");
+        ScrollBar rightScrollBar = (ScrollBar) rightTreeRender.getTreeView().lookup(".scroll-bar");
+
+        leftScrollBar.valueProperty().addListener((observable, oldValue, newValue) -> rightScrollBar.setValue(newValue.doubleValue()));
+        rightScrollBar.valueProperty().addListener((observable, oldValue, newValue) -> leftScrollBar.setValue(newValue.doubleValue()));
     }
 }

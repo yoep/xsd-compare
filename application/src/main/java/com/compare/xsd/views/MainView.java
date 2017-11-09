@@ -54,6 +54,7 @@ public class MainView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.treeViewManager.setLeftTreeRender(new TreeViewRender(leftTree));
         this.treeViewManager.setRightTreeRender(new TreeViewRender(rightTree));
+        this.viewManager.getStage().setOnShown(event -> this.treeViewManager.synchronize());
     }
 
     public void loadLeftTree() throws SAXException {
