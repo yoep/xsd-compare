@@ -4,7 +4,7 @@ XSD Compare allows you to compare different versions of XML schema files against
 ## Current features
 * Display XML schema files in a tree view
 * Drag-and-drop loading of XML schema files
-* Synchronizing scroll between the 2 tree views
+* Synchronizing scroll and selection between the 2 tree views
 
 ## Future features
 * Showing differences between the 2 XML schema files

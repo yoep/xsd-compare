@@ -63,18 +63,6 @@ public abstract class AbstractXsdNode implements XsdNode {
         return null;
     }
 
-    @Override
-    public String getPathLevel() {
-        String path = "";
-        int index = 0;
-
-        if (parent != null) {
-            path = parent.getPathLevel();
-        }
-
-        return path += "." + index;
-    }
-
     //endregion
 
     //region Functions

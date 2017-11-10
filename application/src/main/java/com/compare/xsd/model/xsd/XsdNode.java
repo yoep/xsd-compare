@@ -27,14 +27,6 @@ public interface XsdNode {
     String getCardinality();
 
     /**
-     * Get the path level of the node separated by dots as delimiters to indicate the "to following path".
-     * This path should always start with "document.".
-     *
-     * @return Returns the path level.
-     */
-    String getPathLevel();
-
-    /**
      * Get the icon of the node.
      *
      * @return Returns the image icon of the node.
