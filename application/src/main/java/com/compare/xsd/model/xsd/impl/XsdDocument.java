@@ -60,6 +60,11 @@ public class XsdDocument extends AbstractXsdElementNode {
         return null;
     }
 
+    @Override
+    public String getPathLevel() {
+        return "document";
+    }
+
     //endregion
 
     //region Functions

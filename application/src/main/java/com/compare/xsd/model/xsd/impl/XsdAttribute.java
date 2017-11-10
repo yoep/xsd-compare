@@ -21,8 +21,10 @@ public class XsdAttribute extends AbstractXsdNode {
      * Initialize a new instance of {@link XsdAttribute}.
      *
      * @param attribute Set the attribute.
+     * @param parent    Set the parent element of this node.
      */
-    public XsdAttribute(XSAttributeUseImpl attribute) {
+    public XsdAttribute(XSAttributeUseImpl attribute, XsdElement parent) {
+        super(parent);
         Assert.notNull(attribute, "attribute cannot be null");
         this.attribute = attribute;
         this.maxOccurrence = 1;

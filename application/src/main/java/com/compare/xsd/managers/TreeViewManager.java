@@ -16,6 +16,10 @@ public class TreeViewManager {
     private TreeViewRender leftTreeRender;
     private TreeViewRender rightTreeRender;
 
+    private boolean isSelecting;
+
+    //region Methods
+
     /**
      * Get the renderer for the given node.
      *
@@ -36,13 +40,52 @@ public class TreeViewManager {
     }
 
     /**
-     * Synchronize the scrolling between the 2 tree views.
+     * Synchronize the scrolling and selection between the 2 tree views.
      */
     public void synchronize() {
-        ScrollBar leftScrollBar = (ScrollBar) leftTreeRender.getTreeView().lookup(".scroll-bar");
-        ScrollBar rightScrollBar = (ScrollBar) rightTreeRender.getTreeView().lookup(".scroll-bar");
+        TreeTableView<XsdNode> leftTree = leftTreeRender.getTreeView();
+        TreeTableView<XsdNode> rightTree = rightTreeRender.getTreeView();
+        ScrollBar leftScrollBar = (ScrollBar) leftTree.lookup(".scroll-bar");
+        ScrollBar rightScrollBar = (ScrollBar) rightTree.lookup(".scroll-bar");
 
         leftScrollBar.valueProperty().addListener((observable, oldValue, newValue) -> rightScrollBar.setValue(newValue.doubleValue()));
         rightScrollBar.valueProperty().addListener((observable, oldValue, newValue) -> leftScrollBar.setValue(newValue.doubleValue()));
+
+        leftTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            synchronizeSelection(leftTreeRender, rightTreeRender);
+        });
+        rightTree.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            synchronizeSelection(rightTreeRender, leftTreeRender);
+        });
     }
+
+    /**
+     * Refresh the rendered tree views.
+     */
+    public void refresh() {
+        leftTreeRender.refresh();
+        rightTreeRender.refresh();
+    }
+
+    //endregion
+
+    //region Functions
+
+    /**
+     * Synchronize the selection between the tree views.
+     *
+     * @param selectedTree Set the tree view which is being selected.
+     * @param otherTree    Set the unfocused tree view.
+     */
+    private void synchronizeSelection(TreeViewRender selectedTree, TreeViewRender otherTree) {
+        if (!isSelecting && otherTree.isRendering()) {
+            isSelecting = true;
+
+            otherTree.getTreeView().getSelectionModel().select(selectedTree.getTreeView().getSelectionModel().getSelectedIndex());
+
+            isSelecting = false;
+        }
+    }
+
+    //endregion
 }

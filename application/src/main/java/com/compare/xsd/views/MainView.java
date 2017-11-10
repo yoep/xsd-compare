@@ -121,6 +121,7 @@ public class MainView implements Initializable {
         XsdDocument newDocument = treeViewManager.getRightTreeRender().getDocument();
 
         originalDocument.compare(newDocument);
+        treeViewManager.refresh(); // refresh tree views to reflect removed and added items
     }
 
     private void loadTree(TreeViewRender treeViewRender) {

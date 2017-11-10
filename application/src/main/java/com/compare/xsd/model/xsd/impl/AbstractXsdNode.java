@@ -4,12 +4,15 @@ import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
  */
 @Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdNode implements XsdNode {
     private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
     private static final String ICON_DIRECTORY = "/icons/";
@@ -19,7 +22,21 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected Integer minOccurrence;
     protected Integer maxOccurrence;
 
+    protected AbstractXsdNode parent;
     protected Modifications modifications;
+
+    //region Constructors
+
+    /**
+     * Initialize a new instance of {@link AbstractXsdNode}.
+     *
+     * @param parent Set the parent of this node.
+     */
+    protected AbstractXsdNode(AbstractXsdNode parent) {
+        this.parent = parent;
+    }
+
+    //endregion
 
     //region Getters & Setters
 
@@ -44,6 +61,18 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
 
         return null;
+    }
+
+    @Override
+    public String getPathLevel() {
+        String path = "";
+        int index = 0;
+
+        if (parent != null) {
+            path = parent.getPathLevel();
+        }
+
+        return path += "." + index;
     }
 
     //endregion

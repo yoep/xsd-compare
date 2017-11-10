@@ -58,6 +58,15 @@ public class TreeViewRender {
     //region Methods
 
     /**
+     * Refresh the tree view.
+     */
+    public void refresh() {
+        if (isRendering()) {
+            this.render(this.document);
+        }
+    }
+
+    /**
      * Render the given {@link XsdDocument} in the tree view.
      *
      * @param xsdDocument Set the xsd document.

@@ -45,8 +45,10 @@ public class XsdElement extends AbstractXsdElementNode {
      * Initialize a new {@link XsdElement}.
      *
      * @param elementDefinition Set the definition to process.
+     * @param parent            Set the parent element of this element.
      */
-    public XsdElement(XSParticleDecl elementDefinition) {
+    public XsdElement(XSParticleDecl elementDefinition, XsdElement parent) {
+        super(parent);
         Assert.notNull(elementDefinition, "elementDefinition cannot be null");
         this.element = (XSElementDecl) elementDefinition.getTerm();
         this.definition = elementDefinition;
@@ -54,6 +56,16 @@ public class XsdElement extends AbstractXsdElementNode {
         this.maxOccurrence = elementDefinition.getMaxOccursUnbounded() ? null : elementDefinition.getMaxOccurs();
 
         init();
+    }
+
+    /**
+     * Initialize a new {@link XsdElement}.
+     * This constructor can only be used {@link XsdEmptyNode}.
+     */
+    protected XsdElement() {
+        this.element = null;
+        this.definition = null;
+        this.name = "";
     }
 
     //endregion
@@ -101,7 +113,7 @@ public class XsdElement extends AbstractXsdElementNode {
                     XSParticleDecl child = (XSParticleDecl) childItem;
 
                     if (child.getTerm() instanceof XSElementDeclaration) {
-                        this.elements.add(new XsdElement(child));
+                        this.elements.add(new XsdElement(child, this));
                     }
                 }
             }
@@ -111,7 +123,7 @@ public class XsdElement extends AbstractXsdElementNode {
 
         if (CollectionUtils.isNotEmpty(attributes)) {
             for (Object attribute : attributes) {
-                this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute));
+                this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
             }
         }
     }
