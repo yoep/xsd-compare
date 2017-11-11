@@ -99,6 +99,7 @@ public class XsdElement extends AbstractXsdElementNode {
     public void compare(AbstractXsdElementNode compareNode) {
         super.compare(compareNode);
         List<XsdAttribute> attributesCopy = new ArrayList<>(attributes); //take a copy as the actual list might be modified during comparison
+        List<XsdAttribute> compareAttributesCopy = new ArrayList<>(((XsdElement) compareNode).getAttributes());
         XsdElement compareElement = (XsdElement) compareNode;
 
         for (XsdAttribute attribute : attributesCopy) {
@@ -111,6 +112,17 @@ public class XsdElement extends AbstractXsdElementNode {
             } catch (NodeNotFoundException ex) {
                 attribute.setModifications(new Modifications(ModificationType.Removed));
                 copyAttributeAsEmptyNode(attributes.indexOf(attribute), compareElement);
+            }
+        }
+
+        for (XsdAttribute attribute : compareAttributesCopy) {
+            try {
+                if (StringUtils.isNoneEmpty(attribute.getName())) {
+                    compareElement.findAttribute(attribute.getName());
+                }
+            } catch (NodeNotFoundException ex) {
+                attribute.setModifications(new Modifications(ModificationType.Added));
+                copyAttributeAsEmptyNode(attributes.indexOf(attribute), this);
             }
         }
     }

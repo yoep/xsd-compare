@@ -97,16 +97,6 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
                 .orElseThrow(() -> new NodeNotFoundException(name));
     }
 
-    public int findIndexOfElement(String name) throws NodeNotFoundException {
-        Assert.hasText(name, "name cannot be empty");
-        XsdElement element = elements.stream()
-                .filter(e -> e.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new NodeNotFoundException(name));
-
-        return elements.indexOf(element);
-    }
-
     /**
      * Insert the given element at the given index in this node.
      *
