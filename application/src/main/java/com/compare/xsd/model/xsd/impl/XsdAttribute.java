@@ -32,6 +32,15 @@ public class XsdAttribute extends AbstractXsdNode {
         init();
     }
 
+    /**
+     * Initialize a new instance of {@link XsdAttribute}.
+     * This constructor should only be used by {@link XsdEmptyAttributeNode}.
+     */
+    protected XsdAttribute() {
+        this.attribute = null;
+        this.name = "";
+    }
+
     //endregion
 
     //region Getters & Setters
@@ -44,6 +53,21 @@ public class XsdAttribute extends AbstractXsdNode {
     @Override
     public List<XsdNode> getNodes() {
         return null;
+    }
+
+    //endregion
+
+    //region Methods
+
+    /**
+     * Compare this attribute against the given attribute.
+     *
+     * @param compareAttribute Set the attribute to compare against.
+     */
+    public void compare(XsdAttribute compareAttribute) {
+        Assert.notNull(compareAttribute, "compareAttribute cannot be null");
+
+        //TODO: implement comparison
     }
 
     //endregion

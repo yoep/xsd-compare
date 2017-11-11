@@ -2,7 +2,7 @@ package com.compare.xsd.model.xsd.impl;
 
 import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
-import com.compare.xsd.model.xsd.ElementNotFoundException;
+import com.compare.xsd.model.xsd.NodeNotFoundException;
 import com.compare.xsd.model.xsd.XsdNode;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -44,21 +44,22 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
     //region Methods
 
     /**
-     * Compare this document against the given document for changes.
+     * Compare this node against the given node for changes.
      *
-     * @param compareNode Set the new document.
+     * @param compareNode Set the new node.
      */
     public void compare(AbstractXsdElementNode compareNode) {
-        Assert.notNull(compareNode, "newDocument cannot be null");
+        Assert.notNull(compareNode, "compareNode cannot be null");
+        List<XsdElement> elementsCopy = new ArrayList<>(elements); //take a copy as the actual list might be modified during comparison
 
-        for (XsdElement element : elements) {
+        for (XsdElement element : elementsCopy) {
             try {
                 XsdElement compareElement = compareNode.findElement(element.getName());
 
                 element.compare(compareElement);
-            } catch (ElementNotFoundException ex) {
+            } catch (NodeNotFoundException ex) {
                 element.setModifications(new Modifications(ModificationType.Removed));
-                insertEmptyNode(elements.indexOf(element), compareNode);
+                copyElementAsEmptyNode(elements.indexOf(element), element, compareNode);
             }
         }
     }
@@ -68,15 +69,25 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
      *
      * @param name Set the name of the element to search for.
      * @return Returns the found XSD element.
-     * @throws ElementNotFoundException Is thrown when the given element name couldn't be found back.
+     * @throws NodeNotFoundException Is thrown when the given element name couldn't be found back.
      */
-    public XsdElement findElement(String name) throws ElementNotFoundException {
+    public XsdElement findElement(String name) throws NodeNotFoundException {
         Assert.hasText(name, "name cannot be empty");
 
         return elements.stream()
                 .filter(e -> e.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new ElementNotFoundException(name));
+                .orElseThrow(() -> new NodeNotFoundException(name));
+    }
+
+    public int findIndexOfElement(String name) throws NodeNotFoundException {
+        Assert.hasText(name, "name cannot be empty");
+        XsdElement element = elements.stream()
+                .filter(e -> e.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NodeNotFoundException(name));
+
+        return elements.indexOf(element);
     }
 
     /**
@@ -95,8 +106,25 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
 
     //region Functions
 
-    private void insertEmptyNode(int index, AbstractXsdElementNode compareNode) {
-        compareNode.insertElementAt(index, new XsdEmptyNode());
+    /**
+     * Copy the element and inner elements of the given to copy node to the destination element at given index.
+     *
+     * @param index           Set the index to add the nodes at.
+     * @param toCopyNode      Set the node to deep copy.
+     * @param destinationNode Set the destination of the copied nodes.
+     */
+    private void copyElementAsEmptyNode(int index, AbstractXsdElementNode toCopyNode, AbstractXsdElementNode destinationNode) {
+        destinationNode.insertElementAt(index, deepCopyEmptyElementNodes(toCopyNode));
+    }
+
+    protected XsdEmptyElementNode deepCopyEmptyElementNodes(XsdNode toCopyNode) {
+        XsdEmptyElementNode emptyNode = new XsdEmptyElementNode();
+
+        for (XsdNode element : toCopyNode.getNodes()) {
+            emptyNode.addNode(deepCopyEmptyElementNodes(element));
+        }
+
+        return emptyNode;
     }
 
     //endregion

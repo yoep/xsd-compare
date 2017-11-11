@@ -1,12 +1,17 @@
 package com.compare.xsd.model.xsd.impl;
 
 import com.compare.xsd.model.comparison.Modifications;
+import com.compare.xsd.model.xsd.NodeNotFoundException;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
@@ -62,6 +67,10 @@ public abstract class AbstractXsdNode implements XsdNode {
 
         return null;
     }
+
+    //endregion
+
+    //region Methods
 
     //endregion
 

@@ -1,5 +1,9 @@
 package com.compare.xsd.model.xsd.impl;
 
+import com.compare.xsd.model.comparison.ModificationType;
+import com.compare.xsd.model.comparison.Modifications;
+import com.compare.xsd.model.xsd.NodeNotFoundException;
+import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.*;
 import com.sun.org.apache.xerces.internal.xs.XSElementDeclaration;
@@ -60,7 +64,7 @@ public class XsdElement extends AbstractXsdElementNode {
 
     /**
      * Initialize a new {@link XsdElement}.
-     * This constructor can only be used {@link XsdEmptyNode}.
+     * This constructor can only be used {@link XsdEmptyElementNode}.
      */
     protected XsdElement() {
         this.element = null;
@@ -75,6 +79,65 @@ public class XsdElement extends AbstractXsdElementNode {
     @Override
     public Image getIcon() {
         return loadResourceIcon("element.png");
+    }
+
+    @Override
+    public List<XsdNode> getNodes() {
+        List<XsdNode> nodes = new ArrayList<>(attributes);
+
+        nodes.addAll(elements);
+
+        return nodes;
+    }
+
+    //endregion
+
+    //region Methods
+
+    @Override
+    public void compare(AbstractXsdElementNode compareNode) {
+        super.compare(compareNode);
+        List<XsdAttribute> attributesCopy = new ArrayList<>(attributes); //take a copy as the actual list might be modified during comparison
+        XsdElement compareElement = (XsdElement) compareNode;
+
+        for (XsdAttribute attribute : attributesCopy) {
+            try {
+                XsdAttribute compareAttribute = compareElement.findAttribute(attribute.getName());
+
+                attribute.compare(compareAttribute);
+            } catch (NodeNotFoundException ex) {
+                attribute.setModifications(new Modifications(ModificationType.Removed));
+                copyAttributeAsEmptyNode(attributes.indexOf(attribute), compareElement);
+            }
+        }
+    }
+
+    /**
+     * Find the attribute by name.
+     *
+     * @param name Set the name of the attribute.
+     * @return Returns the attribute.
+     * @throws NodeNotFoundException Is thrown when the attribute couldn't be found.
+     */
+    public XsdAttribute findAttribute(String name) throws NodeNotFoundException {
+        Assert.hasText(name, "name cannot be empty");
+
+        return attributes.stream()
+                .filter(e -> e.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new NodeNotFoundException(name));
+    }
+
+    /**
+     * Insert the given attribute at the given index.
+     *
+     * @param index     Set the index of the attribute.
+     * @param attribute Set the attribute to add.
+     */
+    private void insertAttributeAt(int index, XsdAttribute attribute) {
+        Assert.notNull(attribute, "attribute cannot be null");
+
+        this.attributes.add(index, attribute);
     }
 
     //endregion
@@ -126,6 +189,16 @@ public class XsdElement extends AbstractXsdElementNode {
                 this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
             }
         }
+    }
+
+    /**
+     * Copy the attribute and inner attributes of the given to copy node to the destination element at given index.
+     *
+     * @param index           Set the index to add the nodes at.
+     * @param destinationNode Set the destination of the copied nodes.
+     */
+    private void copyAttributeAsEmptyNode(int index, XsdElement destinationNode) {
+        destinationNode.insertAttributeAt(index, new XsdEmptyAttributeNode());
     }
 
     //endregion
