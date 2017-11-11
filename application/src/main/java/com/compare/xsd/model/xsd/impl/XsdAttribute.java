@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -52,7 +53,7 @@ public class XsdAttribute extends AbstractXsdNode {
 
     @Override
     public List<XsdNode> getNodes() {
-        return null;
+        return new ArrayList<>();
     }
 
     //endregion

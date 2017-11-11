@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -102,9 +103,11 @@ public class XsdElement extends AbstractXsdElementNode {
 
         for (XsdAttribute attribute : attributesCopy) {
             try {
-                XsdAttribute compareAttribute = compareElement.findAttribute(attribute.getName());
+                if (StringUtils.isNoneEmpty(attribute.getName())) {
+                    XsdAttribute compareAttribute = compareElement.findAttribute(attribute.getName());
 
-                attribute.compare(compareAttribute);
+                    attribute.compare(compareAttribute);
+                }
             } catch (NodeNotFoundException ex) {
                 attribute.setModifications(new Modifications(ModificationType.Removed));
                 copyAttributeAsEmptyNode(attributes.indexOf(attribute), compareElement);

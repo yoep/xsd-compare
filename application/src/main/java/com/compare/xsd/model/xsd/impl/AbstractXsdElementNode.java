@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -51,15 +52,31 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
     public void compare(AbstractXsdElementNode compareNode) {
         Assert.notNull(compareNode, "compareNode cannot be null");
         List<XsdElement> elementsCopy = new ArrayList<>(elements); //take a copy as the actual list might be modified during comparison
+        List<XsdElement> compareElementsCopy = new ArrayList<>(compareNode.getElements()); //take a copy as the actual list might be modified during comparison
 
+        //check for removed nodes
         for (XsdElement element : elementsCopy) {
             try {
-                XsdElement compareElement = compareNode.findElement(element.getName());
+                if (StringUtils.isNoneEmpty(element.getName())) {
+                    XsdElement compareElement = compareNode.findElement(element.getName());
 
-                element.compare(compareElement);
+                    element.compare(compareElement);
+                }
             } catch (NodeNotFoundException ex) {
                 element.setModifications(new Modifications(ModificationType.Removed));
                 copyElementAsEmptyNode(elements.indexOf(element), element, compareNode);
+            }
+        }
+
+        //check for added nodes
+        for (XsdElement element : compareElementsCopy) {
+            try {
+                if (StringUtils.isNoneEmpty(element.getName())) {
+                    this.findElement(element.getName());
+                }
+            } catch (NodeNotFoundException ex) {
+                element.setModifications(new Modifications(ModificationType.Added));
+                copyElementAsEmptyNode(compareNode.getElements().indexOf(element), element, this);
             }
         }
     }
@@ -106,6 +123,16 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
 
     //region Functions
 
+    protected XsdEmptyElementNode deepCopyEmptyElementNodes(XsdNode toCopyNode) {
+        XsdEmptyElementNode emptyNode = new XsdEmptyElementNode();
+
+        for (XsdNode element : toCopyNode.getNodes()) {
+            emptyNode.addNode(deepCopyEmptyElementNodes(element));
+        }
+
+        return emptyNode;
+    }
+
     /**
      * Copy the element and inner elements of the given to copy node to the destination element at given index.
      *
@@ -115,16 +142,6 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
      */
     private void copyElementAsEmptyNode(int index, AbstractXsdElementNode toCopyNode, AbstractXsdElementNode destinationNode) {
         destinationNode.insertElementAt(index, deepCopyEmptyElementNodes(toCopyNode));
-    }
-
-    protected XsdEmptyElementNode deepCopyEmptyElementNodes(XsdNode toCopyNode) {
-        XsdEmptyElementNode emptyNode = new XsdEmptyElementNode();
-
-        for (XsdNode element : toCopyNode.getNodes()) {
-            emptyNode.addNode(deepCopyEmptyElementNodes(element));
-        }
-
-        return emptyNode;
     }
 
     //endregion

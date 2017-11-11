@@ -3,6 +3,7 @@ package com.compare.xsd.model.xsd.impl;
 import com.compare.xsd.model.xsd.XsdNode;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class XsdEmptyAttributeNode extends XsdAttribute {
@@ -20,7 +21,7 @@ public class XsdEmptyAttributeNode extends XsdAttribute {
 
     @Override
     public List<XsdNode> getNodes() {
-        return null;
+        return new ArrayList<>();
     }
 
     //endregion
