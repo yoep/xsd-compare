@@ -49,6 +49,13 @@ public interface XsdNode {
     List<XsdNode> getNodes();
 
     /**
+     * Get the modifications of this node.
+     *
+     * @return Returns the modifications.
+     */
+    Modifications getModifications();
+
+    /**
      * Set the modifications of this node.
      *
      * @param modifications Set the modifications.

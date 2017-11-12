@@ -23,6 +23,7 @@ import java.util.List;
 @Getter
 public class TreeViewRender {
     private final TreeTableView<XsdNode> treeView;
+    private final PropertyViewRender propertyViewRender;
 
     private XsdDocument document;
 
@@ -31,11 +32,13 @@ public class TreeViewRender {
     /**
      * Initialize a new instance of {@link TreeViewRender}.
      *
-     * @param treeView Set the tree view to use for the rendering.
+     * @param treeView           Set the tree view to use for the rendering.
+     * @param propertyViewRender Set the view to render the properties in.
      */
-    public TreeViewRender(TreeTableView<XsdNode> treeView) {
+    public TreeViewRender(TreeTableView<XsdNode> treeView, PropertyViewRender propertyViewRender) {
         Assert.notNull(treeView, "treeView cannot be null");
         this.treeView = treeView;
+        this.propertyViewRender = propertyViewRender;
 
         init();
     }
@@ -98,6 +101,7 @@ public class TreeViewRender {
         addTypeColumn();
         addCardinalityColumn();
         addColorColumn();
+        addSelectionListener();
     }
 
     private void renderChildren(List<XsdNode> elements, TreeItem<XsdNode> parent) {
@@ -114,7 +118,7 @@ public class TreeViewRender {
     }
 
     private void addNameColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("Name", 350);
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Name", 350);
 
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();
@@ -137,7 +141,7 @@ public class TreeViewRender {
     }
 
     private void addTypeColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("Type", 80);
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Type", 80);
 
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();
@@ -158,7 +162,7 @@ public class TreeViewRender {
     }
 
     private void addCardinalityColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("Cardinality", 50);
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Cardinality", 50);
 
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();
@@ -179,7 +183,7 @@ public class TreeViewRender {
     }
 
     private void addColorColumn() {
-        TreeTableColumn<XsdNode, String> column = initNewColumn("", 20);
+        TreeTableColumn<XsdNode, String> column = createNewColumn("", 20);
 
         column.setCellFactory(treeColumn -> new TreeTableCell<XsdNode, String>() {
             @Override
@@ -195,7 +199,7 @@ public class TreeViewRender {
         });
     }
 
-    private TreeTableColumn<XsdNode, String> initNewColumn(String name, double width) {
+    private TreeTableColumn<XsdNode, String> createNewColumn(String name, double width) {
         TreeTableColumn<XsdNode, String> column = new TreeTableColumn<>(name);
 
         column.setPrefWidth(width);
@@ -205,6 +209,12 @@ public class TreeViewRender {
         treeView.getColumns().add(column);
 
         return column;
+    }
+
+    private void addSelectionListener() {
+        this.treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.propertyViewRender.render(newValue.getValue());
+        });
     }
 
     //endregion

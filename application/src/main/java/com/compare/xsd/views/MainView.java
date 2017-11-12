@@ -1,21 +1,22 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.loaders.XsdLoader;
+import com.compare.xsd.managers.PropertyViewManager;
 import com.compare.xsd.managers.TreeViewManager;
 import com.compare.xsd.managers.ViewManager;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
+import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
-import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import lombok.extern.java.Log;
+import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
@@ -30,6 +31,7 @@ public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
+    private final PropertyViewManager propertyViewManager;
 
     @FXML
     private TreeTableView<XsdNode> leftTree;
@@ -37,25 +39,53 @@ public class MainView implements Initializable {
     @FXML
     private TreeTableView<XsdNode> rightTree;
 
+    @FXML
+    private SplitPane treeSplitPane;
+
+    @FXML
+    private SplitPane propertiesSplitPane;
+
+    @FXML
+    private TableView leftProperties;
+
+    @FXML
+    private TableView rightProperties;
+
+    //region Constructors
+
     /**
      * Initialize a new instance of {@link MainView}.
      * This view contains the main screen of the application including the tree renders.
      *
-     * @param xsdLoader       Set the XSD loader.
-     * @param viewManager     Set the view manager.
-     * @param treeViewManager Set the tree view manager.
+     * @param xsdLoader           Set the XSD loader.
+     * @param viewManager         Set the view manager.
+     * @param treeViewManager     Set the tree view manager.
+     * @param propertyViewManager Set the property manager.
      */
-    public MainView(XsdLoader xsdLoader, ViewManager viewManager, TreeViewManager treeViewManager) {
+    public MainView(XsdLoader xsdLoader, ViewManager viewManager, TreeViewManager treeViewManager, PropertyViewManager propertyViewManager) {
         this.xsdLoader = xsdLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
+        this.propertyViewManager = propertyViewManager;
     }
+
+    //endregion
+
+    //region Methods
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.treeViewManager.setLeftTreeRender(new TreeViewRender(leftTree));
-        this.treeViewManager.setRightTreeRender(new TreeViewRender(rightTree));
+        PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
+        PropertyViewRender rightProperties = new PropertyViewRender(this.rightProperties);
+        TreeViewRender leftTreeRender = new TreeViewRender(leftTree, leftProperties);
+        TreeViewRender rightTreeRender = new TreeViewRender(rightTree, rightProperties);
+
+        this.treeViewManager.setLeftTreeRender(leftTreeRender);
+        this.treeViewManager.setRightTreeRender(rightTreeRender);
+        this.propertyViewManager.setLeftProperties(leftProperties);
+        this.propertyViewManager.setRightProperties(rightProperties);
         this.viewManager.getStage().setOnShown(event -> this.treeViewManager.synchronize());
+        this.synchronizeDividers();
     }
 
     public void loadLeftTree() throws SAXException {
@@ -112,13 +142,16 @@ public class MainView implements Initializable {
         }
     }
 
-    public void exit() {
-        Platform.exit();
-    }
-
+    /**
+     * Clear all tree views.
+     */
     public void clearAll() {
         treeViewManager.clearAll();
     }
+
+    //endregion
+
+    //region Functions
 
     private void compare() {
         XsdDocument originalDocument = treeViewManager.getLeftTreeRender().getDocument();
@@ -154,4 +187,22 @@ public class MainView implements Initializable {
             new Alert(Alert.AlertType.ERROR, "We are sorry, but an unexpected error occurred.\n" + ex.getMessage(), ButtonType.OK).show();
         }
     }
+
+    private void synchronizeDividers() {
+        SplitPane.Divider treeDivider = getFirstDivider(this.treeSplitPane.getDividers());
+        SplitPane.Divider propertiesDivider = getFirstDivider(this.propertiesSplitPane.getDividers());
+
+        treeDivider.positionProperty().addListener((observable, oldValue, newValue) -> {
+            propertiesDivider.setPosition(newValue.doubleValue());
+        });
+        propertiesDivider.positionProperty().addListener((observable, oldValue, newValue) -> {
+            treeDivider.setPosition(newValue.doubleValue());
+        });
+    }
+
+    private SplitPane.Divider getFirstDivider(ObservableList<SplitPane.Divider> dividers) {
+        return IteratorUtils.toList(dividers.iterator()).get(0);
+    }
+
+    //endregion
 }
