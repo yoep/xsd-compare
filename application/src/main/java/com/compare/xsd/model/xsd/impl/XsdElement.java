@@ -110,7 +110,7 @@ public class XsdElement extends AbstractXsdElementNode {
                     attribute.compare(compareAttribute);
                 }
             } catch (NodeNotFoundException ex) {
-                attribute.setModifications(new Modifications(ModificationType.Removed));
+                attribute.setModifications(new Modifications(ModificationType.REMOVED));
                 copyAttributeAsEmptyNode(attributes.indexOf(attribute), compareElement);
             }
         }
@@ -121,7 +121,7 @@ public class XsdElement extends AbstractXsdElementNode {
                     compareElement.findAttribute(attribute.getName());
                 }
             } catch (NodeNotFoundException ex) {
-                attribute.setModifications(new Modifications(ModificationType.Added));
+                attribute.setModifications(new Modifications(ModificationType.ADDED));
                 copyAttributeAsEmptyNode(attributes.indexOf(attribute), this);
             }
         }

@@ -17,4 +17,15 @@ public class Modifications {
     public Modifications(ModificationType type) {
         this.type = type;
     }
+
+    /**
+     * Verify if modifications were made.
+     */
+    public void verify() {
+        if (type == ModificationType.NONE) {
+            if (nameChanged || typeChanged) {
+                type = ModificationType.MODIFIED;
+            }
+        }
+    }
 }

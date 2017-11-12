@@ -63,7 +63,7 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
                     element.compare(compareElement);
                 }
             } catch (NodeNotFoundException ex) {
-                element.setModifications(new Modifications(ModificationType.Removed));
+                element.setModifications(new Modifications(ModificationType.REMOVED));
                 copyElementAsEmptyNode(elements.indexOf(element), element, compareNode);
             }
         }
@@ -75,10 +75,12 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
                     this.findElement(element.getName());
                 }
             } catch (NodeNotFoundException ex) {
-                element.setModifications(new Modifications(ModificationType.Added));
+                element.setModifications(new Modifications(ModificationType.ADDED));
                 copyElementAsEmptyNode(compareNode.getElements().indexOf(element), element, this);
             }
         }
+
+        this.compareProperties(compareNode);
     }
 
     /**

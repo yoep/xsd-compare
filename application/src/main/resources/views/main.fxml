@@ -46,7 +46,7 @@
         </Button>
     </ToolBar>
     <SplitPane dividerPositions="1" orientation="VERTICAL" GridPane.rowIndex="1">
-        <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES">
+        <SplitPane fx:id="treeDivider" dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES">
             <TreeTableView fx:id="leftTree" onDragDropped="#onDragDropped" onDragEntered="#onDragEntered" onDragExited="#onDragExited" onDragOver="#onDragOver"
                            SplitPane.resizableWithParent="true">
                 <placeholder>
@@ -64,8 +64,21 @@
                 </columns>
             </TreeTableView>
         </SplitPane>
-        <SplitPane>
-
+        <SplitPane fx:id="propertiesDivider" dividerPositions="0.5">
+            <TableView>
+                <placeholder>
+                    <Label/>
+                </placeholder>
+                <columns>
+                </columns>
+            </TableView>
+            <TableView>
+                <placeholder>
+                    <Label/>
+                </placeholder>
+                <columns>
+                </columns>
+            </TableView>
         </SplitPane>
     </SplitPane>
 </GridPane>

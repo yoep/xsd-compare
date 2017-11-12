@@ -1,5 +1,6 @@
 package com.compare.xsd.model.xsd.impl;
 
+import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
@@ -7,6 +8,7 @@ import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
@@ -49,13 +51,13 @@ public abstract class AbstractXsdNode implements XsdNode {
     public Image getModificationColor() {
         if (modifications != null) {
             switch (modifications.getType()) {
-                case Added:
+                case ADDED:
                     return loadResourceIcon("green.png");
-                case Removed:
+                case REMOVED:
                     return loadResourceIcon("red.png");
-                case Modified:
+                case MODIFIED:
                     return loadResourceIcon("orange.png");
-                case Moved:
+                case MOVED:
                     return loadResourceIcon("yellow.png");
                 default:
                     return null;
@@ -68,6 +70,25 @@ public abstract class AbstractXsdNode implements XsdNode {
     //endregion
 
     //region Methods
+
+    /**
+     * Compare if any of the properties are different.
+     *
+     * @param compareNode Set the node to compare against.
+     */
+    public void compareProperties(XsdNode compareNode) {
+        Assert.notNull(compareNode, "compareNode cannot be null");
+
+        if (this.name != null) {
+            this.modifications = new Modifications(ModificationType.NONE);
+
+            if (hasNameChanged(compareNode)) {
+                this.modifications.setNameChanged(true);
+            }
+
+            this.modifications.verify();
+        }
+    }
 
     //endregion
 
@@ -94,6 +115,10 @@ public abstract class AbstractXsdNode implements XsdNode {
      */
     protected Image loadResourceIcon(String name) {
         return new Image(getClass().getResourceAsStream(ICON_DIRECTORY + name));
+    }
+
+    private boolean hasNameChanged(XsdNode compareNode) {
+        return !this.name.equals(compareNode.getName());
     }
 
     //endregion
