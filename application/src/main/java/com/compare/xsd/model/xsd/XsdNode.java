@@ -1,5 +1,6 @@
 package com.compare.xsd.model.xsd;
 
+import com.compare.xsd.model.comparison.Modifications;
 import javafx.scene.image.Image;
 
 import java.util.List;
@@ -46,4 +47,11 @@ public interface XsdNode {
      * @return  Returns the inner node or null.
      */
     List<XsdNode> getNodes();
+
+    /**
+     * Set the modifications of this node.
+     *
+     * @param modifications Set the modifications.
+     */
+    void setModifications(Modifications modifications);
 }

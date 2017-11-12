@@ -85,8 +85,14 @@ public abstract class AbstractXsdNode implements XsdNode {
             if (hasNameChanged(compareNode)) {
                 this.modifications.setNameChanged(true);
             }
+            if (hasTypeChanged(compareNode)) {
+                this.modifications.setTypeChanged(true);
+            }
+            if (hasCardinalityChanged(compareNode)) {
+                this.modifications.setCardinalityChanged(true);
+            }
 
-            this.modifications.verify();
+            this.modifications.verify(compareNode);
         }
     }
 
@@ -118,7 +124,15 @@ public abstract class AbstractXsdNode implements XsdNode {
     }
 
     private boolean hasNameChanged(XsdNode compareNode) {
-        return !this.name.equals(compareNode.getName());
+        return !this.getName().equals(compareNode.getName());
+    }
+
+    private boolean hasTypeChanged(XsdNode compareNode) {
+        return this.getType() != null && !this.getType().equals(compareNode.getType());
+    }
+
+    private boolean hasCardinalityChanged(XsdNode compareNode) {
+        return !this.getCardinality().equals(compareNode.getCardinality());
     }
 
     //endregion
