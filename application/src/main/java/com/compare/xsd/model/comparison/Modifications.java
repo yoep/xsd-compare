@@ -4,8 +4,10 @@ import lombok.Data;
 
 @Data
 public class Modifications {
-
     private ModificationType type;
+
+    private boolean nameChanged;
+    private boolean typeChanged;
 
     /**
      * Initialize a new instance of {@link Modifications}.

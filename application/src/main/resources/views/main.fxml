@@ -1,41 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<GridPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+<GridPane prefHeight="600" prefWidth="800" stylesheets="/styles/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.compare.xsd.views.MainView">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
+        <RowConstraints maxHeight="25" minHeight="25" prefHeight="25" vgrow="NEVER"/>
         <RowConstraints vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
     </rowConstraints>
-    <MenuBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
-        <Menu text="File">
-            <MenuItem onAction="#loadLeftTree" text="Load left side"/>
-            <MenuItem onAction="#loadRightTree" text="Load right side"/>
-            <SeparatorMenuItem />
-            <MenuItem onAction="#exit" text="Exit" />
-        </Menu>
-    </MenuBar>
-    <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1">
-        <TreeTableView fx:id="leftTree" SplitPane.resizableWithParent="true" onDragEntered="#onDragEntered" onDragExited="#onDragExited"
-                       onDragDropped="#onDragDropped" onDragOver="#onDragOver">
-            <placeholder>
-                <Label/>
-            </placeholder>
-            <columns>
-            </columns>
-        </TreeTableView>
-        <TreeTableView fx:id="rightTree" SplitPane.resizableWithParent="true" onDragEntered="#onDragEntered" onDragExited="#onDragExited"
-                       onDragDropped="#onDragDropped" onDragOver="#onDragOver">
-            <placeholder>
-                <Label/>
-            </placeholder>
-            <columns>
-            </columns>
-        </TreeTableView>
+    <ToolBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
+        <Button onAction="#clearAll">
+            <tooltip>
+                <Tooltip text="New file"/>
+            </tooltip>
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/new_file.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button onAction="#loadLeftTree">
+            <tooltip>
+                <Tooltip text="Load left side"/>
+            </tooltip>
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/left_file.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button onAction="#loadRightTree">
+            <tooltip>
+                <Tooltip text="Load right side"/>
+            </tooltip>
+            <graphic>
+                <ImageView>
+                    <Image url="/icons/right_file.png"/>
+                </ImageView>
+            </graphic>
+        </Button>
+    </ToolBar>
+    <SplitPane dividerPositions="1" orientation="VERTICAL" GridPane.rowIndex="1">
+        <SplitPane dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES">
+            <TreeTableView fx:id="leftTree" onDragDropped="#onDragDropped" onDragEntered="#onDragEntered" onDragExited="#onDragExited" onDragOver="#onDragOver"
+                           SplitPane.resizableWithParent="true">
+                <placeholder>
+                    <Label/>
+                </placeholder>
+                <columns>
+                </columns>
+            </TreeTableView>
+            <TreeTableView fx:id="rightTree" onDragDropped="#onDragDropped" onDragEntered="#onDragEntered" onDragExited="#onDragExited" onDragOver="#onDragOver"
+                           SplitPane.resizableWithParent="true">
+                <placeholder>
+                    <Label/>
+                </placeholder>
+                <columns>
+                </columns>
+            </TreeTableView>
+        </SplitPane>
+        <SplitPane>
+
+        </SplitPane>
     </SplitPane>
 </GridPane>

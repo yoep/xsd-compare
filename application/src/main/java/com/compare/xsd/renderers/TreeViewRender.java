@@ -82,6 +82,11 @@ public class TreeViewRender {
         this.document = xsdDocument;
     }
 
+    public void clear() {
+        this.document = null;
+        this.treeView.setRoot(null);
+    }
+
     //endregion
 
     //region Functions

@@ -116,6 +116,10 @@ public class MainView implements Initializable {
         Platform.exit();
     }
 
+    public void clearAll() {
+        treeViewManager.clearAll();
+    }
+
     private void compare() {
         XsdDocument originalDocument = treeViewManager.getLeftTreeRender().getDocument();
         XsdDocument newDocument = treeViewManager.getRightTreeRender().getDocument();

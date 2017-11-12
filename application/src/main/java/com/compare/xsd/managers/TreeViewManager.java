@@ -67,6 +67,11 @@ public class TreeViewManager {
         rightTreeRender.refresh();
     }
 
+    public void clearAll() {
+        leftTreeRender.clear();
+        rightTreeRender.clear();
+    }
+
     //endregion
 
     //region Functions

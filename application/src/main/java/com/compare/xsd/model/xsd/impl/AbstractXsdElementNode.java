@@ -92,7 +92,7 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
         Assert.hasText(name, "name cannot be empty");
 
         return elements.stream()
-                .filter(e -> e.getName().equals(name))
+                .filter(e -> e.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new NodeNotFoundException(name));
     }
