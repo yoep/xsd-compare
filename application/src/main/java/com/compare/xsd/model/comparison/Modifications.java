@@ -10,6 +10,11 @@ public class Modifications {
     private boolean nameChanged;
     private boolean typeChanged;
     private boolean cardinalityChanged;
+    private boolean fixedValueChanged;
+    private boolean lengthChanged;
+    private boolean maxLengthChanged;
+    private boolean minLengthChanged;
+    private boolean patternChanged;
 
     /**
      * Initialize a new instance of {@link Modifications}.
@@ -27,10 +32,14 @@ public class Modifications {
      */
     public void verify(XsdNode compareNode) {
         if (type == ModificationType.NONE) {
-            if (nameChanged || typeChanged || cardinalityChanged) {
+            if (isModified()) {
                 type = ModificationType.MODIFIED;
                 compareNode.setModifications(this);
             }
         }
+    }
+
+    private boolean isModified() {
+        return nameChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged || minLengthChanged || patternChanged;
     }
 }

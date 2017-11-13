@@ -21,6 +21,41 @@ public interface XsdNode {
     String getType();
 
     /**
+     * Get the fixed value of the node (optional).
+     *
+     * @return Returns the fixed value of the node or null.
+     */
+    String getFixedValue();
+
+    /**
+     * Get the pattern of the node (optional).
+     *
+     * @return Returns the pattern of the node or null.
+     */
+    String getPattern();
+
+    /**
+     * Get the length of the node (optional).
+     *
+     * @return Returns the length of the node or null.
+     */
+    Integer getLength();
+
+    /**
+     * Get the minimum length of the node (optional).
+     *
+     * @return Returns the minimum length of the node or null.
+     */
+    Integer getMinLength();
+
+    /**
+     * Get the maximum length of the node (optional).
+     *
+     * @return Returns the maximum length of the node or null.
+     */
+    Integer getMaxLength();
+
+    /**
      * Get the cardinality of the node (optional).
      *
      * @return Returns the cardinality of the node or null.

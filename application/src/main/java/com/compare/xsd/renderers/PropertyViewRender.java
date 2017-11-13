@@ -44,6 +44,11 @@ public class PropertyViewRender {
         items.add(new Property("Name", node.getName(), modifications.isNameChanged()));
         items.add(new Property("Type", node.getType(), modifications.isTypeChanged()));
         items.add(new Property("Cardinality", node.getCardinality(), modifications.isCardinalityChanged()));
+        items.add(new Property("Fixed value", node.getFixedValue(), modifications.isFixedValueChanged()));
+        items.add(new Property("Pattern", node.getPattern(), modifications.isPatternChanged()));
+        items.add(new Property("Length", node.getLength(), modifications.isLengthChanged()));
+        items.add(new Property("Min. length", node.getMinLength(), modifications.isMinLengthChanged()));
+        items.add(new Property("Max. length", node.getMaxLength(), modifications.isMaxLengthChanged()));
     }
 
     //endregion
@@ -64,7 +69,11 @@ public class PropertyViewRender {
     private void addValueColumn() {
         TableColumn<Property, String> property = createNewColumn("Value");
 
-        property.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue()));
+        property.setCellValueFactory(cellData -> {
+            Object value = cellData.getValue().getValue();
+
+            return new ReadOnlyStringWrapper(value != null ? value.toString() : null);
+        });
     }
 
     private TableColumn<Property, String> createNewColumn(String name) {
@@ -106,7 +115,7 @@ public class PropertyViewRender {
     @AllArgsConstructor
     public class Property {
         private String property;
-        private String value;
+        private Object value;
         private boolean modified;
     }
 }

@@ -21,8 +21,13 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     protected String name;
     protected String type;
+    protected String fixedValue;
+    protected String pattern;
     protected Integer minOccurrence;
     protected Integer maxOccurrence;
+    protected Integer length;
+    protected Integer minLength;
+    protected Integer maxLength;
 
     protected AbstractXsdNode parent;
     protected Modifications modifications;
@@ -91,6 +96,21 @@ public abstract class AbstractXsdNode implements XsdNode {
             if (hasCardinalityChanged(compareNode)) {
                 this.modifications.setCardinalityChanged(true);
             }
+            if (hasFixedValueChanged(compareNode)) {
+                this.modifications.setFixedValueChanged(true);
+            }
+            if (hasLengthChanged(compareNode)) {
+                this.modifications.setLengthChanged(true);
+            }
+            if (hasMinLengthChanged(compareNode)) {
+                this.modifications.setMinLengthChanged(true);
+            }
+            if (hasMaxLengthChanged(compareNode)) {
+                this.modifications.setMaxLengthChanged(true);
+            }
+            if (hasPatternChanged(compareNode)) {
+                this.modifications.setPatternChanged(true);
+            }
 
             this.modifications.verify(compareNode);
         }
@@ -133,6 +153,26 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     private boolean hasCardinalityChanged(XsdNode compareNode) {
         return !this.getCardinality().equals(compareNode.getCardinality());
+    }
+
+    private boolean hasFixedValueChanged(XsdNode compareNode) {
+        return getFixedValue() != null && !getFixedValue().equals(compareNode.getFixedValue());
+    }
+
+    private boolean hasPatternChanged(XsdNode compareNode) {
+        return getPattern() != null && !getPattern().equals(compareNode.getPattern());
+    }
+
+    private boolean hasMaxLengthChanged(XsdNode compareNode) {
+        return getMaxLength() != null && !getMaxLength().equals(compareNode.getMaxLength());
+    }
+
+    private boolean hasMinLengthChanged(XsdNode compareNode) {
+        return getMinLength() != null && !getMinLength().equals(compareNode.getMinLength());
+    }
+
+    private boolean hasLengthChanged(XsdNode compareNode) {
+        return getLength() != null && !getLength().equals(compareNode.getLength());
     }
 
     //endregion

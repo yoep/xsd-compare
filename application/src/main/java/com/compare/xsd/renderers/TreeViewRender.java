@@ -98,9 +98,9 @@ public class TreeViewRender {
         treeView.getColumns().clear();
 
         addNameColumn();
+        addColorColumn();
         addTypeColumn();
         addCardinalityColumn();
-        addColorColumn();
         addSelectionListener();
     }
 
@@ -135,6 +135,7 @@ public class TreeViewRender {
                 XsdNode xsdNode = treeItem != null ? treeItem.getValue() : null;
 
                 setText(empty ? null : item);
+                setTooltip(empty ? null : new Tooltip(item));
                 setGraphic(empty || xsdNode == null ? null : new ImageView(xsdNode.getIcon()));
             }
         });
@@ -156,7 +157,7 @@ public class TreeViewRender {
                 super.updateItem(item, empty);
 
                 setText(empty ? null : item);
-                setTooltip(new Tooltip(item));
+                setTooltip(empty ? null : new Tooltip(item));
             }
         });
     }
