@@ -5,6 +5,7 @@ import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,8 +16,12 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Getter
-public class PropertyViewRender {
+public class PropertyViewRender implements RenderView {
     private final TableView<Property> propertyView;
+
+    private XsdNode node;
+
+    //region Constructors
 
     /**
      * Initialize a new instance of {@link PropertyViewRender}.
@@ -28,6 +33,22 @@ public class PropertyViewRender {
 
         init();
     }
+
+    //endregion
+
+    //region Implementation of RenderView
+
+    @Override
+    public boolean isRendering() {
+        return node != null;
+    }
+
+    @Override
+    public Node getNode() {
+        return this.propertyView;
+    }
+
+    //endregion
 
     //region Methods
 
@@ -46,9 +67,12 @@ public class PropertyViewRender {
         items.add(new Property("Cardinality", node.getCardinality(), modifications.isCardinalityChanged()));
         items.add(new Property("Fixed value", node.getFixedValue(), modifications.isFixedValueChanged()));
         items.add(new Property("Pattern", node.getPattern(), modifications.isPatternChanged()));
+        items.add(new Property("Enumeration", node.getEnumeration(), modifications.isEnumerationChanged()));
         items.add(new Property("Length", node.getLength(), modifications.isLengthChanged()));
         items.add(new Property("Min. length", node.getMinLength(), modifications.isMinLengthChanged()));
         items.add(new Property("Max. length", node.getMaxLength(), modifications.isMaxLengthChanged()));
+        items.add(new Property("Whitespace mode", node.getWhitespace(), modifications.isWhitespaceChanged()));
+        this.node = node;
     }
 
     //endregion

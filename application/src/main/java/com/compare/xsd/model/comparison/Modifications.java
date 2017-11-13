@@ -15,6 +15,8 @@ public class Modifications {
     private boolean maxLengthChanged;
     private boolean minLengthChanged;
     private boolean patternChanged;
+    private boolean enumerationChanged;
+    private boolean whitespaceChanged;
 
     /**
      * Initialize a new instance of {@link Modifications}.
@@ -40,6 +42,7 @@ public class Modifications {
     }
 
     private boolean isModified() {
-        return nameChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged || minLengthChanged || patternChanged;
+        return nameChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged || minLengthChanged ||
+                patternChanged || enumerationChanged || whitespaceChanged;
     }
 }

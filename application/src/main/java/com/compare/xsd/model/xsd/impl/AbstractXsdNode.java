@@ -4,6 +4,7 @@ import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.xs.XSFacet;
+import com.sun.org.apache.xerces.internal.xs.XSMultiValueFacet;
 import com.sun.org.apache.xerces.internal.xs.XSSimpleTypeDefinition;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
@@ -12,6 +13,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
@@ -27,11 +31,13 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected String type;
     protected String fixedValue;
     protected String pattern;
+    protected String whitespace;
     protected Integer minOccurrence;
     protected Integer maxOccurrence;
     protected Integer length;
     protected Integer minLength;
     protected Integer maxLength;
+    protected List<String> enumeration = new ArrayList<>();
 
     protected AbstractXsdNode parent;
     protected Modifications modifications;
@@ -115,6 +121,12 @@ public abstract class AbstractXsdNode implements XsdNode {
             if (hasPatternChanged(compareNode)) {
                 this.modifications.setPatternChanged(true);
             }
+            if (hasEnumerationChanged(compareNode)) {
+                this.modifications.setEnumerationChanged(true);
+            }
+            if (hasWhitespaceChanged(compareNode)) {
+                this.modifications.setWhitespaceChanged(true);
+            }
 
             this.modifications.verify(compareNode);
         }
@@ -171,8 +183,24 @@ public abstract class AbstractXsdNode implements XsdNode {
                 case XSSimpleTypeDefinition.FACET_PATTERN:
                     this.pattern = facet.getLexicalFacetValue();
                     break;
+                case XSSimpleTypeDefinition.FACET_WHITESPACE:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
                 default:
                     log.warning("Facet type " + facet.getFacetKind() + " is not being used at the moment");
+                    break;
+            }
+        }
+
+        for (Object facetObject : simpleType.getMultiValueFacets()) {
+            XSMultiValueFacet facet = (XSMultiValueFacet) facetObject;
+
+            switch (facet.getFacetKind()) {
+                case XSSimpleTypeDefinition.FACET_ENUMERATION:
+                    this.enumeration.addAll(facet.getLexicalFacetValues());
+                    break;
+                default:
+                    log.warning("Multi facet value type " + facet.getFacetKind() + " is not being used at the moment");
                     break;
             }
         }
@@ -208,6 +236,14 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     private boolean hasLengthChanged(XsdNode compareNode) {
         return getLength() != null && !getLength().equals(compareNode.getLength());
+    }
+
+    private boolean hasEnumerationChanged(XsdNode compareNode) {
+        return !getEnumeration().equals(compareNode.getEnumeration());
+    }
+
+    private boolean hasWhitespaceChanged(XsdNode compareNode) {
+        return getWhitespace() != null && !getWhitespace().equals(compareNode.getWhitespace());
     }
 
     //endregion

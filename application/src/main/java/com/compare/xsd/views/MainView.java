@@ -46,10 +46,10 @@ public class MainView implements Initializable {
     private SplitPane propertiesSplitPane;
 
     @FXML
-    private TableView leftProperties;
+    private TableView<PropertyViewRender.Property> leftProperties;
 
     @FXML
-    private TableView rightProperties;
+    private TableView<PropertyViewRender.Property> rightProperties;
 
     //region Constructors
 
@@ -84,7 +84,10 @@ public class MainView implements Initializable {
         this.treeViewManager.setRightTreeRender(rightTreeRender);
         this.propertyViewManager.setLeftProperties(leftProperties);
         this.propertyViewManager.setRightProperties(rightProperties);
-        this.viewManager.getStage().setOnShown(event -> this.treeViewManager.synchronize());
+        this.viewManager.getStage().setOnShown(event -> {
+            this.treeViewManager.synchronize();
+            this.propertyViewManager.synchronize();
+        });
         this.synchronizeDividers();
     }
 

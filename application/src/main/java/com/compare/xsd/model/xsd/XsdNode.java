@@ -21,6 +21,13 @@ public interface XsdNode {
     String getType();
 
     /**
+     * Get the cardinality of the node (optional).
+     *
+     * @return Returns the cardinality of the node or null.
+     */
+    String getCardinality();
+
+    /**
      * Get the fixed value of the node (optional).
      *
      * @return Returns the fixed value of the node or null.
@@ -33,6 +40,13 @@ public interface XsdNode {
      * @return Returns the pattern of the node or null.
      */
     String getPattern();
+
+    /**
+     * Get the whitespace mode of the node (optional).
+     *
+     * @return Returns the whitespace mode of the node or null.
+     */
+    String getWhitespace();
 
     /**
      * Get the length of the node (optional).
@@ -56,13 +70,6 @@ public interface XsdNode {
     Integer getMaxLength();
 
     /**
-     * Get the cardinality of the node (optional).
-     *
-     * @return Returns the cardinality of the node or null.
-     */
-    String getCardinality();
-
-    /**
      * Get the icon of the node.
      *
      * @return Returns the image icon of the node.
@@ -82,6 +89,13 @@ public interface XsdNode {
      * @return  Returns the inner node or null.
      */
     List<XsdNode> getNodes();
+
+    /**
+     * Get the enumeration values of the node.
+     *
+     * @return Returns the enumeration values of the node or an empty list.
+     */
+    List<String> getEnumeration();
 
     /**
      * Get the modifications of this node.

@@ -4,6 +4,7 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Getter
-public class TreeViewRender {
+public class TreeViewRender implements RenderView {
     private final TreeTableView<XsdNode> treeView;
     private final PropertyViewRender propertyViewRender;
 
@@ -45,7 +46,7 @@ public class TreeViewRender {
 
     //endregion
 
-    //region Getters & Setters
+    //region Implementation of RenderView
 
     /**
      * Get if a document is currently being rendered.
@@ -54,6 +55,11 @@ public class TreeViewRender {
      */
     public boolean isRendering() {
         return this.document != null;
+    }
+
+    @Override
+    public Node getNode() {
+        return this.treeView;
     }
 
     //endregion
@@ -214,7 +220,9 @@ public class TreeViewRender {
 
     private void addSelectionListener() {
         this.treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            this.propertyViewRender.render(newValue.getValue());
+            if (newValue != null) {
+                this.propertyViewRender.render(newValue.getValue());
+            }
         });
     }
 
