@@ -3,16 +3,20 @@ package com.compare.xsd.model.xsd.impl;
 import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
+import com.sun.org.apache.xerces.internal.xs.XSFacet;
+import com.sun.org.apache.xerces.internal.xs.XSSimpleTypeDefinition;
 import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.util.Assert;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
  */
+@Log
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdNode implements XsdNode {
@@ -141,6 +145,37 @@ public abstract class AbstractXsdNode implements XsdNode {
      */
     protected Image loadResourceIcon(String name) {
         return new Image(getClass().getResourceAsStream(ICON_DIRECTORY + name));
+    }
+
+    /**
+     * Load the simple type definition for this node.
+     *
+     * @param simpleType Set the simple type definition to load.
+     */
+    protected void loadSimpleType(XSSimpleTypeDefinition simpleType) {
+        loadType(simpleType);
+
+        for (Object facetObject : simpleType.getFacets()) {
+            XSFacet facet = (XSFacet) facetObject;
+
+            switch (facet.getFacetKind()) {
+                case XSSimpleTypeDefinition.FACET_LENGTH:
+                    this.length = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MINLENGTH:
+                    this.minLength = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MAXLENGTH:
+                    this.maxLength = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_PATTERN:
+                    this.pattern = facet.getLexicalFacetValue();
+                    break;
+                default:
+                    log.warning("Facet type " + facet.getFacetKind() + " is not being used at the moment");
+                    break;
+            }
+        }
     }
 
     private boolean hasNameChanged(XsdNode compareNode) {

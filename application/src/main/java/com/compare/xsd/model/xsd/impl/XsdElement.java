@@ -6,7 +6,10 @@ import com.compare.xsd.model.xsd.NodeNotFoundException;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.*;
-import com.sun.org.apache.xerces.internal.xs.*;
+import com.sun.org.apache.xerces.internal.xs.XSElementDeclaration;
+import com.sun.org.apache.xerces.internal.xs.XSObjectList;
+import com.sun.org.apache.xerces.internal.xs.XSParticle;
+import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -168,32 +171,6 @@ public class XsdElement extends AbstractXsdElementNode {
             loadSimpleType((XSSimpleTypeDecl) typeDefinition);
         } else {
             log.warning("Unknown element type " + typeDefinition.getTypeCategory());
-        }
-    }
-
-    private void loadSimpleType(XSSimpleTypeDecl simpleType) {
-        loadType(simpleType);
-
-        for (Object facetObject : simpleType.getFacets()) {
-            XSFacet facet = (XSFacet) facetObject;
-
-            switch (facet.getFacetKind()) {
-                case XSSimpleTypeDefinition.FACET_LENGTH:
-                    this.length = Integer.valueOf(facet.getLexicalFacetValue());
-                    break;
-                case XSSimpleTypeDefinition.FACET_MINLENGTH:
-                    this.minLength = Integer.valueOf(facet.getLexicalFacetValue());
-                    break;
-                case XSSimpleTypeDefinition.FACET_MAXLENGTH:
-                    this.maxLength = Integer.valueOf(facet.getLexicalFacetValue());
-                    break;
-                case XSSimpleTypeDefinition.FACET_PATTERN:
-                    this.pattern = facet.getLexicalFacetValue();
-                    break;
-                default:
-                    log.warning("Facet type " + facet.getFacetKind() + " is not being used at the moment");
-                    break;
-            }
         }
     }
 

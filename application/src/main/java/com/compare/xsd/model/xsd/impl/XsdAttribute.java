@@ -81,7 +81,7 @@ public class XsdAttribute extends AbstractXsdNode {
         this.name = declaration.getName();
         this.minOccurrence = attribute.getRequired() ? 1 : 0;
 
-        loadType(declaration.getTypeDefinition());
+        loadSimpleType(declaration.getTypeDefinition());
     }
 
     //endregion
