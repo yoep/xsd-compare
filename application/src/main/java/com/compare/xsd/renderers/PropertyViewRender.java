@@ -34,7 +34,7 @@ public class PropertyViewRender {
     /**
      * Render the properties of the given node.
      *
-     * @param node
+     * @param node Set the node to render.
      */
     public void render(XsdNode node) {
         ObservableList<Property> items = this.propertyView.getItems();
