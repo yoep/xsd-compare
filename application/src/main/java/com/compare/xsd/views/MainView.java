@@ -171,6 +171,7 @@ public class MainView implements Initializable {
         setLoading();
 
         if (comparer.compare()) {
+            propertyViewManager.clearAll();
             treeViewManager.refresh(); // refresh tree views to reflect removed and added items
             modificationsLabel.setText(comparer.toString());
 
