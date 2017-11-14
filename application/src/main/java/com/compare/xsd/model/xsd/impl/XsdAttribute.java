@@ -6,6 +6,8 @@ import com.sun.org.apache.xerces.internal.xs.XSAttributeDeclaration;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -61,6 +63,28 @@ public class XsdAttribute extends AbstractXsdNode {
         String xpath = parent.getXPath();
 
         return xpath + "[@" + getName() + "]";
+    }
+
+    @Override
+    public String getXml() {
+        return null;
+    }
+
+    //endregion
+
+    //region Methods
+
+    @Override
+    public String getXmlValue() {
+        String xmlValue = super.getXmlValue();
+
+        if (CollectionUtils.isNotEmpty(getEnumeration())) {
+            xmlValue = getEnumeration().toString();
+        } else if (StringUtils.isNotEmpty(getPattern())) {
+            xmlValue = getPattern();
+        }
+
+        return xmlValue;
     }
 
     //endregion

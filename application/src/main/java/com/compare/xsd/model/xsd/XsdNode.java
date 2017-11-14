@@ -56,6 +56,13 @@ public interface XsdNode {
     String getXPath();
 
     /**
+     * Get the XML example of the node.
+     *
+     * @return Returns the XML example of the node.
+     */
+    String getXml();
+
+    /**
      * Get the length of the node (optional).
      *
      * @return Returns the length of the node or null.

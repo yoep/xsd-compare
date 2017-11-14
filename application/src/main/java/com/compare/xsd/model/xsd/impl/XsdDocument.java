@@ -58,6 +58,11 @@ public class XsdDocument extends AbstractXsdElementNode {
         return null;
     }
 
+    @Override
+    public String getXPath() {
+        return "//";
+    }
+
     //endregion
 
     //region Functions
@@ -77,7 +82,7 @@ public class XsdDocument extends AbstractXsdElementNode {
                 XSObject element = (XSObject) item;
 
                 if (element instanceof XSElementDecl) {
-                    XsdElement rootElement = new XsdElement((XSElementDecl) item);
+                    XsdElement rootElement = new XsdElement((XSElementDecl) item, this);
 
                     this.elements.add(rootElement);
                 }

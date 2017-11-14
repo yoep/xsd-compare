@@ -121,13 +121,15 @@ public class TreeViewRender implements RenderView {
             TreeTableRow<XsdNode> row = new TreeTableRow<>();
             MenuItem copyName = new MenuItem("Copy name to clipboard\t(Ctrl+C)");
             MenuItem copyXPath = new MenuItem("Copy XPath to clipboard\t(Ctrl+Alt+C)");
+            MenuItem copyXml = new MenuItem("Copy XML to clipboard\t(Ctrl+Shift+C)");
 
             copyName.setOnAction(event -> copyNameToClipboard(row.getItem()));
             copyXPath.setOnAction(event -> copyXPathToClipboard(row.getItem()));
+            copyXml.setOnAction(event -> copyXmlToClipboard(row.getItem()));
 
             row.contextMenuProperty().bind(Bindings.when(row.emptyProperty())
                     .then((ContextMenu) null)
-                    .otherwise(new ContextMenu(copyName, copyXPath)));
+                    .otherwise(new ContextMenu(copyName, copyXPath, copyXml)));
 
             return row;
         });
@@ -141,6 +143,9 @@ public class TreeViewRender implements RenderView {
                 if (event.isControlDown() && event.isAltDown() && event.getCode() == KeyCode.C) {
                     copyXPathToClipboard(selectedItem.getValue());
                 }
+                if (event.isControlDown() && event.isShiftDown() && event.getCode() == KeyCode.C) {
+                    copyXmlToClipboard(selectedItem.getValue());
+                }
             }
         });
     }
@@ -151,6 +156,10 @@ public class TreeViewRender implements RenderView {
 
     private void copyXPathToClipboard(XsdNode item) {
         copyTextToClipboard(item.getXPath());
+    }
+
+    private void copyXmlToClipboard(XsdNode item) {
+        copyTextToClipboard(item.getXml());
     }
 
     private void copyTextToClipboard(String text) {

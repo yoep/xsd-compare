@@ -11,6 +11,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,13 +84,11 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getXPath() {
-        String xpath;
+        String xpath = "";
         String multiplicity = "";
 
         if (parent != null) {
             xpath = parent.getXPath() + "/";
-        } else {
-            xpath = "//";
         }
 
         if (maxOccurrence == null || maxOccurrence > 1) {
@@ -96,6 +96,52 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
 
         return xpath + "*:" + getName() + multiplicity;
+    }
+
+    //endregion
+
+    //region Methods
+
+    /**
+     * Get the XML value for this node.
+     *
+     * @return Returns the XML value or null.
+     */
+    public String getXmlValue() {
+        if (StringUtils.isNotEmpty(getFixedValue())) {
+            return getFixedValue();
+        } else if (CollectionUtils.isNotEmpty(getEnumeration())) {
+            return getEnumeration().get(0);
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the XML comment for this node.
+     *
+     * @return Returns the XML comment or null.
+     */
+    public String getXmlComment() {
+        String comment = "";
+
+        if (CollectionUtils.isNotEmpty(getEnumeration())) {
+            comment += " Possible values: " + getEnumeration();
+        }
+        if (StringUtils.isNotEmpty(getPattern())) {
+            comment += " Pattern: '" + getPattern() + "'";
+        }
+        if (getLength() != null) {
+            comment += " Length: " + getLength();
+        }
+        if (getMinLength() != null) {
+            comment += " Min. length: " + getMinLength();
+        }
+        if (getMaxLength() != null) {
+            comment += " Max. length: " + getMaxLength();
+        }
+
+        return StringUtils.isNotEmpty(comment) ? comment.trim() : null;
     }
 
     //endregion

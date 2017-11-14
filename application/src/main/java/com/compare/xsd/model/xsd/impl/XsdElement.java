@@ -14,6 +14,8 @@ import lombok.EqualsAndHashCode;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +34,12 @@ public class XsdElement extends AbstractXsdElementNode {
      * Initialize a new {@link XsdElement}.
      *
      * @param element Set the element to process.
+     * @param parent  Set the parent document.
      */
-    public XsdElement(XSElementDecl element) {
+    public XsdElement(XSElementDecl element, XsdDocument parent) {
         Assert.notNull(element, "element cannot be null");
         this.element = element;
+        this.parent = parent;
         this.definition = null;
         this.minOccurrence = 1;
         this.maxOccurrence = 1;
@@ -165,6 +169,17 @@ public class XsdElement extends AbstractXsdElementNode {
                 this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
             }
         }
+    }
+
+    @Override
+    protected Element createXml(Document xmlDoc, Element parent) {
+        Element xmlElement = super.createXml(xmlDoc, parent);
+
+        for (XsdAttribute attribute : getAttributes()) {
+            xmlElement.setAttribute(attribute.getName(), attribute.getXmlValue());
+        }
+
+        return xmlElement;
     }
 
     //endregion
