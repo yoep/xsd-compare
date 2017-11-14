@@ -2,12 +2,15 @@ package com.compare.xsd.renderers;
 
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
 import javafx.util.Callback;
 import lombok.*;
@@ -89,6 +92,37 @@ public class PropertyViewRender implements RenderView {
     private void init() {
         addPropertyColumn();
         addValueColumn();
+        addContextMenu();
+    }
+
+    private void addContextMenu() {
+        this.propertyView.setRowFactory(tableView -> {
+            TableRow<Property> row = new TableRow<>();
+            MenuItem copyValue = new MenuItem("Copy value to clipboard\t(Ctrl+C)");
+
+            copyValue.setOnAction(event -> copyValueToClipboard(row.getItem()));
+
+            row.contextMenuProperty().bind(Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(new ContextMenu(copyValue)));
+
+            return row;
+        });
+        this.propertyView.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            Property selectedItem = this.propertyView.getSelectionModel().getSelectedItem();
+
+            if (selectedItem != null) {
+                if (event.isControlDown() && event.getCode() == KeyCode.C) {
+                    copyValueToClipboard(selectedItem);
+                }
+            }
+        });
+    }
+
+    private void copyValueToClipboard(Property property) {
+        ClipboardContent clipboardContent = new ClipboardContent();
+        clipboardContent.putString(property.getValue().toString());
+        Clipboard.getSystemClipboard().setContent(clipboardContent);
     }
 
     private void addPropertyColumn() {
