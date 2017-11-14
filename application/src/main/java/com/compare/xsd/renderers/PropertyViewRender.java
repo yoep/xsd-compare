@@ -74,6 +74,14 @@ public class PropertyViewRender implements RenderView {
         this.node = node;
     }
 
+    /**
+     * Clear the rendering of the properties.
+     */
+    public void clear() {
+        this.node = null;
+        this.propertyView.getItems().clear();
+    }
+
     //endregion
 
     //region Functions

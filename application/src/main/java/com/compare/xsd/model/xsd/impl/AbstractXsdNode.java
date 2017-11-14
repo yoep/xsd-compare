@@ -135,7 +135,7 @@ public abstract class AbstractXsdNode implements XsdNode {
                     this.whitespace = facet.getLexicalFacetValue();
                     break;
                 default:
-                    log.warning("Facet type " + facet.getFacetKind() + " is not being used at the moment");
+                    log.warning("Facet type " + facet.getFacetKind() + " is not implemented at the moment");
                     break;
             }
         }
@@ -147,8 +147,11 @@ public abstract class AbstractXsdNode implements XsdNode {
                 case XSSimpleTypeDefinition.FACET_ENUMERATION:
                     this.enumeration.addAll(facet.getLexicalFacetValues());
                     break;
+                case XSSimpleTypeDefinition.FACET_PATTERN:
+                    this.pattern = String.join(", ", facet.getLexicalFacetValues());
+                    break;
                 default:
-                    log.warning("Multi facet value type " + facet.getFacetKind() + " is not being used at the moment");
+                    log.warning("Multi facet value type " + facet.getFacetKind() + " is not implemented at the moment");
                     break;
             }
         }

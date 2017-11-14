@@ -126,6 +126,10 @@ public class TreeViewRender implements RenderView {
     private void addNameColumn() {
         TreeTableColumn<XsdNode, String> column = createNewColumn("Name", 350);
 
+        column.setPrefWidth(-1);
+        column.setMinWidth(-1);
+        column.setMaxWidth(5000);
+
         column.setCellValueFactory(cellData -> {
             TreeItem<XsdNode> treeItem = cellData.getValue();
             XsdNode node = treeItem.getValue();
@@ -210,6 +214,8 @@ public class TreeViewRender implements RenderView {
         TreeTableColumn<XsdNode, String> column = new TreeTableColumn<>(name);
 
         column.setPrefWidth(width);
+        column.setMinWidth(width);
+        column.setMaxWidth(width);
         column.setSortable(false);
         column.setEditable(false);
 

@@ -15,4 +15,12 @@ public class PropertyViewManager extends AbstractScrollBarSynchronizeManager {
     public void synchronize() {
         this.synchronize(leftProperties, rightProperties);
     }
+
+    /**
+     * Clear all property rendering views.
+     */
+    public void clearAll() {
+        leftProperties.clear();
+        rightProperties.clear();
+    }
 }
