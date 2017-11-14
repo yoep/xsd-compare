@@ -1,0 +1,65 @@
+subprojects {
+    group = "com.compare.xsd"
+
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-idea'
+    apply plugin: "io.spring.dependency-management"
+    apply from: "$rootDir/gradle/code-quality.gradle"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << '-Xlint:unchecked'
+            options.encoding = 'UTF-8'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.failOnVersionConflict()
+    }
+
+    test {
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+        }
+        maxParallelForks 2
+        jvmArgs = ['-Xmx512m']
+    }
+
+    jar {
+        manifest {
+            attributes 'Implementation-Title': "$project.name"
+            attributes 'Implementation-Version': "$project.version"
+        }
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.mockito:mockito-core'
+        testCompile 'org.assertj:assertj-core'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+
+            dependencies {
+                dependency 'org.projectlombok:lombok:1.16.18'
+                dependency 'com.jayway.restassured:rest-assured:2.9.0'
+                dependency 'com.google.guava:guava:21.0'
+                dependency 'org.apache.commons:commons-lang3:3.4'
+            }
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.jacoco.reportPaths", "$buildDir/jacoco/test.exec,$buildDir/jacoco/integrationTest.exec"
+            property "sonar.junit.reportsPath", "$buildDir/junit-xml"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://repo.spring.io/plugins-release' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.1.RELEASE"
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
+    }
+
+}
+
+apply plugin: 'application'
+apply plugin: 'org.sonarqube'
+apply from: "$rootDir/gradle/versioning.gradle"
+apply from: "$rootDir/gradle/allprojects.gradle"
+apply from: "$rootDir/gradle/subprojects.gradle"
+
+mainClassName = "com.compare.xsd.XsdCompareApplication"
+
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew scripts for unix and windows environments'
+    gradleVersion = '3.4'
+}
+

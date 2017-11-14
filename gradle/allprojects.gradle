@@ -1,0 +1,18 @@
+allprojects {
+
+    defaultTasks 'clean', 'build'
+
+    afterEvaluate {
+        tasks.withType(Test).each { testTask ->
+            testTask.doFirst {
+                reports.junitXml.destination = "$buildDir/junit-xml"
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        maven { url 'http://repo.spring.io/plugins-release' }
+        mavenCentral()
+    }
+}

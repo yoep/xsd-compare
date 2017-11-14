@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply from: "$rootDir/gradle/versioning.gradle"
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-lang3:3.6'
+    compile 'org.projectlombok:lombok'
+}
