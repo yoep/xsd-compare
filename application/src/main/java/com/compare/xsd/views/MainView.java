@@ -157,6 +157,7 @@ public class MainView implements Initializable {
     public void clearAll() {
         treeViewManager.clearAll();
         propertyViewManager.clearAll();
+        modificationsLabel.setText("");
     }
 
     //endregion
