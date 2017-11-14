@@ -1,5 +1,6 @@
 package com.compare.xsd.views;
 
+import com.compare.xsd.compare.XsdComparer;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.PropertyViewManager;
 import com.compare.xsd.managers.TreeViewManager;
@@ -35,21 +36,26 @@ public class MainView implements Initializable {
 
     @FXML
     private TreeTableView<XsdNode> leftTree;
-
     @FXML
     private TreeTableView<XsdNode> rightTree;
 
     @FXML
     private SplitPane treeSplitPane;
-
     @FXML
     private SplitPane propertiesSplitPane;
 
     @FXML
     private TableView<PropertyViewRender.Property> leftProperties;
-
     @FXML
     private TableView<PropertyViewRender.Property> rightProperties;
+
+    @FXML
+    private Label modificationsLabel;
+
+    @FXML
+    private Label progressBarLabel;
+    @FXML
+    private ProgressBar progressBar;
 
     //region Constructors
 
@@ -159,9 +165,18 @@ public class MainView implements Initializable {
     private void compare() {
         XsdDocument originalDocument = treeViewManager.getLeftTreeRender().getDocument();
         XsdDocument newDocument = treeViewManager.getRightTreeRender().getDocument();
+        XsdComparer comparer = new XsdComparer(originalDocument, newDocument);
 
-        originalDocument.compare(newDocument);
-        treeViewManager.refresh(); // refresh tree views to reflect removed and added items
+        setLoading();
+
+        if (comparer.compare()) {
+            treeViewManager.refresh(); // refresh tree views to reflect removed and added items
+            modificationsLabel.setText(comparer.toString());
+
+            setLoadingDone();
+        } else {
+            setLoadingFailed();
+        }
     }
 
     private void loadTree(TreeViewRender treeViewRender) {
@@ -172,6 +187,8 @@ public class MainView implements Initializable {
         XsdDocument xsdDocument;
 
         try {
+            setLoading();
+
             if (file == null) {
                 xsdDocument = xsdLoader.chooseAndLoad();
             } else {
@@ -185,8 +202,11 @@ public class MainView implements Initializable {
             if (treeViewManager.getLeftTreeRender().isRendering() && treeViewManager.getRightTreeRender().isRendering()) {
                 compare();
             }
+
+            setLoadingDone();
         } catch (Exception ex) {
             log.log(Level.SEVERE, ex.getMessage(), ex);
+            setLoadingFailed();
             new Alert(Alert.AlertType.ERROR, "We are sorry, but an unexpected error occurred.\n" + ex.getMessage(), ButtonType.OK).show();
         }
     }
@@ -205,6 +225,24 @@ public class MainView implements Initializable {
 
     private SplitPane.Divider getFirstDivider(ObservableList<SplitPane.Divider> dividers) {
         return IteratorUtils.toList(dividers.iterator()).get(0);
+    }
+
+    private void setLoading() {
+        progressBarLabel.setText("Loading...");
+        progressBar.setProgress(-1);
+        progressBar.setStyle("-fx-accent: dodgerblue");
+    }
+
+    private void setLoadingDone() {
+        progressBarLabel.setText("Done");
+        progressBar.setProgress(1);
+        progressBar.setStyle("-fx-accent: limegreen");
+    }
+
+    private void setLoadingFailed() {
+        progressBarLabel.setText("Failed");
+        progressBar.setProgress(1);
+        progressBar.setStyle("-fx-accent: red");
     }
 
     //endregion

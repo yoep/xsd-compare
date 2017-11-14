@@ -1,7 +1,5 @@
 package com.compare.xsd.model.xsd.impl;
 
-import com.compare.xsd.model.comparison.ModificationType;
-import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.NodeNotFoundException;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
@@ -15,7 +13,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -95,38 +92,6 @@ public class XsdElement extends AbstractXsdElementNode {
 
     //region Methods
 
-    @Override
-    public void compare(AbstractXsdElementNode compareNode) {
-        super.compare(compareNode);
-        List<XsdAttribute> attributesCopy = new ArrayList<>(attributes); //take a copy as the actual list might be modified during comparison
-        List<XsdAttribute> compareAttributesCopy = new ArrayList<>(((XsdElement) compareNode).getAttributes());
-        XsdElement compareElement = (XsdElement) compareNode;
-
-        for (XsdAttribute attribute : attributesCopy) {
-            try {
-                if (StringUtils.isNoneEmpty(attribute.getName())) {
-                    XsdAttribute compareAttribute = compareElement.findAttribute(attribute.getName());
-
-                    attribute.compare(compareAttribute);
-                }
-            } catch (NodeNotFoundException ex) {
-                attribute.setModifications(new Modifications(ModificationType.REMOVED));
-                copyAttributeAsEmptyNode(attributes.indexOf(attribute), compareElement);
-            }
-        }
-
-        for (XsdAttribute attribute : compareAttributesCopy) {
-            try {
-                if (StringUtils.isNoneEmpty(attribute.getName())) {
-                    compareElement.findAttribute(attribute.getName());
-                }
-            } catch (NodeNotFoundException ex) {
-                attribute.setModifications(new Modifications(ModificationType.ADDED));
-                copyAttributeAsEmptyNode(attributes.indexOf(attribute), this);
-            }
-        }
-    }
-
     /**
      * Find the attribute by name.
      *
@@ -149,7 +114,7 @@ public class XsdElement extends AbstractXsdElementNode {
      * @param index     Set the index of the attribute.
      * @param attribute Set the attribute to add.
      */
-    private void insertAttributeAt(int index, XsdAttribute attribute) {
+    public void insertAttributeAt(int index, XsdAttribute attribute) {
         Assert.notNull(attribute, "attribute cannot be null");
 
         this.attributes.add(index, attribute);
@@ -200,16 +165,6 @@ public class XsdElement extends AbstractXsdElementNode {
                 this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
             }
         }
-    }
-
-    /**
-     * Copy the attribute and inner attributes of the given to copy node to the destination element at given index.
-     *
-     * @param index           Set the index to add the nodes at.
-     * @param destinationNode Set the destination of the copied nodes.
-     */
-    private void copyAttributeAsEmptyNode(int index, XsdElement destinationNode) {
-        destinationNode.insertAttributeAt(index, new XsdEmptyAttributeNode());
     }
 
     //endregion

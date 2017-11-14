@@ -58,21 +58,6 @@ public class XsdAttribute extends AbstractXsdNode {
 
     //endregion
 
-    //region Methods
-
-    /**
-     * Compare this attribute against the given attribute.
-     *
-     * @param compareAttribute Set the attribute to compare against.
-     */
-    public void compare(XsdAttribute compareAttribute) {
-        Assert.notNull(compareAttribute, "compareAttribute cannot be null");
-
-        //TODO: implement comparison
-    }
-
-    //endregion
-
     //region Functions
 
     private void init() {

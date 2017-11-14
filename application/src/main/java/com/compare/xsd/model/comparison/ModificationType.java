@@ -4,6 +4,5 @@ public enum ModificationType {
     ADDED,
     REMOVED,
     MOVED,
-    MODIFIED,
-    NONE
+    MODIFIED
 }

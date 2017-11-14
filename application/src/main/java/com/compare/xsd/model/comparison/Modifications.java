@@ -1,9 +1,10 @@
 package com.compare.xsd.model.comparison;
 
-import com.compare.xsd.model.xsd.XsdNode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Modifications {
     private ModificationType type;
 
@@ -18,6 +19,8 @@ public class Modifications {
     private boolean enumerationChanged;
     private boolean whitespaceChanged;
 
+    //region Constructors
+
     /**
      * Initialize a new instance of {@link Modifications}.
      *
@@ -27,22 +30,19 @@ public class Modifications {
         this.type = type;
     }
 
-    /**
-     * Verify if modifications were made.
-     *
-     * @param compareNode Set the node which was used for comparison.
-     */
-    public void verify(XsdNode compareNode) {
-        if (type == ModificationType.NONE) {
-            if (isModified()) {
-                type = ModificationType.MODIFIED;
-                compareNode.setModifications(this);
-            }
-        }
-    }
+    //endregion
 
-    private boolean isModified() {
+    //region Getters & Setters
+
+    /**
+     * Verify if any modifications were made.
+     *
+     * @return Returns true if something changed, else false.
+     */
+    public boolean isModified() {
         return nameChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged || minLengthChanged ||
                 patternChanged || enumerationChanged || whitespaceChanged;
     }
+
+    //endregion
 }

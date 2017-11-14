@@ -1,6 +1,5 @@
 package com.compare.xsd.renderers;
 
-import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -59,7 +58,7 @@ public class PropertyViewRender implements RenderView {
      */
     public void render(XsdNode node) {
         ObservableList<Property> items = this.propertyView.getItems();
-        Modifications modifications = node.getModifications() != null ? node.getModifications() : new Modifications(ModificationType.NONE);
+        Modifications modifications = node.getModifications() != null ? node.getModifications() : new Modifications();
 
         items.clear();
         items.add(new Property("Name", node.getName(), modifications.isNameChanged()));

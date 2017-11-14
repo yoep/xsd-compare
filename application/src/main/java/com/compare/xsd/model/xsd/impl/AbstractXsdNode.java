@@ -1,6 +1,5 @@
 package com.compare.xsd.model.xsd.impl;
 
-import com.compare.xsd.model.comparison.ModificationType;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.xs.XSFacet;
@@ -12,7 +11,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,56 +78,6 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
 
         return null;
-    }
-
-    //endregion
-
-    //region Methods
-
-    /**
-     * Compare if any of the properties are different.
-     *
-     * @param compareNode Set the node to compare against.
-     */
-    public void compareProperties(XsdNode compareNode) {
-        Assert.notNull(compareNode, "compareNode cannot be null");
-
-        if (this.name != null) {
-            this.modifications = new Modifications(ModificationType.NONE);
-
-            if (hasNameChanged(compareNode)) {
-                this.modifications.setNameChanged(true);
-            }
-            if (hasTypeChanged(compareNode)) {
-                this.modifications.setTypeChanged(true);
-            }
-            if (hasCardinalityChanged(compareNode)) {
-                this.modifications.setCardinalityChanged(true);
-            }
-            if (hasFixedValueChanged(compareNode)) {
-                this.modifications.setFixedValueChanged(true);
-            }
-            if (hasLengthChanged(compareNode)) {
-                this.modifications.setLengthChanged(true);
-            }
-            if (hasMinLengthChanged(compareNode)) {
-                this.modifications.setMinLengthChanged(true);
-            }
-            if (hasMaxLengthChanged(compareNode)) {
-                this.modifications.setMaxLengthChanged(true);
-            }
-            if (hasPatternChanged(compareNode)) {
-                this.modifications.setPatternChanged(true);
-            }
-            if (hasEnumerationChanged(compareNode)) {
-                this.modifications.setEnumerationChanged(true);
-            }
-            if (hasWhitespaceChanged(compareNode)) {
-                this.modifications.setWhitespaceChanged(true);
-            }
-
-            this.modifications.verify(compareNode);
-        }
     }
 
     //endregion
@@ -204,46 +152,6 @@ public abstract class AbstractXsdNode implements XsdNode {
                     break;
             }
         }
-    }
-
-    private boolean hasNameChanged(XsdNode compareNode) {
-        return !this.getName().equals(compareNode.getName());
-    }
-
-    private boolean hasTypeChanged(XsdNode compareNode) {
-        return this.getType() != null && !this.getType().equals(compareNode.getType());
-    }
-
-    private boolean hasCardinalityChanged(XsdNode compareNode) {
-        return !this.getCardinality().equals(compareNode.getCardinality());
-    }
-
-    private boolean hasFixedValueChanged(XsdNode compareNode) {
-        return getFixedValue() != null && !getFixedValue().equals(compareNode.getFixedValue());
-    }
-
-    private boolean hasPatternChanged(XsdNode compareNode) {
-        return getPattern() != null && !getPattern().equals(compareNode.getPattern());
-    }
-
-    private boolean hasMaxLengthChanged(XsdNode compareNode) {
-        return getMaxLength() != null && !getMaxLength().equals(compareNode.getMaxLength());
-    }
-
-    private boolean hasMinLengthChanged(XsdNode compareNode) {
-        return getMinLength() != null && !getMinLength().equals(compareNode.getMinLength());
-    }
-
-    private boolean hasLengthChanged(XsdNode compareNode) {
-        return getLength() != null && !getLength().equals(compareNode.getLength());
-    }
-
-    private boolean hasEnumerationChanged(XsdNode compareNode) {
-        return !getEnumeration().equals(compareNode.getEnumeration());
-    }
-
-    private boolean hasWhitespaceChanged(XsdNode compareNode) {
-        return getWhitespace() != null && !getWhitespace().equals(compareNode.getWhitespace());
     }
 
     //endregion
