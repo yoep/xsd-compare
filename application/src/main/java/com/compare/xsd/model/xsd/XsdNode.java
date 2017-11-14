@@ -49,6 +49,13 @@ public interface XsdNode {
     String getWhitespace();
 
     /**
+     * Get the xpath of the node.
+     *
+     * @return Returns the xpath of the node.
+     */
+    String getXPath();
+
+    /**
      * Get the length of the node (optional).
      *
      * @return Returns the length of the node or null.

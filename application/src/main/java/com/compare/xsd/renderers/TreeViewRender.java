@@ -2,12 +2,17 @@ package com.compare.xsd.renderers;
 
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -108,6 +113,50 @@ public class TreeViewRender implements RenderView {
         addTypeColumn();
         addCardinalityColumn();
         addSelectionListener();
+        addContextMenu();
+    }
+
+    private void addContextMenu() {
+        this.treeView.setRowFactory(treeView -> {
+            TreeTableRow<XsdNode> row = new TreeTableRow<>();
+            MenuItem copyName = new MenuItem("Copy name to clipboard\t(Ctrl+C)");
+            MenuItem copyXPath = new MenuItem("Copy XPath to clipboard\t(Ctrl+Alt+C)");
+
+            copyName.setOnAction(event -> copyNameToClipboard(row.getItem()));
+            copyXPath.setOnAction(event -> copyXPathToClipboard(row.getItem()));
+
+            row.contextMenuProperty().bind(Bindings.when(row.emptyProperty())
+                    .then((ContextMenu) null)
+                    .otherwise(new ContextMenu(copyName, copyXPath)));
+
+            return row;
+        });
+        this.treeView.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            TreeItem<XsdNode> selectedItem = this.treeView.getSelectionModel().getSelectedItem();
+
+            if (selectedItem != null) {
+                if (event.isControlDown() && event.getCode() == KeyCode.C) {
+                    copyNameToClipboard(selectedItem.getValue());
+                }
+                if (event.isControlDown() && event.isAltDown() && event.getCode() == KeyCode.C) {
+                    copyXPathToClipboard(selectedItem.getValue());
+                }
+            }
+        });
+    }
+
+    private void copyNameToClipboard(XsdNode item) {
+        copyTextToClipboard(item.getName());
+    }
+
+    private void copyXPathToClipboard(XsdNode item) {
+        copyTextToClipboard(item.getXPath());
+    }
+
+    private void copyTextToClipboard(String text) {
+        ClipboardContent clipboardContent = new ClipboardContent();
+        clipboardContent.putString(text);
+        Clipboard.getSystemClipboard().setContent(clipboardContent);
     }
 
     private void renderChildren(List<XsdNode> elements, TreeItem<XsdNode> parent) {

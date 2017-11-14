@@ -53,7 +53,7 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     //endregion
 
-    //region Getters & Setters
+    //region Implementation of XsdNode
 
     @Override
     public String getCardinality() {
@@ -78,6 +78,24 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
 
         return null;
+    }
+
+    @Override
+    public String getXPath() {
+        String xpath;
+        String multiplicity = "";
+
+        if (parent != null) {
+            xpath = parent.getXPath() + "/";
+        } else {
+            xpath = "//";
+        }
+
+        if (maxOccurrence == null || maxOccurrence > 1) {
+            multiplicity = "[]";
+        }
+
+        return xpath + "*:" + getName() + multiplicity;
     }
 
     //endregion

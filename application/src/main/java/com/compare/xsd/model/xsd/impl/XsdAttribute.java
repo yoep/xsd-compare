@@ -44,7 +44,7 @@ public class XsdAttribute extends AbstractXsdNode {
 
     //endregion
 
-    //region Getters & Setters
+    //region Implementation of XsdNode
 
     @Override
     public Image getIcon() {
@@ -54,6 +54,13 @@ public class XsdAttribute extends AbstractXsdNode {
     @Override
     public List<XsdNode> getNodes() {
         return new ArrayList<>();
+    }
+
+    @Override
+    public String getXPath() {
+        String xpath = parent.getXPath();
+
+        return xpath + "[@" + getName() + "]";
     }
 
     //endregion
