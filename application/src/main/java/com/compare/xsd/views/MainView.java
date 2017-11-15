@@ -1,8 +1,6 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.compare.XsdComparer;
-import com.compare.xsd.excel.Workbook;
-import com.compare.xsd.loaders.ExcelLoader;
 import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.PropertyViewManager;
@@ -12,6 +10,7 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
+import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,11 +32,11 @@ import java.util.logging.Level;
 @Component
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
-    private final ExcelLoader excelLoader;
     private final ViewLoader viewLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
+    private final ExcelComparisonWriter comparisonWriter;
 
     private XsdComparer comparer;
 
@@ -74,20 +73,20 @@ public class MainView implements Initializable {
      * This view contains the main screen of the application including the tree renders.
      *
      * @param xsdLoader           Set the XSD loader.
-     * @param excelLoader         Set the Excel loader.
      * @param viewLoader          Set the view loader.
      * @param viewManager         Set the view manager.
      * @param treeViewManager     Set the tree view manager.
      * @param propertyViewManager Set the property manager.
+     * @param comparisonWriter    Set the Excel writer.
      */
-    public MainView(XsdLoader xsdLoader, ExcelLoader excelLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager,
-                    PropertyViewManager propertyViewManager) {
+    public MainView(XsdLoader xsdLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager,
+                    PropertyViewManager propertyViewManager, ExcelComparisonWriter comparisonWriter) {
         this.xsdLoader = xsdLoader;
-        this.excelLoader = excelLoader;
         this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
         this.propertyViewManager = propertyViewManager;
+        this.comparisonWriter = comparisonWriter;
     }
 
     //endregion
@@ -179,14 +178,9 @@ public class MainView implements Initializable {
         }
     }
 
-
     public void exportToExcel() throws IOException {
         if (comparer != null) {
-            Workbook workbook = new Workbook(excelLoader.showSaveDialog());
-
-
-
-            workbook.save();
+            comparisonWriter.save(comparer);
         }
     }
 

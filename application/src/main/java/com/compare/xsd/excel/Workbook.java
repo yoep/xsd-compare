@@ -1,13 +1,19 @@
 package com.compare.xsd.excel;
 
+import lombok.Getter;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.Assert;
 
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Workbook implementation of an Excel Workbook file.
+ */
+@Getter
 public class Workbook {
     private final File file;
 
@@ -29,12 +35,21 @@ public class Workbook {
     /**
      * Create a new worksheet within the workbook.
      *
-     * @param name Set the name of the workbook.
+     * @param name        Set the name of the workbook.
+     * @param shortenName Set if the name must be shortened when too long.
+     * @throws NameTooLongException Is thrown when the given name is too long and #shortenName is false.
      */
-    public void createWorksheet(String name) {
+    public Worksheet getOrCreateWorksheet(String name, boolean shortenName) throws NameTooLongException {
         Assert.hasText(name, "name cannot be empty");
 
-        workbook.createSheet(name);
+        name = Worksheet.getWorksheetName(name, shortenName);
+        XSSFSheet sheet = workbook.getSheet(name);
+
+        if (sheet != null) {
+            return new Worksheet(this, sheet);
+        } else {
+            return Worksheet.newWorksheet(name, this, shortenName);
+        }
     }
 
     /**
