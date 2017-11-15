@@ -1,6 +1,8 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.compare.XsdComparer;
+import com.compare.xsd.excel.Workbook;
+import com.compare.xsd.loaders.ExcelLoader;
 import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.PropertyViewManager;
@@ -22,6 +24,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +33,7 @@ import java.util.logging.Level;
 @Component
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
+    private final ExcelLoader excelLoader;
     private final ViewLoader viewLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
@@ -70,14 +74,16 @@ public class MainView implements Initializable {
      * This view contains the main screen of the application including the tree renders.
      *
      * @param xsdLoader           Set the XSD loader.
+     * @param excelLoader         Set the Excel loader.
      * @param viewLoader          Set the view loader.
      * @param viewManager         Set the view manager.
      * @param treeViewManager     Set the tree view manager.
      * @param propertyViewManager Set the property manager.
      */
-    public MainView(XsdLoader xsdLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager, PropertyViewManager
-            propertyViewManager) {
+    public MainView(XsdLoader xsdLoader, ExcelLoader excelLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager,
+                    PropertyViewManager propertyViewManager) {
         this.xsdLoader = xsdLoader;
+        this.excelLoader = excelLoader;
         this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
@@ -174,9 +180,13 @@ public class MainView implements Initializable {
     }
 
 
-    public void exportToExcel() {
+    public void exportToExcel() throws IOException {
         if (comparer != null) {
+            Workbook workbook = new Workbook(excelLoader.showSaveDialog());
 
+
+
+            workbook.save();
         }
     }
 
