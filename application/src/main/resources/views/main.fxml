@@ -34,13 +34,19 @@
             </tooltip>
             <Icons fx:constant="COGS"/>
         </Button>
-        <Button fx:id="exportComparisonButton" onAction="#loadNextAvailableTree" styleClass="icon" disable="true">
+        <Button fx:id="exportComparisonButton" onAction="#exportToExcel" styleClass="icon" disable="true">
             <tooltip>
                 <Tooltip text="Export comparison"/>
             </tooltip>
             <Icons fx:constant="DOWNLOAD"/>
         </Button>
         <Pane HBox.hgrow="ALWAYS" />
+        <Button onAction="#openSettingsView" styleClass="icon" disable="true">
+            <tooltip>
+                <Tooltip text="Settings"/>
+            </tooltip>
+            <Icons fx:constant="COG"/>
+        </Button>
         <Button onAction="#openHelpView" styleClass="icon">
             <tooltip>
                 <Tooltip text="Help"/>

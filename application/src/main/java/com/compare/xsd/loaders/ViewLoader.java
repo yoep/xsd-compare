@@ -1,6 +1,7 @@
 package com.compare.xsd.loaders;
 
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.views.ViewProperties;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -75,16 +76,21 @@ public class ViewLoader {
     /**
      * Show the given view in a new window.
      *
-     * @param view  Set the view to load and show.
-     * @param title Set the title of the window.
+     * @param view       Set the view to load and show.
+     * @param properties Set the properties of the window.
      */
-    public void showWindow(String view, String title) {
+    public void showWindow(String view, ViewProperties properties) {
         Assert.hasText(view, "view cannot be empty");
+        Assert.notNull(properties, "properties cannot be null");
         Scene scene = loadScene(view);
         Stage stage = new Stage();
 
+        if (properties.isMaximizeDisabled()) {
+            stage.setResizable(false);
+        }
+
         stage.setScene(scene);
-        stage.setTitle(title);
+        stage.setTitle(properties.getTitle());
         stage.show();
     }
 

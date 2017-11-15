@@ -35,6 +35,8 @@ public class MainView implements Initializable {
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
 
+    private XsdComparer comparer;
+
     @FXML
     private TreeTableView<XsdNode> leftTree;
     @FXML
@@ -171,8 +173,22 @@ public class MainView implements Initializable {
         }
     }
 
+
+    public void exportToExcel() {
+        if (comparer != null) {
+
+        }
+    }
+
+    public void openSettingsView() {
+        //TODO: implement
+    }
+
     public void openHelpView() {
-        viewLoader.showWindow("help.fxml", "Help");
+        viewLoader.showWindow("help.fxml", ViewProperties.builder()
+                .title("Help")
+                .maximizeDisabled(true)
+                .build());
     }
 
     //endregion
@@ -187,10 +203,11 @@ public class MainView implements Initializable {
         setLoading();
 
         if (comparer.compare()) {
-            propertyViewManager.clearAll();
-            treeViewManager.refresh(); // refresh tree views to reflect removed and added items
-            modificationsLabel.setText(comparer.toString());
-            exportComparisonButton.setDisable(false);
+            this.propertyViewManager.clearAll();
+            this.treeViewManager.refresh(); // refresh tree views to reflect removed and added items
+            this.modificationsLabel.setText(comparer.toString());
+            this.exportComparisonButton.setDisable(false);
+            this.comparer = comparer;
 
             setLoadingDone();
         } else {

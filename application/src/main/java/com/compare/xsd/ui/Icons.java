@@ -7,5 +7,6 @@ public class Icons {
     public static final String DOWNLOAD = "\uf019";
     public static final String HELP = "\uf059";
     public static final String COGS = "\uf085";
+    public static final String COG = "\uf013";
     //CHECKSTYLE:ON
 }
