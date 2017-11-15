@@ -18,10 +18,7 @@ buildscript {
 
 }
 
-apply plugin: 'application'
 apply from: "$rootDir/gradle/versioning.gradle"
-
-mainClassName = 'com.compare.xsd.XsdCompareApplication'
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew scripts for unix and windows environments'
@@ -45,6 +42,10 @@ allprojects {
                 reports.junitXml.destination = "$buildDir/junit-xml"
             }
         }
+    }
+
+    springBoot {
+        mainClass = "com.compare.xsd.XsdCompareApplication"
     }
 
     repositories {
