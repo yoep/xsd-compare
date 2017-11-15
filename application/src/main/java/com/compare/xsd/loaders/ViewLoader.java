@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import lombok.extern.java.Log;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -64,12 +65,32 @@ public class ViewLoader {
      */
     public void show(String view) {
         Assert.hasText(view, "view cannot be empty");
-        Parent loadedView = load(view);
-        Scene scene = new Scene(loadedView);
+        Scene scene = loadScene(view);
 
         viewManager.setScene(scene);
         viewManager.getStage().setScene(scene);
         viewManager.getStage().show();
+    }
+
+    /**
+     * Show the given view in a new window.
+     *
+     * @param view  Set the view to load and show.
+     * @param title Set the title of the window.
+     */
+    public void showWindow(String view, String title) {
+        Assert.hasText(view, "view cannot be empty");
+        Scene scene = loadScene(view);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.setTitle(title);
+        stage.show();
+    }
+
+    private Scene loadScene(String view) {
+        Parent loadedView = load(view);
+        return new Scene(loadedView);
     }
 
     private void loadFonts() {

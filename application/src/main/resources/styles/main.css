@@ -11,6 +11,12 @@
     -fx-text-fill: gray;
 }
 
-.icon:hover{
+.bold {
+    -fx-font-weight: bold;
+}
+
+.section {
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
 }
 

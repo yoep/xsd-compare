@@ -1,6 +1,7 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.compare.XsdComparer;
+import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.PropertyViewManager;
 import com.compare.xsd.managers.TreeViewManager;
@@ -29,6 +30,7 @@ import java.util.logging.Level;
 @Component
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
+    private final ViewLoader viewLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
@@ -66,12 +68,15 @@ public class MainView implements Initializable {
      * This view contains the main screen of the application including the tree renders.
      *
      * @param xsdLoader           Set the XSD loader.
+     * @param viewLoader          Set the view loader.
      * @param viewManager         Set the view manager.
      * @param treeViewManager     Set the tree view manager.
      * @param propertyViewManager Set the property manager.
      */
-    public MainView(XsdLoader xsdLoader, ViewManager viewManager, TreeViewManager treeViewManager, PropertyViewManager propertyViewManager) {
+    public MainView(XsdLoader xsdLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager, PropertyViewManager
+            propertyViewManager) {
         this.xsdLoader = xsdLoader;
+        this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
         this.propertyViewManager = propertyViewManager;
@@ -167,7 +172,7 @@ public class MainView implements Initializable {
     }
 
     public void openHelpView() {
-
+        viewLoader.showWindow("help.fxml", "Help");
     }
 
     //endregion
