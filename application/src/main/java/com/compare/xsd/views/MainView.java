@@ -19,7 +19,6 @@ import javafx.scene.input.TransferMode;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
-import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.net.URL;
@@ -56,6 +55,9 @@ public class MainView implements Initializable {
     private Label progressBarLabel;
     @FXML
     private ProgressBar progressBar;
+
+    @FXML
+    private Button exportComparisonButton;
 
     //region Constructors
 
@@ -95,14 +97,6 @@ public class MainView implements Initializable {
             this.propertyViewManager.synchronize();
         });
         this.synchronizeDividers();
-    }
-
-    public void loadLeftTree() throws SAXException {
-        loadTree(this.treeViewManager.getLeftTreeRender());
-    }
-
-    public void loadRightTree() {
-        loadTree(this.treeViewManager.getRightTreeRender());
     }
 
     /**
@@ -158,6 +152,22 @@ public class MainView implements Initializable {
         treeViewManager.clearAll();
         propertyViewManager.clearAll();
         modificationsLabel.setText("");
+        exportComparisonButton.setDisable(true);
+    }
+
+    /**
+     * Open and load the given file in the next available tree.
+     */
+    public void loadNextAvailableTree() {
+        if (treeViewManager.getLeftTreeRender().isRendering()) {
+            loadTree(treeViewManager.getRightTreeRender());
+        } else {
+            loadTree(treeViewManager.getLeftTreeRender());
+        }
+    }
+
+    public void openHelpView() {
+
     }
 
     //endregion
@@ -175,6 +185,7 @@ public class MainView implements Initializable {
             propertyViewManager.clearAll();
             treeViewManager.refresh(); // refresh tree views to reflect removed and added items
             modificationsLabel.setText(comparer.toString());
+            exportComparisonButton.setDisable(false);
 
             setLoadingDone();
         } else {

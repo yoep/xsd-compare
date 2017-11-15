@@ -1,3 +1,16 @@
-.clickable:hover {
-    -fx-cursor: hand;
+.root {
 }
+
+.icon {
+    -fx-font-family: FontAwesome;
+    -fx-font-size: 14px;
+    -fx-text-fill: #4b95b4;
+}
+
+.icon:disabled {
+    -fx-text-fill: gray;
+}
+
+.icon:hover{
+}
+
