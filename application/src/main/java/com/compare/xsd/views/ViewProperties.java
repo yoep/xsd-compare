@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ViewProperties {
     private String title;
+    private boolean dialog;
     private boolean maximizeDisabled;
 }

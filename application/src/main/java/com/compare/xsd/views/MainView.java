@@ -11,6 +11,7 @@ import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.writers.ExcelComparisonWriter;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -180,7 +181,23 @@ public class MainView implements Initializable {
 
     public void exportToExcel() throws IOException {
         if (comparer != null) {
-            comparisonWriter.save(comparer);
+            try {
+                setWriting();
+
+                comparisonWriter.save(comparer, comparisonWriter.showSaveDialog())
+                        .thenAccept(state -> {
+                            Platform.runLater(() -> {
+                                if (state) {
+                                    setLoadingDone();
+                                } else {
+                                    setLoadingFailed();
+                                }
+                            });
+                        });
+            } catch (Exception ex) {
+                log.log(Level.SEVERE, ex.getMessage(), ex);
+                setLoadingFailed();
+            }
         }
     }
 
@@ -269,6 +286,12 @@ public class MainView implements Initializable {
 
     private void setLoading() {
         progressBarLabel.setText("Loading...");
+        progressBar.setProgress(-1);
+        progressBar.setStyle("-fx-accent: dodgerblue");
+    }
+
+    private void setWriting() {
+        progressBarLabel.setText("Writing...");
         progressBar.setProgress(-1);
         progressBar.setStyle("-fx-accent: dodgerblue");
     }

@@ -91,7 +91,12 @@ public class ViewLoader {
 
         stage.setScene(scene);
         stage.setTitle(properties.getTitle());
-        stage.show();
+
+        if (properties.isDialog()) {
+            stage.showAndWait();
+        } else {
+            stage.show();
+        }
     }
 
     private Scene loadScene(String view) {

@@ -11,6 +11,7 @@ import com.compare.xsd.model.xsd.impl.XsdEmptyAttributeNode;
 import com.compare.xsd.model.xsd.impl.XsdEmptyElementNode;
 import javafx.stage.FileChooser;
 import lombok.extern.java.Log;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -19,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
 import static java.util.Arrays.asList;
@@ -59,13 +61,30 @@ public class ExcelComparisonWriter {
     }
 
     /**
+     * Show the save dialog.
+     *
+     * @return Returns the selected file.
+     */
+    public File showSaveDialog() {
+        File file = chooser.showSaveDialog(viewManager.getStage());
+        String extension = EXTENSION.substring(1);
+
+        if (!file.getName().contains(extension)) {
+            file = new File(file.getAbsolutePath() + extension);
+        }
+
+        return file;
+    }
+
+    /**
      * Save the given comparer to an Excel file.
      *
      * @param comparer Set the comparer to save.
+     * @return Returns true if the comparer was saved with success, else false.
      */
-    public void save(XsdComparer comparer) {
+    @Async
+    public CompletableFuture<Boolean> save(XsdComparer comparer, File file) {
         Assert.notNull(comparer, "comparer cannot be null");
-        File file = showSaveDialog();
 
         try {
             if (file != null) {
@@ -76,26 +95,18 @@ public class ExcelComparisonWriter {
                 writeXsdComparison(comparer, workbook);
 
                 workbook.save();
+                return CompletableFuture.completedFuture(Boolean.TRUE);
             }
         } catch (IOException ex) {
             log.log(Level.SEVERE, ex.getMessage(), ex);
         }
+
+        return CompletableFuture.completedFuture(Boolean.FALSE);
     }
 
     //endregion
 
     //region Functions
-
-    private File showSaveDialog() {
-        File file = chooser.showSaveDialog(viewManager.getStage());
-        String extension = EXTENSION.substring(1);
-
-        if (!file.getName().contains(extension)) {
-            file = new File(file.getAbsolutePath() + extension);
-        }
-
-        return file;
-    }
 
     private void writeXsdOverview(XsdDocument document, String name, Workbook workbook) {
         Worksheet worksheet = workbook.deleteAndCreateWorksheet(name, true);
