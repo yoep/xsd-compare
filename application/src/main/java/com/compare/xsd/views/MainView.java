@@ -1,6 +1,7 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.compare.XsdComparer;
+import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.PropertyViewManager;
 import com.compare.xsd.managers.TreeViewManager;
@@ -9,6 +10,8 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
+import com.compare.xsd.writers.ExcelComparisonWriter;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,9 +22,9 @@ import javafx.scene.input.TransferMode;
 import lombok.extern.java.Log;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
-import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,9 +33,13 @@ import java.util.logging.Level;
 @Component
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
+    private final ViewLoader viewLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
+    private final ExcelComparisonWriter comparisonWriter;
+
+    private XsdComparer comparer;
 
     @FXML
     private TreeTableView<XsdNode> leftTree;
@@ -57,6 +64,9 @@ public class MainView implements Initializable {
     @FXML
     private ProgressBar progressBar;
 
+    @FXML
+    private Button exportComparisonButton;
+
     //region Constructors
 
     /**
@@ -64,15 +74,20 @@ public class MainView implements Initializable {
      * This view contains the main screen of the application including the tree renders.
      *
      * @param xsdLoader           Set the XSD loader.
+     * @param viewLoader          Set the view loader.
      * @param viewManager         Set the view manager.
      * @param treeViewManager     Set the tree view manager.
      * @param propertyViewManager Set the property manager.
+     * @param comparisonWriter    Set the Excel writer.
      */
-    public MainView(XsdLoader xsdLoader, ViewManager viewManager, TreeViewManager treeViewManager, PropertyViewManager propertyViewManager) {
+    public MainView(XsdLoader xsdLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager,
+                    PropertyViewManager propertyViewManager, ExcelComparisonWriter comparisonWriter) {
         this.xsdLoader = xsdLoader;
+        this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
         this.propertyViewManager = propertyViewManager;
+        this.comparisonWriter = comparisonWriter;
     }
 
     //endregion
@@ -95,14 +110,6 @@ public class MainView implements Initializable {
             this.propertyViewManager.synchronize();
         });
         this.synchronizeDividers();
-    }
-
-    public void loadLeftTree() throws SAXException {
-        loadTree(this.treeViewManager.getLeftTreeRender());
-    }
-
-    public void loadRightTree() {
-        loadTree(this.treeViewManager.getRightTreeRender());
     }
 
     /**
@@ -158,6 +165,51 @@ public class MainView implements Initializable {
         treeViewManager.clearAll();
         propertyViewManager.clearAll();
         modificationsLabel.setText("");
+        exportComparisonButton.setDisable(true);
+    }
+
+    /**
+     * Open and load the given file in the next available tree.
+     */
+    public void loadNextAvailableTree() {
+        if (treeViewManager.getLeftTreeRender().isRendering()) {
+            loadTree(treeViewManager.getRightTreeRender());
+        } else {
+            loadTree(treeViewManager.getLeftTreeRender());
+        }
+    }
+
+    public void exportToExcel() throws IOException {
+        if (comparer != null) {
+            try {
+                setWriting();
+
+                comparisonWriter.save(comparer, comparisonWriter.showSaveDialog())
+                        .thenAccept(state -> {
+                            Platform.runLater(() -> {
+                                if (state) {
+                                    setLoadingDone();
+                                } else {
+                                    setLoadingFailed();
+                                }
+                            });
+                        });
+            } catch (Exception ex) {
+                log.log(Level.SEVERE, ex.getMessage(), ex);
+                setLoadingFailed();
+            }
+        }
+    }
+
+    public void openSettingsView() {
+        //TODO: implement
+    }
+
+    public void openHelpView() {
+        viewLoader.showWindow("help.fxml", ViewProperties.builder()
+                .title("Help")
+                .maximizeDisabled(true)
+                .build());
     }
 
     //endregion
@@ -172,9 +224,11 @@ public class MainView implements Initializable {
         setLoading();
 
         if (comparer.compare()) {
-            propertyViewManager.clearAll();
-            treeViewManager.refresh(); // refresh tree views to reflect removed and added items
-            modificationsLabel.setText(comparer.toString());
+            this.propertyViewManager.clearAll();
+            this.treeViewManager.refresh(); // refresh tree views to reflect removed and added items
+            this.modificationsLabel.setText(comparer.toString());
+            this.exportComparisonButton.setDisable(false);
+            this.comparer = comparer;
 
             setLoadingDone();
         } else {
@@ -232,6 +286,12 @@ public class MainView implements Initializable {
 
     private void setLoading() {
         progressBarLabel.setText("Loading...");
+        progressBar.setProgress(-1);
+        progressBar.setStyle("-fx-accent: dodgerblue");
+    }
+
+    private void setWriting() {
+        progressBarLabel.setText("Writing...");
         progressBar.setProgress(-1);
         progressBar.setStyle("-fx-accent: dodgerblue");
     }
