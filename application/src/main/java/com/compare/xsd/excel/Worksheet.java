@@ -1,13 +1,14 @@
 package com.compare.xsd.excel;
 
+import lombok.Getter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFTable;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
 
+@Getter
 public class Worksheet {
     private static final int NAME_LIMIT = 32;
 
