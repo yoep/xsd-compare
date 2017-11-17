@@ -1,12 +1,14 @@
 package com.compare.xsd.writers;
 
 import com.compare.xsd.compare.XsdComparer;
-import com.compare.xsd.excel.Cell;
+import com.compare.xsd.excel.CellRange;
 import com.compare.xsd.excel.Workbook;
 import com.compare.xsd.excel.Worksheet;
 import com.compare.xsd.managers.ViewManager;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
+import com.compare.xsd.model.xsd.impl.XsdEmptyAttributeNode;
+import com.compare.xsd.model.xsd.impl.XsdEmptyElementNode;
 import javafx.stage.FileChooser;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
@@ -27,18 +29,12 @@ public class ExcelComparisonWriter {
     private static final String EXTENSION_DESCRIPTION = "Excel file";
     private static final String EXTENSION = "*.xlsx";
     private static final int LEVEL_COLUMN_START_INDEX = 1;
-    private static final int LEVEL_ROW_START_INDEX = 3;
     private static final int LEVEL_LIMIT = 15;
 
     private final ViewManager viewManager;
     private final FileChooser chooser;
 
-    private List<Cell> levelColumns;
-    private Cell typeColumn;
-    private Cell cardinalityColumn;
-    private Cell fixedValueColumn;
-    private Cell patternColumn;
-    private Cell enumerationColumn;
+    //region Constructors
 
     /**
      * Initialize a new instance of {@link ExcelComparisonWriter}.
@@ -49,6 +45,10 @@ public class ExcelComparisonWriter {
         this.viewManager = viewManager;
         this.chooser = new FileChooser();
     }
+
+    //endregion
+
+    //region Methods
 
     @PostConstruct
     public void init() {
@@ -71,9 +71,9 @@ public class ExcelComparisonWriter {
             if (file != null) {
                 Workbook workbook = new Workbook(file);
 
-                clear();
                 writeXsdOverview(comparer.getOriginalDocument(), "Original document", workbook);
                 writeXsdOverview(comparer.getNewDocument(), "New document", workbook);
+                writeXsdComparison(comparer, workbook);
 
                 workbook.save();
             }
@@ -82,13 +82,9 @@ public class ExcelComparisonWriter {
         }
     }
 
-    /**
-     * Clear the writer information.
-     */
-    public void clear() {
-        this.levelColumns = new ArrayList<>();
-        this.typeColumn = null;
-    }
+    //endregion
+
+    //region Functions
 
     private File showSaveDialog() {
         File file = chooser.showSaveDialog(viewManager.getStage());
@@ -102,88 +98,74 @@ public class ExcelComparisonWriter {
     }
 
     private void writeXsdOverview(XsdDocument document, String name, Workbook workbook) {
-        Worksheet worksheet = workbook.getOrCreateWorksheet(name, true);
+        Worksheet worksheet = workbook.deleteAndCreateWorksheet(name, true);
 
         writeDocumentInformation(document, worksheet);
-        createColumns(worksheet);
+        TableHeader tableHeader = createTableHeader(LEVEL_COLUMN_START_INDEX, LEVEL_LIMIT, 3);
 
-        document.getElements().forEach(node -> writeXsdNode(node, 0, worksheet));
+        tableHeader.writeHeader(worksheet);
+        document.getElements().forEach(node -> writeXsdNode(node, tableHeader, 0, worksheet));
     }
 
 
-    private void createColumns(Worksheet worksheet) {
+    private TableHeader createTableHeader(int columnStartIndex, int levelLimit, int rowStartIndex) {
+        CellRange lastLevelColumn = null;
+        TableHeader tableHeader = new TableHeader();
+        List<CellRange> levelColumns = new ArrayList<>();
         int levelIndex = 1;
-        Cell lastLevelColumn = null;
 
-        for (int columnIndex = LEVEL_COLUMN_START_INDEX; columnIndex < LEVEL_COLUMN_START_INDEX + LEVEL_LIMIT; columnIndex++) {
-            lastLevelColumn = Cell.builder()
+        for (int columnIndex = columnStartIndex; columnIndex < columnStartIndex + levelLimit; columnIndex++) {
+            lastLevelColumn = CellRange.builder()
+                    .range(new CellRange.Range(columnIndex, rowStartIndex))
                     .value("L" + levelIndex)
-                    .row(LEVEL_ROW_START_INDEX)
-                    .column(columnIndex)
                     .build();
 
-            this.levelColumns.add(lastLevelColumn);
+            levelColumns.add(lastLevelColumn);
             levelIndex++;
         }
 
-        this.typeColumn = Cell.builder()
-                .row(LEVEL_ROW_START_INDEX)
-                .column(lastLevelColumn.getColumn() + 1)
-                .autoSizeColumn(true)
+        tableHeader.setLevelColumns(levelColumns);
+        tableHeader.setTypeColumn(CellRange.builder()
+                .range(new CellRange.Range(lastLevelColumn.getRange().getColumnEndIndex() + 1, rowStartIndex))
                 .value("Type")
-                .build();
-        this.cardinalityColumn = Cell.builder()
-                .row(LEVEL_ROW_START_INDEX)
-                .column(typeColumn.getColumn() + 1)
-                .autoSizeColumn(true)
+                .build());
+        tableHeader.setCardinalityColumn(CellRange.builder()
+                .range(new CellRange.Range(tableHeader.getTypeColumn().getRange().getColumnEndIndex() + 1, rowStartIndex))
                 .value("Cardinality")
-                .build();
-        this.fixedValueColumn = Cell.builder()
-                .row(LEVEL_ROW_START_INDEX)
-                .column(cardinalityColumn.getColumn() + 1)
-                .autoSizeColumn(true)
+                .build());
+        tableHeader.setFixedValueColumn(CellRange.builder()
+                .range(new CellRange.Range(tableHeader.getCardinalityColumn().getRange().getColumnEndIndex() + 1, rowStartIndex))
                 .value("Fixed value")
-                .build();
-        this.patternColumn = Cell.builder()
-                .row(LEVEL_ROW_START_INDEX)
-                .column(fixedValueColumn.getColumn() + 1)
-                .autoSizeColumn(true)
+                .build());
+        tableHeader.setPatternColumn(CellRange.builder()
+                .range(new CellRange.Range(tableHeader.getFixedValueColumn().getRange().getColumnEndIndex() + 1, rowStartIndex))
                 .value("Pattern")
-                .build();
-        this.enumerationColumn = Cell.builder()
-                .row(LEVEL_ROW_START_INDEX)
-                .column(patternColumn.getColumn() + 1)
-                .autoSizeColumn(true)
+                .build());
+        tableHeader.setEnumerationColumn(CellRange.builder()
+                .range(new CellRange.Range(tableHeader.getPatternColumn().getRange().getColumnEndIndex() + 1, rowStartIndex))
                 .value("Enumeration")
-                .build();
+                .build());
 
-        worksheet.write(this.levelColumns);
-        worksheet.write(this.typeColumn);
-        worksheet.write(this.cardinalityColumn);
-        worksheet.write(this.fixedValueColumn);
-        worksheet.write(this.patternColumn);
-        worksheet.write(this.enumerationColumn);
+        return tableHeader;
     }
 
     private void writeDocumentInformation(XsdDocument document, Worksheet worksheet) {
-        List<Cell> propertyCells = asList(Cell.builder()
-                .column(0)
-                .row(0)
+        List<CellRange> propertyCells = asList(CellRange.builder()
+                .range(new CellRange.Range(0, 0))
                 .value("Filename:")
                 .autoSizeColumn(true)
-                .build(), Cell.builder()
-                .column(0)
-                .row(1)
+                .bold(true)
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(0, 1))
                 .value("Location:")
                 .autoSizeColumn(true)
+                .bold(true)
                 .build());
-        List<Cell> valueCells = asList(Cell.builder()
-                .column(1)
-                .row(0)
+        List<CellRange> valueCells = asList(CellRange.builder()
+                .range(new CellRange.Range(1, 0))
                 .value(document.getName())
-                .build(), Cell.builder()
-                .column(1)
-                .row(1)
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(1, 1))
                 .value(document.getFile().getAbsolutePath())
                 .build());
 
@@ -191,41 +173,35 @@ public class ExcelComparisonWriter {
         worksheet.write(valueCells);
     }
 
-    private void writeXsdNode(XsdNode node, int levelIndex, Worksheet worksheet) {
-        if (levelIndex <= levelColumns.size() - 1) {
+    private void writeXsdNode(XsdNode node, TableHeader tableHeader, int levelIndex, Worksheet worksheet) {
+        if (levelIndex <= tableHeader.getLevelColumns().size() - 1) {
             int rowIndex = worksheet.getLastRowIndex() + 1;
-            Cell name = Cell.builder()
-                    .row(rowIndex)
-                    .column(levelColumns.get(levelIndex).getColumn())
+            CellRange name = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getLevelColumns().get(levelIndex).getRange().getColumnEndIndex() + 1, rowIndex))
                     .value(node.getName())
                     .build();
-            Cell type = Cell.builder()
-                    .row(rowIndex)
-                    .column(this.typeColumn.getColumn())
+            CellRange type = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getTypeColumn().getRange().getColumnEndIndex() + 1, rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getType())
                     .build();
-            Cell cardinality = Cell.builder()
-                    .row(rowIndex)
-                    .column(this.cardinalityColumn.getColumn())
+            CellRange cardinality = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getCardinalityColumn().getRange().getColumnEndIndex() + 1, rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getCardinality())
                     .build();
-            Cell fixedValue = Cell.builder()
-                    .row(rowIndex)
-                    .column(this.fixedValueColumn.getColumn())
+            CellRange fixedValue = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getFixedValueColumn().getRange().getColumnEndIndex() + 1, rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getFixedValue())
                     .build();
-            Cell pattern = Cell.builder()
-                    .row(rowIndex)
-                    .column(this.patternColumn.getColumn())
+            CellRange pattern = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getPatternColumn().getRange().getColumnEndIndex() + 1, rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getPattern())
                     .build();
-            Cell enumeration = Cell.builder()
-                    .row(rowIndex)
-                    .column(this.enumerationColumn.getColumn())
+            CellRange enumeration = CellRange.builder()
+                    .range(new CellRange.Range(tableHeader.getEnumerationColumn().getRange().getColumnEndIndex() + 1, rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getEnumeration())
                     .build();
@@ -233,10 +209,69 @@ public class ExcelComparisonWriter {
             worksheet.write(asList(name, type, cardinality, fixedValue, pattern, enumeration));
 
             for (XsdNode childNode : node.getNodes()) {
-                writeXsdNode(childNode, levelIndex + 1, worksheet);
+                if (notEmptyNode(childNode)) {
+                    writeXsdNode(childNode, tableHeader, levelIndex + 1, worksheet);
+                }
             }
         } else {
             log.warning("Exceeding max level " + LEVEL_LIMIT + " for node " + node);
         }
     }
+
+    private void writeXsdComparison(XsdComparer comparer, Workbook workbook) {
+        Worksheet worksheet = workbook.deleteAndCreateWorksheet("Comparison", true);
+
+        writeCompareInformation(comparer, worksheet);
+        TableHeader tableHeaderOriginal = createTableHeader(LEVEL_COLUMN_START_INDEX, LEVEL_LIMIT, 5);
+        TableHeader tableHeaderNew = createTableHeader(tableHeaderOriginal.getEnumerationColumn().getRange().getColumnEndIndex() + 2, LEVEL_LIMIT, 5);
+
+        tableHeaderOriginal.writeHeader(worksheet);
+        tableHeaderNew.writeHeader(worksheet);
+    }
+
+    private void writeCompareInformation(XsdComparer comparer, Worksheet worksheet) {
+        List<CellRange> propertyCells = asList(CellRange.builder()
+                .range(new CellRange.Range(0, 0))
+                .autoSizeColumn(true)
+                .bold(true)
+                .value("Original document:")
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(0, 1))
+                .value("Original document file:")
+                .autoSizeColumn(true)
+                .bold(true)
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(0, 2))
+                .autoSizeColumn(true)
+                .bold(true)
+                .value("New document:")
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(0, 3))
+                .value("New document file:")
+                .autoSizeColumn(true)
+                .bold(true)
+                .build());
+        List<CellRange> informationCells = asList(CellRange.builder()
+                .range(new CellRange.Range(1, 0))
+                .value(comparer.getOriginalDocument().getName())
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(1, 1))
+                .value(comparer.getOriginalDocument().getFile().getAbsolutePath())
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(1, 2))
+                .value(comparer.getNewDocument().getName())
+                .build(), CellRange.builder()
+                .range(new CellRange.Range(1, 3))
+                .value(comparer.getNewDocument().getFile().getAbsolutePath())
+                .build());
+
+        worksheet.write(propertyCells);
+        worksheet.write(informationCells);
+    }
+
+    private boolean notEmptyNode(XsdNode node) {
+        return !(node instanceof XsdEmptyElementNode) && !(node instanceof XsdEmptyAttributeNode);
+    }
+
+    //endregion
 }

@@ -1,15 +1,22 @@
 package com.compare.xsd.excel;
 
 import lombok.Getter;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.SpreadsheetVersion;
+import org.apache.poi.ss.util.AreaReference;
+import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.*;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 public class Worksheet {
+    private static final char SHEET_NAME_DELIMITER = '!';
+    private static final char SPECIAL_NAME_DELIMITER = '\'';
     private static final int NAME_LIMIT = 32;
 
     private final Workbook workbook;
@@ -86,7 +93,7 @@ public class Worksheet {
      *
      * @param cells Set the cells to write.
      */
-    public void write(Collection<Cell> cells) {
+    public void write(Collection<CellRange> cells) {
         Assert.notNull(cells, "cells cannot be null");
 
         cells.forEach(this::write);
@@ -97,16 +104,36 @@ public class Worksheet {
      *
      * @param cell Set the cell to write.
      */
-    public void write(Cell cell) {
+    public void write(CellRange cell) {
         Assert.notNull(cell, "cell cannot be null");
-        XSSFRow row = getOrCreateRow(cell.getRow());
-        XSSFCell xssfCell = getOrCreateCell(cell.getColumn(), row);
+        AreaReference areaReference = new AreaReference(getSheetReference(cell), SpreadsheetVersion.EXCEL2007);
+        List<CellReference> cellReferences = Arrays.asList(areaReference.getAllReferencedCells());
 
-        writeCellValue(cell, xssfCell);
+        for (CellReference cellReference : cellReferences) {
+            XSSFRow row = getOrCreateRow(cellReference.getRow());
+            XSSFCell xssfCell = getOrCreateCell(cellReference.getCol(), row);
+            XSSFCellStyle cellStyle = workbook.getWorkbook().createCellStyle();
+            XSSFFont newFont = workbook.getWorkbook().createFont();
 
-        if (cell.isAutoSizeColumn()) {
-            worksheet.autoSizeColumn(cell.getColumn());
+            writeCellValue(cell, xssfCell);
+            newFont.setBold(cell.isBold());
+            newFont.setItalic(cell.isItalic());
+
+            if (cell.isAutoSizeColumn()) {
+                worksheet.autoSizeColumn(cellReference.getCol());
+            }
+
+            cellStyle.setFont(newFont);
+            xssfCell.setCellStyle(cellStyle);
         }
+    }
+
+    public void createTable() {
+        XSSFTable table = worksheet.createTable();
+        CTTable ctTable = table.getCTTable();
+        CTTableStyleInfo tableStyleInfo = ctTable.addNewTableStyleInfo();
+
+        tableStyleInfo.setName("TableStyleMedium3");
     }
 
     //endregion
@@ -133,12 +160,16 @@ public class Worksheet {
         return cell;
     }
 
-    private void writeCellValue(Cell cell, XSSFCell xssfCell) {
+    private void writeCellValue(CellRange cell, XSSFCell xssfCell) {
         if (cell.getValue() instanceof String) {
             xssfCell.setCellValue((String) cell.getValue());
         } else if (cell.getValue() instanceof Integer) {
             xssfCell.setCellValue((Integer) cell.getValue());
         }
+    }
+
+    private String getSheetReference(CellRange cell) {
+        return SPECIAL_NAME_DELIMITER + worksheet.getSheetName() + SPECIAL_NAME_DELIMITER + SHEET_NAME_DELIMITER + cell.getRange().toRange();
     }
 
     //endregion

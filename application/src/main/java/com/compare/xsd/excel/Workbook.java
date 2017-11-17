@@ -37,6 +37,7 @@ public class Workbook {
      *
      * @param name        Set the name of the workbook.
      * @param shortenName Set if the name must be shortened when too long.
+     * @return Returns the existing or created worksheet.
      * @throws NameTooLongException Is thrown when the given name is too long and #shortenName is false.
      */
     public Worksheet getOrCreateWorksheet(String name, boolean shortenName) throws NameTooLongException {
@@ -50,6 +51,27 @@ public class Workbook {
         } else {
             return Worksheet.newWorksheet(name, this, shortenName);
         }
+    }
+
+    /**
+     * Delete the given worksheet if it already exists and create a new one.
+     *
+     * @param name        Set the name of the workbook.
+     * @param shortenName Set if the name must be shortened when too long.
+     * @return Returns the created worksheet.
+     * @throws NameTooLongException Is thrown when the given name is too long and #shortenName is false.
+     */
+    public Worksheet deleteAndCreateWorksheet(String name, boolean shortenName) throws NameTooLongException {
+        Assert.hasText(name, "name cannot be empty");
+
+        name = Worksheet.getWorksheetName(name, shortenName);
+        XSSFSheet sheet = workbook.getSheet(name);
+
+        if (sheet != null) {
+            workbook.removeSheetAt(workbook.getSheetIndex(sheet));
+        }
+
+        return Worksheet.newWorksheet(name, this, shortenName);
     }
 
     /**
