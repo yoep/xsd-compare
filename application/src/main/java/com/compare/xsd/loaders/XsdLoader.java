@@ -3,12 +3,14 @@ package com.compare.xsd.loaders;
 import com.compare.xsd.managers.ViewManager;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import javafx.stage.FileChooser;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
 
+@Log4j2
 @Component
 public class XsdLoader {
     private static final String EXTENSION = "*.xsd";
@@ -60,6 +62,7 @@ public class XsdLoader {
     public XsdDocument load(File file) {
         Assert.notNull(file, "file cannot be null");
 
+        log.debug("Loading xsd file " + file);
         return new XsdDocument(file);
     }
 }

@@ -10,6 +10,7 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
+import com.compare.xsd.ui.ActionCancelledException;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
 
@@ -27,9 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 
-@Log
+@Log4j2
 @Component
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
@@ -154,7 +154,7 @@ public class MainView implements Initializable {
 
             event.consume();
         } else {
-            log.severe("Unknown drag dropped source " + event.getSource().getClass());
+            log.error("Unknown drag dropped source " + event.getSource().getClass());
         }
     }
 
@@ -194,8 +194,10 @@ public class MainView implements Initializable {
                                 }
                             });
                         });
+            } catch (ActionCancelledException ex) {
+                setLoadingDone();
             } catch (Exception ex) {
-                log.log(Level.SEVERE, ex.getMessage(), ex);
+                log.error(ex.getMessage(), ex);
                 setLoadingFailed();
             }
         }
@@ -262,7 +264,7 @@ public class MainView implements Initializable {
 
             setLoadingDone();
         } catch (Exception ex) {
-            log.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             setLoadingFailed();
             new Alert(Alert.AlertType.ERROR, "We are sorry, but an unexpected error occurred.\n" + ex.getMessage(), ButtonType.OK).show();
         }

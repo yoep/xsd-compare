@@ -1,6 +1,7 @@
 package com.compare.xsd.excel;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,6 +14,7 @@ import java.io.IOException;
 /**
  * Workbook implementation of an Excel Workbook file.
  */
+@Log4j2
 @Getter
 public class Workbook {
     private final File file;
@@ -80,15 +82,21 @@ public class Workbook {
      * @throws IOException Is thrown when the workbook couldn't be saved.
      */
     public void save() throws IOException {
+        log.debug("Saving excel file...");
         workbook.write(FileUtils.openOutputStream(this.file));
+        log.debug("Excel file saved");
     }
 
     private void init() throws ExcelLoadingException {
         try {
             if (this.file.exists()) {
+                log.debug("Reading excel file " + this.file);
                 this.workbook = new XSSFWorkbook(this.file);
+                log.debug("Excel file read");
             } else {
+                log.debug("Creating excel file " + this.file);
                 this.workbook = new XSSFWorkbook();
+                log.debug("Excel file created");
             }
         } catch (IOException | InvalidFormatException ex) {
             throw new ExcelLoadingException(this.file, ex);

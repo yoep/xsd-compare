@@ -9,8 +9,9 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.model.xsd.impl.XsdEmptyAttributeNode;
 import com.compare.xsd.model.xsd.impl.XsdEmptyElementNode;
+import com.compare.xsd.ui.ActionCancelledException;
 import javafx.stage.FileChooser;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -21,11 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
 
 import static java.util.Arrays.asList;
 
-@Log
+@Log4j2
 @Component
 public class ExcelComparisonWriter {
     private static final String EXTENSION_DESCRIPTION = "Excel file";
@@ -64,16 +64,21 @@ public class ExcelComparisonWriter {
      * Show the save dialog.
      *
      * @return Returns the selected file.
+     * @throws ActionCancelledException Is thrown when the save action is being cancelled by the user.
      */
-    public File showSaveDialog() {
+    public File showSaveDialog() throws ActionCancelledException {
         File file = chooser.showSaveDialog(viewManager.getStage());
         String extension = EXTENSION.substring(1);
 
-        if (!file.getName().contains(extension)) {
-            file = new File(file.getAbsolutePath() + extension);
-        }
+        if (file != null) {
+            if (!file.getName().contains(extension)) {
+                file = new File(file.getAbsolutePath() + extension);
+            }
 
-        return file;
+            return file;
+        } else {
+            throw new ActionCancelledException();
+        }
     }
 
     /**
@@ -98,7 +103,7 @@ public class ExcelComparisonWriter {
                 return CompletableFuture.completedFuture(Boolean.TRUE);
             }
         } catch (IOException ex) {
-            log.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
         }
 
         return CompletableFuture.completedFuture(Boolean.FALSE);
@@ -109,17 +114,20 @@ public class ExcelComparisonWriter {
     //region Functions
 
     private void writeXsdOverview(XsdDocument document, String name, Workbook workbook) {
+        final int rowStartIndex = 3;
+        int rowIndex = rowStartIndex;
         Worksheet worksheet = workbook.deleteAndCreateWorksheet(name, true);
-        int rowIndex = 3;
 
         writeDocumentInformation(document, worksheet);
-        TableHeader tableHeader = createTableHeader(LEVEL_COLUMN_START_INDEX, LEVEL_LIMIT, 3);
+        TableHeader tableHeader = createTableHeader(LEVEL_COLUMN_START_INDEX, LEVEL_LIMIT, rowStartIndex);
 
         tableHeader.writeHeader(worksheet);
 
         for (XsdNode node : document.getElements()) {
             rowIndex = writeXsdNode(node, tableHeader, 0, rowIndex + 1, worksheet, false);
         }
+
+        //worksheet.createTable(name, new CellRange.Range(LEVEL_COLUMN_START_INDEX, tableHeader.getColumnEndIndex(), rowStartIndex, rowIndex));
     }
 
 
@@ -228,7 +236,7 @@ public class ExcelComparisonWriter {
                 }
             }
         } else {
-            log.warning("Exceeding max level " + LEVEL_LIMIT + " for node " + node);
+            log.warn("Exceeding max level " + LEVEL_LIMIT + " for node " + node);
         }
 
         return rowIndex;

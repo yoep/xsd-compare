@@ -5,11 +5,11 @@ import com.compare.xsd.renderers.TreeViewRender;
 import javafx.scene.control.TreeTableView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Log
+@Log4j2
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Component

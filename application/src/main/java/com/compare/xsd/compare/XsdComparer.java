@@ -7,15 +7,14 @@ import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
-@Log
+@Log4j2
 @EqualsAndHashCode
 @Getter
 public class XsdComparer {
@@ -54,7 +53,7 @@ public class XsdComparer {
 
             return true;
         } catch (Exception ex) {
-            log.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             return false;
         }
     }

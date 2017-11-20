@@ -7,16 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.logging.Level;
 
-@Log
+@Log4j2
 @Component
 public class ViewLoader {
     private static final String VIEW_DIRECTORY = "/views/";
@@ -53,7 +52,7 @@ public class ViewLoader {
         } catch (IllegalStateException ex) {
             throw new ViewNotFoundException(view, ex);
         } catch (IOException ex) {
-            log.log(Level.SEVERE, "View '" + view + "' is invalid", ex);
+            log.error("View '" + view + "' is invalid", ex);
         }
 
         return null;

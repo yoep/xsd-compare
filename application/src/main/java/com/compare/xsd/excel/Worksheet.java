@@ -1,6 +1,7 @@
 package com.compare.xsd.excel;
 
 import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellReference;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+@Log4j2
 @Getter
 public class Worksheet {
     private static final char SHEET_NAME_DELIMITER = '!';
@@ -128,12 +130,17 @@ public class Worksheet {
         }
     }
 
-    public void createTable() {
+    public void createTable(String name, CellRange.Range range) {
         XSSFTable table = worksheet.createTable();
         CTTable ctTable = table.getCTTable();
         CTTableStyleInfo tableStyleInfo = ctTable.addNewTableStyleInfo();
 
         tableStyleInfo.setName("TableStyleMedium3");
+
+        ctTable.setRef(range.toRange());
+        ctTable.setName(name);
+        ctTable.setDisplayName(name);
+        ctTable.setId(1L);
     }
 
     //endregion

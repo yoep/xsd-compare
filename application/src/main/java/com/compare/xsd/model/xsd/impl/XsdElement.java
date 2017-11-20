@@ -11,7 +11,7 @@ import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log
+@Log4j2
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class XsdElement extends AbstractXsdElementNode {
@@ -132,14 +132,14 @@ public class XsdElement extends AbstractXsdElementNode {
         XSTypeDefinition typeDefinition = element.getTypeDefinition();
 
         this.name = element.getName();
-        log.fine("Processing element " + this.name);
+        log.debug("Processing element " + this.name);
 
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);
         } else if (typeDefinition.getTypeCategory() == XSTypeDefinition.SIMPLE_TYPE) {
             loadSimpleType((XSSimpleTypeDecl) typeDefinition);
         } else {
-            log.warning("Unknown element type " + typeDefinition.getTypeCategory());
+            log.warn("Unknown element type " + typeDefinition.getTypeCategory());
         }
     }
 

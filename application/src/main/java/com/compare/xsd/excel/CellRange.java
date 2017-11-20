@@ -85,6 +85,20 @@ public class CellRange {
             initialize(column, column, rowIndex, rowIndex);
         }
 
+        /**
+         * Initialize a new instance of {@link Range}.
+         *
+         * @param columnStartIndex Set the column start index (zero-based index).
+         * @param columnEndIndex   Set the column end index (zero-based index).
+         * @param rowStartIndex    Set the row start index (zero-based index).
+         * @param rowEndIndex      Set the row end index (zero-based index).
+         */
+        public Range(int columnStartIndex, int columnEndIndex, int rowStartIndex, int rowEndIndex) {
+            String columnStart = indexToLetter(columnStartIndex + 1);
+            String columnEnd = indexToLetter(columnEndIndex + 1);
+            initialize(columnStart, columnEnd, rowStartIndex, rowEndIndex);
+        }
+
         //endregion
 
         //region Getters

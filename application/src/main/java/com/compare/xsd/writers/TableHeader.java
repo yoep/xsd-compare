@@ -21,6 +21,15 @@ public class TableHeader {
     private CellRange enumerationColumn;
 
     /**
+     * Get the column end index of this header.
+     *
+     * @return Returns the column end index.
+     */
+    public int getColumnEndIndex() {
+        return enumerationColumn.getRange().getColumnEndIndex();
+    }
+
+    /**
      * Write the header to the worksheet.
      *
      * @param worksheet Set the worksheet to write to.

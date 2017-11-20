@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Abstract implementation of the {@link XsdNode}.
  */
-@Log
+@Log4j2
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdNode implements XsdNode {
@@ -199,7 +199,7 @@ public abstract class AbstractXsdNode implements XsdNode {
                     this.whitespace = facet.getLexicalFacetValue();
                     break;
                 default:
-                    log.warning("Facet type " + facet.getFacetKind() + " is not implemented at the moment");
+                    log.warn("Facet type " + facet.getFacetKind() + " is not implemented at the moment");
                     break;
             }
         }
@@ -215,7 +215,7 @@ public abstract class AbstractXsdNode implements XsdNode {
                     this.pattern = String.join(", ", facet.getLexicalFacetValues());
                     break;
                 default:
-                    log.warning("Multi facet value type " + facet.getFacetKind() + " is not implemented at the moment");
+                    log.warn("Multi facet value type " + facet.getFacetKind() + " is not implemented at the moment");
                     break;
             }
         }
