@@ -2,6 +2,7 @@ package com.compare.xsd.excel;
 
 import lombok.*;
 import org.apache.poi.ss.SpreadsheetVersion;
+import org.apache.poi.ss.usermodel.FontFamily;
 import org.springframework.util.Assert;
 
 import java.util.regex.Matcher;
@@ -22,6 +23,8 @@ public class CellRange {
     private boolean autoSizeColumn;
     private boolean bold;
     private boolean italic;
+
+    private FontFamily fontFamily =  FontFamily.MODERN;
 
     /**
      * Initialize a new instance of {@link CellRange}.

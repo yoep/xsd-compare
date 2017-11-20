@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.Assert;
@@ -98,6 +99,8 @@ public class Workbook {
                 this.workbook = new XSSFWorkbook();
                 log.debug("Excel file created");
             }
+
+            this.workbook.setMissingCellPolicy(Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
         } catch (IOException | InvalidFormatException ex) {
             throw new ExcelLoadingException(this.file, ex);
         }

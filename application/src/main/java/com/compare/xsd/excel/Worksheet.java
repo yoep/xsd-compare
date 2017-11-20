@@ -7,9 +7,6 @@ import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.*;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumns;
-import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 import org.springframework.util.Assert;
 
 import java.util.Arrays;
@@ -125,6 +122,7 @@ public class Worksheet {
             XSSFFont newFont = workbook.getWorkbook().createFont();
 
             writeCellValue(cell, xssfCell);
+            newFont.setFamily(cell.getFontFamily());
             newFont.setBold(cell.isBold());
             newFont.setItalic(cell.isItalic());
 
@@ -137,24 +135,38 @@ public class Worksheet {
         }
     }
 
+    /**
+     * Create a new table with the given name on the given range.
+     *
+     * @param name  Set the name of the table.
+     * @param range Set the range.
+     */
     public void createTable(String name, CellRange.Range range) {
         log.debug("Creating table '" + name + "' within '" + worksheet.getSheetName() + "' [" + range.toRange() + "]");
+        final int totalColumns = (range.getColumnEndIndex() - range.getColumnStartIndex()) + 1;
         XSSFTable table = worksheet.createTable();
-        CTTable ctTable = table.getCTTable();
-        CTTableStyleInfo tableStyleInfo = ctTable.addNewTableStyleInfo();
         AreaReference tableArea = new AreaReference(getSheetReference(range), SpreadsheetVersion.EXCEL2007);
-        CTTableColumns columns = ctTable.addNewTableColumns();
 
-        tableStyleInfo.setName("TableStyleMedium3");
-        tableStyleInfo.setShowColumnStripes(false);
-        tableStyleInfo.setShowRowStripes(true);
+        table.getCTTable().addNewTableStyleInfo();
+        table.getCTTable().getTableStyleInfo().setName("TableStyleMedium2");
 
-        ctTable.setRef(tableArea.formatAsString());
-        ctTable.setDisplayName("test");
-        ctTable.setName("test");
-        ctTable.setId(1L);
+        table.setDisplayName(getTableDisplayName(name));
+        table.setName(getTableName(name));
 
-        columns.setCount((range.getColumnEndIndex() - range.getColumnStartIndex()) + 1);
+        XSSFTableStyleInfo style = (XSSFTableStyleInfo) table.getStyle();
+        style.setName("TableStyleMedium2");
+        style.setShowColumnStripes(false);
+        style.setShowRowStripes(true);
+        style.setFirstColumn(false);
+        style.setLastColumn(false);
+        style.setShowRowStripes(true);
+        style.setShowColumnStripes(true);
+
+        for (int i = 0; i < totalColumns; i++) {
+            table.addColumn();
+        }
+
+        table.setCellReferences(tableArea);
 
         worksheet.setAutoFilter(new CellRangeAddress(range.getRowStartIndex(), range.getRowStartIndex(), range.getColumnStartIndex(),
                 range.getColumnEndIndex()));
@@ -191,6 +203,14 @@ public class Worksheet {
         } else if (cell.getValue() instanceof Integer) {
             xssfCell.setCellValue((Integer) cell.getValue());
         }
+    }
+
+    private String getTableName(String name) {
+        return name.replace(" ", "").toLowerCase();
+    }
+
+    private String getTableDisplayName(String name) {
+        return name.replace(" ", "_");
     }
 
     private String getSheetReference(CellRange.Range range) {

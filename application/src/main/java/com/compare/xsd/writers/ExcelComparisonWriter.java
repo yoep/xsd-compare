@@ -102,7 +102,7 @@ public class ExcelComparisonWriter {
                 workbook.save();
                 return CompletableFuture.completedFuture(Boolean.TRUE);
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
 
