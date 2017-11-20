@@ -14,7 +14,7 @@ public class XsdCompareConfiguration {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(4);
         executor.setMaxPoolSize(4);
-        executor.setThreadNamePrefix("xsd-compare-background");
+        executor.setThreadNamePrefix("xc-background");
         executor.initialize();
         return executor;
     }

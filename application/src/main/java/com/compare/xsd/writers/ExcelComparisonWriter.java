@@ -127,7 +127,7 @@ public class ExcelComparisonWriter {
             rowIndex = writeXsdNode(node, tableHeader, 0, rowIndex + 1, worksheet, false);
         }
 
-        //worksheet.createTable(name, new CellRange.Range(LEVEL_COLUMN_START_INDEX, tableHeader.getColumnEndIndex(), rowStartIndex, rowIndex));
+        worksheet.createTable(name, new CellRange.Range(LEVEL_COLUMN_START_INDEX, tableHeader.getColumnEndIndex(), rowStartIndex, rowIndex));
     }
 
 

@@ -132,7 +132,7 @@ public class CellRange {
          * @return Returns the excel range indication.
          */
         public String toRange() {
-            return columnStart + (rowStartIndex + 1) + Character.toString(CELL_DELIMITER) + columnStart + (rowEndIndex + 1);
+            return columnStart + (rowStartIndex + 1) + Character.toString(CELL_DELIMITER) + columnEnd + (rowEndIndex + 1);
         }
 
         /**

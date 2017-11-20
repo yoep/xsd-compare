@@ -132,7 +132,7 @@ public class XsdElement extends AbstractXsdElementNode {
         XSTypeDefinition typeDefinition = element.getTypeDefinition();
 
         this.name = element.getName();
-        log.debug("Processing element " + this.name);
+        log.trace("Processing element " + this.name);
 
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);

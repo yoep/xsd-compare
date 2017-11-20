@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.util.AreaReference;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.*;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
+import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableColumns;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTableStyleInfo;
 import org.springframework.util.Assert;
 
@@ -14,6 +16,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a worksheet of an excel file.
+ *
+ * @see XSSFSheet
+ */
 @Log4j2
 @Getter
 public class Worksheet {
@@ -108,7 +115,7 @@ public class Worksheet {
      */
     public void write(CellRange cell) {
         Assert.notNull(cell, "cell cannot be null");
-        AreaReference areaReference = new AreaReference(getSheetReference(cell), SpreadsheetVersion.EXCEL2007);
+        AreaReference areaReference = new AreaReference(getSheetReference(cell.getRange()), SpreadsheetVersion.EXCEL2007);
         List<CellReference> cellReferences = Arrays.asList(areaReference.getAllReferencedCells());
 
         for (CellReference cellReference : cellReferences) {
@@ -131,16 +138,27 @@ public class Worksheet {
     }
 
     public void createTable(String name, CellRange.Range range) {
+        log.debug("Creating table '" + name + "' within '" + worksheet.getSheetName() + "' [" + range.toRange() + "]");
         XSSFTable table = worksheet.createTable();
         CTTable ctTable = table.getCTTable();
         CTTableStyleInfo tableStyleInfo = ctTable.addNewTableStyleInfo();
+        AreaReference tableArea = new AreaReference(getSheetReference(range), SpreadsheetVersion.EXCEL2007);
+        CTTableColumns columns = ctTable.addNewTableColumns();
 
         tableStyleInfo.setName("TableStyleMedium3");
+        tableStyleInfo.setShowColumnStripes(false);
+        tableStyleInfo.setShowRowStripes(true);
 
-        ctTable.setRef(range.toRange());
-        ctTable.setName(name);
-        ctTable.setDisplayName(name);
+        ctTable.setRef(tableArea.formatAsString());
+        ctTable.setDisplayName("test");
+        ctTable.setName("test");
         ctTable.setId(1L);
+
+        columns.setCount((range.getColumnEndIndex() - range.getColumnStartIndex()) + 1);
+
+        worksheet.setAutoFilter(new CellRangeAddress(range.getRowStartIndex(), range.getRowStartIndex(), range.getColumnStartIndex(),
+                range.getColumnEndIndex()));
+        log.debug("Table created");
     }
 
     //endregion
@@ -175,8 +193,8 @@ public class Worksheet {
         }
     }
 
-    private String getSheetReference(CellRange cell) {
-        return SPECIAL_NAME_DELIMITER + worksheet.getSheetName() + SPECIAL_NAME_DELIMITER + SHEET_NAME_DELIMITER + cell.getRange().toRange();
+    private String getSheetReference(CellRange.Range range) {
+        return SPECIAL_NAME_DELIMITER + worksheet.getSheetName() + SPECIAL_NAME_DELIMITER + SHEET_NAME_DELIMITER + range.toRange();
     }
 
     //endregion
