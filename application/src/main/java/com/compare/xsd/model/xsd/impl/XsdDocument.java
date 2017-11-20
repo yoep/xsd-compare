@@ -18,8 +18,6 @@ import java.io.File;
 public class XsdDocument extends AbstractXsdElementNode {
     private final File file;
 
-    private String name;
-
     //region Constructors
 
     /**
