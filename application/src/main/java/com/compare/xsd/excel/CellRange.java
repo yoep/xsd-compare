@@ -2,9 +2,11 @@ package com.compare.xsd.excel;
 
 import lombok.*;
 import org.apache.poi.ss.SpreadsheetVersion;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.FontFamily;
 import org.springframework.util.Assert;
 
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +26,14 @@ public class CellRange {
     private boolean bold;
     private boolean italic;
 
-    private FontFamily fontFamily =  FontFamily.MODERN;
+    @Builder.Default
+    private FontFamily fontFamily = FontFamily.MODERN;
+    @Builder.Default
+    private Color fontColor = Color.BLACK;
+    @Builder.Default
+    private Color backgroundColor = new Color(255, 255, 255, 0);
+    @Builder.Default
+    private FillPatternType fillPattern = FillPatternType.NO_FILL;
 
     /**
      * Initialize a new instance of {@link CellRange}.

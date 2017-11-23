@@ -12,11 +12,11 @@ XSD Compare allows you to compare different versions of XML schema files against
 * Copy field as XPath to clipboard
 * Copy field as XML to clipboard
 * Exporting the differences to an Excel file
+* Add Excel colors
 
 ## Future features
 * Settings for shown columns
 * Batch comparison of XML schema files
-* Add Excel colors
 
 # System requirements
 

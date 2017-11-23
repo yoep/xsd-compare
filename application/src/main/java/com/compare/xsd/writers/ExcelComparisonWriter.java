@@ -5,6 +5,7 @@ import com.compare.xsd.excel.CellRange;
 import com.compare.xsd.excel.Workbook;
 import com.compare.xsd.excel.Worksheet;
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.model.xsd.impl.XsdEmptyAttributeNode;
@@ -12,17 +13,21 @@ import com.compare.xsd.model.xsd.impl.XsdEmptyElementNode;
 import com.compare.xsd.ui.ActionCancelledException;
 import javafx.stage.FileChooser;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.collections4.ListUtils;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static java.util.Arrays.asList;
+import static java.util.Optional.ofNullable;
 
 @Log4j2
 @Component
@@ -195,43 +200,73 @@ public class ExcelComparisonWriter {
         worksheet.write(valueCells);
     }
 
-    private int writeXsdNode(XsdNode node, TableHeader tableHeader, int levelIndex, int rowIndex, Worksheet worksheet, boolean allowEmptyChildren) {
+    private int writeXsdNode(XsdNode node, TableHeader tableHeader, int levelIndex, int rowIndex, Worksheet worksheet, boolean isComparison) {
         if (levelIndex <= tableHeader.getLevelColumns().size() - 1) {
-            CellRange name = CellRange.builder()
-                    .range(new CellRange.Range(tableHeader.getLevelColumns().get(levelIndex).getRange().getColumnEndIndex(), rowIndex))
-                    .value(node.getName())
-                    .build();
+            Modifications modifications = ofNullable(node.getModifications()).orElse(new Modifications());
+            Color backgroundColor = getBackgroundColor(modifications);
+            Color transparent = new Color(255, 255, 255, 0);
+            List<CellRange> nameCells = new ArrayList<>();
             CellRange type = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getTypeColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getType())
+                    .fontColor(isComparison && modifications.isTypeChanged() ? Color.RED : Color.BLACK)
+                    .backgroundColor(isComparison ? backgroundColor : transparent)
+                    .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
             CellRange cardinality = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getCardinalityColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getCardinality())
+                    .fontColor(isComparison && modifications.isCardinalityChanged() ? Color.RED : Color.BLACK)
+                    .backgroundColor(isComparison ? backgroundColor : transparent)
+                    .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
             CellRange fixedValue = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getFixedValueColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getFixedValue())
+                    .fontColor(isComparison && modifications.isFixedValueChanged() ? Color.RED : Color.BLACK)
+                    .backgroundColor(isComparison ? backgroundColor : transparent)
+                    .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
             CellRange pattern = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getPatternColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getPattern())
+                    .fontColor(isComparison && modifications.isPatternChanged() ? Color.RED : Color.BLACK)
+                    .backgroundColor(isComparison ? backgroundColor : transparent)
+                    .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
             CellRange enumeration = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getEnumerationColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getEnumeration())
+                    .fontColor(isComparison && modifications.isEnumerationChanged() ? Color.RED : Color.BLACK)
+                    .backgroundColor(isComparison ? backgroundColor : transparent)
+                    .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
 
-            worksheet.write(asList(name, type, cardinality, fixedValue, pattern, enumeration));
+            for (CellRange column : tableHeader.getLevelColumns()) {
+                CellRange cell = CellRange.builder()
+                        .range(new CellRange.Range(column.getRange().getColumnStart(), rowIndex))
+                        .fontColor(isComparison && modifications.isNameChanged() ? Color.RED : Color.BLACK)
+                        .backgroundColor(isComparison ? backgroundColor : transparent)
+                        .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
+                        .build();
+
+                if (tableHeader.getLevelColumns().indexOf(column) == levelIndex) {
+                    cell.setValue(node.getName());
+                }
+
+                nameCells.add(cell);
+            }
+
+            worksheet.write(ListUtils.union(nameCells, asList(type, cardinality, fixedValue, pattern, enumeration)));
 
             for (XsdNode childNode : node.getNodes()) {
-                if (notEmptyNode(childNode) || allowEmptyChildren) {
-                    rowIndex = writeXsdNode(childNode, tableHeader, levelIndex + 1, rowIndex + 1, worksheet, allowEmptyChildren);
+                if (notEmptyNode(childNode) || isComparison) {
+                    rowIndex = writeXsdNode(childNode, tableHeader, levelIndex + 1, rowIndex + 1, worksheet, isComparison);
                 }
             }
         } else {
@@ -301,6 +336,27 @@ public class ExcelComparisonWriter {
 
         worksheet.write(propertyCells);
         worksheet.write(informationCells);
+    }
+
+    private Color getBackgroundColor(Modifications modifications) {
+        Color transparent = new Color(255, 255, 255, 0);
+
+        if (modifications != null && modifications.getType() != null) {
+            switch (modifications.getType()) {
+                case ADDED:
+                    return new Color(170, 255, 201);
+                case REMOVED:
+                    return new Color(255, 170, 170);
+                case MODIFIED:
+                    return new Color(255, 209, 170);
+                case MOVED:
+                    return new Color(255, 253, 170);
+                default:
+                    return transparent;
+            }
+        }
+
+        return transparent;
     }
 
     private boolean notEmptyNode(XsdNode node) {

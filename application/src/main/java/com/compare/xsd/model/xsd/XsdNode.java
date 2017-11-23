@@ -93,7 +93,7 @@ public interface XsdNode {
     /**
      * Get the image to display for the modification of the node.
      *
-     * @return Returns the color image of the node.
+     * @return Returns the fontColor image of the node.
      */
     Image getModificationColor();
 

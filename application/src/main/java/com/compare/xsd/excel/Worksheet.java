@@ -125,6 +125,9 @@ public class Worksheet {
             newFont.setFamily(cell.getFontFamily());
             newFont.setBold(cell.isBold());
             newFont.setItalic(cell.isItalic());
+            newFont.setColor(new XSSFColor(cell.getFontColor()));
+            cellStyle.setFillForegroundColor(new XSSFColor(cell.getBackgroundColor()));
+            cellStyle.setFillPattern(cell.getFillPattern());
 
             if (cell.isAutoSizeColumn()) {
                 worksheet.autoSizeColumn(cellReference.getCol());
