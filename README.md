@@ -17,3 +17,7 @@ XSD Compare allows you to compare different versions of XML schema files against
 * Settings for shown columns
 * Batch comparison of XML schema files
 * Add Excel colors
+
+# System requirements
+
+`Java 8`
