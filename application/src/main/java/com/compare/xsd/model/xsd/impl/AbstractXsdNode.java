@@ -28,6 +28,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     private static final String ICON_DIRECTORY = "/icons/";
 
     protected String name;
+    protected String namespace;
     protected String type;
     protected String fixedValue;
     protected String pattern;

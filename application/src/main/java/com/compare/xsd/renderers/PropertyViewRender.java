@@ -64,6 +64,7 @@ public class PropertyViewRender implements RenderView {
         Modifications modifications = node.getModifications() != null ? node.getModifications() : new Modifications();
 
         items.clear();
+        items.add(new Property("Namespace", node.getNamespace(), modifications.isNamespaceChanged()));
         items.add(new Property("Name", node.getName(), modifications.isNameChanged()));
         items.add(new Property("Type", node.getType(), modifications.isTypeChanged()));
         items.add(new Property("Cardinality", node.getCardinality(), modifications.isCardinalityChanged()));

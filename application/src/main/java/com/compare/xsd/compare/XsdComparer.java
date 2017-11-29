@@ -173,6 +173,9 @@ public class XsdComparer {
             if (hasNameChanged(originalNode, newNode)) {
                 modifications.setNameChanged(true);
             }
+            if (hasNamespaceChanged(originalNode, newNode)) {
+                modifications.setNamespaceChanged(true);
+            }
             if (hasTypeChanged(originalNode, newNode)) {
                 modifications.setTypeChanged(true);
             }
@@ -249,6 +252,11 @@ public class XsdComparer {
 
     private boolean hasNameChanged(XsdNode originalNode, XsdNode newNode) {
         return isPresenceDifferent(originalNode.getName(), newNode.getName()) || isValueDifferent(originalNode.getName(), newNode.getName());
+    }
+
+    private boolean hasNamespaceChanged(XsdNode originalNode, XsdNode newNode) {
+        return isPresenceDifferent(originalNode.getNamespace(), newNode.getNamespace()) ||
+                isValueDifferent(originalNode.getNamespace(), newNode.getNamespace());
     }
 
     private boolean hasTypeChanged(XsdNode originalNode, XsdNode newNode) {

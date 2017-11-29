@@ -9,6 +9,7 @@ public class Modifications {
     private ModificationType type;
 
     private boolean nameChanged;
+    private boolean namespaceChanged;
     private boolean typeChanged;
     private boolean cardinalityChanged;
     private boolean fixedValueChanged;
@@ -40,8 +41,8 @@ public class Modifications {
      * @return Returns true if something changed, else false.
      */
     public boolean isModified() {
-        return nameChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged || minLengthChanged ||
-                patternChanged || enumerationChanged || whitespaceChanged;
+        return nameChanged || namespaceChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged ||
+                minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged;
     }
 
     //endregion

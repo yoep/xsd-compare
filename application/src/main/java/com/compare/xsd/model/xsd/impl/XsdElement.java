@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -133,6 +134,7 @@ public class XsdElement extends AbstractXsdElementNode {
 
         this.name = element.getName();
         log.trace("Processing element " + this.name);
+        loadNamespace();
 
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);
@@ -167,6 +169,18 @@ public class XsdElement extends AbstractXsdElementNode {
         if (CollectionUtils.isNotEmpty(attributes)) {
             for (Object attribute : attributes) {
                 this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
+            }
+        }
+    }
+
+    private void loadNamespace() {
+        this.namespace = element.getNamespace();
+
+        if (StringUtils.isEmpty(this.namespace)) {
+            this.namespace = element.getTypeDefinition().getNamespace();
+
+            if (StringUtils.isEmpty(this.namespace) && this.definition != null) {
+                this.namespace = this.definition.getNamespace();
             }
         }
     }
