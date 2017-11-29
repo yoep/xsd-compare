@@ -214,6 +214,13 @@ public class MainView implements Initializable {
                 .build());
     }
 
+    public void openBatchView() {
+        viewLoader.showWindow("batch.fxml", ViewProperties.builder()
+                .title("Batch comparison")
+                .maximizeDisabled(true)
+                .build());
+    }
+
     //endregion
 
     //region Functions

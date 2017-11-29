@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.compare.xsd.views.BatchView">
+    <columnConstraints>
+        <ColumnConstraints prefWidth="200"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints prefHeight="30"/>
+        <RowConstraints prefHeight="30"/>
+        <RowConstraints vgrow="ALWAYS"/>
+        <RowConstraints prefHeight="25"/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0"/>
+    </padding>
+    <!-- Original directory -->
+    <Label text="Original directory" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <GridPane GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+        <TextField fx:id="originalDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <Button text="Browse..." GridPane.rowIndex="0" GridPane.columnIndex="1" />
+    </GridPane>
+
+    <!-- New directory -->
+    <Label text="New directory" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <GridPane GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+        <TextField fx:id="newDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <Button text="Browse..." onAction="#selectOriginalDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+    </GridPane>
+
+    <!-- Buttons -->
+    <GridPane GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS"/>
+            <ColumnConstraints prefWidth="75" halignment="RIGHT"/>
+            <ColumnConstraints prefWidth="75" halignment="RIGHT"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+        <Button text="Cancel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button text="Execute" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+    </GridPane>
+</GridPane>

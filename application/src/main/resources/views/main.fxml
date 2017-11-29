@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.compare.xsd.ui.Icons?>
+<?import com.compare.xsd.ui.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,7 +15,7 @@
         <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
     </rowConstraints>
     <!-- Menu -->
-    <ToolBar GridPane.columnIndex="0" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="0">
+    <ToolBar>
         <Button onAction="#clearAll" styleClass="icon">
             <tooltip>
                 <Tooltip text="New file"/>
@@ -28,7 +28,7 @@
             </tooltip>
             <Icons fx:constant="FOLDER_OPEN"/>
         </Button>
-        <Button styleClass="icon" disable="true">
+        <Button onAction="#openBatchView" styleClass="icon">
             <tooltip>
                 <Tooltip text="Batch comparison"/>
             </tooltip>
@@ -40,7 +40,7 @@
             </tooltip>
             <Icons fx:constant="DOWNLOAD"/>
         </Button>
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane HBox.hgrow="ALWAYS"/>
         <Button onAction="#openSettingsView" styleClass="icon" disable="true">
             <tooltip>
                 <Tooltip text="Settings"/>
@@ -54,6 +54,7 @@
             <Icons fx:constant="HELP"/>
         </Button>
     </ToolBar>
+
     <!-- Content Container -->
     <SplitPane dividerPositions="0.8" orientation="VERTICAL" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <SplitPane fx:id="treeSplitPane" dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES">
