@@ -19,7 +19,7 @@
         <Insets bottom="15.0" left="10.0" right="10.0" top="15.0"/>
     </padding>
     <!-- Original directory -->
-    <Label text="Original directory" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Label text="%original_directory" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <GridPane GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS"/>
@@ -29,11 +29,11 @@
             <RowConstraints/>
         </rowConstraints>
         <TextField fx:id="originalDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Button text="Browse..." onAction="#selectOriginalDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button text="%browse" onAction="#selectOriginalDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     </GridPane>
 
     <!-- New directory -->
-    <Label text="New directory" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Label text="%new_directory" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
     <GridPane GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS"/>
@@ -43,7 +43,7 @@
             <RowConstraints/>
         </rowConstraints>
         <TextField fx:id="newDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Button text="Browse..." onAction="#selectNewDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button text="%browse" onAction="#selectNewDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     </GridPane>
 
     <!-- Buttons -->
@@ -56,7 +56,7 @@
         <rowConstraints>
             <RowConstraints/>
         </rowConstraints>
-        <Button fx:id="cancelButton" text="Cancel" onAction="#close" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Button fx:id="executeButton" text="Execute" GridPane.rowIndex="0" GridPane.columnIndex="2" disable="true"/>
+        <Button fx:id="cancelButton" text="%cancel" onAction="#close" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button fx:id="executeButton" text="%execute" GridPane.rowIndex="0" GridPane.columnIndex="2" disable="true"/>
     </GridPane>
 </GridPane>

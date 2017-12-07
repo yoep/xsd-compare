@@ -1,5 +1,7 @@
 package com.compare.xsd.loaders;
 
+import com.compare.xsd.managers.PrimaryWindowNotAvailableException;
+import com.compare.xsd.managers.WindowNotFoundException;
 import com.compare.xsd.managers.ViewManager;
 import com.compare.xsd.ui.UIText;
 import com.compare.xsd.views.ViewProperties;
@@ -30,8 +32,8 @@ public class ViewLoader {
      * Intialize a new instance of {@link ViewLoader}.
      *
      * @param applicationContext Set the current application context.
-     * @param viewManager Set the view manager to store the views in.
-     * @param uiText Set the UI text manager.
+     * @param viewManager        Set the view manager to store the views in.
+     * @param uiText             Set the UI text manager.
      */
     public ViewLoader(ApplicationContext applicationContext, ViewManager viewManager, UIText uiText) {
         this.applicationContext = applicationContext;
@@ -76,11 +78,15 @@ public class ViewLoader {
      */
     public void show(String view) {
         Assert.hasText(view, "view cannot be empty");
-        Scene scene = loadScene(view);
+        Scene windowView = loadScene(view);
+        Stage window;
 
-        viewManager.setScene(scene);
-        viewManager.getStage().setScene(scene);
-        viewManager.getStage().show();
+        try {
+            window = viewManager.getPrimaryWindow();
+            window.setScene(windowView);
+        } catch (WindowNotFoundException | PrimaryWindowNotAvailableException ex) {
+            log.error(ex.getMessage(), ex);
+        }
     }
 
     /**
@@ -92,20 +98,21 @@ public class ViewLoader {
     public void showWindow(String view, ViewProperties properties) {
         Assert.hasText(view, "view cannot be empty");
         Assert.notNull(properties, "properties cannot be null");
-        Scene scene = loadScene(view);
-        Stage stage = new Stage();
+        Scene windowView = loadScene(view);
+        Stage window = new Stage();
 
         if (properties.isMaximizeDisabled()) {
-            stage.setResizable(false);
+            window.setResizable(false);
         }
 
-        stage.setScene(scene);
-        stage.setTitle(properties.getTitle());
+        window.setScene(windowView);
+        window.setTitle(properties.getTitle());
+        viewManager.addWindowView(window, windowView);
 
         if (properties.isDialog()) {
-            stage.showAndWait();
+            window.showAndWait();
         } else {
-            stage.show();
+            window.show();
         }
     }
 

@@ -25,9 +25,9 @@ public class XsdCompareApplication extends Application {
         ViewManager viewManager = APPLICATION_CONTEXT.getBean(ViewManager.class);
         ViewLoader loader = APPLICATION_CONTEXT.getBean(ViewLoader.class);
 
-        viewManager.setStage(primaryStage);
-        primaryStage.setTitle("XSD Compare");
+        viewManager.addPrimaryWindow(primaryStage);
         primaryStage.setMaximized(true);
         loader.show("main.fxml");
+        primaryStage.show();
     }
 }

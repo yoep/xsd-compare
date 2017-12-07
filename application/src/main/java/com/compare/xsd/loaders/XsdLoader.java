@@ -1,6 +1,8 @@
 package com.compare.xsd.loaders;
 
+import com.compare.xsd.managers.PrimaryWindowNotAvailableException;
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.managers.WindowNotFoundException;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import javafx.stage.FileChooser;
 import lombok.extern.log4j.Log4j2;
@@ -43,13 +45,19 @@ public class XsdLoader {
      * @return Returns the loaded XSD file.
      */
     public XsdDocument chooseAndLoad() {
-        File file = fileChooser.showOpenDialog(viewManager.getStage());
+        File file;
 
-        if (file != null) {
-            this.fileChooser.setInitialDirectory(file.getParentFile());
-            return load(file);
-        } else {
-            return null;
+        try {
+            file = fileChooser.showOpenDialog(viewManager.getPrimaryWindow());
+            if (file != null) {
+                this.fileChooser.setInitialDirectory(file.getParentFile());
+                return load(file);
+            } else {
+                return null;
+            }
+        } catch (PrimaryWindowNotAvailableException | WindowNotFoundException ex) {
+            log.error(ex.getMessage(), ex);
+            throw new RuntimeException(ex);
         }
     }
 

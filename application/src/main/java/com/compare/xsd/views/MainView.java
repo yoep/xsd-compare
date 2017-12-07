@@ -3,15 +3,12 @@ package com.compare.xsd.views;
 import com.compare.xsd.compare.XsdComparer;
 import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
-import com.compare.xsd.managers.PropertyViewManager;
-import com.compare.xsd.managers.TreeViewManager;
-import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.managers.*;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.ui.ActionCancelledException;
-import com.compare.xsd.ui.UIText;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -23,8 +20,6 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
-import org.springframework.context.support.MessageSourceResourceBundle;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -41,7 +36,6 @@ public class MainView implements Initializable {
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
     private final ExcelComparisonWriter comparisonWriter;
-    private final UIText uiText;
 
     private XsdComparer comparer;
 
@@ -89,15 +83,13 @@ public class MainView implements Initializable {
                     ViewManager viewManager,
                     TreeViewManager treeViewManager,
                     PropertyViewManager propertyViewManager,
-                    ExcelComparisonWriter comparisonWriter,
-                    UIText uiText) {
+                    ExcelComparisonWriter comparisonWriter) {
         this.xsdLoader = xsdLoader;
         this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
         this.propertyViewManager = propertyViewManager;
         this.comparisonWriter = comparisonWriter;
-        this.uiText = uiText;
     }
 
     //endregion
@@ -115,11 +107,17 @@ public class MainView implements Initializable {
         this.treeViewManager.setRightTreeRender(rightTreeRender);
         this.propertyViewManager.setLeftProperties(leftProperties);
         this.propertyViewManager.setRightProperties(rightProperties);
-        this.viewManager.getStage().setOnShown(event -> {
-            this.treeViewManager.synchronize();
-            this.propertyViewManager.synchronize();
-        });
         this.synchronizeDividers();
+
+        try {
+            this.viewManager.getPrimaryWindow().setOnShown(event -> {
+                this.treeViewManager.synchronize();
+                this.propertyViewManager.synchronize();
+            });
+        } catch (WindowNotFoundException | PrimaryWindowNotAvailableException ex) {
+            log.error(ex.getMessage(), ex);
+            throw new RuntimeException(ex);
+        }
     }
 
     /**
@@ -136,8 +134,8 @@ public class MainView implements Initializable {
      *
      * @param event Set the event.
      */
-    public void onDragEntered(DragEvent event) {
-        viewManager.getScene().setCursor(Cursor.HAND);
+    public void onDragEntered(DragEvent event) throws WindowNotFoundException, PrimaryWindowNotAvailableException {
+        viewManager.getPrimaryWindow().getScene().setCursor(Cursor.HAND);
         event.consume();
     }
 
@@ -146,8 +144,8 @@ public class MainView implements Initializable {
      *
      * @param event Set the event.
      */
-    public void onDragExited(DragEvent event) {
-        viewManager.getScene().setCursor(Cursor.DEFAULT);
+    public void onDragExited(DragEvent event) throws WindowNotFoundException, PrimaryWindowNotAvailableException {
+        viewManager.getPrimaryWindow().getScene().setCursor(Cursor.DEFAULT);
         event.consume();
     }
 

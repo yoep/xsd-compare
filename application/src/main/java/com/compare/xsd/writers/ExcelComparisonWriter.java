@@ -4,7 +4,9 @@ import com.compare.xsd.compare.XsdComparer;
 import com.compare.xsd.excel.CellRange;
 import com.compare.xsd.excel.Workbook;
 import com.compare.xsd.excel.Worksheet;
+import com.compare.xsd.managers.PrimaryWindowNotAvailableException;
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.managers.WindowNotFoundException;
 import com.compare.xsd.model.comparison.Modifications;
 import com.compare.xsd.model.xsd.XsdNode;
 import com.compare.xsd.model.xsd.impl.XsdDocument;
@@ -71,17 +73,24 @@ public class ExcelComparisonWriter {
      * @throws ActionCancelledException Is thrown when the save action is being cancelled by the user.
      */
     public File showSaveDialog() throws ActionCancelledException {
-        File file = chooser.showSaveDialog(viewManager.getStage());
         String extension = EXTENSION.substring(1);
+        File file;
 
-        if (file != null) {
-            if (!file.getName().contains(extension)) {
-                file = new File(file.getAbsolutePath() + extension);
+        try {
+            file = chooser.showSaveDialog(viewManager.getPrimaryWindow());
+
+            if (file != null) {
+                if (!file.getName().contains(extension)) {
+                    file = new File(file.getAbsolutePath() + extension);
+                }
+
+                return file;
+            } else {
+                throw new ActionCancelledException();
             }
-
-            return file;
-        } else {
-            throw new ActionCancelledException();
+        } catch (WindowNotFoundException | PrimaryWindowNotAvailableException ex) {
+            log.error(ex.getMessage(), ex);
+            throw new RuntimeException(ex);
         }
     }
 

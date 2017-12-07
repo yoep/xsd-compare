@@ -24,7 +24,7 @@ public class XsdCompareConfiguration {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames(UIText.DIRECTORY + "menu");
+        messageSource.setBasenames(UIText.DIRECTORY + "menu", UIText.DIRECTORY + "batch");
         return messageSource;
     }
 }

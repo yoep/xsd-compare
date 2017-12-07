@@ -1,12 +1,14 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.managers.WindowNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@Log4j2
 @Component
 public class BatchView implements Initializable {
     private final ViewManager viewManager;
@@ -92,10 +95,16 @@ public class BatchView implements Initializable {
 
     private void selectDirectory(TextField directoryField) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        File file = directoryChooser.showDialog(viewManager.getStage());
+        File file;
 
-        if (file != null) {
-            directoryField.setText(file.getAbsolutePath());
+        try {
+            file = directoryChooser.showDialog(viewManager.getWindow(ViewManager.BATCH_TITLE));
+
+            if (file != null) {
+                directoryField.setText(file.getAbsolutePath());
+            }
+        } catch (WindowNotFoundException ex) {
+            log.error(ex.getMessage(), ex);
         }
     }
 
