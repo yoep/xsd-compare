@@ -1,6 +1,7 @@
 package com.compare.xsd.loaders;
 
 import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.ui.UIText;
 import com.compare.xsd.views.ViewProperties;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,10 +24,19 @@ public class ViewLoader {
 
     private final ApplicationContext applicationContext;
     private final ViewManager viewManager;
+    private final UIText uiText;
 
-    public ViewLoader(ApplicationContext applicationContext, ViewManager viewManager) {
+    /**
+     * Intialize a new instance of {@link ViewLoader}.
+     *
+     * @param applicationContext Set the current application context.
+     * @param viewManager Set the view manager to store the views in.
+     * @param uiText Set the UI text manager.
+     */
+    public ViewLoader(ApplicationContext applicationContext, ViewManager viewManager, UIText uiText) {
         this.applicationContext = applicationContext;
         this.viewManager = viewManager;
+        this.uiText = uiText;
     }
 
     @PostConstruct
@@ -46,6 +56,7 @@ public class ViewLoader {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(VIEW_DIRECTORY + view));
 
         loader.setControllerFactory(applicationContext::getBean);
+        loader.setResources(uiText.getResourceBundle());
 
         try {
             return loader.load();

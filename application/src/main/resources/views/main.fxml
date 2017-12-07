@@ -18,38 +18,38 @@
     <ToolBar>
         <Button onAction="#clearAll" styleClass="icon">
             <tooltip>
-                <Tooltip text="New file"/>
+                <Tooltip text="%new_file" />
             </tooltip>
             <Icons fx:constant="FILE"/>
         </Button>
         <Button onAction="#loadNextAvailableTree" styleClass="icon">
             <tooltip>
-                <Tooltip text="Open file"/>
+                <Tooltip text="%open_file"/>
             </tooltip>
             <Icons fx:constant="FOLDER_OPEN"/>
         </Button>
         <Button onAction="#openBatchView" styleClass="icon">
             <tooltip>
-                <Tooltip text="Batch comparison"/>
+                <Tooltip text="%batch_comparison"/>
             </tooltip>
             <Icons fx:constant="COGS"/>
         </Button>
         <Button fx:id="exportComparisonButton" onAction="#exportToExcel" styleClass="icon" disable="true">
             <tooltip>
-                <Tooltip text="Export comparison"/>
+                <Tooltip text="%export_comparison"/>
             </tooltip>
             <Icons fx:constant="DOWNLOAD"/>
         </Button>
         <Pane HBox.hgrow="ALWAYS"/>
         <Button onAction="#openSettingsView" styleClass="icon" disable="true">
             <tooltip>
-                <Tooltip text="Settings"/>
+                <Tooltip text="%settings"/>
             </tooltip>
             <Icons fx:constant="COG"/>
         </Button>
         <Button onAction="#openHelpView" styleClass="icon">
             <tooltip>
-                <Tooltip text="Help"/>
+                <Tooltip text="%help"/>
             </tooltip>
             <Icons fx:constant="HELP"/>
         </Button>

@@ -2,26 +2,102 @@ package com.compare.xsd.views;
 
 import com.compare.xsd.managers.ViewManager;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 @Component
-public class BatchView {
+public class BatchView implements Initializable {
     private final ViewManager viewManager;
+
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button executeButton;
 
     @FXML
     private TextField originalDirectoryInput;
     @FXML
     private TextField newDirectoryInput;
 
+    //region Constructors
+
+    /**
+     * Initialize a new instance of {@link BatchView}.
+     *
+     * @param viewManager Set the view manager.
+     */
     public BatchView(ViewManager viewManager) {
         this.viewManager = viewManager;
     }
 
-    public void selectOriginalDirectory() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
+    //endregion
 
-        directoryChooser.showDialog(viewManager.getStage());
+    //region Methods
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        originalDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> directoryChanged());
+        newDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> directoryChanged());
     }
+
+    /**
+     * Open a selection dialog window for the original directory.
+     */
+    public void selectOriginalDirectory() {
+        selectDirectory(originalDirectoryInput);
+    }
+
+    /**
+     * Open a selection dialog window for the new directory.
+     */
+    public void selectNewDirectory() {
+        selectDirectory(newDirectoryInput);
+    }
+
+    /**
+     * Invocation method which identifies if the directory inputs have been changed.
+     */
+    public void directoryChanged() {
+        if (StringUtils.isNotEmpty(originalDirectoryInput.getText()) && StringUtils.isNotEmpty(newDirectoryInput.getText())) {
+            executeButton.setDisable(false);
+        } else {
+            executeButton.setDisable(true);
+        }
+    }
+
+    public void execute() {
+
+    }
+
+    /**
+     * Closes the window.
+     */
+    public void close() {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    //endregion
+
+    //region Functions
+
+    private void selectDirectory(TextField directoryField) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(viewManager.getStage());
+
+        if (file != null) {
+            directoryField.setText(file.getAbsolutePath());
+        }
+    }
+
+    //endregion
 }

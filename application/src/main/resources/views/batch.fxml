@@ -28,8 +28,8 @@
         <rowConstraints>
             <RowConstraints/>
         </rowConstraints>
-        <TextField fx:id="originalDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-        <Button text="Browse..." GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <TextField fx:id="originalDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text="Browse..." onAction="#selectOriginalDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     </GridPane>
 
     <!-- New directory -->
@@ -42,8 +42,8 @@
         <rowConstraints>
             <RowConstraints/>
         </rowConstraints>
-        <TextField fx:id="newDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-        <Button text="Browse..." onAction="#selectOriginalDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <TextField fx:id="newDirectoryInput" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text="Browse..." onAction="#selectNewDirectory" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     </GridPane>
 
     <!-- Buttons -->
@@ -56,7 +56,7 @@
         <rowConstraints>
             <RowConstraints/>
         </rowConstraints>
-        <Button text="Cancel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Button text="Execute" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Button fx:id="cancelButton" text="Cancel" onAction="#close" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button fx:id="executeButton" text="Execute" GridPane.rowIndex="0" GridPane.columnIndex="2" disable="true"/>
     </GridPane>
 </GridPane>

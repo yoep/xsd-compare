@@ -11,6 +11,7 @@ import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.ui.ActionCancelledException;
+import com.compare.xsd.ui.UIText;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -22,6 +23,8 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
+import org.springframework.context.support.MessageSourceResourceBundle;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -38,6 +41,7 @@ public class MainView implements Initializable {
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
     private final ExcelComparisonWriter comparisonWriter;
+    private final UIText uiText;
 
     private XsdComparer comparer;
 
@@ -80,14 +84,20 @@ public class MainView implements Initializable {
      * @param propertyViewManager Set the property manager.
      * @param comparisonWriter    Set the Excel writer.
      */
-    public MainView(XsdLoader xsdLoader, ViewLoader viewLoader, ViewManager viewManager, TreeViewManager treeViewManager,
-                    PropertyViewManager propertyViewManager, ExcelComparisonWriter comparisonWriter) {
+    public MainView(XsdLoader xsdLoader,
+                    ViewLoader viewLoader,
+                    ViewManager viewManager,
+                    TreeViewManager treeViewManager,
+                    PropertyViewManager propertyViewManager,
+                    ExcelComparisonWriter comparisonWriter,
+                    UIText uiText) {
         this.xsdLoader = xsdLoader;
         this.viewLoader = viewLoader;
         this.viewManager = viewManager;
         this.treeViewManager = treeViewManager;
         this.propertyViewManager = propertyViewManager;
         this.comparisonWriter = comparisonWriter;
+        this.uiText = uiText;
     }
 
     //endregion
@@ -166,6 +176,7 @@ public class MainView implements Initializable {
         propertyViewManager.clearAll();
         modificationsLabel.setText("");
         exportComparisonButton.setDisable(true);
+        log.debug("Cleared treeViewManager and propertyViewManager");
     }
 
     /**
