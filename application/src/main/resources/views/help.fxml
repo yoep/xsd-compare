@@ -27,31 +27,31 @@
     <Label text="Description" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" styleClass="bold"/>
     <!-- Rows -->
     <!-- Section: Menu -->
-    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" text="Menu" styleClass="section"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" text="%menu" styleClass="section"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="FILE"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="New file" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="2" text="Clear the window" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="%new_file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="2" text="%new_file_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="FOLDER_OPEN"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="Open file" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="3" text="Load and show XSD file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="%open_file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="3" text="%open_file_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="COGS"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="Batch comparison" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="4" text="Run multiple XSD comparison's at the same time" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="%batch_comparison" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="4" text="%batch_comparison_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="DOWNLOAD"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="Export comparison" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="5" text="Export the comparison to an Excel file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="%export_comparison" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="5" text="%export_comparison_description" GridPane.valignment="CENTER"/>
 
     <!-- Section: Tree view -->
     <Label GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" text="XSD view" styleClass="section" />
