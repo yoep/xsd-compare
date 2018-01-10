@@ -151,17 +151,7 @@ public class XsdElement extends AbstractXsdElementNode {
 
         if (particle != null) {
             XSModelGroupImpl group = (XSModelGroupImpl) particle.getTerm();
-            XSObjectList children = group.getParticles();
-
-            for (Object childItem : children) {
-                if (childItem instanceof XSParticle) {
-                    XSParticleDecl child = (XSParticleDecl) childItem;
-
-                    if (child.getTerm() instanceof XSElementDeclaration) {
-                        this.elements.add(new XsdElement(child, this));
-                    }
-                }
-            }
+            processComplexGroup(group);
         } else {
             loadType(complexType);
         }
@@ -169,6 +159,22 @@ public class XsdElement extends AbstractXsdElementNode {
         if (CollectionUtils.isNotEmpty(attributes)) {
             for (Object attribute : attributes) {
                 this.attributes.add(new XsdAttribute((XSAttributeUseImpl) attribute, this));
+            }
+        }
+    }
+
+    private void processComplexGroup(XSModelGroupImpl group) {
+        XSObjectList children = group.getParticles();
+
+        for (Object childItem : children) {
+            if (childItem instanceof XSParticle) {
+                XSParticleDecl child = (XSParticleDecl) childItem;
+
+                if (child.getTerm() instanceof XSElementDeclaration) {
+                    this.elements.add(new XsdElement(child, this));
+                } else if (child.getTerm() instanceof XSModelGroupImpl) {
+                    processComplexGroup((XSModelGroupImpl) child.getTerm());
+                }
             }
         }
     }
