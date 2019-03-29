@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.compare.xsd.ui.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,45 +14,7 @@
         <RowConstraints maxHeight="20" minHeight="20" prefHeight="20" vgrow="NEVER"/>
     </rowConstraints>
     <!-- Menu -->
-    <ToolBar>
-        <Button onAction="#clearAll" styleClass="icon">
-            <tooltip>
-                <Tooltip text="%new_file" />
-            </tooltip>
-            <Icons fx:constant="FILE"/>
-        </Button>
-        <Button onAction="#loadNextAvailableTree" styleClass="icon">
-            <tooltip>
-                <Tooltip text="%open_file"/>
-            </tooltip>
-            <Icons fx:constant="FOLDER_OPEN"/>
-        </Button>
-        <Button onAction="#openBatchView" styleClass="icon">
-            <tooltip>
-                <Tooltip text="%batch_comparison"/>
-            </tooltip>
-            <Icons fx:constant="COGS"/>
-        </Button>
-        <Button fx:id="exportComparisonButton" onAction="#exportToExcel" styleClass="icon" disable="true">
-            <tooltip>
-                <Tooltip text="%export_comparison"/>
-            </tooltip>
-            <Icons fx:constant="DOWNLOAD"/>
-        </Button>
-        <Pane HBox.hgrow="ALWAYS"/>
-        <Button onAction="#openSettingsView" styleClass="icon" disable="true">
-            <tooltip>
-                <Tooltip text="%settings"/>
-            </tooltip>
-            <Icons fx:constant="COG"/>
-        </Button>
-        <Button onAction="#openHelpView" styleClass="icon">
-            <tooltip>
-                <Tooltip text="%help"/>
-            </tooltip>
-            <Icons fx:constant="HELP"/>
-        </Button>
-    </ToolBar>
+    <fx:include source="components/menu.component.fxml"/>
 
     <!-- Content Container -->
     <SplitPane dividerPositions="0.8" orientation="VERTICAL" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">

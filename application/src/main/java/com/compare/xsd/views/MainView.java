@@ -1,7 +1,6 @@
 package com.compare.xsd.views;
 
 import com.compare.xsd.compare.XsdComparer;
-import com.compare.xsd.loaders.ViewLoader;
 import com.compare.xsd.loaders.XsdLoader;
 import com.compare.xsd.managers.*;
 import com.compare.xsd.model.xsd.XsdNode;
@@ -9,6 +8,7 @@ import com.compare.xsd.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.ui.ActionCancelledException;
+import com.compare.xsd.views.components.MenuComponent;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -18,24 +18,25 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Log4j2
 @Component
+@RequiredArgsConstructor
 public class MainView implements Initializable {
     private final XsdLoader xsdLoader;
-    private final ViewLoader viewLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
     private final ExcelComparisonWriter comparisonWriter;
+    private final MenuComponent menuComponent;
 
     private XsdComparer comparer;
 
@@ -65,37 +66,6 @@ public class MainView implements Initializable {
     @FXML
     private Button exportComparisonButton;
 
-    //region Constructors
-
-    /**
-     * Initialize a new instance of {@link MainView}.
-     * This view contains the main screen of the application including the tree renders.
-     *
-     * @param xsdLoader           Set the XSD loader.
-     * @param viewLoader          Set the view loader.
-     * @param viewManager         Set the view manager.
-     * @param treeViewManager     Set the tree view manager.
-     * @param propertyViewManager Set the property manager.
-     * @param comparisonWriter    Set the Excel writer.
-     */
-    public MainView(XsdLoader xsdLoader,
-                    ViewLoader viewLoader,
-                    ViewManager viewManager,
-                    TreeViewManager treeViewManager,
-                    PropertyViewManager propertyViewManager,
-                    ExcelComparisonWriter comparisonWriter) {
-        this.xsdLoader = xsdLoader;
-        this.viewLoader = viewLoader;
-        this.viewManager = viewManager;
-        this.treeViewManager = treeViewManager;
-        this.propertyViewManager = propertyViewManager;
-        this.comparisonWriter = comparisonWriter;
-    }
-
-    //endregion
-
-    //region Methods
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
@@ -107,6 +77,9 @@ public class MainView implements Initializable {
         this.treeViewManager.setRightTreeRender(rightTreeRender);
         this.propertyViewManager.setLeftProperties(leftProperties);
         this.propertyViewManager.setRightProperties(rightProperties);
+        this.menuComponent.setOnClearAll(this::clearAll);
+        this.menuComponent.setOnExportToExcel(this::exportToExcel);
+        this.menuComponent.setOnLoadNextAvailableTree(this::loadNextAvailableTree);
         this.synchronizeDividers();
 
         try {
@@ -188,7 +161,7 @@ public class MainView implements Initializable {
         }
     }
 
-    public void exportToExcel() throws IOException {
+    public void exportToExcel() {
         if (comparer != null) {
             try {
                 setWriting();
@@ -211,28 +184,6 @@ public class MainView implements Initializable {
             }
         }
     }
-
-    public void openSettingsView() {
-        //TODO: implement
-    }
-
-    public void openHelpView() {
-        viewLoader.showWindow("help.fxml", ViewProperties.builder()
-                .title("Help")
-                .maximizeDisabled(true)
-                .build());
-    }
-
-    public void openBatchView() {
-        viewLoader.showWindow("batch.fxml", ViewProperties.builder()
-                .title("Batch comparison")
-                .maximizeDisabled(true)
-                .build());
-    }
-
-    //endregion
-
-    //region Functions
 
     private void compare() {
         XsdDocument originalDocument = treeViewManager.getLeftTreeRender().getDocument();
@@ -325,6 +276,4 @@ public class MainView implements Initializable {
         progressBar.setProgress(1);
         progressBar.setStyle("-fx-accent: red");
     }
-
-    //endregion
 }
