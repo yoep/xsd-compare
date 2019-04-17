@@ -4,6 +4,7 @@ import com.compare.xsd.XsdCompareApplication;
 import com.compare.xsd.common.ObservableWrapper;
 import com.compare.xsd.settings.model.UserSettings;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SettingsService {
     private final ObjectMapper objectMapper;
+    @Getter
     private final ObservableWrapper<UserSettings> userSettingsObservable = new ObservableWrapper<>();
 
     @PostConstruct

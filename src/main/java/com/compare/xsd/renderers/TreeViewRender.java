@@ -2,6 +2,7 @@ package com.compare.xsd.renderers;
 
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
+import com.compare.xsd.settings.model.CompareColumns;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
@@ -13,43 +14,25 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Renders a {@link XsdDocument} within a {@link TreeTableView}.
  */
-@EqualsAndHashCode
-@ToString
-@Getter
+@Data
+@RequiredArgsConstructor
 public class TreeViewRender implements RenderView {
     private final TreeTableView<XsdNode> treeView;
     private final PropertyViewRender propertyViewRender;
+    private List<CompareColumns> visibleColumns;
 
     private XsdDocument document;
-
-    //region Constructors
-
-    /**
-     * Initialize a new instance of {@link TreeViewRender}.
-     *
-     * @param treeView           Set the tree view to use for the rendering.
-     * @param propertyViewRender Set the view to render the properties in.
-     */
-    public TreeViewRender(TreeTableView<XsdNode> treeView, PropertyViewRender propertyViewRender) {
-        Assert.notNull(treeView, "treeView cannot be null");
-        this.treeView = treeView;
-        this.propertyViewRender = propertyViewRender;
-
-        init();
-    }
-
-    //endregion
 
     //region Implementation of RenderView
 
@@ -101,20 +84,34 @@ public class TreeViewRender implements RenderView {
         this.treeView.setRoot(null);
     }
 
-    //endregion
-
-    //region Functions
-
-    private void init() {
+    void initialize() {
+        //clear all columns
         treeView.getColumns().clear();
 
+        //create default columns
         addNameColumn();
         addColorColumn();
-        addTypeColumn();
-        addCardinalityColumn();
+
+        //create additional columns
+        if (visibleColumns.contains(CompareColumns.TYPE))
+            addTypeColumn();
+        if (visibleColumns.contains(CompareColumns.CARDINALITY))
+            addCardinalityColumn();
+        if (visibleColumns.contains(CompareColumns.FIXED_VALUE))
+            addFixedValueColumn();
+        if (visibleColumns.contains(CompareColumns.PATTERN))
+            addPatternColumn();
+        if (visibleColumns.contains(CompareColumns.LENGTH))
+            addLengthColumn();
+
+        //selection and context menu
         addSelectionListener();
         addContextMenu();
     }
+
+    //endregion
+
+    //region Functions
 
     private void addContextMenu() {
         this.treeView.setRowFactory(treeView -> {
@@ -219,15 +216,7 @@ public class TreeViewRender implements RenderView {
             return new ReadOnlyStringWrapper(node.getType());
         });
 
-        column.setCellFactory(treeColumn -> new TreeTableCell<XsdNode, String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-
-                setText(empty ? null : item);
-                setTooltip(empty ? null : new Tooltip(item));
-            }
-        });
+        column.setCellFactory(treeColumn -> createTextCellFactoryWithTooltip());
     }
 
     private void addCardinalityColumn() {
@@ -249,6 +238,47 @@ public class TreeViewRender implements RenderView {
                 setAlignment(Pos.CENTER);
             }
         });
+    }
+
+    private void addFixedValueColumn() {
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Fixed value", 80);
+
+        column.setCellValueFactory(cellData -> {
+            TreeItem<XsdNode> treeItem = cellData.getValue();
+            XsdNode node = treeItem.getValue();
+
+            return new ReadOnlyStringWrapper(node.getFixedValue());
+        });
+
+        column.setCellFactory(treeColumn -> createTextCellFactoryWithTooltip());
+    }
+
+    private void addPatternColumn() {
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Pattern", 125);
+
+        column.setCellValueFactory(cellData -> {
+            TreeItem<XsdNode> treeItem = cellData.getValue();
+            XsdNode node = treeItem.getValue();
+
+            return new ReadOnlyStringWrapper(node.getPattern());
+        });
+
+        column.setCellFactory(treeColumn -> createTextCellFactoryWithTooltip());
+    }
+
+    private void addLengthColumn() {
+        TreeTableColumn<XsdNode, String> column = createNewColumn("Length", 50);
+
+        column.setCellValueFactory(cellData -> {
+            TreeItem<XsdNode> treeItem = cellData.getValue();
+            XsdNode node = treeItem.getValue();
+
+            return new ReadOnlyStringWrapper(Optional.ofNullable(node.getLength())
+                    .map(String::valueOf)
+                    .orElse(null));
+        });
+
+        column.setCellFactory(treeColumn -> createTextCellFactoryWithTooltip());
     }
 
     private void addColorColumn() {
@@ -280,6 +310,18 @@ public class TreeViewRender implements RenderView {
         treeView.getColumns().add(column);
 
         return column;
+    }
+
+    private TreeTableCell<XsdNode, String> createTextCellFactoryWithTooltip() {
+        return new TreeTableCell<XsdNode, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                setText(empty ? null : item);
+                setTooltip(empty ? null : new Tooltip(item));
+            }
+        };
     }
 
     private void addSelectionListener() {

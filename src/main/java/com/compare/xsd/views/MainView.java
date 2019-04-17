@@ -8,6 +8,9 @@ import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
+import com.compare.xsd.renderers.TreeViewRenderBuilder;
+import com.compare.xsd.settings.SettingsService;
+import com.compare.xsd.settings.model.CompareSettings;
 import com.compare.xsd.ui.ScaleAwareImpl;
 import com.compare.xsd.ui.ViewManager;
 import com.compare.xsd.ui.WindowAware;
@@ -43,6 +46,7 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
     private final ExcelComparisonWriter comparisonWriter;
+    private final SettingsService settingsService;
     private final MenuComponent menuComponent;
 
     private XsdComparer comparer;
@@ -72,10 +76,20 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        CompareSettings compareSettings = settingsService.getUserSettingsOrDefault().getCompareSettings();
+
         PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
         PropertyViewRender rightProperties = new PropertyViewRender(this.rightProperties);
-        TreeViewRender leftTreeRender = new TreeViewRender(leftTree, leftProperties);
-        TreeViewRender rightTreeRender = new TreeViewRender(rightTree, rightProperties);
+        TreeViewRender leftTreeRender = TreeViewRenderBuilder.builder()
+                .treeView(leftTree)
+                .propertyViewRender(leftProperties)
+                .compareSettings(compareSettings)
+                .build();
+        TreeViewRender rightTreeRender = TreeViewRenderBuilder.builder()
+                .treeView(rightTree)
+                .propertyViewRender(rightProperties)
+                .compareSettings(compareSettings)
+                .build();
 
         this.treeViewManager.setLeftTreeRender(leftTreeRender);
         this.treeViewManager.setRightTreeRender(rightTreeRender);
