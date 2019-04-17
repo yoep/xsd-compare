@@ -13,9 +13,9 @@ XSD Compare allows you to compare different versions of XML schema files against
 * Copy field as XML to clipboard
 * Exporting the differences to an Excel file
 * Add Excel colors
+* Settings for shown columns
 
 ## Future features
-* Settings for shown columns
 * Batch comparison of XML schema files
 
 # System requirements
