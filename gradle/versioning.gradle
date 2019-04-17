@@ -1,1 +1,0 @@
-version = System.getProperty('APP_VERSION', 'local')

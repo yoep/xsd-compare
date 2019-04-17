@@ -1,6 +1,0 @@
-include 'application'
-
-rootProject.children.each {project ->
-    project.buildFileName = project.name + ".gradle"
-}
-

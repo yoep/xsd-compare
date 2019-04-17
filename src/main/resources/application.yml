@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: XSD Compare
+
+logging:
+  level:
+    com:
+      compare:
+        xsd: debug

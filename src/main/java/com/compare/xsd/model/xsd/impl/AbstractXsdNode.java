@@ -60,7 +60,7 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getCardinality() {
-        return minOccurrence + ".." + (maxOccurrence != null ? maxOccurrence : "*");
+        return minOccurrence + "src/test" + (maxOccurrence != null ? maxOccurrence : "*");
     }
 
     @Override
