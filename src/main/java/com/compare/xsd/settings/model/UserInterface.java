@@ -1,15 +1,15 @@
 package com.compare.xsd.settings.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.Observable;
+
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInterface {
+public class UserInterface extends Observable {
     @Builder.Default
     private boolean maximized = true;
     @Builder.Default
@@ -18,4 +18,10 @@ public class UserInterface {
     private float height = 600f;
     @Builder.Default
     private float scale = 1f;
+
+    public void setScale(float scale) {
+        this.scale = scale;
+        this.setChanged();
+        this.notifyObservers();
+    }
 }

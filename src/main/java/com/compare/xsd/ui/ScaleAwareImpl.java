@@ -3,26 +3,35 @@ package com.compare.xsd.ui;
 import com.compare.xsd.settings.model.UserInterface;
 import com.compare.xsd.ui.exceptions.MissingScaleAwarePropertyException;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.transform.Scale;
-import javafx.stage.Screen;
 import javafx.stage.Window;
 
 /**
  * Implementation of {@link ScaleAware} for scaling the scene during initialization.
  */
 public abstract class ScaleAwareImpl implements ScaleAware {
+    private Scene scene;
+    private Region root;
+    private UserInterface userInterface;
+
     @Override
     public void scale(Scene scene, UserInterface userInterface) {
         if (scene == null) {
             throw new MissingScaleAwarePropertyException();
         }
 
+        this.scene = scene;
+        this.root = (Region) scene.getRoot();
+        this.userInterface = userInterface;
+
+        scale();
+        userInterface.addObserver((o, args) -> scale());
+    }
+
+    private void scale() {
         float scaleFactor = userInterface.getScale();
-        Region root = (Region) scene.getRoot();
         Window window = scene.getWindow();
 
         //set initial window size
