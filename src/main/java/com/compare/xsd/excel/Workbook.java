@@ -1,5 +1,7 @@
 package com.compare.xsd.excel;
 
+import com.compare.xsd.excel.exceptions.ExcelLoadingException;
+import com.compare.xsd.excel.exceptions.NameTooLongException;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;

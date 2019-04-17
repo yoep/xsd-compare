@@ -1,7 +1,7 @@
 package com.compare.xsd.renderers;
 
-import com.compare.xsd.model.comparison.Modifications;
-import com.compare.xsd.model.xsd.XsdNode;
+import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.xsd.XsdNode;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;

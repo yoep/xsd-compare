@@ -1,7 +1,6 @@
 package com.compare.xsd;
 
-import com.compare.xsd.loaders.ViewLoader;
-import com.compare.xsd.managers.ViewManager;
+import com.compare.xsd.ui.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.boot.Banner;
@@ -9,9 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.io.File;
+
 @SpringBootApplication
 public class XsdCompareApplication extends Application {
-    private static ApplicationContext APPLICATION_CONTEXT;
+    public static final String APP_DIR = System.getProperty("user.home") + File.separator + ".xsd-compare" + File.separator;
+    public static ApplicationContext APPLICATION_CONTEXT;
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(XsdCompareApplication.class);
@@ -21,13 +23,15 @@ public class XsdCompareApplication extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        ViewManager viewManager = APPLICATION_CONTEXT.getBean(ViewManager.class);
+    public void start(Stage primaryStage) {
         ViewLoader loader = APPLICATION_CONTEXT.getBean(ViewLoader.class);
+        ViewManager viewManager = APPLICATION_CONTEXT.getBean(ViewManagerImpl.class);
 
-        viewManager.addPrimaryWindow(primaryStage);
-        primaryStage.setMaximized(true);
-        loader.show("main.fxml");
-        primaryStage.show();
+        loader.showPrimary(primaryStage, "main.fxml", ViewProperties.builder()
+                .title("XSD Compare")
+                .centerOnScreen(true)
+                .maximizable(true)
+                .build());
+        viewManager.setPolicy(ViewManagerPolicy.CLOSEABLE);
     }
 }

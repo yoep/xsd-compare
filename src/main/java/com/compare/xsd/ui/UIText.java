@@ -1,5 +1,6 @@
 package com.compare.xsd.ui;
 
+import com.compare.xsd.ui.lang.Message;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.ArrayUtils;
@@ -27,7 +28,7 @@ public class UIText {
      */
     public UIText(ResourceBundleMessageSource messageSource) {
         this.messageSource = new MessageSourceAccessor(messageSource);
-        this.resourceBundle = new MessageSourceResourceBundle(messageSource, Locale.ENGLISH);
+        this.resourceBundle = new MessageSourceResourceBundle(messageSource, Locale.getDefault());
     }
 
     /**
@@ -48,19 +49,22 @@ public class UIText {
      * @return Returns the formatted text.
      */
     public String get(Message message, Object... args) {
-
-        try {
-            return messageSource.getMessage(message.toString().toLowerCase(), args);
-        } catch (NoSuchMessageException ex) {
-            log.error("Message key '" + message + "' not found", ex);
-            return null;
-        }
+        return get(message.getKey(), args);
     }
 
     /**
-     * Possible UI messages.
+     * Get the text for the given message.
+     *
+     * @param message Set the message.
+     * @param args    Set the arguments to pass to the message.
+     * @return Returns the formatted text.
      */
-    public enum Message {
-
+    public String get(String message, Object... args) {
+        try {
+            return messageSource.getMessage(message, args);
+        } catch (NoSuchMessageException ex) {
+            log.error("Message key '" + message + "' not found", ex);
+            return message;
+        }
     }
 }

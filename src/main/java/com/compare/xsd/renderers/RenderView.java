@@ -4,7 +4,7 @@ import javafx.scene.Node;
 
 public interface RenderView {
     /**
-     * Get is the view is rendering something.
+     * Get if the view is rendering something.
      *
      * @return Returns true if the view is rendering, else false.
      */

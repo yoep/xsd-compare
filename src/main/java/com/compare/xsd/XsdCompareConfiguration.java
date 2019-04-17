@@ -1,6 +1,7 @@
 package com.compare.xsd;
 
 import com.compare.xsd.ui.UIText;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -24,7 +25,12 @@ public class XsdCompareConfiguration {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames(UIText.DIRECTORY + "menu", UIText.DIRECTORY + "batch");
+        messageSource.setBasenames(UIText.DIRECTORY + "menu", UIText.DIRECTORY + "batch", UIText.DIRECTORY + "settings");
         return messageSource;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

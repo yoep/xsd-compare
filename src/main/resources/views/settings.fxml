@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.compare.xsd.views.SettingsView"
+          prefHeight="400.0" prefWidth="600.0">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="Infinity" vgrow="ALWAYS"/>
+        <RowConstraints maxHeight="30.0" minHeight="30.0"/>
+    </rowConstraints>
+
+    <!-- CONTENT -->
+    <TabPane maxWidth="Infinity" maxHeight="Infinity" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"
+             tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Tab text="%settings_general">
+            <fx:include source="components/settings_general_component.fxml"/>
+        </Tab>
+        <Tab text="%settings_compare_view">
+            <fx:include source="components/settings_compare_component.fxml"/>
+        </Tab>
+    </TabPane>
+
+    <!-- BUTTONS -->
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity"/>
+            <ColumnConstraints maxWidth="100"/>
+            <ColumnConstraints minWidth="3"/>
+            <ColumnConstraints maxWidth="100"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="Infinity" vgrow="ALWAYS"/>
+        </rowConstraints>
+
+        <Button maxWidth="Infinity" onAction="#close" text="%settings_cancel" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"/>
+        <Button maxWidth="Infinity" onAction="#apply" text="%settings_apply" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"/>
+        <GridPane.margin>
+            <Insets bottom="5.0" right="5.0"/>
+        </GridPane.margin>
+    </GridPane>
+</GridPane>

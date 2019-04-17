@@ -1,5 +1,7 @@
 package com.compare.xsd.excel;
 
+import com.compare.xsd.excel.exceptions.InvalidCellRangeException;
+import com.compare.xsd.excel.exceptions.RangeOutOfBoundsException;
 import lombok.*;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.usermodel.FillPatternType;

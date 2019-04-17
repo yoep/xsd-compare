@@ -1,13 +1,19 @@
 package com.compare.xsd.views;
 
-import com.compare.xsd.compare.XsdComparer;
-import com.compare.xsd.loaders.XsdLoader;
-import com.compare.xsd.managers.*;
-import com.compare.xsd.model.xsd.XsdNode;
-import com.compare.xsd.model.xsd.impl.XsdDocument;
+import com.compare.xsd.comparison.PropertyViewManager;
+import com.compare.xsd.comparison.TreeViewManager;
+import com.compare.xsd.comparison.XsdComparer;
+import com.compare.xsd.comparison.XsdLoader;
+import com.compare.xsd.comparison.model.xsd.XsdNode;
+import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
-import com.compare.xsd.ui.ActionCancelledException;
+import com.compare.xsd.ui.ScaleAwareImpl;
+import com.compare.xsd.ui.ViewManager;
+import com.compare.xsd.ui.WindowAware;
+import com.compare.xsd.ui.exceptions.ActionCancelledException;
+import com.compare.xsd.ui.exceptions.PrimaryWindowNotAvailableException;
+import com.compare.xsd.ui.exceptions.WindowNotFoundException;
 import com.compare.xsd.views.components.MenuComponent;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import javafx.application.Platform;
@@ -18,6 +24,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
@@ -30,7 +37,7 @@ import java.util.ResourceBundle;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class MainView implements Initializable {
+public class MainView extends ScaleAwareImpl implements Initializable, WindowAware {
     private final XsdLoader xsdLoader;
     private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
@@ -63,9 +70,6 @@ public class MainView implements Initializable {
     @FXML
     private ProgressBar progressBar;
 
-    @FXML
-    private Button exportComparisonButton;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
@@ -81,16 +85,18 @@ public class MainView implements Initializable {
         this.menuComponent.setOnExportToExcel(this::exportToExcel);
         this.menuComponent.setOnLoadNextAvailableTree(this::loadNextAvailableTree);
         this.synchronizeDividers();
+    }
 
-        try {
-            this.viewManager.getPrimaryWindow().setOnShown(event -> {
-                this.treeViewManager.synchronize();
-                this.propertyViewManager.synchronize();
-            });
-        } catch (WindowNotFoundException | PrimaryWindowNotAvailableException ex) {
-            log.error(ex.getMessage(), ex);
-            throw new RuntimeException(ex);
-        }
+    @Override
+    public void onShown(Stage window) {
+        this.treeViewManager.synchronize();
+        this.propertyViewManager.synchronize();
+        window.setMaximized(true);
+    }
+
+    @Override
+    public void onClosed(Stage window) {
+        //no-op
     }
 
     /**
@@ -146,7 +152,7 @@ public class MainView implements Initializable {
         treeViewManager.clearAll();
         propertyViewManager.clearAll();
         modificationsLabel.setText("");
-        exportComparisonButton.setDisable(true);
+        menuComponent.setComparisonEnabled(false);
         log.debug("Cleared treeViewManager and propertyViewManager");
     }
 
@@ -196,7 +202,7 @@ public class MainView implements Initializable {
             this.propertyViewManager.clearAll();
             this.treeViewManager.refresh(); // refresh tree views to reflect removed and added items
             this.modificationsLabel.setText(comparer.toString());
-            this.exportComparisonButton.setDisable(false);
+            this.menuComponent.setComparisonEnabled(true);
             this.comparer = comparer;
 
             setLoadingDone();
