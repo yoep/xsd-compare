@@ -106,6 +106,16 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <vendor>com.compare.xsd</vendor>
+                    <mainClass>com.compare.xsd.XsdCompareApplication</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
