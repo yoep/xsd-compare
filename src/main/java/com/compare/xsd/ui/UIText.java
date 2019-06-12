@@ -1,5 +1,6 @@
 package com.compare.xsd.ui;
 
+import com.compare.xsd.context.support.ExtendedMessageSourceResourceBundle;
 import com.compare.xsd.ui.lang.Message;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -19,7 +20,8 @@ public class UIText {
     public static final String DIRECTORY = "lang/";
 
     private final MessageSourceAccessor messageSource;
-    private final MessageSourceResourceBundle resourceBundle;
+    private final ExtendedMessageSourceResourceBundle resourceBundle;
+    private final MessageSourceResourceBundle fallbackResourceBundle;
 
     /**
      * Initialize a new instance of {@link UIText}.
@@ -27,8 +29,9 @@ public class UIText {
      * @param messageSource set the message source to use.
      */
     public UIText(ResourceBundleMessageSource messageSource) {
-        this.messageSource = new MessageSourceAccessor(messageSource);
-        this.resourceBundle = new MessageSourceResourceBundle(messageSource, Locale.getDefault());
+        this.messageSource = new MessageSourceAccessor(messageSource, Locale.ENGLISH);
+        this.fallbackResourceBundle = new MessageSourceResourceBundle(messageSource, Locale.ENGLISH);
+        this.resourceBundle = new ExtendedMessageSourceResourceBundle(messageSource, Locale.getDefault(), fallbackResourceBundle);
     }
 
     /**
@@ -61,7 +64,7 @@ public class UIText {
      */
     public String get(String message, Object... args) {
         try {
-            return messageSource.getMessage(message, args);
+            return resourceBundle.getString(message);
         } catch (NoSuchMessageException ex) {
             log.error("Message key '" + message + "' not found", ex);
             return message;
