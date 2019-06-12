@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstract implementation of the {@link XsdNode}.
@@ -155,7 +156,7 @@ public abstract class AbstractXsdNode implements XsdNode {
      * @param typeDefinition Set the type definition of the node.
      */
     protected void loadType(XSTypeDefinition typeDefinition) {
-        while (typeDefinition.getBaseType() != null && !typeDefinition.getNamespace().equals(SCHEMA_DEFINITION)) {
+        while (typeDefinition.getBaseType() != null && !isTypeDefinitionDefaultXsdSchemaDefinition(typeDefinition)) {
             typeDefinition = typeDefinition.getBaseType();
         }
 
@@ -220,6 +221,10 @@ public abstract class AbstractXsdNode implements XsdNode {
                     break;
             }
         }
+    }
+
+    private boolean isTypeDefinitionDefaultXsdSchemaDefinition(XSTypeDefinition typeDefinition) {
+        return Objects.equals(typeDefinition.getNamespace(), SCHEMA_DEFINITION);
     }
 
     //endregion
