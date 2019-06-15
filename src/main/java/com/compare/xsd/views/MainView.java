@@ -149,7 +149,7 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
      */
     public void onDragDropped(DragEvent event) {
         if (event.getSource() instanceof TreeTableView) {
-            TreeTableView<XsdNode> source = (TreeTableView) event.getSource();
+            TreeTableView<XsdNode> source = (TreeTableView<XsdNode>) event.getSource();
 
             loadTree(treeViewManager.getRenderer(source), event.getDragboard().getFiles().get(0));
 

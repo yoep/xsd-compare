@@ -32,26 +32,26 @@
     <Label GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="FILE"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="%new_file" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="2" text="%new_file_description" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="%menu_new_file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="2" text="%menu_new_file_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="FOLDER_OPEN"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="%open_file" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="3" text="%open_file_description" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="3" text="%menu_open_file" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="3" text="%menu_open_file_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="COGS"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="%batch_comparison" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="4" text="%batch_comparison_description" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="%menu_batch_comparison" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="4" text="%menu_batch_comparison_description" GridPane.valignment="CENTER"/>
 
     <Label GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="CENTER" styleClass="icon">
         <Icons fx:constant="DOWNLOAD"/>
     </Label>
-    <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="%export_comparison" GridPane.valignment="CENTER"/>
-    <Label GridPane.columnIndex="2" GridPane.rowIndex="5" text="%export_comparison_description" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="%menu_export_comparison" GridPane.valignment="CENTER"/>
+    <Label GridPane.columnIndex="2" GridPane.rowIndex="5" text="%menu_export_comparison_description" GridPane.valignment="CENTER"/>
 
     <!-- Section: Tree view -->
     <Label GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" text="XSD view" styleClass="section" />

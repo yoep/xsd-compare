@@ -1,5 +1,8 @@
 package com.compare.xsd.ui.lang;
 
+import lombok.Getter;
+
+@Getter
 public enum BatchMessage implements Message {
     TITLE("batch_title");
 
@@ -7,10 +10,5 @@ public enum BatchMessage implements Message {
 
     BatchMessage(String key) {
         this.key = key;
-    }
-
-    @Override
-    public String getKey() {
-        return key;
     }
 }

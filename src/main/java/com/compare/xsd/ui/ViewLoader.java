@@ -137,7 +137,7 @@ public class ViewLoader {
             if (controller instanceof SizeAware) {
                 initWindowSize(scene, (SizeAware) controller);
             }
-            if(controller instanceof WindowAware) {
+            if (controller instanceof WindowAware) {
                 initWindowEvents(scene, (WindowAware) controller);
             }
 
@@ -215,10 +215,10 @@ public class ViewLoader {
     }
 
     private void initWindowEvents(Scene scene, WindowAware controller) {
-        Stage window = (Stage) scene.getWindow();
+        final Stage window = (Stage) scene.getWindow();
 
-        window.onShownProperty().addListener((observable, oldValue, newValue) -> controller.onShown(window));
-        window.onCloseRequestProperty().addListener((observable, oldValue, newValue) -> controller.onClosed(window));
+        window.setOnShown(event -> controller.onShown(window));
+        window.setOnCloseRequest(event -> controller.onClosed(window));
     }
 
     @Getter

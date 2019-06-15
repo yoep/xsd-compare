@@ -3,6 +3,8 @@ package com.compare.xsd.renderers;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.compare.xsd.settings.model.CompareColumns;
+import com.compare.xsd.ui.UIText;
+import com.compare.xsd.ui.lang.MenuMessage;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
@@ -30,6 +32,7 @@ import java.util.Optional;
 public class TreeViewRender implements RenderView {
     private final TreeTableView<XsdNode> treeView;
     private final PropertyViewRender propertyViewRender;
+    private final UIText uiText;
     private List<CompareColumns> visibleColumns;
 
     private XsdDocument document;
@@ -116,9 +119,9 @@ public class TreeViewRender implements RenderView {
     private void addContextMenu() {
         this.treeView.setRowFactory(treeView -> {
             TreeTableRow<XsdNode> row = new TreeTableRow<>();
-            MenuItem copyName = new MenuItem("Copy name to clipboard\t(Ctrl+C)");
-            MenuItem copyXPath = new MenuItem("Copy XPath to clipboard\t(Ctrl+Alt+C)");
-            MenuItem copyXml = new MenuItem("Copy XML to clipboard\t(Ctrl+Shift+C)");
+            MenuItem copyName = new MenuItem(uiText.get(MenuMessage.COPY_NAME));
+            MenuItem copyXPath = new MenuItem(uiText.get(MenuMessage.COPY_XPATH));
+            MenuItem copyXml = new MenuItem(uiText.get(MenuMessage.COPY_XML));
 
             copyName.setOnAction(event -> copyNameToClipboard(row.getItem()));
             copyXPath.setOnAction(event -> copyXPathToClipboard(row.getItem()));

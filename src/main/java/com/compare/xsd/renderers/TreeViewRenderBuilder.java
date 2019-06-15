@@ -1,7 +1,9 @@
 package com.compare.xsd.renderers;
 
+import com.compare.xsd.XsdCompareApplication;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.settings.model.CompareSettings;
+import com.compare.xsd.ui.UIText;
 import javafx.scene.control.TreeTableView;
 import org.springframework.util.Assert;
 
@@ -59,7 +61,7 @@ public class TreeViewRenderBuilder {
         Assert.notNull(treeView, "treeView cannot be null");
         Assert.notNull(propertyViewRender, "propertyViewRender cannot be null");
         Assert.notNull(compareSettings, "compareSettings cannot be null");
-        TreeViewRender treeViewRender = new TreeViewRender(treeView, propertyViewRender);
+        TreeViewRender treeViewRender = new TreeViewRender(treeView, propertyViewRender, XsdCompareApplication.APPLICATION_CONTEXT.getBean(UIText.class));
         treeViewRender.setVisibleColumns(compareSettings.getShownColumns());
 
         compareSettings.addObserver((o, arg) -> {
