@@ -28,6 +28,7 @@ public class XsdCompareApplication extends Application {
         ViewManager viewManager = APPLICATION_CONTEXT.getBean(ViewManagerImpl.class);
 
         loader.showPrimary(primaryStage, "main.fxml", ViewProperties.builder()
+                .icon("logo_64.png")
                 .title("XSD Compare")
                 .centerOnScreen(true)
                 .maximizable(true)

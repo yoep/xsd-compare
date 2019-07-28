@@ -53,6 +53,7 @@ public class MenuComponent {
     @FXML
     private void openSettingsView() {
         viewLoader.showWindow("settings.fxml", ViewProperties.builder()
+                .icon("logo_64.png")
                 .title("Settings")
                 .maximizable(false)
                 .build());
@@ -61,6 +62,7 @@ public class MenuComponent {
     @FXML
     private void openHelpView() {
         viewLoader.showWindow("help.fxml", ViewProperties.builder()
+                .icon("logo_64.png")
                 .title("Help")
                 .maximizable(false)
                 .build());
@@ -69,6 +71,7 @@ public class MenuComponent {
     @FXML
     private void openBatchView() {
         viewLoader.showWindow("batch.fxml", ViewProperties.builder()
+                .icon("logo_64.png")
                 .title(uiText.get(BatchMessage.TITLE))
                 .maximizable(false)
                 .build());

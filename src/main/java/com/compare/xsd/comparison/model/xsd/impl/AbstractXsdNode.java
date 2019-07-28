@@ -26,7 +26,7 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdNode implements XsdNode {
     private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
-    private static final String ICON_DIRECTORY = "/icons/";
+    private static final String ICON_DIRECTORY = "/images/";
 
     protected String name;
     protected String namespace;

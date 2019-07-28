@@ -57,19 +57,19 @@
     <Label GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2" text="XSD view" styleClass="section" />
 
     <ImageView GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.valignment="CENTER">
-        <Image url="/icons/file.png" />
+        <Image url="/images/file.png" />
     </ImageView>
     <Label GridPane.columnIndex="1" GridPane.rowIndex="7" text="XSD document" GridPane.valignment="CENTER"/>
     <Label GridPane.columnIndex="2" GridPane.rowIndex="7" text="XSD document file which is loaded into the view" GridPane.valignment="CENTER"/>
 
     <ImageView GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-        <Image url="/icons/element.png" />
+        <Image url="/images/element.png" />
     </ImageView>
     <Label GridPane.columnIndex="1" GridPane.rowIndex="8" text="XSD element" GridPane.valignment="CENTER"/>
     <Label GridPane.columnIndex="2" GridPane.rowIndex="8" text="XSD element from within the XSD document" GridPane.valignment="CENTER"/>
 
     <ImageView GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.valignment="CENTER">
-        <Image url="/icons/attribute.png" />
+        <Image url="/images/attribute.png" />
     </ImageView>
     <Label GridPane.columnIndex="1" GridPane.rowIndex="9" text="XSD attribute" GridPane.valignment="CENTER"/>
     <Label GridPane.columnIndex="2" GridPane.rowIndex="9" text="XSD attribute that belongs to the XSD element" GridPane.valignment="CENTER"/>
