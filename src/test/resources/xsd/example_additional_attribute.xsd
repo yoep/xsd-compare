@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="MyRootElement" type="MyRootElementComplexType"/>
+
+    <xs:complexType name="MyRootElementComplexType">
+        <xs:attribute name="attribute1" type="xs:string"/>
+        <xs:attribute name="attribute2" type="xs:string"/>
+    </xs:complexType>
+</xs:schema>

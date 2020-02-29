@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 @Log4j2
@@ -44,6 +45,7 @@ public class XsdLoader {
      *
      * @return Returns the loaded XSD file.
      */
+    //TODO: refactor to a separate class so the actual XSD loading and javafx dependency are separated
     public XsdDocument chooseAndLoad() {
         Optional<Stage> stage = viewManager.getPrimaryStage();
 
@@ -70,6 +72,13 @@ public class XsdLoader {
      */
     public XsdDocument load(File file) {
         Assert.notNull(file, "file cannot be null");
+
+        // verify if the file exists
+        // if not, throw an XsdLoadException that contains an inner FileNotFoundException
+        if (!file.exists()) {
+            FileNotFoundException fileException = new FileNotFoundException(file.getAbsolutePath());
+            throw new XsdLoadException(fileException.getMessage(), fileException);
+        }
 
         log.debug("Loading xsd file " + file);
         return new XsdDocument(file);
