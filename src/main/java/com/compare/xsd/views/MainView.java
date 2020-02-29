@@ -11,19 +11,15 @@ import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.renderers.TreeViewRenderBuilder;
 import com.compare.xsd.settings.SettingsService;
 import com.compare.xsd.settings.model.CompareSettings;
-import com.compare.xsd.ui.ScaleAwareImpl;
-import com.compare.xsd.ui.ViewManager;
-import com.compare.xsd.ui.WindowAware;
-import com.compare.xsd.ui.exceptions.ActionCancelledException;
-import com.compare.xsd.ui.exceptions.PrimaryWindowNotAvailableException;
-import com.compare.xsd.ui.exceptions.WindowNotFoundException;
 import com.compare.xsd.views.components.MenuComponent;
 import com.compare.xsd.writers.ExcelComparisonWriter;
+import com.github.spring.boot.javafx.text.LocaleText;
+import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
+import com.github.spring.boot.javafx.ui.stage.StageAware;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -40,14 +36,14 @@ import java.util.ResourceBundle;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class MainView extends ScaleAwareImpl implements Initializable, WindowAware {
+public class MainView extends ScaleAwareImpl implements Initializable, StageAware {
     private final XsdLoader xsdLoader;
-    private final ViewManager viewManager;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
     private final ExcelComparisonWriter comparisonWriter;
     private final SettingsService settingsService;
     private final MenuComponent menuComponent;
+    private final LocaleText localeText;
 
     private XsdComparer comparer;
 
@@ -80,12 +76,12 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
 
         PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
         PropertyViewRender rightProperties = new PropertyViewRender(this.rightProperties);
-        TreeViewRender leftTreeRender = TreeViewRenderBuilder.builder()
+        TreeViewRender leftTreeRender = TreeViewRenderBuilder.builder(localeText)
                 .treeView(leftTree)
                 .propertyViewRender(leftProperties)
                 .compareSettings(compareSettings)
                 .build();
-        TreeViewRender rightTreeRender = TreeViewRenderBuilder.builder()
+        TreeViewRender rightTreeRender = TreeViewRenderBuilder.builder(localeText)
                 .treeView(rightTree)
                 .propertyViewRender(rightProperties)
                 .compareSettings(compareSettings)
@@ -102,14 +98,13 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
     }
 
     @Override
-    public void onShown(Stage window) {
+    public void onShown(Stage stage) {
         this.treeViewManager.synchronize();
         this.propertyViewManager.synchronize();
-        window.setMaximized(true);
     }
 
     @Override
-    public void onClosed(Stage window) {
+    public void onClosed(Stage stage) {
         //no-op
     }
 
@@ -120,26 +115,6 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
      */
     public void onDragOver(DragEvent event) {
         event.acceptTransferModes(TransferMode.ANY);
-    }
-
-    /**
-     * Handle a drag enter event invoked on one of the tree views.
-     *
-     * @param event Set the event.
-     */
-    public void onDragEntered(DragEvent event) throws WindowNotFoundException, PrimaryWindowNotAvailableException {
-        viewManager.getPrimaryWindow().getScene().setCursor(Cursor.HAND);
-        event.consume();
-    }
-
-    /**
-     * Handle a drag exited event invoked on one of the tree views.
-     *
-     * @param event Set the event.
-     */
-    public void onDragExited(DragEvent event) throws WindowNotFoundException, PrimaryWindowNotAvailableException {
-        viewManager.getPrimaryWindow().getScene().setCursor(Cursor.DEFAULT);
-        event.consume();
     }
 
     /**
@@ -196,8 +171,6 @@ public class MainView extends ScaleAwareImpl implements Initializable, WindowAwa
                                 }
                             });
                         });
-            } catch (ActionCancelledException ex) {
-                setLoadingDone();
             } catch (Exception ex) {
                 log.error(ex.getMessage(), ex);
                 setLoadingFailed();

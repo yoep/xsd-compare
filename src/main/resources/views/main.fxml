@@ -19,7 +19,7 @@
     <!-- Content Container -->
     <SplitPane dividerPositions="0.8" orientation="VERTICAL" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <SplitPane fx:id="treeSplitPane" dividerPositions="0.5" GridPane.fillHeight="true" GridPane.fillWidth="true" GridPane.hgrow="SOMETIMES">
-            <TreeTableView fx:id="leftTree" onDragDropped="#onDragDropped" onDragEntered="#onDragEntered" onDragExited="#onDragExited" onDragOver="#onDragOver"
+            <TreeTableView fx:id="leftTree" onDragDropped="#onDragDropped" onDragOver="#onDragOver"
                            SplitPane.resizableWithParent="true">
                 <placeholder>
                     <Label/>
@@ -30,7 +30,7 @@
                     <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
             </TreeTableView>
-            <TreeTableView fx:id="rightTree" onDragDropped="#onDragDropped" onDragEntered="#onDragEntered" onDragExited="#onDragExited" onDragOver="#onDragOver"
+            <TreeTableView fx:id="rightTree" onDragDropped="#onDragDropped" onDragOver="#onDragOver"
                            SplitPane.resizableWithParent="true">
                 <placeholder>
                     <Label/>

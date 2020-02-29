@@ -1,6 +1,6 @@
 package com.compare.xsd.views;
 
-import com.compare.xsd.ui.ScaleAwareImpl;
+import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
 import org.springframework.stereotype.Component;
 
 @Component

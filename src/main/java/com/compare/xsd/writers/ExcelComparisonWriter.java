@@ -9,11 +9,9 @@ import com.compare.xsd.comparison.model.xsd.impl.XsdEmptyElementNode;
 import com.compare.xsd.excel.CellRange;
 import com.compare.xsd.excel.Workbook;
 import com.compare.xsd.excel.Worksheet;
-import com.compare.xsd.ui.ViewManager;
-import com.compare.xsd.ui.exceptions.ActionCancelledException;
-import com.compare.xsd.ui.exceptions.PrimaryWindowNotAvailableException;
-import com.compare.xsd.ui.exceptions.WindowNotFoundException;
+import com.github.spring.boot.javafx.view.ViewManager;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -26,6 +24,7 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static java.util.Arrays.asList;
@@ -70,28 +69,26 @@ public class ExcelComparisonWriter {
      * Show the save dialog.
      *
      * @return Returns the selected file.
-     * @throws ActionCancelledException Is thrown when the save action is being cancelled by the user.
      */
-    public File showSaveDialog() throws ActionCancelledException {
+    public File showSaveDialog() {
         String extension = EXTENSION.substring(1);
+        Optional<Stage> stage = viewManager.getPrimaryStage();
         File file;
 
-        try {
-            file = chooser.showSaveDialog(viewManager.getPrimaryWindow());
-
-            if (file != null) {
-                if (!file.getName().contains(extension)) {
-                    file = new File(file.getAbsolutePath() + extension);
-                }
-
-                return file;
-            } else {
-                throw new ActionCancelledException();
-            }
-        } catch (WindowNotFoundException | PrimaryWindowNotAvailableException ex) {
-            log.error(ex.getMessage(), ex);
-            throw new RuntimeException(ex);
+        if (!stage.isPresent()) {
+            log.error("Failed to open save dialog, primary stage is missing");
+            return null;
         }
+
+        file = chooser.showSaveDialog(stage.get());
+
+        if (file != null) {
+            if (!file.getName().contains(extension)) {
+                file = new File(file.getAbsolutePath() + extension);
+            }
+        }
+
+        return file;
     }
 
     /**

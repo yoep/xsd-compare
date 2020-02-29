@@ -1,38 +1,40 @@
 package com.compare.xsd;
 
-import com.compare.xsd.ui.*;
-import javafx.application.Application;
+import com.github.spring.boot.javafx.SpringJavaFXApplication;
+import com.github.spring.boot.javafx.view.ViewLoader;
+import com.github.spring.boot.javafx.view.ViewManager;
+import com.github.spring.boot.javafx.view.ViewManagerPolicy;
+import com.github.spring.boot.javafx.view.ViewProperties;
 import javafx.stage.Stage;
-import org.springframework.boot.Banner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 import java.io.File;
 
 @SpringBootApplication
-public class XsdCompareApplication extends Application {
-    public static final String APP_DIR = System.getProperty("user.home") + File.separator + ".xsd-compare" + File.separator;
-    public static ApplicationContext APPLICATION_CONTEXT;
+public class XsdCompareApplication extends SpringJavaFXApplication {
+    public static final String APP_DIR = getDefaultAppDirLocation();
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(XsdCompareApplication.class);
-        application.setBannerMode(Banner.Mode.OFF);
-        APPLICATION_CONTEXT = application.run(args);
-        launch(args);
+        launch(XsdCompareApplication.class, args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        ViewLoader loader = APPLICATION_CONTEXT.getBean(ViewLoader.class);
-        ViewManager viewManager = APPLICATION_CONTEXT.getBean(ViewManagerImpl.class);
+    public void start(Stage primaryStage) throws Exception {
+        super.start(primaryStage);
+        ViewLoader loader = applicationContext.getBean(ViewLoader.class);
+        ViewManager viewManager = applicationContext.getBean(ViewManager.class);
 
-        loader.showPrimary(primaryStage, "main.fxml", ViewProperties.builder()
+        loader.show(primaryStage, "main.fxml", ViewProperties.builder()
                 .icon("logo_64.png")
                 .title("XSD Compare")
                 .centerOnScreen(true)
-                .maximizable(true)
+                .resizable(true)
+                .maximized(true)
                 .build());
         viewManager.setPolicy(ViewManagerPolicy.CLOSEABLE);
+    }
+
+    private static String getDefaultAppDirLocation() {
+        return System.getProperty("user.home") + File.separator + ".xsd-compare" + File.separator;
     }
 }

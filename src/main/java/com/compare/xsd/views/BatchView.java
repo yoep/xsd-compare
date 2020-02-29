@@ -1,10 +1,9 @@
 package com.compare.xsd.views;
 
-import com.compare.xsd.ui.ScaleAwareImpl;
-import com.compare.xsd.ui.UIText;
-import com.compare.xsd.ui.ViewManager;
-import com.compare.xsd.ui.exceptions.WindowNotFoundException;
-import com.compare.xsd.ui.lang.BatchMessage;
+import com.compare.xsd.messages.BatchMessage;
+import com.github.spring.boot.javafx.text.LocaleText;
+import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
+import com.github.spring.boot.javafx.view.ViewManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Log4j2
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class BatchView extends ScaleAwareImpl implements Initializable {
     private final ViewManager viewManager;
-    private final UIText uiText;
+    private final LocaleText localeText;
 
     @FXML
     private Button cancelButton;
@@ -88,16 +88,17 @@ public class BatchView extends ScaleAwareImpl implements Initializable {
 
     private void selectDirectory(TextField directoryField) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        File file;
+        Optional<Stage> stage = viewManager.getStage(localeText.get(BatchMessage.TITLE));
 
-        try {
-            file = directoryChooser.showDialog(viewManager.getWindow(uiText.get(BatchMessage.TITLE)));
+        if (!stage.isPresent()) {
+            log.warn("Failed to open directory selector, batch stage is missing");
+            return;
+        }
 
-            if (file != null) {
-                directoryField.setText(file.getAbsolutePath());
-            }
-        } catch (WindowNotFoundException ex) {
-            log.error(ex.getMessage(), ex);
+        File file = directoryChooser.showDialog(stage.get());
+
+        if (file != null) {
+            directoryField.setText(file.getAbsolutePath());
         }
     }
 

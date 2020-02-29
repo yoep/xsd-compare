@@ -1,16 +1,16 @@
 package com.compare.xsd.comparison;
 
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
-import com.compare.xsd.ui.ViewManager;
-import com.compare.xsd.ui.exceptions.PrimaryWindowNotAvailableException;
-import com.compare.xsd.ui.exceptions.WindowNotFoundException;
+import com.github.spring.boot.javafx.view.ViewManager;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.util.Optional;
 
 @Log4j2
 @Component
@@ -45,19 +45,20 @@ public class XsdLoader {
      * @return Returns the loaded XSD file.
      */
     public XsdDocument chooseAndLoad() {
-        File file;
+        Optional<Stage> stage = viewManager.getPrimaryStage();
 
-        try {
-            file = fileChooser.showOpenDialog(viewManager.getPrimaryWindow());
-            if (file != null) {
-                this.fileChooser.setInitialDirectory(file.getParentFile());
-                return load(file);
-            } else {
-                return null;
-            }
-        } catch (PrimaryWindowNotAvailableException | WindowNotFoundException ex) {
-            log.error(ex.getMessage(), ex);
-            throw new RuntimeException(ex);
+        if (!stage.isPresent()) {
+            log.warn("Unable to show XSD loader, primary stage is missing");
+            return null;
+        }
+
+        File file = fileChooser.showOpenDialog(stage.get());
+
+        if (file != null) {
+            this.fileChooser.setInitialDirectory(file.getParentFile());
+            return load(file);
+        } else {
+            return null;
         }
     }
 

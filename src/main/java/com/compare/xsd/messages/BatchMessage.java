@@ -1,5 +1,6 @@
-package com.compare.xsd.ui.lang;
+package com.compare.xsd.messages;
 
+import com.github.spring.boot.javafx.text.Message;
 import lombok.Getter;
 
 @Getter

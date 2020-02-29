@@ -1,9 +1,9 @@
 package com.compare.xsd.views.components;
 
-import com.compare.xsd.ui.UIText;
-import com.compare.xsd.ui.ViewLoader;
-import com.compare.xsd.ui.ViewProperties;
-import com.compare.xsd.ui.lang.BatchMessage;
+import com.compare.xsd.messages.BatchMessage;
+import com.github.spring.boot.javafx.text.LocaleText;
+import com.github.spring.boot.javafx.view.ViewLoader;
+import com.github.spring.boot.javafx.view.ViewProperties;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MenuComponent {
     private final ViewLoader viewLoader;
-    private final UIText uiText;
+    private final LocaleText localeText;
 
     @Setter
     private Runnable onClearAll;
@@ -55,7 +55,7 @@ public class MenuComponent {
         viewLoader.showWindow("settings.fxml", ViewProperties.builder()
                 .icon("logo_64.png")
                 .title("Settings")
-                .maximizable(false)
+                .resizable(false)
                 .build());
     }
 
@@ -64,7 +64,7 @@ public class MenuComponent {
         viewLoader.showWindow("help.fxml", ViewProperties.builder()
                 .icon("logo_64.png")
                 .title("Help")
-                .maximizable(false)
+                .resizable(false)
                 .build());
     }
 
@@ -72,8 +72,8 @@ public class MenuComponent {
     private void openBatchView() {
         viewLoader.showWindow("batch.fxml", ViewProperties.builder()
                 .icon("logo_64.png")
-                .title(uiText.get(BatchMessage.TITLE))
-                .maximizable(false)
+                .title(localeText.get(BatchMessage.TITLE))
+                .resizable(false)
                 .build());
     }
 }

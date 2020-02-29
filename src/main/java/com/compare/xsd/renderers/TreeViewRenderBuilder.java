@@ -1,22 +1,24 @@
 package com.compare.xsd.renderers;
 
-import com.compare.xsd.XsdCompareApplication;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.settings.model.CompareSettings;
-import com.compare.xsd.ui.UIText;
+import com.github.spring.boot.javafx.text.LocaleText;
 import javafx.scene.control.TreeTableView;
 import org.springframework.util.Assert;
 
 public class TreeViewRenderBuilder {
+    private final LocaleText localeText;
+
     private TreeTableView<XsdNode> treeView;
     private PropertyViewRender propertyViewRender;
     private CompareSettings compareSettings;
 
-    private TreeViewRenderBuilder() {
+    private TreeViewRenderBuilder(LocaleText localeText) {
+        this.localeText = localeText;
     }
 
-    public static TreeViewRenderBuilder builder() {
-        return new TreeViewRenderBuilder();
+    public static TreeViewRenderBuilder builder(LocaleText localeText) {
+        return new TreeViewRenderBuilder(localeText);
     }
 
     /**
@@ -61,7 +63,7 @@ public class TreeViewRenderBuilder {
         Assert.notNull(treeView, "treeView cannot be null");
         Assert.notNull(propertyViewRender, "propertyViewRender cannot be null");
         Assert.notNull(compareSettings, "compareSettings cannot be null");
-        TreeViewRender treeViewRender = new TreeViewRender(treeView, propertyViewRender, XsdCompareApplication.APPLICATION_CONTEXT.getBean(UIText.class));
+        TreeViewRender treeViewRender = new TreeViewRender(treeView, propertyViewRender, localeText);
         treeViewRender.setVisibleColumns(compareSettings.getShownColumns());
 
         compareSettings.addObserver((o, arg) -> {
