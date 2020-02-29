@@ -1,4 +1,4 @@
-package com.compare.xsd.views;
+package com.compare.xsd.controllers;
 
 import com.compare.xsd.messages.BatchMessage;
 import com.github.spring.boot.javafx.text.LocaleText;
@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class BatchView extends ScaleAwareImpl implements Initializable {
+public class BatchController extends ScaleAwareImpl implements Initializable {
     private final ViewManager viewManager;
     private final LocaleText localeText;
 

@@ -1,4 +1,4 @@
-package com.compare.xsd.views.components;
+package com.compare.xsd.controllers.components;
 
 import com.compare.xsd.settings.model.UserSettings;
 

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <GridPane prefHeight="600" prefWidth="800" stylesheets="/styles/main.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.compare.xsd.views.MainView">
+          fx:controller="com.compare.xsd.controllers.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES"/>
     </columnConstraints>

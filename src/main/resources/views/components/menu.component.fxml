@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <ToolBar xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="com.compare.xsd.views.components.MenuComponent">
+         fx:controller="com.compare.xsd.controllers.components.MenuComponent">
     <Button onAction="#clearAll" styleClass="icon">
         <tooltip>
             <Tooltip text="%menu_new_file"/>

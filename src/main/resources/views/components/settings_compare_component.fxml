@@ -5,7 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
 <GridPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.compare.xsd.views.components.SettingsCompareComponent">
+          fx:controller="com.compare.xsd.controllers.components.SettingsCompareComponent">
     <columnConstraints>
         <ColumnConstraints minWidth="50" percentWidth="20"/>
         <ColumnConstraints percentWidth="80"/>

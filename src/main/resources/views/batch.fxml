@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.compare.xsd.views.BatchView">
+          fx:controller="com.compare.xsd.controllers.BatchController">
     <columnConstraints>
         <ColumnConstraints prefWidth="200"/>
         <ColumnConstraints hgrow="ALWAYS"/>

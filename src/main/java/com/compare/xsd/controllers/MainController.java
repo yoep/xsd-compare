@@ -1,4 +1,4 @@
-package com.compare.xsd.views;
+package com.compare.xsd.controllers;
 
 import com.compare.xsd.comparison.PropertyViewManager;
 import com.compare.xsd.comparison.TreeViewManager;
@@ -11,7 +11,7 @@ import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.renderers.TreeViewRenderBuilder;
 import com.compare.xsd.settings.SettingsService;
 import com.compare.xsd.settings.model.CompareSettings;
-import com.compare.xsd.views.components.MenuComponent;
+import com.compare.xsd.controllers.components.MenuComponent;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import com.github.spring.boot.javafx.text.LocaleText;
 import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
@@ -27,16 +27,16 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.collections4.IteratorUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Log4j2
-@Component
+@Controller
 @RequiredArgsConstructor
-public class MainView extends ScaleAwareImpl implements Initializable, StageAware {
+public class MainController extends ScaleAwareImpl implements Initializable, StageAware {
     private final XsdLoader xsdLoader;
     private final TreeViewManager treeViewManager;
     private final PropertyViewManager propertyViewManager;
