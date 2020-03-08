@@ -1,5 +1,6 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
+import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl;
 import com.sun.org.apache.xerces.internal.xs.XSAttributeDeclaration;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class XsdAttribute extends AbstractXsdNode {
+public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
     private final XSAttributeUseImpl attribute;
 
     //region Constructors

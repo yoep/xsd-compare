@@ -2,6 +2,7 @@ package com.compare.xsd.comparison;
 
 import com.compare.xsd.comparison.model.*;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
+import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.*;
 import lombok.EqualsAndHashCode;
@@ -115,15 +116,15 @@ public class XsdComparer {
      * @param newNode      Set the new XSD element.
      */
     private void compareXsdElements(XsdElement originalNode, XsdElement newNode) {
-        List<XsdAttribute> attributesCopy = new ArrayList<>(originalNode.getAttributes()); //take a copy as the actual list might be modified during comparison
-        List<XsdAttribute> compareAttributesCopy = new ArrayList<>(newNode.getAttributes());
+        List<XsdAttribute> originalNodeAttributes = new ArrayList<>(originalNode.getAttributes()); //take a copy as the actual list might be modified during comparison
+        List<XsdAttribute> newNodeAttributes = new ArrayList<>(newNode.getAttributes());
 
         compareAbstractElementNodes(originalNode, newNode);
 
-        for (XsdAttribute attribute : attributesCopy) {
+        for (XsdAttribute attribute : originalNodeAttributes) {
             try {
                 if (StringUtils.isNoneEmpty(attribute.getName())) {
-                    XsdAttribute compareAttribute = newNode.findAttribute(attribute.getName());
+                    XsdAttributeNode compareAttribute = newNode.findAttributeByName(attribute.getName());
 
                     compareXsdAttributes(attribute, compareAttribute);
                 }
@@ -134,15 +135,15 @@ public class XsdComparer {
             }
         }
 
-        for (XsdAttribute attribute : compareAttributesCopy) {
+        for (XsdAttribute attribute : newNodeAttributes) {
             try {
                 if (StringUtils.isNoneEmpty(attribute.getName())) {
-                    newNode.findAttribute(attribute.getName());
+                    originalNode.findAttributeByName(attribute.getName());
                 }
             } catch (NodeNotFoundException ex) {
                 added++;
                 attribute.setModifications(new Modifications(ModificationType.ADDED));
-                copyAttributeAsEmptyNode(originalNode.getAttributes().indexOf(attribute), originalNode);
+                copyAttributeAsEmptyNode(newNode.getAttributes().indexOf(attribute), originalNode);
             }
         }
     }
@@ -153,7 +154,7 @@ public class XsdComparer {
      * @param originalNode Set the original XSD attribute.
      * @param newNode      Set the new XSD attribute.
      */
-    private void compareXsdAttributes(XsdAttribute originalNode, XsdAttribute newNode) {
+    private void compareXsdAttributes(XsdAttributeNode originalNode, XsdAttributeNode newNode) {
         compareProperties(originalNode, newNode);
     }
 

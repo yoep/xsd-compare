@@ -1,6 +1,7 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
+import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.*;
@@ -25,8 +26,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class XsdElement extends AbstractXsdElementNode {
-    private final XSElementDecl element;
-    private final XSParticleDecl definition;
+    private final XSElementDeclaration element;
+    private final XSParticle definition;
     private final List<XsdAttribute> attributes = new ArrayList<>();
 
     //region Constructors
@@ -37,7 +38,7 @@ public class XsdElement extends AbstractXsdElementNode {
      * @param element Set the element to process.
      * @param parent  Set the parent document.
      */
-    public XsdElement(XSElementDecl element, XsdDocument parent) {
+    public XsdElement(XSElementDeclaration element, XsdDocument parent) {
         Assert.notNull(element, "element cannot be null");
         this.element = element;
         this.parent = parent;
@@ -54,7 +55,7 @@ public class XsdElement extends AbstractXsdElementNode {
      * @param elementDefinition Set the definition to process.
      * @param parent            Set the parent element of this element.
      */
-    public XsdElement(XSParticleDecl elementDefinition, XsdElement parent) {
+    public XsdElement(XSParticle elementDefinition, XsdElement parent) {
         super(parent);
         Assert.notNull(elementDefinition, "elementDefinition cannot be null");
         this.element = (XSElementDecl) elementDefinition.getTerm();
@@ -95,23 +96,20 @@ public class XsdElement extends AbstractXsdElementNode {
 
     //endregion
 
-    //region Methods
+    //region XsdElementNode
 
-    /**
-     * Find the attribute by name.
-     *
-     * @param name Set the name of the attribute.
-     * @return Returns the attribute.
-     * @throws NodeNotFoundException Is thrown when the attribute couldn't be found.
-     */
-    public XsdAttribute findAttribute(String name) throws NodeNotFoundException {
-        Assert.hasText(name, "name cannot be empty");
-
+    @Override
+    public XsdAttributeNode findAttributeByName(String name) throws NodeNotFoundException {
+        Assert.notNull(name, "name cannot be null");
         return attributes.stream()
                 .filter(e -> e.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .orElseThrow(() -> new NodeNotFoundException(name));
     }
+
+    //endregion
+
+    //region Methods
 
     /**
      * Insert the given attribute at the given index.

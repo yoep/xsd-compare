@@ -1,6 +1,7 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
+import com.compare.xsd.comparison.model.xsd.XsdElementNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
 import lombok.AccessLevel;
@@ -21,7 +22,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class AbstractXsdElementNode extends AbstractXsdNode {
+public abstract class AbstractXsdElementNode extends AbstractXsdNode implements XsdElementNode {
     protected final List<XsdElement> elements = new ArrayList<>();
 
     //region Constructors
@@ -58,6 +59,19 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode {
         createXml(xmlDoc, null);
 
         return serializer.writeToString(xmlDoc);
+    }
+
+    //endregion
+
+    //region XsdElementNode
+
+    @Override
+    public XsdElementNode getElementByName(String name) throws NodeNotFoundException {
+        Assert.notNull(name, "name cannot be null");
+        return elements.stream()
+                .filter(e -> e.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new NodeNotFoundException(name));
     }
 
     //endregion

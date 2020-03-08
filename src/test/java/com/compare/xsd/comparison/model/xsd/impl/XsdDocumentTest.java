@@ -1,7 +1,9 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -16,6 +18,8 @@ import static org.mockito.Mockito.when;
 public class XsdDocumentTest {
     @Mock
     private File file;
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() {
@@ -23,13 +27,13 @@ public class XsdDocumentTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowIllegalArgumentExceptionWhenFileIsNull() {
+    public void testFileConstructor_shouldThrowIllegalArgumentExceptionWhenFileIsNull() {
         //WHEN
         new XsdDocument(null);
     }
 
     @Test
-    public void shouldCallGetNameOnFileWhenLoaded() {
+    public void testFileConstructor_shouldCallGetNameOnFileWhenLoaded() {
         //WHEN
         new XsdDocument(file);
 
@@ -38,7 +42,7 @@ public class XsdDocumentTest {
     }
 
     @Test
-    public void shouldContainExpectedRootElementWhenLoaded() {
+    public void testFileConstructor_shouldContainExpectedRootElementWhenLoaded() {
         //GIVEN
         final String name = "MyRootElement";
 
@@ -51,7 +55,7 @@ public class XsdDocumentTest {
     }
 
     @Test
-    public void shouldRootElementContainExpectedChildElementsWhenLoaded() {
+    public void testFileConstructor_shouldRootElementContainExpectedChildElementsWhenLoaded() {
         //GIVEN
         final String child1 = "FirstChildElement";
         final String child2 = "SecondChildElement";
@@ -102,5 +106,14 @@ public class XsdDocumentTest {
 
         //THEN
         assertNotNull(result.getIcon());
+    }
+
+    @Test
+    public void testFindAttributeByName_shouldThrowUnsupportedException() {
+        expectedException.expect(UnsupportedOperationException.class);
+        expectedException.expectMessage("getAttributeByName is not supported for XsdDocument");
+        XsdDocument document = new XsdDocument(file);
+
+        document.findAttributeByName("test");
     }
 }
