@@ -218,6 +218,7 @@
                             <mainClass>${start-class}</mainClass>
                             <runnableJar>${project.build.directory}/xsd-compare.jar</runnableJar>
                             <bundleJre>true</bundleJre>
+                            <jrePath>${project.basedir}/assets/${platform}/jre</jrePath>
                             <copyDependencies>false</copyDependencies>
                             <generateInstaller>true</generateInstaller>
                             <administratorRequired>false</administratorRequired>
@@ -262,7 +263,6 @@
                         <artifactId>javapackager</artifactId>
                         <configuration>
                             <createZipball>true</createZipball>
-                            <jrePath>${project.basedir}/assets/windows/jre</jrePath>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -282,6 +282,9 @@
                         <artifactId>javapackager</artifactId>
                         <configuration>
                             <createTarball>true</createTarball>
+                            <linuxConfig>
+                                <generateRpm>false</generateRpm>
+                            </linuxConfig>
                         </configuration>
                     </plugin>
                 </plugins>
