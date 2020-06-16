@@ -125,6 +125,11 @@
                     <artifactId>javapackager</artifactId>
                     <version>1.0.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>3.0.0-M1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -227,12 +232,24 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <preparationGoals>clean install -P${platform}</preparationGoals>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <profiles>
         <profile>
             <id>windows</id>
+
+            <properties>
+                <platform>windows</platform>
+            </properties>
 
             <build>
                 <plugins>
@@ -249,6 +266,10 @@
         </profile>
         <profile>
             <id>linux</id>
+
+            <properties>
+                <platform>linux</platform>
+            </properties>
 
             <build>
                 <plugins>

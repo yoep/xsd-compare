@@ -3,7 +3,23 @@ XSD Compare allows you to compare different versions of XML schema files against
 
 ![XSD Compare example](https://i.imgur.com/JatqEim.png)
 
-## Current features
+## System Requirements
+
+### Runtime
+
+All dependencies are present in the executables for runtime.
+
+- CPU: 1GHz
+- Memory: 250MB
+
+### Development
+
+* Java 8
+* Copy Java 8 JRE to `assets/#platform/jre` directory
+
+## Features
+
+### 0.0.6
 * Display XML schema files in a tree view
 * Drag-and-drop loading of XML schema files
 * Synchronizing scroll and selection between the 2 tree views
@@ -15,9 +31,5 @@ XSD Compare allows you to compare different versions of XML schema files against
 * Add Excel colors
 * Settings for shown columns
 
-## Future features
+### Upcoming features
 * Batch comparison of XML schema files
-
-# System requirements
-
-`Java 8`
