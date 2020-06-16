@@ -3,7 +3,7 @@ package com.compare.xsd.excel;
 import com.compare.xsd.excel.exceptions.ExcelLoadingException;
 import com.compare.xsd.excel.exceptions.NameTooLongException;
 import lombok.Getter;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Workbook implementation of an Excel Workbook file.
  */
-@Log4j2
+@Slf4j
 @Getter
 public class Workbook {
     private final File file;

@@ -15,6 +15,7 @@ public class XsdCompareApplication extends SpringJavaFXApplication {
     public static final String APP_DIR = getDefaultAppDirLocation();
 
     public static void main(String[] args) {
+        System.setProperty("app.dir", APP_DIR);
         launch(XsdCompareApplication.class, args);
     }
 

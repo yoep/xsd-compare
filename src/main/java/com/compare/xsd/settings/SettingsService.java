@@ -6,7 +6,7 @@ import com.compare.xsd.settings.model.UserSettings;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SettingsService {

@@ -4,6 +4,10 @@ spring:
 
 logging:
   level:
-    com:
-      compare:
-        xsd: debug
+    org.springframework: WARN
+    com.compare.xsd: INFO
+  file:
+    clean-history-on-start: true
+    name: '${app.dir}/logs/xsd-compare.log'
+    max-size: 25MB
+    total-size-cap: 100MB

@@ -12,7 +12,7 @@ import com.compare.xsd.excel.Worksheet;
 import com.github.spring.boot.javafx.view.ViewManager;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.springframework.scheduling.annotation.Async;
@@ -30,7 +30,7 @@ import java.util.concurrent.CompletableFuture;
 import static java.util.Arrays.asList;
 import static java.util.Optional.ofNullable;
 
-@Log4j2
+@Slf4j
 @Component
 public class ExcelComparisonWriter {
     private static final String EXTENSION_DESCRIPTION = "Excel file";

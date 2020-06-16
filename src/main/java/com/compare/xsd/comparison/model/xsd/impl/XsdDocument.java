@@ -2,7 +2,6 @@ package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
-import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
 import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
 import com.sun.org.apache.xerces.internal.xs.XSConstants;

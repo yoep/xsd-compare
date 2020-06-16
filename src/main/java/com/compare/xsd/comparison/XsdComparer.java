@@ -1,20 +1,21 @@
 package com.compare.xsd.comparison;
 
-import com.compare.xsd.comparison.model.*;
+import com.compare.xsd.comparison.model.ModificationType;
+import com.compare.xsd.comparison.model.Modifications;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j2
+@Slf4j
 @EqualsAndHashCode
 @Getter
 public class XsdComparer {

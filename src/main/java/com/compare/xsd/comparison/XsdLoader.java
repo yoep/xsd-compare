@@ -4,7 +4,7 @@ import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.github.spring.boot.javafx.view.ViewManager;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
-@Log4j2
+@Slf4j
 @Component
 public class XsdLoader {
     private static final String EXTENSION = "*.xsd";

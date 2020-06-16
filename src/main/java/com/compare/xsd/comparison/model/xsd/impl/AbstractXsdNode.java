@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +21,7 @@ import java.util.Objects;
 /**
  * Abstract implementation of the {@link XsdNode}.
  */
-@Log4j2
+@Slf4j
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdNode implements XsdNode {

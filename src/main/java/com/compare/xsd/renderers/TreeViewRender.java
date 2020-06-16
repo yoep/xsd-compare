@@ -2,8 +2,8 @@ package com.compare.xsd.renderers;
 
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
-import com.compare.xsd.settings.model.CompareColumns;
 import com.compare.xsd.messages.MenuMessage;
+import com.compare.xsd.settings.model.CompareColumns;
 import com.github.spring.boot.javafx.text.LocaleText;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;

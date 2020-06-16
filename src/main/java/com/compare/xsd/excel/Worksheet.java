@@ -2,7 +2,7 @@ package com.compare.xsd.excel;
 
 import com.compare.xsd.excel.exceptions.NameTooLongException;
 import lombok.Getter;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.SpreadsheetVersion;
 import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @see XSSFSheet
  */
-@Log4j2
+@Slf4j
 @Getter
 public class Worksheet {
     private static final char SHEET_NAME_DELIMITER = '!';

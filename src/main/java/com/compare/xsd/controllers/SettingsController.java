@@ -1,8 +1,8 @@
 package com.compare.xsd.controllers;
 
+import com.compare.xsd.controllers.components.SettingComponent;
 import com.compare.xsd.settings.SettingsService;
 import com.compare.xsd.settings.model.UserSettings;
-import com.compare.xsd.controllers.components.SettingComponent;
 import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;

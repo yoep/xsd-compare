@@ -12,7 +12,7 @@ import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
@@ -22,7 +22,7 @@ import org.w3c.dom.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j2
+@Slf4j
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class XsdElement extends AbstractXsdElementNode {
