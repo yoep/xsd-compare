@@ -1,8 +1,8 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
-import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
-import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
+import org.apache.xerces.impl.xs.XSElementDecl;
+import org.apache.xerces.xs.XSTypeDefinition;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

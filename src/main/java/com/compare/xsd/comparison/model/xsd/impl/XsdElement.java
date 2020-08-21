@@ -3,18 +3,17 @@ package com.compare.xsd.comparison.model.xsd.impl;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
-import com.sun.org.apache.xerces.internal.impl.dv.xs.XSSimpleTypeDecl;
-import com.sun.org.apache.xerces.internal.impl.xs.*;
-import com.sun.org.apache.xerces.internal.xs.XSElementDeclaration;
-import com.sun.org.apache.xerces.internal.xs.XSObjectList;
-import com.sun.org.apache.xerces.internal.xs.XSParticle;
-import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xerces.impl.dv.xs.XSSimpleTypeDecl;
+import org.apache.xerces.impl.xs.*;
+import org.apache.xerces.xs.XSElementDeclaration;
+import org.apache.xerces.xs.XSParticle;
+import org.apache.xerces.xs.XSTypeDefinition;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -128,7 +127,7 @@ public class XsdElement extends AbstractXsdElementNode {
     //region Functions
 
     private void init() {
-        XSTypeDefinition typeDefinition = element.getTypeDefinition();
+        var typeDefinition = element.getTypeDefinition();
 
         this.name = element.getName();
         log.trace("Processing element " + this.name);
@@ -144,11 +143,11 @@ public class XsdElement extends AbstractXsdElementNode {
     }
 
     private void loadComplexType(XSComplexTypeDecl complexType) {
-        XSParticleDecl particle = (XSParticleDecl) complexType.getParticle();
-        XSObjectList attributes = complexType.getAttributeUses();
+        var particle = (XSParticleDecl) complexType.getParticle();
+        var attributes = complexType.getAttributeUses();
 
         if (particle != null) {
-            XSModelGroupImpl group = (XSModelGroupImpl) particle.getTerm();
+            var group = (XSModelGroupImpl) particle.getTerm();
             processComplexGroup(group);
         } else {
             loadType(complexType);
@@ -162,7 +161,7 @@ public class XsdElement extends AbstractXsdElementNode {
     }
 
     private void processComplexGroup(XSModelGroupImpl group) {
-        XSObjectList children = group.getParticles();
+        var children = group.getParticles();
 
         for (Object childItem : children) {
             if (childItem instanceof XSParticle) {

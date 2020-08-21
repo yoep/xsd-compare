@@ -3,11 +3,11 @@ package com.compare.xsd.comparison.model.xsd.impl;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import com.compare.xsd.comparison.model.xsd.XsdElementNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.apache.xerces.dom.DocumentImpl;
 import org.springframework.util.Assert;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMConfiguration;
@@ -47,7 +47,7 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode implements 
 
     @Override
     public String getXml() {
-        DocumentImpl xmlDoc = new DocumentImpl();
+        var xmlDoc = new DocumentImpl();
         DOMImplementationLS document = (DOMImplementationLS) xmlDoc.getImplementation();
         LSSerializer serializer = document.createLSSerializer();
         DOMConfiguration domConfig = serializer.getDomConfig();

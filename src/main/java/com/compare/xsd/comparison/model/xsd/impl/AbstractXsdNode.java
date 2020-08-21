@@ -2,10 +2,6 @@ package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.Modifications;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
-import com.sun.org.apache.xerces.internal.xs.XSFacet;
-import com.sun.org.apache.xerces.internal.xs.XSMultiValueFacet;
-import com.sun.org.apache.xerces.internal.xs.XSSimpleTypeDefinition;
-import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
 import javafx.scene.image.Image;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -13,6 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xerces.xs.XSFacet;
+import org.apache.xerces.xs.XSMultiValueFacet;
+import org.apache.xerces.xs.XSSimpleTypeDefinition;
+import org.apache.xerces.xs.XSTypeDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,7 +182,7 @@ public abstract class AbstractXsdNode implements XsdNode {
         loadType(simpleType);
 
         for (Object facetObject : simpleType.getFacets()) {
-            XSFacet facet = (XSFacet) facetObject;
+            var facet = (XSFacet) facetObject;
 
             switch (facet.getFacetKind()) {
                 case XSSimpleTypeDefinition.FACET_LENGTH:
@@ -207,7 +207,7 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
 
         for (Object facetObject : simpleType.getMultiValueFacets()) {
-            XSMultiValueFacet facet = (XSMultiValueFacet) facetObject;
+            var facet = (XSMultiValueFacet) facetObject;
 
             switch (facet.getFacetKind()) {
                 case XSSimpleTypeDefinition.FACET_ENUMERATION:

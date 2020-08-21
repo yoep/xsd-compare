@@ -2,13 +2,13 @@ package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
-import com.sun.org.apache.xerces.internal.impl.xs.XSAttributeUseImpl;
-import com.sun.org.apache.xerces.internal.xs.XSAttributeDeclaration;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.xerces.impl.xs.XSAttributeUseImpl;
+import org.apache.xerces.xs.XSAttributeDeclaration;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
     //region Functions
 
     private void init() {
-        XSAttributeDeclaration declaration = this.attribute.getAttrDeclaration();
+        var declaration = this.attribute.getAttrDeclaration();
 
         this.name = declaration.getName();
         this.minOccurrence = attribute.getRequired() ? 1 : 0;

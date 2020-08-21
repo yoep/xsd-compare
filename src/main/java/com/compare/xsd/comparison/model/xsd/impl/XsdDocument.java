@@ -2,15 +2,13 @@ package com.compare.xsd.comparison.model.xsd.impl;
 
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
-import com.sun.org.apache.xerces.internal.impl.xs.XSElementDecl;
-import com.sun.org.apache.xerces.internal.impl.xs.XSLoaderImpl;
-import com.sun.org.apache.xerces.internal.xs.XSConstants;
-import com.sun.org.apache.xerces.internal.xs.XSModel;
-import com.sun.org.apache.xerces.internal.xs.XSNamedMap;
-import com.sun.org.apache.xerces.internal.xs.XSObject;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.xerces.impl.xs.XSElementDecl;
+import org.apache.xerces.impl.xs.XSLoaderImpl;
+import org.apache.xerces.xs.XSConstants;
+import org.apache.xerces.xs.XSObject;
 import org.springframework.util.Assert;
 
 import java.io.File;
@@ -80,9 +78,9 @@ public class XsdDocument extends AbstractXsdElementNode {
      * Initialize the {@link XsdDocument} by loading the given file.
      */
     private void init() {
-        XSLoaderImpl loader = new XSLoaderImpl();
-        XSModel model = loader.loadURI(file.getAbsolutePath());
-        XSNamedMap elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
+        var loader = new XSLoaderImpl();
+        var model = loader.loadURI(file.getAbsolutePath());
+        var elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
 
         this.name = file.getName();
 

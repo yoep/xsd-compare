@@ -14,8 +14,7 @@ All dependencies are present in the executables for runtime.
 
 ### Development
 
-* Java 8
-* Copy Java 8 JRE to `assets/#platform/jre` directory
+* Java 11+
 
 ## Features
 
