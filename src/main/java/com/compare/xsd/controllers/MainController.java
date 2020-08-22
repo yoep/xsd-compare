@@ -11,7 +11,6 @@ import com.compare.xsd.renderers.PropertyViewRender;
 import com.compare.xsd.renderers.TreeViewRender;
 import com.compare.xsd.renderers.TreeViewRenderBuilder;
 import com.compare.xsd.settings.SettingsService;
-import com.compare.xsd.settings.model.CompareSettings;
 import com.compare.xsd.writers.ExcelComparisonWriter;
 import com.github.spring.boot.javafx.text.LocaleText;
 import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
@@ -72,16 +71,16 @@ public class MainController extends ScaleAwareImpl implements Initializable, Sta
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CompareSettings compareSettings = settingsService.getUserSettingsOrDefault().getCompareSettings();
+        var compareSettings = settingsService.getSettings().getCompareSettings();
 
-        PropertyViewRender leftProperties = new PropertyViewRender(this.leftProperties);
-        PropertyViewRender rightProperties = new PropertyViewRender(this.rightProperties);
-        TreeViewRender leftTreeRender = TreeViewRenderBuilder.builder(localeText)
+        var leftProperties = new PropertyViewRender(this.leftProperties);
+        var rightProperties = new PropertyViewRender(this.rightProperties);
+        var leftTreeRender = TreeViewRenderBuilder.builder(localeText)
                 .treeView(leftTree)
                 .propertyViewRender(leftProperties)
                 .compareSettings(compareSettings)
                 .build();
-        TreeViewRender rightTreeRender = TreeViewRenderBuilder.builder(localeText)
+        var rightTreeRender = TreeViewRenderBuilder.builder(localeText)
                 .treeView(rightTree)
                 .propertyViewRender(rightProperties)
                 .compareSettings(compareSettings)

@@ -1,10 +1,8 @@
 package com.compare.xsd.settings;
 
 import com.compare.xsd.XsdCompareApplication;
-import com.compare.xsd.common.ObservableWrapper;
-import com.compare.xsd.settings.model.UserSettings;
+import com.compare.xsd.settings.model.ApplicationSettings;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -23,17 +21,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SettingsService {
     private final ObjectMapper objectMapper;
-    @Getter
-    private final ObservableWrapper<UserSettings> userSettingsObservable = new ObservableWrapper<>();
 
-    @PostConstruct
-    public void init() {
-        createApplicationSettingsDirectory();
+    private ApplicationSettings currentSettings;
+
+    //region Getters
+
+    /**
+     * Get the current application settings.
+     *
+     * @return Returns the application settings.
+     */
+    public ApplicationSettings getSettings() {
+        return currentSettings;
     }
 
-    @PreDestroy
-    public void onDestroy() {
-        save(getUserSettingsOrDefault());
+    //endregion
+
+    //region Methods
+
+    /**
+     * Save the current application settings to the settings file.
+     */
+    public void save() {
+        save(currentSettings);
     }
 
     /**
@@ -42,68 +52,31 @@ public class SettingsService {
      * @param settings Set the user settings to save.
      * @throws SettingsException Is thrown when an error occurs during writing.
      */
-    public void save(UserSettings settings) throws SettingsException {
+    public void save(ApplicationSettings settings) throws SettingsException {
         Assert.notNull(settings, "settings cannot be null");
-        File settingsFile = getSettingsFile();
+        var settingsFile = getSettingsFile();
 
         try {
             log.info("Saving user settings to " + settingsFile.getAbsolutePath());
             FileUtils.writeStringToFile(settingsFile, objectMapper.writeValueAsString(settings), Charset.defaultCharset());
-            userSettingsObservable.set(settings);
+            currentSettings = settings;
         } catch (IOException ex) {
             throw new SettingsException("Unable to write settings to " + settingsFile.getAbsolutePath(), ex);
         }
     }
 
-    /**
-     * Get the user settings if present.
-     *
-     * @return Returns the user settings.
-     * @throws SettingsException Is thrown when the user settings exist but couldn't be read.
-     */
-    public Optional<UserSettings> getUserSettings() throws SettingsException {
-        if (userSettingsObservable.get() != null) {
-            return Optional.of(userSettingsObservable.get());
-        } else {
-            return loadUserSettingsFromFile();
-        }
+    //endregion
+
+    //region PostConstruct
+
+    @PostConstruct
+    private void init() {
+        initializeSettingsDirectory();
+        initializeSettings();
     }
 
-    /**
-     * Get the user settings or the default settings if they don't exist yet.
-     *
-     * @return Returns the user settings.
-     * @throws SettingsException Is thrown when the user settings exist but couldn't be read.
-     */
-    public UserSettings getUserSettingsOrDefault() throws SettingsException {
-        return getUserSettings().orElseGet(() -> {
-            UserSettings defaultSettings = UserSettings.builder().build();
-            userSettingsObservable.set(defaultSettings);
-            return defaultSettings;
-        });
-    }
-
-    private Optional<UserSettings> loadUserSettingsFromFile() {
-        File settingsFile = getSettingsFile();
-
-        if (settingsFile.exists()) {
-            try {
-                log.info("Loading user settings from " + settingsFile.getAbsolutePath());
-
-                UserSettings userSettings = objectMapper.readValue(settingsFile, UserSettings.class);
-                userSettingsObservable.set(userSettings);
-
-                return Optional.of(userSettings);
-            } catch (IOException ex) {
-                throw new SettingsException("Unable to read settings file at " + settingsFile.getAbsolutePath(), ex);
-            }
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private void createApplicationSettingsDirectory() {
-        File appDir = new File(XsdCompareApplication.APP_DIR);
+    void initializeSettingsDirectory() {
+        var appDir = new File(XsdCompareApplication.APP_DIR);
 
         if (!appDir.exists()) {
             if (!appDir.mkdirs()) {
@@ -112,7 +85,45 @@ public class SettingsService {
         }
     }
 
+    void initializeSettings() {
+        currentSettings = loadUserSettingsFromFile()
+                .orElseGet(() -> ApplicationSettings.builder().build());
+    }
+
+    //endregion
+
+    //region PreDestroy
+
+    @PreDestroy
+    private void onDestroy() {
+        save();
+    }
+
+    //endregion
+
+    //region Functions
+
+    private Optional<ApplicationSettings> loadUserSettingsFromFile() {
+        var settingsFile = getSettingsFile();
+
+        if (settingsFile.exists()) {
+            try {
+                log.info("Loading user settings from " + settingsFile.getAbsolutePath());
+
+                var applicationSettings = objectMapper.readValue(settingsFile, ApplicationSettings.class);
+
+                return Optional.of(applicationSettings);
+            } catch (IOException ex) {
+                throw new SettingsException("Unable to read settings file at " + settingsFile.getAbsolutePath(), ex);
+            }
+        } else {
+            return Optional.empty();
+        }
+    }
+
     private File getSettingsFile() {
         return new File(XsdCompareApplication.APP_DIR + "settings.json");
     }
+
+    //endregion
 }

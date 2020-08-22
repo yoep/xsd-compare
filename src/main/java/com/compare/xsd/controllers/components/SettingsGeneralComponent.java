@@ -1,8 +1,7 @@
 package com.compare.xsd.controllers.components;
 
 import com.compare.xsd.settings.SettingsService;
-import com.compare.xsd.settings.model.UserInterface;
-import com.compare.xsd.settings.model.UserSettings;
+import com.compare.xsd.settings.model.ApplicationSettings;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -34,12 +33,12 @@ public class SettingsGeneralComponent implements Initializable, SettingComponent
     }
 
     @Override
-    public void apply(UserSettings userSettings) {
-        userSettings.getUserInterface().setScale(scaleFactor.getSelectionModel().getSelectedItem().getScale().getValue());
+    public void apply(ApplicationSettings applicationSettings) {
+        applicationSettings.getUserInterface().setScale(scaleFactor.getSelectionModel().getSelectedItem().getScale().getValue());
     }
 
     private void initializeScaleFactor() {
-        UserInterface userInterface = settingsService.getUserSettingsOrDefault().getUserInterface();
+        var userInterface = settingsService.getSettings().getUserInterface();
         List<ScaleItem> scaleItems = asList(
                 new ScaleItem("50%", 0.5f),
                 new ScaleItem("100%", 1.0f),

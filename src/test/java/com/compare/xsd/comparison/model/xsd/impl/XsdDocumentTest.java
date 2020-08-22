@@ -1,35 +1,31 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class XsdDocumentTest {
     @Mock
     private File file;
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        when(file.getAbsolutePath()).thenReturn(getClass().getResource("/xsd/simple_example.xsd").getFile());
+        lenient().when(file.getAbsolutePath()).thenReturn(getClass().getResource("/xsd/simple_example.xsd").getFile());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testFileConstructor_shouldThrowIllegalArgumentExceptionWhenFileIsNull() {
         //WHEN
-        new XsdDocument(null);
+        assertThrows(IllegalArgumentException.class, () -> new XsdDocument(null));
     }
 
     @Test
@@ -110,10 +106,8 @@ public class XsdDocumentTest {
 
     @Test
     public void testFindAttributeByName_shouldThrowUnsupportedException() {
-        expectedException.expect(UnsupportedOperationException.class);
-        expectedException.expectMessage("getAttributeByName is not supported for XsdDocument");
         XsdDocument document = new XsdDocument(file);
 
-        document.findAttributeByName("test");
+        assertThrows(UnsupportedOperationException.class, () -> document.findAttributeByName("test"), "getAttributeByName is not supported for XsdDocument");
     }
 }

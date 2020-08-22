@@ -3,18 +3,16 @@ package com.compare.xsd.comparison.model.xsd.impl;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
 import org.apache.xerces.impl.xs.XSElementDecl;
 import org.apache.xerces.xs.XSTypeDefinition;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class XsdElementTest {
     @Mock
     private XSElementDecl elementDecl;
@@ -22,12 +20,10 @@ public class XsdElementTest {
     private XsdDocument document;
     @Mock
     private XSTypeDefinition typeDefinition;
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     private XsdElement element;
 
-    @Before
+    @BeforeEach
     public void setup() {
         when(elementDecl.getTypeDefinition()).thenReturn(typeDefinition);
 
@@ -36,18 +32,13 @@ public class XsdElementTest {
 
     @Test
     public void testFindAttributeByName_shouldThrowIllegalArgumentException_whenNameIsNull() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("name cannot be null");
-
-        new XsdElement().findAttributeByName(null);
+        assertThrows(IllegalArgumentException.class, () -> new XsdElement().findAttributeByName(null), "name cannot be null");
     }
 
     @Test
     public void testFindAttributeByName_shouldThrowNodeNotFoundException_whenAttributeDoesNotExist() {
         String name = "attribute985654";
-        expectedException.expect(NodeNotFoundException.class);
-        expectedException.expectMessage("Node couldn't be found with name '" + name + "'");
 
-        assertNotNull(element.findAttributeByName(name));
+        assertThrows(NodeNotFoundException.class, () -> element.findAttributeByName(name), "Node couldn't be found with name '" + name + "'");
     }
 }

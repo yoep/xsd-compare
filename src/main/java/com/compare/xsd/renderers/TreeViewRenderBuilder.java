@@ -66,9 +66,11 @@ public class TreeViewRenderBuilder {
         TreeViewRender treeViewRender = new TreeViewRender(treeView, propertyViewRender, localeText);
         treeViewRender.setVisibleColumns(compareSettings.getShownColumns());
 
-        compareSettings.addObserver((o, arg) -> {
-            treeViewRender.setVisibleColumns(compareSettings.getShownColumns());
-            treeViewRender.initialize();
+        compareSettings.addListener(event -> {
+            if (event.getPropertyName().equals(CompareSettings.SHOW_COLUMNS_PROPERTY)) {
+                treeViewRender.setVisibleColumns(compareSettings.getShownColumns());
+                treeViewRender.initialize();
+            }
         });
 
         treeViewRender.initialize();

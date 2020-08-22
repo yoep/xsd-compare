@@ -2,7 +2,6 @@ package com.compare.xsd.controllers;
 
 import com.compare.xsd.controllers.components.SettingComponent;
 import com.compare.xsd.settings.SettingsService;
-import com.compare.xsd.settings.model.UserSettings;
 import com.github.spring.boot.javafx.ui.scale.ScaleAwareImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -19,10 +18,10 @@ public class SettingsController extends ScaleAwareImpl {
     private final SettingsService settingsService;
 
     public void apply(ActionEvent event) {
-        UserSettings userSettings = settingsService.getUserSettingsOrDefault();
+        var applicationSettings = settingsService.getSettings();
 
-        settingComponents.forEach(e -> e.apply(userSettings));
-        settingsService.save(userSettings);
+        settingComponents.forEach(e -> e.apply(applicationSettings));
+        settingsService.save(applicationSettings);
 
         close(event);
     }

@@ -1,9 +1,9 @@
 package com.compare.xsd.controllers.components;
 
 import com.compare.xsd.settings.SettingsService;
+import com.compare.xsd.settings.model.ApplicationSettings;
 import com.compare.xsd.settings.model.CompareColumns;
 import com.compare.xsd.settings.model.CompareSettings;
-import com.compare.xsd.settings.model.UserSettings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,8 +35,8 @@ public class SettingsCompareComponent implements Initializable, SettingComponent
     }
 
     @Override
-    public void apply(UserSettings userSettings) {
-        CompareSettings compareSettings = userSettings.getCompareSettings();
+    public void apply(ApplicationSettings applicationSettings) {
+        CompareSettings compareSettings = applicationSettings.getCompareSettings();
 
         compareSettings.setShownColumns(shownColumns.getItems().stream()
                 .filter(e -> e.getEnabled().getValue())
@@ -46,7 +46,7 @@ public class SettingsCompareComponent implements Initializable, SettingComponent
     }
 
     private void initializeListView() {
-        CompareSettings compareSettings = settingsService.getUserSettingsOrDefault().getCompareSettings();
+        var compareSettings = settingsService.getSettings().getCompareSettings();
 
         shownColumns.setCellFactory(CheckBoxListCell.forListView(shownColumnItem -> shownColumnItem.enabled));
         shownColumns.getItems().addAll(Arrays.stream(CompareColumns.values())
