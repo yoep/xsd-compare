@@ -6,6 +6,7 @@ import com.github.spring.boot.javafx.view.ViewManager;
 import com.github.spring.boot.javafx.view.ViewManagerPolicy;
 import com.github.spring.boot.javafx.view.ViewProperties;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
@@ -22,8 +23,8 @@ public class XsdCompareApplication extends SpringJavaFXApplication {
     @Override
     public void start(Stage primaryStage) throws Exception {
         super.start(primaryStage);
-        ViewLoader loader = applicationContext.getBean(ViewLoader.class);
-        ViewManager viewManager = applicationContext.getBean(ViewManager.class);
+        var loader = applicationContext.getBean(ViewLoader.class);
+        var viewManager = applicationContext.getBean(ViewManager.class);
 
         loader.show(primaryStage, "main.fxml", ViewProperties.builder()
                 .icon("logo_64.png")
