@@ -10,13 +10,13 @@
 
     <groupId>com.xsd</groupId>
     <artifactId>xsd-compare</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.8</version>
     <packaging>jar</packaging>
 
     <scm>
         <url>https://github.com/yoep/xsd-compare</url>
         <connection>scm:git:git@github.com:yoep/xsd-compare.git</connection>
-        <tag>HEAD</tag>
+        <tag>0.0.8</tag>
     </scm>
 
     <properties>
