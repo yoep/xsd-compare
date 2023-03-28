@@ -28,9 +28,11 @@ public abstract class AbstractXsdNode implements XsdNode {
     private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
     private static final String ICON_DIRECTORY = "/images/";
 
+    public String xpath;
     protected String name;
-    protected String namespace;
-    protected String type;
+    protected String typeNamespace;
+    protected String typeName;
+    protected XSTypeDefinition typeDefinition;
     protected String fixedValue;
     protected String pattern;
     protected String whitespace;
@@ -59,6 +61,36 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     //region Implementation of XsdNode
 
+    /** getTypeName() may return null in case of an anonymous type in this case the next typeName of an ancestor is returned
+     For example, the attribute @format would return null as its parent typeName:
+     <xsd:complexType name="FormattedDateTimeType">
+        <xsd:sequence>
+            <xsd:element name="DateTimeString">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="format" type="qdt:FormattedDateTimeFormatContentType"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+     </xsd:complexType>
+    */
+    public String getNextTypeName(){
+        AbstractXsdNode node = this;
+        String typeName = node.getTypeName();
+        while(typeName == null){
+            node = node.getParent();
+            if(node instanceof XsdDocument){
+                return null;
+            }
+            typeName = node.getTypeName();
+        }
+        return typeName;
+    }
+
+
     @Override
     public String getCardinality() {
         return minOccurrence + ".." + (maxOccurrence != null ? maxOccurrence : "*");
@@ -86,24 +118,23 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getXPath() {
-        String xpath = "";
-        String multiplicity = "";
-
-        if (parent != null) {
-            xpath = parent.getXPath() + "/";
-        }
-
-        if (maxOccurrence == null || maxOccurrence > 1) {
-            multiplicity = "[]";
-        }
-
-        return xpath + "*:" + getName() + multiplicity;
+        return xpath + "{" + getCardinality() + "}";
     }
 
     //endregion
 
     //region Methods
 
+
+    /** @return the local name with (optional - if existent) the namespace as prefix within curely brackets: {ns}name
+     * as universal name as described by James Clark - http://www.jclark.com/xml/xmlns.htm  */
+    public static String getUniversalName(String namespace, String name){
+        if(namespace != null && !namespace.isEmpty()){
+            return "{" + namespace + "}" + name;
+        }else{
+            return name;
+        }
+    }
     /**
      * Get the XML value for this node.
      *
@@ -151,16 +182,17 @@ public abstract class AbstractXsdNode implements XsdNode {
     //region Functions
 
     /**
-     * Load the base type of the definition and store the value in {@link #type}.
+     * Load the base type of the definition and store the value in {@link #typeName}.
      *
      * @param typeDefinition Set the type definition of the node.
      */
     protected void loadType(XSTypeDefinition typeDefinition) {
+        /* 2DO instead of taking the final type of inheritance tree, when should create a list of all inherited types
         while (typeDefinition.getBaseType() != null && !isTypeDefinitionDefaultXsdSchemaDefinition(typeDefinition)) {
             typeDefinition = typeDefinition.getBaseType();
         }
-
-        this.type = typeDefinition.getName();
+        */
+        this.typeName = typeDefinition.getName();
     }
 
     /**
@@ -174,7 +206,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     }
 
     /**
-     * Load the simple type definition for this node.
+     * Load facets from the simple type definition for this node.
      *
      * @param simpleType Set the simple type definition to load.
      */

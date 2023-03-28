@@ -215,7 +215,7 @@ public class ExcelComparisonWriter {
             CellRange type = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getTypeColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
-                    .value(node.getType())
+                    .value(node.getTypeName())
                     .fontColor(isComparison && modifications.isTypeChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)

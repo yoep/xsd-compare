@@ -18,14 +18,14 @@ public interface XsdNode {
      *
      * @return Returns the namespace of the node.
      */
-    String getNamespace();
+    String getTypeNamespace();
 
     /**
      * Get the type of the node (optional).
      *
-     * @return Returns the type of the node or null.
+     * @return Returns the name of the type of the node or null.
      */
-    String getType();
+    String getTypeName();
 
     /**
      * Get the cardinality of the node (optional).

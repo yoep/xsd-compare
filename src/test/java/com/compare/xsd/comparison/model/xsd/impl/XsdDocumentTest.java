@@ -83,7 +83,7 @@ public class XsdDocumentTest {
         XsdDocument result = new XsdDocument(file);
 
         //THEN
-        assertNull(result.getType());
+        assertNull(result.getTypeName());
     }
 
     @Test

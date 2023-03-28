@@ -5,20 +5,35 @@ import com.compare.xsd.comparison.model.xsd.XsdAttributeNode;
 import javafx.scene.image.Image;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.xerces.dom.DOMXSImplementationSourceImpl;
 import org.apache.xerces.impl.xs.XSElementDecl;
 import org.apache.xerces.impl.xs.XSLoaderImpl;
-import org.apache.xerces.xs.XSConstants;
-import org.apache.xerces.xs.XSObject;
+import org.apache.xerces.impl.xs.XSModelImpl;
+import org.apache.xerces.xs.*;
 import org.springframework.util.Assert;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class XsdDocument extends AbstractXsdElementNode {
     private final File file;
+    public Stack<String> xPathStack = new Stack<>();
+    public Map<String, Integer> ancestorCountByelementIO = new HashMap();
+    private DocumentBuilder builder;
 
     //region Constructors
 
@@ -41,7 +56,7 @@ public class XsdDocument extends AbstractXsdElementNode {
     //region Getters & Setters
 
     @Override
-    public String getType() {
+    public String getTypeName() {
         return null;
     }
 
@@ -62,8 +77,9 @@ public class XsdDocument extends AbstractXsdElementNode {
 
     @Override
     public String getXPath() {
-        return "//";
+        return xpath;
     }
+
 
     //endregion
 
@@ -83,20 +99,25 @@ public class XsdDocument extends AbstractXsdElementNode {
      */
     private void init() {
         var loader = new XSLoaderImpl();
-        var model = loader.loadURI(file.getAbsolutePath());
-        var elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
+        // XSD is now parsed by Xerces the XSModelImpl holds all information
+        XSModelImpl model = (XSModelImpl) loader.loadURI(file.getAbsolutePath());
+
+        // start to bootstrap our model by accessing the map of all root elements
+        XSNamedMap elements = model.getComponents(XSConstants.ELEMENT_DECLARATION);
 
         this.name = file.getName();
+        this.xpath = "//";
 
+        // check every root element
         for (Object item : elements.values()) {
             if (item instanceof XSObject) {
                 XSObject element = (XSObject) item;
-
                 if (element instanceof XSElementDecl) {
                     XsdElement rootElement = XsdElement.newXsdElement((XSElementDecl) item, this);
-
                     this.elements.add(rootElement);
                 }
+            }else{
+                new AssertionError("The member of Xerces 'Element Declaration map should be all of type XSObject!");
             }
         }
     }

@@ -13,7 +13,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,6 +28,8 @@ public class XsdComparerTest {
     private ViewManager viewManager;
 
     private XsdLoader xsdLoader;
+
+    private static final String COMPARISON_RESULT_CII_D16B_WITH_D22B = "references/comparison-CII_D16B-with-D22B.txt";
 
     @BeforeEach
     public void setup() {
@@ -42,16 +47,21 @@ public class XsdComparerTest {
         XsdDocument newGrammar = xsdLoader.load(newResource.getFile());
         log.debug("Finished loading new grammar!");
         XsdComparer comparer = new XsdComparer(originalGrammar, newGrammar);
-        boolean result = comparer.compare();
-        assertTrue(result);
+        String result = comparer.compareAsString();
+        System.out.println(result);
+        // if you change the programming copy the reference test from the last test
+        Files.writeString(Paths.get(new ClassPathResource("references/newReference.txt").getURI()), result);
+        String referenceResult = Files.readString(Paths.get(new ClassPathResource(COMPARISON_RESULT_CII_D16B_WITH_D22B).getURI()));
+        assertTrue(result.equals(referenceResult));
+
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);
         int modified = comparer.getModified();
         log.debug("Modified in grammar: " + modified);
         int removed = comparer.getRemoved();
         log.debug("Removed from grammar: " + removed);
+        log.debug(comparer.toString());
     }
-
 
     @Test
     public void testCompare_shouldReturnTrue() throws IOException {

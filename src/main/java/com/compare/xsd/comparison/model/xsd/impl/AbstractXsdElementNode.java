@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.xerces.dom.DocumentImpl;
 import org.springframework.util.Assert;
 import org.w3c.dom.Comment;
@@ -21,9 +22,10 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdElementNode extends AbstractXsdNode implements XsdElementNode {
-    protected final List<XsdElement> elements = new ArrayList<>();
+    protected List<XsdElement> elements = new ArrayList<>();
     // required for the central map of all already processed elements
     protected XsdDocument document;
 
@@ -87,9 +89,8 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode implements 
      * @return Returns the found XSD element.
      * @throws NodeNotFoundException Is thrown when the given element name couldn't be found back.
      */
-    public XsdElement findElement(String name) throws NodeNotFoundException {
+    public XsdElement findElement(String name, String grammarType) throws NodeNotFoundException {
         Assert.hasText(name, "name cannot be empty");
-
         return elements.stream()
                 .filter(e -> e.getName().equalsIgnoreCase(name))
                 .findFirst()
@@ -143,17 +144,7 @@ public abstract class AbstractXsdElementNode extends AbstractXsdNode implements 
         return element;
     }
 
-    private XsdDocument getDocument() {
-        AbstractXsdNode parent = getParent();
 
-        if (parent != null) {
-            while (parent.getParent() != null) {
-                parent = parent.getParent();
-            }
-        }
-
-        return (XsdDocument) parent;
-    }
 
     //endregion
 }

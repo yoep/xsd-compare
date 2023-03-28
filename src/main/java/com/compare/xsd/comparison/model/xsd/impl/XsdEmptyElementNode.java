@@ -10,7 +10,7 @@ public class XsdEmptyElementNode extends XsdElement {
 
 
     public XsdEmptyElementNode(XsdDocument document){
-        super(document);
+        super(document,null);
     }
     private final List<XsdNode> nodes = new ArrayList<>();
 
