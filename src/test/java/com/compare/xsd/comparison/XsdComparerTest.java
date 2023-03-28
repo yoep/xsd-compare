@@ -34,18 +34,24 @@ public class XsdComparerTest {
 
     @Test
     public void testCompare_recursiveGrammar() throws IOException {
-        ClassPathResource baseResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
-        ClassPathResource additionalResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
+        ClassPathResource originalResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
+        ClassPathResource newResource = new ClassPathResource("xsd/uncefact_22B_20230324/CrossIndustryInvoice_100pD22B.xsd");
 
-        XsdDocument baseDocument = xsdLoader.load(baseResource.getFile());
-        log.trace("Finished loading 1st grammar!");
-        XsdDocument additionalDocument = xsdLoader.load(additionalResource.getFile());
-        log.trace("Finished loading 2nd grammar!");
-        XsdComparer comparer = new XsdComparer(baseDocument, additionalDocument);
+        XsdDocument originalGrammar = xsdLoader.load(originalResource.getFile());
+        log.debug("Finished loading original grammar!");
+        XsdDocument newGrammar = xsdLoader.load(newResource.getFile());
+        log.debug("Finished loading new grammar!");
+        XsdComparer comparer = new XsdComparer(originalGrammar, newGrammar);
         boolean result = comparer.compare();
-
         assertTrue(result);
+        int added = comparer.getAdded();
+        log.debug("Added to grammar: " + added);
+        int modified = comparer.getModified();
+        log.debug("Modified in grammar: " + modified);
+        int removed = comparer.getRemoved();
+        log.debug("Removed from grammar: " + removed);
     }
+
 
     @Test
     public void testCompare_shouldReturnTrue() throws IOException {
