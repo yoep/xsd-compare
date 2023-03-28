@@ -5,6 +5,7 @@ import com.compare.xsd.comparison.model.xsd.XsdElementNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.github.spring.boot.javafx.view.ViewManager;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
+@Slf4j
 public class XsdComparerTest {
     @Mock
     private ViewManager viewManager;
@@ -36,9 +38,9 @@ public class XsdComparerTest {
         ClassPathResource additionalResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
 
         XsdDocument baseDocument = xsdLoader.load(baseResource.getFile());
-        System.out.println("Finished loading 1st grammar!");
+        log.trace("Finished loading 1st grammar!");
         XsdDocument additionalDocument = xsdLoader.load(additionalResource.getFile());
-        System.out.println("Finished loading 2nd grammar!");
+        log.trace("Finished loading 2nd grammar!");
         XsdComparer comparer = new XsdComparer(baseDocument, additionalDocument);
         boolean result = comparer.compare();
 

@@ -24,6 +24,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractXsdElementNode extends AbstractXsdNode implements XsdElementNode {
     protected final List<XsdElement> elements = new ArrayList<>();
+    // required for the central map of all already processed elements
+    protected XsdDocument document;
 
     //region Constructors
 

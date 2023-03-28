@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XsdEmptyElementNode extends XsdElement {
+
+
+    public XsdEmptyElementNode(XsdDocument document){
+        super(document);
+    }
     private final List<XsdNode> nodes = new ArrayList<>();
 
     //region Getters & Setters

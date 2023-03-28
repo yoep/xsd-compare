@@ -13,7 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @EqualsAndHashCode
@@ -50,6 +52,7 @@ public class XsdComparer {
         reset();
 
         try {
+
             compareAbstractElementNodes(originalDocument, newDocument);
 
             return true;
@@ -68,6 +71,8 @@ public class XsdComparer {
 
     //region Functions
 
+    private static final List<XsdElement> EMPTY_ARRAY_LIST = new ArrayList<>();
+
     /**
      * Compare the original abstract XSD node against the new abstract XSD node.
      *
@@ -76,15 +81,25 @@ public class XsdComparer {
      */
     private void compareAbstractElementNodes(AbstractXsdElementNode originalNode, AbstractXsdElementNode newNode) {
         Assert.notNull(newNode, "newNode cannot be null");
-        List<XsdElement> elementsCopy = new ArrayList<>(originalNode.getElements()); //take a copy as the actual list might be modified during comparison
-        List<XsdElement> compareElementsCopy = new ArrayList<>(newNode.getElements()); //take a copy as the actual list might be modified during comparison
+        List<XsdElement> elementsCopy;
+        if(!alreadyCompared_OldGrammar(originalNode)){
+            elementsCopy = new ArrayList<>(originalNode.getElements()); //take a copy as the actual list might be modified during comparison
+        }else{
+            elementsCopy = EMPTY_ARRAY_LIST;
+        }
+
+        List<XsdElement> compareElementsCopy;
+        if(!alreadyCompared_OldGrammar(originalNode)){
+            compareElementsCopy = new ArrayList<>(newNode.getElements()); //take a copy as the actual list might be modified during comparison
+        }else{
+            compareElementsCopy = EMPTY_ARRAY_LIST;
+        }
 
         //check for removed nodes
         for (XsdElement element : elementsCopy) {
             try {
                 if (StringUtils.isNoneEmpty(element.getName())) {
                     XsdElement compareElement = newNode.findElement(element.getName());
-
                     compareXsdElements(element, compareElement);
                 }
             } catch (NodeNotFoundException ex) {
@@ -93,7 +108,6 @@ public class XsdComparer {
                 copyElementAsEmptyNode(originalNode.getElements().indexOf(element), element, newNode);
             }
         }
-
         //check for added nodes
         for (XsdElement element : compareElementsCopy) {
             try {
@@ -106,9 +120,38 @@ public class XsdComparer {
                 copyElementAsEmptyNode(newNode.getElements().indexOf(element), element, originalNode);
             }
         }
-
         compareProperties(originalNode, newNode);
     }
+
+    boolean alreadyCompared_NewGrammar(AbstractXsdElementNode element){
+        String ns = element.getNamespace();
+        String name = element.getName();
+        if(ns != null && !ns.isEmpty()){
+            name = "{" + ns + "}" + name;
+        }
+        if(!alreadyComparedElements_NewGrammar.containsKey(name)){
+            alreadyComparedElements_NewGrammar.put(name, element);
+            return Boolean.FALSE;
+        }else{
+            return Boolean.TRUE;
+        }
+    }
+
+    boolean alreadyCompared_OldGrammar(AbstractXsdElementNode element){
+        String ns = element.getNamespace();
+        String name = element.getName();
+        if(ns != null && !ns.isEmpty()){
+            name = "{" + ns + "}" + name;
+        }
+        if(!alreadyComparedElements_OldGrammar.containsKey(name)){
+            alreadyComparedElements_OldGrammar.put(name, element);
+            return Boolean.FALSE;
+        }else{
+            return Boolean.TRUE;
+        }
+    }
+    private Map alreadyComparedElements_NewGrammar = new HashMap<String, XsdElement>();
+    private Map alreadyComparedElements_OldGrammar = new HashMap<String, XsdElement>();
 
     /**
      * Compare the original XSD element against the new XSD element.
@@ -236,11 +279,18 @@ public class XsdComparer {
     }
 
     private XsdEmptyElementNode deepCopyEmptyElementNodes(XsdNode toCopyNode) {
-        XsdEmptyElementNode emptyNode = new XsdEmptyElementNode();
-
+        XsdEmptyElementNode emptyNode;
+        if(toCopyNode instanceof XsdElement){
+            emptyNode = new XsdEmptyElementNode(((XsdElement)toCopyNode).getDocument());
+            emptyNode.setName(toCopyNode.getName());
+        }else{
+            log.error("Should not occur: Node to copy should be an element!");
+            emptyNode = null;
+        }
+        /*
         for (XsdNode element : toCopyNode.getNodes()) {
             emptyNode.addNode(deepCopyEmptyElementNodes(element));
-        }
+        }*/
 
         return emptyNode;
     }
@@ -249,6 +299,8 @@ public class XsdComparer {
         this.added = 0;
         this.removed = 0;
         this.modified = 0;
+        this.alreadyComparedElements_NewGrammar.clear();
+        this.alreadyComparedElements_OldGrammar.clear();
     }
 
     private boolean hasNameChanged(XsdNode originalNode, XsdNode newNode) {

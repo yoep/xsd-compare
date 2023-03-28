@@ -11,9 +11,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.impl.dv.xs.XSSimpleTypeDecl;
 import org.apache.xerces.impl.xs.*;
-import org.apache.xerces.xs.XSElementDeclaration;
-import org.apache.xerces.xs.XSParticle;
-import org.apache.xerces.xs.XSTypeDefinition;
+import org.apache.xerces.xs.*;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,47 +35,99 @@ public class XsdElement extends AbstractXsdElementNode {
      * @param element Set the element to process.
      * @param parent  Set the parent document.
      */
-    public XsdElement(XSElementDeclaration element, XsdDocument parent) {
+    private XsdElement(XSElementDeclaration element, XsdDocument parent) {
         Assert.notNull(element, "element cannot be null");
         this.element = element;
+        // required for centralized map of already processed elements (to prevent endless loops in recursive grammars)
+        this.document = parent;
         this.parent = parent;
         this.definition = null;
         this.minOccurrence = 1;
         this.maxOccurrence = 1;
+    }
 
-        init();
+    /** @return the local name with (optional - if existent) the namespace as prefix within curely brackets: {ns}name */
+    public static String getNormalizedName(XSObject xsObject){
+        String ns = xsObject.getNamespace();
+        if(ns != null && !ns.isEmpty()){
+            return "{" + ns + "}" + xsObject.getName();
+        }else{
+            return xsObject.getName();
+        }
+    }
+
+    public static XsdElement newXsdElement(XSElementDeclaration element, XsdDocument parent) {
+        String name = getNormalizedName(element);
+        if(parent.allElements.containsKey(name)){
+            return parent.allElements.get(name);
+        }else{
+            XsdElement xsdElement = new XsdElement(element, parent);
+            parent.allElements.put(name, xsdElement);
+            xsdElement.init();
+            return xsdElement;
+        }
+    }
+
+    public static XsdElement newXsdElement(XSParticle elementDefinition, XsdElement parent) {
+        XSElementDeclaration element = (XSElementDecl) elementDefinition.getTerm();
+        String name = getNormalizedName(element);
+        if(parent.document.allElements.containsKey(name)){
+            return parent.document.allElements.get(name);
+        }else{
+            XsdElement xsdElement = new XsdElement(elementDefinition, parent);
+            parent.document.allElements.put(name, xsdElement);
+            xsdElement.init();
+            return xsdElement;
+        }
     }
 
     /**
      * Initialize a new {@link XsdElement}.
      *
-     * @param elementDefinition Set the definition to process.
+     * @param particle          Only elementDefinition are supported as term to be process.
      * @param parent            Set the parent element of this element.
      */
-    public XsdElement(XSParticle elementDefinition, XsdElement parent) {
+    private XsdElement(XSParticle particle, XsdElement parent) {
         super(parent);
-        Assert.notNull(elementDefinition, "elementDefinition cannot be null");
-        this.element = (XSElementDecl) elementDefinition.getTerm();
-        this.definition = elementDefinition;
-        this.minOccurrence = elementDefinition.getMinOccurs();
-        this.maxOccurrence = elementDefinition.getMaxOccursUnbounded() ? null : elementDefinition.getMaxOccurs();
-
-        init();
+        Assert.notNull(particle, "elementDefinition cannot be null");
+        /** a term could be as well <code>XSModelGroup</code> and <code>XSWildcard</code> */
+        XSTerm xsTerm = particle.getTerm();
+        if(xsTerm instanceof XSElementDecl){
+            this.element = (XSElementDecl) xsTerm;
+        }else{
+            this.element = null;
+            if(xsTerm instanceof XSModelGroup){
+                log.warn("XSModelGroup is not supported!");
+            }else if(xsTerm instanceof XSWildcard){
+                log.warn("XSWildcard is not supported!");
+            } else {
+                log.error("This should not happen!");
+            }
+        }
+        this.document = parent.document;
+        this.definition = particle;
+        this.minOccurrence = particle.getMinOccurs();
+        this.maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
     }
 
     /**
      * Initialize a new {@link XsdElement}.
      * This constructor can only be used {@link XsdEmptyElementNode}.
      */
-    protected XsdElement() {
+    protected XsdElement(XsdDocument document) {
         this.element = null;
         this.definition = null;
         this.name = "";
+        this.document = document;
     }
 
     //endregion
 
     //region Getters & Setters
+
+    public XsdDocument getDocument(){
+        return document;
+    }
 
     @Override
     public Image getIcon() {
@@ -168,7 +218,7 @@ public class XsdElement extends AbstractXsdElementNode {
                 XSParticleDecl child = (XSParticleDecl) childItem;
 
                 if (child.getTerm() instanceof XSElementDeclaration) {
-                    this.elements.add(new XsdElement(child, this));
+                    this.elements.add(newXsdElement(child, this));
                 } else if (child.getTerm() instanceof XSModelGroupImpl) {
                     processComplexGroup((XSModelGroupImpl) child.getTerm());
                 }

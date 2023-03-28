@@ -12,6 +12,8 @@ import org.apache.xerces.xs.XSObject;
 import org.springframework.util.Assert;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -32,6 +34,8 @@ public class XsdDocument extends AbstractXsdElementNode {
         init();
     }
 
+    /** adds all elements within a document to check for potential loops */
+    public Map<String, XsdElement> allElements = new HashMap<>();
     //endregion
 
     //region Getters & Setters
@@ -89,7 +93,7 @@ public class XsdDocument extends AbstractXsdElementNode {
                 XSObject element = (XSObject) item;
 
                 if (element instanceof XSElementDecl) {
-                    XsdElement rootElement = new XsdElement((XSElementDecl) item, this);
+                    XsdElement rootElement = XsdElement.newXsdElement((XSElementDecl) item, this);
 
                     this.elements.add(rootElement);
                 }
