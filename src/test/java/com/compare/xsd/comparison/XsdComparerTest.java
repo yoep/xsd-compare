@@ -29,6 +29,22 @@ public class XsdComparerTest {
         xsdLoader = new XsdLoader(viewManager);
     }
 
+
+    @Test
+    public void testCompare_recursiveGrammar() throws IOException {
+        ClassPathResource baseResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
+        ClassPathResource additionalResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
+
+        XsdDocument baseDocument = xsdLoader.load(baseResource.getFile());
+        System.out.println("Finished loading 1st grammar!");
+        XsdDocument additionalDocument = xsdLoader.load(additionalResource.getFile());
+        System.out.println("Finished loading 2nd grammar!");
+        XsdComparer comparer = new XsdComparer(baseDocument, additionalDocument);
+        boolean result = comparer.compare();
+
+        assertTrue(result);
+    }
+
     @Test
     public void testCompare_shouldReturnTrue() throws IOException {
         ClassPathResource baseResource = new ClassPathResource("xsd/example_base_attribute.xsd");
