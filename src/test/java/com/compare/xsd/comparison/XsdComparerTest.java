@@ -81,7 +81,7 @@ public class XsdComparerTest {
         String result = comparer.compareAsString();
         System.out.println(result);
         // if you change the programming, update the reference by copying new result as new reference!
-        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
         String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
         assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + REPORT_CII_D16D_WITH_D22B +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B);
