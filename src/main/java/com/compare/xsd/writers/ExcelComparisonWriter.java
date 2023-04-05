@@ -105,7 +105,7 @@ public class ExcelComparisonWriter {
             if (file != null) {
                 Workbook workbook = new Workbook(file);
 
-                writeXsdOverview(comparer.getOriginalDocument(), "Original document", workbook);
+                writeXsdOverview(comparer.getOldDocument(), "Original document", workbook);
                 writeXsdOverview(comparer.getNewDocument(), "New document", workbook);
                 writeXsdComparison(comparer, workbook);
 
@@ -293,7 +293,7 @@ public class ExcelComparisonWriter {
         tableHeaderOriginal.writeHeader(worksheet);
         tableHeaderNew.writeHeader(worksheet);
 
-        for (XsdNode node : comparer.getOriginalDocument().getElements()) {
+        for (XsdNode node : comparer.getOldDocument().getElements()) {
             rowIndex = writeXsdNode(node, tableHeaderOriginal, 0, rowIndex + 1, worksheet, true);
         }
 
@@ -328,10 +328,10 @@ public class ExcelComparisonWriter {
                 .build());
         List<CellRange> informationCells = asList(CellRange.builder()
                 .range(new CellRange.Range(1, 0))
-                .value(comparer.getOriginalDocument().getName())
+                .value(comparer.getOldDocument().getName())
                 .build(), CellRange.builder()
                 .range(new CellRange.Range(1, 1))
-                .value(comparer.getOriginalDocument().getFile().getAbsolutePath())
+                .value(comparer.getOldDocument().getFile().getAbsolutePath())
                 .build(), CellRange.builder()
                 .range(new CellRange.Range(1, 2))
                 .value(comparer.getNewDocument().getName())

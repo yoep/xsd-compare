@@ -12,13 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
+import java.io.File;
 import java.util.*;
 
 @Slf4j
 @EqualsAndHashCode
 @Getter
 public class XsdComparer {
-    private final XsdDocument originalDocument;
+    private final XsdDocument oldDocument;
     private final XsdDocument newDocument;
 
     private int added;
@@ -53,13 +54,28 @@ public class XsdComparer {
     /**
      * Initialize a new instance of {@link XsdComparer}.
      *
-     * @param originalDocument Set the original document.
+     * @param oldDocument Set the old document.
      * @param newDocument      Set the new document.
      */
-    public XsdComparer(XsdDocument originalDocument, XsdDocument newDocument) {
-        Assert.notNull(originalDocument, "originalDocument cannot be null");
+    public XsdComparer(String oldDocument, String newDocument) {
+        Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-        this.originalDocument = originalDocument;
+        XsdLoader xsdLoader = new XsdLoader(null);
+        this.oldDocument = xsdLoader.load(new File(oldDocument));
+        this.newDocument = xsdLoader.load(new File(newDocument));
+    }
+
+
+    /**
+     * Initialize a new instance of {@link XsdComparer}.
+     *
+     * @param oldDocument Set the old document.
+     * @param newDocument      Set the new document.
+     */
+    public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument) {
+        Assert.notNull(oldDocument, "oldDocument cannot be null");
+        Assert.notNull(newDocument, "newDocument cannot be null");
+        this.oldDocument = oldDocument;
         this.newDocument = newDocument;
     }
 
@@ -153,7 +169,7 @@ ATTRIBUTES:
     }
 
     /**
-     * Compare the original document against the new document.
+     * Compare the old document against the new document.
      *
      * @return Returns true if the comparison was successful, else false.
      */
@@ -163,14 +179,14 @@ ATTRIBUTES:
     }
 
     /**
-     * Compare the original document against the new document.
+     * Compare the old document against the new document.
      *
      * @return Returns true if the comparison was successful, else false.
      */
     public String compareAsString() {
         reset();
         try {
-            compareAbstractElementNodes(originalDocument, newDocument);
+            compareAbstractElementNodes(oldDocument, newDocument);
             return getReport();
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
@@ -191,9 +207,9 @@ ATTRIBUTES:
     private static final List<XsdElement> EMPTY_ARRAY_LIST = new ArrayList<>();
 
     /**
-     * Compare the original abstract XSD node against the new abstract XSD node.
+     * Compare the old abstract XSD node against the new abstract XSD node.
      *
-     * @param oldNode Set the original XSD abstract element node.
+     * @param oldNode Set the old XSD abstract element node.
      * @param newNode      Set the new XSD abstract element node.
      */
     private void compareAbstractElementNodes(AbstractXsdElementNode oldNode, AbstractXsdElementNode newNode) {
@@ -316,9 +332,9 @@ ATTRIBUTES:
     }
 
     /**
-     * Compare the original XSD element against the new XSD element.
+     * Compare the old XSD element against the new XSD element.
      *
-     * @param oldNode Set the original XSD element.
+     * @param oldNode Set the old XSD element.
      * @param newNode      Set the new XSD element.
      */
     private void compareXsdElementProperties(XsdElement oldNode, XsdElement newNode) {
@@ -353,9 +369,9 @@ ATTRIBUTES:
     }
 
     /**
-     * Compare the original XSD attribute against the new XSD attribute.
+     * Compare the old XSD attribute against the new XSD attribute.
      *
-     * @param oldNode Set the original XSD attribute.
+     * @param oldNode Set the old XSD attribute.
      * @param newNode      Set the new XSD attribute.
      */
     private void compareXsdAttributes(XsdAttributeNode oldNode, XsdAttributeNode newNode) {
@@ -363,9 +379,9 @@ ATTRIBUTES:
     }
 
     /**
-     * Compare the original XSD node properties against the new XSD node properties.
+     * Compare the old XSD node properties against the new XSD node properties.
      *
-     * @param oldNode Set the original XSD node.
+     * @param oldNode Set the old XSD node.
      * @param newNode      Set the new XSD node.
      */
     private void compareProperties(XsdNode oldNode, XsdNode newNode) {
