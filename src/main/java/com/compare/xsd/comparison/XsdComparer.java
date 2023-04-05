@@ -229,7 +229,7 @@ ATTRIBUTES:
                 removed++;
                 oldElementChild.setModifications(new Modifications(ModificationType.REMOVED));
                 copyElementAsEmptyNode(oldNode.getElements().indexOf(oldElementChild), oldElementChild, newNode);
-                addReportItem(REMOVE_ELEMENT_START + oldElementChild.getName() + "> {" + oldElementChild.getTypeName() + "} in type {" + oldElementChild.getParent().getTypeName() + "}",
+                addReportItem(REMOVE_ELEMENT_START + oldElementChild.getName() + "> {" + oldElementChild.getTypeName() + "}{" + oldElementChild.getCardinality() + "} in type {" + oldElementChild.getParent().getTypeName() + "}",
                         "in " + oldElementChild.getParent().getName() + " at " + oldElementChild.getXPath());
             }
         }
@@ -241,7 +241,7 @@ ATTRIBUTES:
                 added++;
                 newElementChild.setModifications(new Modifications(ModificationType.ADDED));
                 copyElementAsEmptyNode(newNode.getElements().indexOf(newElementChild), newElementChild, oldNode);
-                addReportItem(ADD_ELEMENT_START + newElementChild.getName() + "> {" + newElementChild.getTypeName() + "} in type {" + newElementChild.getParent().getTypeName() + "}",
+                addReportItem(ADD_ELEMENT_START + newElementChild.getName() + "> {" + newElementChild.getTypeName() + "}{" + newElementChild.getCardinality() + "} in type {" + newElementChild.getParent().getTypeName() + "}",
                         "in " + newElementChild.getParent().getName() + " at " + newElementChild.getXPath());
             }
         }
@@ -332,7 +332,7 @@ ATTRIBUTES:
                 compareXsdAttributes(attribute, compareAttribute);
             } catch (NodeNotFoundException ex) {
                 removed++;
-                addReportItem(REMOVE_ATTRIBUTE_START + attribute.getName() + " {" + attribute.getTypeName() + "} in type {" + attribute.getParent().getTypeName() + "}",
+                addReportItem(REMOVE_ATTRIBUTE_START + attribute.getName() + " {" + attribute.getTypeName() + "}{" + attribute.getCardinality() + "} in type {" + attribute.getParent().getTypeName() + "}",
                         "in " + attribute.getParent().getName() + " at " + attribute.getXPath());
                 attribute.setModifications(new Modifications(ModificationType.REMOVED));
                 copyAttributeAsEmptyNode(oldNode.getAttributes().indexOf(attribute), newNode);
@@ -346,7 +346,7 @@ ATTRIBUTES:
                 added++;
                 attribute.setModifications(new Modifications(ModificationType.ADDED));
                 copyAttributeAsEmptyNode(newNode.getAttributes().indexOf(attribute), oldNode);
-                addReportItem(ADD_ATTRIBUTE_START + attribute.getName() + " {" + attribute.getTypeName() + "} in type {" + attribute.getParent().getTypeName() + "}",
+                addReportItem(ADD_ATTRIBUTE_START + attribute.getName() + " {" + attribute.getTypeName() + "}{" + attribute.getCardinality() + "} in type {" + attribute.getParent().getTypeName() + "}",
                         "in " + attribute.getParent().getName() + " at " + attribute.getXPath());
             }
         }
@@ -396,7 +396,7 @@ ATTRIBUTES:
                     xPath += ((AbstractXsdNode) newNode).xpath;
                 }else if(newNode instanceof XsdAttribute) {
                     assert(( ((AbstractXsdNode) newNode).getParent().xpath != null && ((AbstractXsdNode) newNode).getParent().xpath != null && ((AbstractXsdNode) newNode).getParent().xpath.equals(((AbstractXsdNode) oldNode).getParent().xpath)));
-                    xPath += ((AbstractXsdNode) newNode).getParent().xpath;
+                    xPath += newNode.getXPath();
                 }
                 addReportItem(modifications.getHeaderLine(), xPath);
                 modified++;

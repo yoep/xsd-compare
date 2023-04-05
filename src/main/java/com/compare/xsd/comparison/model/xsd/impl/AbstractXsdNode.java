@@ -118,7 +118,7 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getXPath() {
-        return xpath + "{" + getCardinality() + "}";
+        return xpath;
     }
 
     //endregion

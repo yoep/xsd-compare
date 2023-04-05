@@ -63,8 +63,8 @@ public class Modifications {
         sb = new StringBuilder();
         this.type = ModificationType.MODIFIED;
         sb.append("Modifying ").append(isElement ? "element: " : "attribute: ").append(
-            "\n\told: " + (isElement ? "<" + oldNode.getName() + ">" : "@" + oldNode.getName()) + "{" + oldNode.getNextTypeName() + "} in type {" + oldNode.getParent().getNextTypeName() + "}" +
-            "\n\tnew: " + (isElement ? "<" + newNode.getName() + ">" : "@" + newNode.getName()) + "{" + newNode.getNextTypeName() + "} in type {" + newNode.getParent().getNextTypeName() + "}");
+            "\n\told: " + (isElement ? "<" + oldNode.getName() + ">" : "@" + oldNode.getName()) + "{" + oldNode.getNextTypeName() + "}{" + oldNode.getCardinality() + "} in type {" + oldNode.getParent().getNextTypeName() + "}" +
+            "\n\tnew: " + (isElement ? "<" + newNode.getName() + ">" : "@" + newNode.getName()) + "{" + newNode.getNextTypeName() + "}{" + newNode.getCardinality() + "} in type {" + newNode.getParent().getNextTypeName() + "}");
     }
 
     public StringBuilder getStringBuilder(){
@@ -84,9 +84,6 @@ public class Modifications {
     }
 
     public String getHeaderLine() {
-        if(sb == null){
-            System.out.println("XXX");
-        }
         return sb.toString();
     }
 

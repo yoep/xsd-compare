@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -80,9 +81,10 @@ public class XsdComparerTest {
         String result = comparer.compareAsString();
         System.out.println(result);
         // if you change the programming, update the reference by copying new result as new reference!
-        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, StandardOpenOption.CREATE);
-        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B).toURI()));
-        assertTrue(result.equals(referenceResult));
+        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
+        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
+        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + REPORT_CII_D16D_WITH_D22B +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B);
 
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);
@@ -102,7 +104,7 @@ public class XsdComparerTest {
         XsdComparer comparer = new XsdComparer(baseDocument, additionalDocument);
 
         boolean result = comparer.compare();
-        assertTrue(result, "\nIf the test fails due to a new output (e.g. programming update) update the reference by copying new result as updated reference:\n\t" + TARGET_DIR + REPORT_CII_D16D_WITH_D22B +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B);
+        assert(result);
     }
 
     @Test
