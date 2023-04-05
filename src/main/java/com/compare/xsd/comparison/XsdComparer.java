@@ -25,6 +25,9 @@ public class XsdComparer {
     private int added;
     private int removed;
     private int modified;
+    /** The SingleLineChangeTextReport creates only a single text line for every XSD change
+     * this harder to read, but assists  to compare the result with other XSD comparison tools */
+    private Boolean useSingleLineChangeTextReport = Boolean.FALSE;
 
     private Map<String, Integer> alreadyComparedAncestor_NewGrammar = new HashMap<>();
     private Map<String, Integer> alreadyComparedAncestor_OldGrammar = new HashMap<>();
@@ -35,11 +38,15 @@ public class XsdComparer {
      * @param oldDocument Set the old document.
      * @param newDocument      Set the new document.
      */
-    public XsdComparer(String oldDocument, String newDocument) {
+    public XsdComparer(String oldDocument, String newDocument, Boolean useSingleLineChangeTextReport) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-        // initialize this one with the correct output creator
-        textReport = new MultiLineTextReport();
+        this.useSingleLineChangeTextReport = useSingleLineChangeTextReport;
+        if(useSingleLineChangeTextReport){
+            textReport = new SingleLineChangeTextReport();
+        }else{
+            textReport = new MultiLineChangeTextReport();
+        }
         XsdLoader xsdLoader = new XsdLoader(null);
         this.oldDocument = xsdLoader.load(new File(oldDocument));
         this.newDocument = xsdLoader.load(new File(newDocument));
@@ -55,7 +62,11 @@ public class XsdComparer {
     public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-        textReport = new MultiLineTextReport();
+        if(useSingleLineChangeTextReport){
+            textReport = new SingleLineChangeTextReport();
+        }else{
+            textReport = new MultiLineChangeTextReport();
+        }
         this.oldDocument = oldDocument;
         this.newDocument = newDocument;
     }

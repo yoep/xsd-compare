@@ -8,8 +8,10 @@ import lombok.Data;
 
 import java.util.*;
 
+/** The SingleLineChangeTextReport creates only a single text line for every XSD change
+ * this harder to read, but assists  to compare the result with other XSD comparison tools */
 @Data
-public class MultiLineTextReport implements TextReport {
+public class SingleLineChangeTextReport implements TextReport {
 
     private String reportHeader = "";
     private String reportFooter = null;
@@ -33,7 +35,7 @@ public class MultiLineTextReport implements TextReport {
     private int removedAttributesInXML = 0;
 
     public void addDocuments(XsdDocument oldNode, XsdDocument newNode){
-        reportHeader =   "**** XSD COMPARISON ****" +
+        reportHeader =   "**** NO HEADER ****" +
                 "\n\t old grammar: " + oldNode.getName() +
                 "\n\t new grammar: " + newNode.getName() + "\n\n\n";
     }

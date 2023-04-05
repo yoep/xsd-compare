@@ -16,7 +16,9 @@ public class XsdCompareStarter {
         final List<String> fileNames = new ArrayList<String>();
 
         boolean gui = false;
-        boolean single = false;
+        /** The SingleLineChangeTextReport creates only a single text line for every XSD change
+         * this harder to read, but assists  to compare the result with other XSD comparison tools */
+        boolean useSingleLineTextReport = false;
 
         for (int i = 0; i < args.length; i++) {
             args[i] = args[i].trim();
@@ -26,14 +28,14 @@ public class XsdCompareStarter {
                 usage();
                 return -1;
             }
-            else if (args[i].equalsIgnoreCase("-singleline")
+            else if (args[i].equalsIgnoreCase("-single")
                     || args[i].equalsIgnoreCase("-s")
-                    || args[i].equalsIgnoreCase("--singleline")
-                    || args[i].equalsIgnoreCase("--s")) single = true;
-            else if (args[i].equalsIgnoreCase("-multiline")
+                    || args[i].equalsIgnoreCase("--single")
+                    || args[i].equalsIgnoreCase("--s")) useSingleLineTextReport = true;
+            else if (args[i].equalsIgnoreCase("-multi")
                     || args[i].equalsIgnoreCase("-m")
-                    || args[i].equalsIgnoreCase("--multiline")
-                    || args[i].equalsIgnoreCase("--m")) single = false;
+                    || args[i].equalsIgnoreCase("--multi")
+                    || args[i].equalsIgnoreCase("--m")) useSingleLineTextReport = false;
             else if (args[i].equalsIgnoreCase("-gui")
                     || args[i].equalsIgnoreCase("-g")
                     || args[i].equalsIgnoreCase("--gui")
@@ -66,7 +68,7 @@ public class XsdCompareStarter {
                 String[] guiArgs = {currentDir + fileNames.get(0), currentDir + fileNames.get(1)};
                 XsdCompareApplication.main(guiArgs);
             }else {
-                XsdComparer comparer = new XsdComparer(currentDir + fileNames.get(0), currentDir + fileNames.get(1));
+                XsdComparer comparer = new XsdComparer(currentDir + fileNames.get(0), currentDir + fileNames.get(1), useSingleLineTextReport);
                 System.out.println(comparer.compareAsString());
             }
             return 0;
@@ -83,10 +85,10 @@ public class XsdCompareStarter {
     private static final String USAGE_UI =
     "usage: java -jar xsd-compare-jar-with-dependencies.jar <opts> <old-xsd-grammar> <new-xsd-grammar>\n\n" +
             "options:\n" +
-            "\t\t-singleline or -s: one single line for each change with XPath in the start.\n" +
-            "\t\t-multiline or -m: multiple lines indented per change sorted by XSD change. (default).\n" +
-            "\t\t-gui: starts a JavaFX GUI front-end for comparison.\n" +
             "\t\t-ui: omits the GUI and returns only a text result for comparision (default).\n" +
+            "\t\t-gui: starts a JavaFX GUI front-end for comparison.\n" +
+            "\t\t-multi or -m: multiple lines indented per change sorted by XSD change. (default).\n" +
+            "\t\t-single or -s: one single line for each change with XPath in the start, harder to read but easier for compare the output with other tools.\n" +
             "\t\t-help or -h: this help text.\n";
             // + "\t\t-version   : display version number.\n";
 
