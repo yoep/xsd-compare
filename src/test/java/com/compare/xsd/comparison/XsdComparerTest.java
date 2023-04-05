@@ -1,6 +1,6 @@
 package com.compare.xsd.comparison;
 
-import com.compare.xsd.comparison.model.ModificationType;
+import com.compare.xsd.comparison.model.ChangeType;
 import com.compare.xsd.comparison.model.xsd.XsdElementNode;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
@@ -120,7 +120,7 @@ public class XsdComparerTest {
         XsdElementNode element = newDocument.getElementByName("MyRootElement");
         XsdNode attribute = element.findAttributeByName("attribute2");
 
-        assertEquals(ModificationType.ADDED, attribute.getModifications().getType());
+        assertEquals(ChangeType.ADDED, attribute.getChange().getType());
     }
 
     @Test
@@ -136,6 +136,6 @@ public class XsdComparerTest {
         XsdElementNode element = originalDocument.getElementByName("MyRootElement");
         XsdNode attribute = element.findAttributeByName("attribute2");
 
-        assertEquals(ModificationType.REMOVED, attribute.getModifications().getType());
+        assertEquals(ChangeType.REMOVED, attribute.getChange().getType());
     }
 }

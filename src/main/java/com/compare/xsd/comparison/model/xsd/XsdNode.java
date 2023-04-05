@@ -1,6 +1,6 @@
 package com.compare.xsd.comparison.model.xsd;
 
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import javafx.scene.image.Image;
 
 import java.util.List;
@@ -123,12 +123,12 @@ public interface XsdNode {
      *
      * @return Returns the modifications.
      */
-    Modifications getModifications();
+    Change getChange();
 
     /**
      * Set the modifications of this node.
      *
-     * @param modifications Set the modifications.
+     * @param change Set the modifications.
      */
-    void setModifications(Modifications modifications);
+    void setChange(Change change);
 }

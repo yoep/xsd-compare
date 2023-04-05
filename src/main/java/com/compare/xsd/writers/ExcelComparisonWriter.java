@@ -1,7 +1,7 @@
 package com.compare.xsd.writers;
 
 import com.compare.xsd.comparison.XsdComparer;
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.compare.xsd.comparison.model.xsd.impl.XsdEmptyAttributeNode;
@@ -208,15 +208,15 @@ public class ExcelComparisonWriter {
 
     private int writeXsdNode(XsdNode node, TableHeader tableHeader, int levelIndex, int rowIndex, Worksheet worksheet, boolean isComparison) {
         if (levelIndex <= tableHeader.getLevelColumns().size() - 1) {
-            Modifications modifications = ofNullable(node.getModifications()).orElse(new Modifications());
-            Color backgroundColor = getBackgroundColor(modifications);
+            Change modification = ofNullable(node.getChange()).orElse(new Change());
+            Color backgroundColor = getBackgroundColor(modification);
             Color transparent = new Color(255, 255, 255, 0);
             List<CellRange> nameCells = new ArrayList<>();
             CellRange type = CellRange.builder()
                     .range(new CellRange.Range(tableHeader.getTypeColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getTypeName())
-                    .fontColor(isComparison && modifications.isTypeChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isTypeChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
@@ -224,7 +224,7 @@ public class ExcelComparisonWriter {
                     .range(new CellRange.Range(tableHeader.getCardinalityColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getCardinality())
-                    .fontColor(isComparison && modifications.isCardinalityChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isCardinalityChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
@@ -232,7 +232,7 @@ public class ExcelComparisonWriter {
                     .range(new CellRange.Range(tableHeader.getFixedValueColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getFixedValue())
-                    .fontColor(isComparison && modifications.isFixedValueChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isFixedValueChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
@@ -240,7 +240,7 @@ public class ExcelComparisonWriter {
                     .range(new CellRange.Range(tableHeader.getPatternColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getPattern())
-                    .fontColor(isComparison && modifications.isPatternChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isPatternChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
@@ -248,7 +248,7 @@ public class ExcelComparisonWriter {
                     .range(new CellRange.Range(tableHeader.getEnumerationColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getEnumeration())
-                    .fontColor(isComparison && modifications.isEnumerationChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isEnumerationChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();
@@ -256,7 +256,7 @@ public class ExcelComparisonWriter {
             for (CellRange column : tableHeader.getLevelColumns()) {
                 CellRange cell = CellRange.builder()
                         .range(new CellRange.Range(column.getRange().getColumnStart(), rowIndex))
-                        .fontColor(isComparison && modifications.isNameChanged() ? Color.RED : Color.BLACK)
+                        .fontColor(isComparison && modification.isNameChanged() ? Color.RED : Color.BLACK)
                         .backgroundColor(isComparison ? backgroundColor : transparent)
                         .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                         .build();
@@ -344,11 +344,11 @@ public class ExcelComparisonWriter {
         worksheet.write(informationCells);
     }
 
-    private Color getBackgroundColor(Modifications modifications) {
+    private Color getBackgroundColor(Change modification) {
         Color transparent = new Color(255, 255, 255, 0);
 
-        if (modifications != null && modifications.getType() != null) {
-            switch (modifications.getType()) {
+        if (modification != null && modification.getType() != null) {
+            switch (modification.getType()) {
                 case ADDED:
                     return new Color(170, 255, 201);
                 case REMOVED:

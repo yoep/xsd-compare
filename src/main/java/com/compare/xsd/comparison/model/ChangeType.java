@@ -1,6 +1,6 @@
 package com.compare.xsd.comparison.model;
 
-public enum ModificationType {
+public enum ChangeType {
     ADDED,
     REMOVED,
     MOVED,

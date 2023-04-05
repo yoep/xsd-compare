@@ -65,6 +65,20 @@ public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
         }
     }
 
+    public String getFixedDefaultValue(){
+        List<String> enumeration = this.getEnumeration();
+        String fixedDefaultValue = null;
+        if(enumeration != null && enumeration.size() == 1){
+            fixedDefaultValue = enumeration.get(0);
+        }
+        if(this.getFixedValue() != null && fixedDefaultValue != null){
+            Assert.isTrue(fixedDefaultValue.equals(this.getFixedValue()), "Simple Node");
+        }else if(fixedDefaultValue == null){
+            fixedDefaultValue = this.getFixedValue();
+        }
+        return fixedDefaultValue;
+    }
+
     /**
      * Initialize a new instance of {@link XsdAttribute}.
      * This constructor should only be used by {@link XsdEmptyAttributeNode}.

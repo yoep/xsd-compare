@@ -1,6 +1,6 @@
 package com.compare.xsd.renderers;
 
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -61,20 +61,20 @@ public class PropertyViewRender implements RenderView {
      */
     public void render(XsdNode node) {
         ObservableList<Property> items = this.propertyView.getItems();
-        Modifications modifications = node.getModifications() != null ? node.getModifications() : new Modifications();
+        Change modification = node.getChange() != null ? node.getChange() : new Change();
 
         items.clear();
-        items.add(new Property("Name", node.getName(), modifications.isNameChanged()));
-        items.add(new Property("Type", node.getTypeName(), modifications.isTypeChanged()));
-        items.add(new Property("Type Namespace", node.getTypeNamespace(), modifications.isNamespaceChanged()));
-        items.add(new Property("Cardinality", node.getCardinality(), modifications.isCardinalityChanged()));
-        items.add(new Property("Fixed value", node.getFixedValue(), modifications.isFixedValueChanged()));
-        items.add(new Property("Pattern", node.getPattern(), modifications.isPatternChanged()));
-        items.add(new Property("Enumeration", node.getEnumeration(), modifications.isEnumerationChanged()));
-        items.add(new Property("Length", node.getLength(), modifications.isLengthChanged()));
-        items.add(new Property("Min. length", node.getMinLength(), modifications.isMinLengthChanged()));
-        items.add(new Property("Max. length", node.getMaxLength(), modifications.isMaxLengthChanged()));
-        items.add(new Property("Whitespace mode", node.getWhitespace(), modifications.isWhitespaceChanged()));
+        items.add(new Property("Name", node.getName(), modification.isNameChanged()));
+        items.add(new Property("Type", node.getTypeName(), modification.isTypeChanged()));
+        items.add(new Property("Type Namespace", node.getTypeNamespace(), modification.isNamespaceChanged()));
+        items.add(new Property("Cardinality", node.getCardinality(), modification.isCardinalityChanged()));
+        items.add(new Property("Fixed value", node.getFixedValue(), modification.isFixedValueChanged()));
+        items.add(new Property("Pattern", node.getPattern(), modification.isPatternChanged()));
+        items.add(new Property("Enumeration", node.getEnumeration(), modification.isEnumerationChanged()));
+        items.add(new Property("Length", node.getLength(), modification.isLengthChanged()));
+        items.add(new Property("Min. length", node.getMinLength(), modification.isMinLengthChanged()));
+        items.add(new Property("Max. length", node.getMaxLength(), modification.isMaxLengthChanged()));
+        items.add(new Property("Whitespace mode", node.getWhitespace(), modification.isWhitespaceChanged()));
         this.node = node;
     }
 

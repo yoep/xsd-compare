@@ -1,6 +1,6 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import javafx.scene.image.Image;
 import lombok.AccessLevel;
@@ -44,7 +44,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected List<String> enumeration = new ArrayList<>();
 
     protected AbstractXsdNode parent;
-    protected Modifications modifications;
+    protected Change change;
 
     //region Constructors
 
@@ -98,8 +98,8 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public Image getModificationColor() {
-        if (modifications != null) {
-            switch (modifications.getType()) {
+        if (change != null) {
+            switch (change.getType()) {
                 case ADDED:
                     return loadResourceIcon("green.png");
                 case REMOVED:
