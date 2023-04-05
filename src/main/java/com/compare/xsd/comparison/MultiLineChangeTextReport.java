@@ -150,17 +150,10 @@ public class MultiLineChangeTextReport implements TextReport {
                 c.setReportBody("in " + c.newNode.getParent().getName() + " at " + c.newNode.getXPath());
             }
         } else if (c.type == ChangeType.MODIFIED) {
-            if (c.isElement) {
-                c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
-                        "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                        "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-                c.setReportBody("\t\t\t" + c.newNode.getXPath());
-            } else {
-                c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
-                        "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                        "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-                c.setReportBody("\t\t\t" + c.newNode.getXPath());
-            }
+            c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
+                    "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
+                    "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
+            c.setReportBody("\t\t\t" + c.newNode.getXPath());
         /*
             "Changed type namespace from " + oldNode.getTypeNamespace() + " to " + newNode.getTypeNamespace()
             "Changed type from " + oldNode.getTypeName() + " to " + newNode.getTypeName()

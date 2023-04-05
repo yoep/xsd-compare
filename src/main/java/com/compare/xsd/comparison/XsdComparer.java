@@ -49,7 +49,9 @@ public class XsdComparer {
         }
         XsdLoader xsdLoader = new XsdLoader(null);
         this.oldDocument = xsdLoader.load(new File(oldDocument));
+        log.debug("Finished loading original grammar!");
         this.newDocument = xsdLoader.load(new File(newDocument));
+        log.debug("Finished loading new grammar!");
     }
 
 
