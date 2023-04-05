@@ -14,9 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +29,37 @@ public class XsdComparerTest {
 
     private XsdLoader xsdLoader;
 
-    private static final String COMPARISON_RESULT_CII_D16B_WITH_D22B = "references/comparison-CII_D16B-with-D22B.txt";
+    /**
+     * Via Maven pom.xml (surefire test plugin) received System variable of the absolute path of the
+     * base directory
+     *
+     * <p>{@ref https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide}
+     *
+     * <p>The absolute path to the pom directory of this submodule, which is relative to project root
+     * ./generator/schema2template
+     */
+    static final String BASE_DIR = System.getProperty("xsd.compare.base.dir") + File.separator;
+
+    private static final String RESOURCES_DIR = BASE_DIR + "src" + File.separator
+            + "test" + File.separator
+            + "resources" + File.separator;
+
+    private static final String TARGET_DIR = BASE_DIR + "target" + File.separator;
+    private static final String REFERENCES_DIR = RESOURCES_DIR + "references" + File.separator;
+    private static final String XSD_DIR = RESOURCES_DIR + "xsd" + File.separator;
+
+    private static final String CII_D16B_XSD = XSD_DIR + "EN16931" + File.separator
+            + "data" + File.separator
+            + "standard" + File.separator
+            + "CrossIndustryInvoice_100pD16B.xsd";
+
+    private static final String CII_D22B_XSD = XSD_DIR + "uncefact_22B_20230324" + File.separator
+            + "CrossIndustryInvoice_100pD22B.xsd";
+
+    private static final String REPORT_CII_D16D_WITH_D22B = "comparison-CII_D16B-with-D22B.txt";
+
+
+
 
     @BeforeEach
     public void setup() {
@@ -39,19 +69,19 @@ public class XsdComparerTest {
 
     @Test
     public void testCompare_recursiveGrammar() throws IOException {
-        ClassPathResource originalResource = new ClassPathResource("xsd/EN16931/data/standard/CrossIndustryInvoice_100pD16B.xsd");
-        ClassPathResource newResource = new ClassPathResource("xsd/uncefact_22B_20230324/CrossIndustryInvoice_100pD22B.xsd");
-
-        XsdDocument originalGrammar = xsdLoader.load(originalResource.getFile());
+        File oldGrammarFile = new File(CII_D16B_XSD);
+        File newGrammarFile = new File(CII_D22B_XSD);
+        
+        XsdDocument oldGrammar = xsdLoader.load(oldGrammarFile);
         log.debug("Finished loading original grammar!");
-        XsdDocument newGrammar = xsdLoader.load(newResource.getFile());
+        XsdDocument newGrammar = xsdLoader.load(newGrammarFile);
         log.debug("Finished loading new grammar!");
-        XsdComparer comparer = new XsdComparer(originalGrammar, newGrammar);
+        XsdComparer comparer = new XsdComparer(oldGrammar, newGrammar);
         String result = comparer.compareAsString();
         System.out.println(result);
-        // if you change the programming copy the reference test from the last test
-        Files.writeString(Paths.get(new ClassPathResource("references/newReference.txt").getURI()), result);
-        String referenceResult = Files.readString(Paths.get(new ClassPathResource(COMPARISON_RESULT_CII_D16B_WITH_D22B).getURI()));
+        // if you change the programming, update the reference by copying new result as new reference!
+        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, StandardOpenOption.CREATE);
+        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B).toURI()));
         assertTrue(result.equals(referenceResult));
 
         int added = comparer.getAdded();
@@ -72,8 +102,7 @@ public class XsdComparerTest {
         XsdComparer comparer = new XsdComparer(baseDocument, additionalDocument);
 
         boolean result = comparer.compare();
-
-        assertTrue(result);
+        assertTrue(result, "\nIf the test fails due to a new output (e.g. programming update) update the reference by copying new result as updated reference:\n\t" + TARGET_DIR + REPORT_CII_D16D_WITH_D22B +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B);
     }
 
     @Test
