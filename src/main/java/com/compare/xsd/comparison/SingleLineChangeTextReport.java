@@ -13,156 +13,53 @@ import java.util.*;
 @Data
 public class SingleLineChangeTextReport implements TextReport {
 
-    private String reportHeader = "";
-    private String reportFooter = null;
-
     private StringBuilder sb;
     /** creating a report with a header line and a set of body lines */
-    private Map<String, Set<String>> report = new TreeMap<>();
+    private Set<String> report = new TreeSet<>();
     private List<Change> changes = new ArrayList<>();
 
-    private int addedAttributesInTypes = 0;
-    private int addedAttributesInXML = 0;
-    private int addedElementsInTypes = 0;
-    private int addedElementsInXML = 0;
-    private int modifiedElementsInTypes = 0;
-    private int modifiedElementsInXML = 0;
-    private int modifiedAttributesInTypes = 0;
-    private int modifiedAttributesInXML = 0;
-    private int removedElementsInTypes = 0;
-    private int removedElementsInXML = 0;
-    private int removedAttributesInTypes = 0;
-    private int removedAttributesInXML = 0;
+    public void addDocuments(XsdDocument oldNode, XsdDocument newNode){}
 
-    public void addDocuments(XsdDocument oldNode, XsdDocument newNode){
-        reportHeader =   "**** NO HEADER ****" +
-                "\n\t old grammar: " + oldNode.getName() +
-                "\n\t new grammar: " + newNode.getName() + "\n\n\n";
-    }
+    /**
+     1) ADDING
+     /CrossIndustryInvoice/@languageID added @languageID {token}{0..1} in type {CodeType}
+     /CrossIndustryInvoice/BasisDateTime added <BasisDateTime> {DateTimeType}{0..1} in type {TradePriceType}
 
-    private String getReportHeader(){
-        if(reportHeader == null){
-            reportHeader = "";
-        }
-        return reportHeader;
-    }
-    private void updateStatistic(Change change, boolean newHeaderLine){
+     2) MODIFYING
+     /CrossIndustryInvoice/@format modifying attribute: old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType} new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType} Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
+     /CrossIndustryInvoice/AssociatedDocumentLineDocument modifying element: old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType} new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType} Changed cardinality from 1..1 to 0..1
 
-        switch (change.type) {
-            case ADDED:
-                if(change.isElement){
-                    if(newHeaderLine)
-                        addedElementsInTypes++;
-                    addedElementsInXML++;
-                }else{
-                    if(newHeaderLine)
-                        addedAttributesInTypes++;
-                    addedAttributesInXML++;
-                }
-                break;
-            case MODIFIED:
-                if(change.isElement){
-                    if(newHeaderLine)
-                        modifiedElementsInTypes++;
-                    modifiedElementsInXML++;
-                }else{
-                    if(newHeaderLine)
-                        modifiedAttributesInTypes++;
-                    modifiedAttributesInXML++;
-                }
-                break;
-            case REMOVED:
-                if(change.isElement){
-                    if(newHeaderLine)
-                        removedElementsInTypes++;
-                    removedElementsInXML++;
-                }else{
-                    if(newHeaderLine)
-                        removedAttributesInTypes++;
-                    removedAttributesInXML++;
-                }
-                break;
-            default:
-                System.err.println("INVALID CHANGE!");
-        }
-    }
-
-
-    /*
-    The function below creates a statistic similar to the one below:
-
-    **** STATISTIC ****
-
-
-    ELEMENTS:
-
-        Added elements in XSD:	98
-        Added elements in XML:	1828
-
-        Modified elements in XSD:	18
-        Modified elements in XML:	175
-
-        Removed elements from XSD:	6
-        Removed elements from XML:	45
-
-
-    ATTRIBUTES:
-
-        Added attributes in XSD:	5
-        Added attributes in XML:	10
-
-        Modified attributes in XSD:	11
-        Modified attributes in XML:	136
-
-        Removed attributes from XSD:	141
-        Removed attributes from XML:	8703
+     3) REMOVAL
+     /CrossIndustryInvoice/@format removed @format {string}{0..1} in type {NumericType}
+     /CrossIndustryInvoice/SubordinateBasicWorkItem <SubordinateBasicWorkItem> {BasicWorkItemType}{0..*} in type {BasicWorkItemType}
 
      */
-    private String getReportFooter(){
-        if(reportFooter == null) {
-            StringBuilder statistic = new StringBuilder();
-
-            statistic.append("\n**** STATISTIC ****");
-            statistic.append("\n\n\nELEMENTS:");
-            statistic.append("\n\n\tAdded elements in XSD:\t").append(addedElementsInTypes);
-            statistic.append("\n\tAdded elements in XML:\t").append(addedElementsInXML);
-            statistic.append("\n\n\tModified elements in XSD:\t").append(modifiedElementsInTypes);
-            statistic.append("\n\tModified elements in XML:\t").append(modifiedElementsInXML);
-            statistic.append("\n\n\tRemoved elements from XSD:\t").append(removedElementsInTypes);
-            statistic.append("\n\tRemoved elements from XML:\t").append(removedElementsInXML);
-            statistic.append("\n\n\nATTRIBUTES:");
-            statistic.append("\n\n\tAdded attributes in XSD:\t").append(addedAttributesInTypes);
-            statistic.append("\n\tAdded attributes in XML:\t").append(addedAttributesInXML);
-            statistic.append("\n\n\tModified attributes in XSD:\t").append(modifiedAttributesInTypes);
-            statistic.append("\n\tModified attributes in XML:\t").append(modifiedAttributesInXML);
-            statistic.append("\n\n\tRemoved attributes from XSD:\t").append(removedAttributesInTypes);
-            statistic.append("\n\tRemoved attributes from XML:\t").append(removedAttributesInXML);
-            reportFooter = statistic.toString();
-        }
-        return reportFooter;
-
-    }
-
     private void createChangeMessage(Change c){
         if (c.type == ChangeType.ADDED) {
+            /*
+             *      1) ADDING
+             *      /CrossIndustryInvoice/BasisDateTime added <BasisDateTime> {DateTimeType}{0..1} in type {TradePriceType}
+             *      /CrossIndustryInvoice/@languageID added @languageID {token}{0..1} in type {CodeType}
+             */
             if (c.isElement) {
-                c.setReportHeader("Added element <" + c.newNode.getName() + "> {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getTypeName() + "}");
-                c.setReportBody("in " + c.newNode.getParent().getName() + " at " + c.newNode.getXPath());
+                c.setReportHeader(c.newNode.getXPath() + " added <" + c.newNode.getName() + "> {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getTypeName() + "}");
             } else {
-                c.setReportHeader("Added attribute @" + c.newNode.getName() + " {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getTypeName() + "}");
-                c.setReportBody("in " + c.newNode.getParent().getName() + " at " + c.newNode.getXPath());
+                c.setReportHeader(c.newNode.getXPath() + " added @" + c.newNode.getName() + " {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getTypeName() + "}");
             }
         } else if (c.type == ChangeType.MODIFIED) {
+            /*
+             *      2) MODIFYING
+             *      /CrossIndustryInvoice/@format modifying attribute: old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType} new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType} Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
+             *      /CrossIndustryInvoice/AssociatedDocumentLineDocument modifying element: old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType} new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType} Changed cardinality from 1..1 to 0..1
+             */
             if (c.isElement) {
-                c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
-                        "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                        "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-                c.setReportBody("\t\t\t" + c.newNode.getXPath());
+                c.setReportHeader(c.newNode.getXPath() + " modifying " + (c.isElement ? "element: " : "attribute: ") +
+                        "old: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
+                        "new: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
             } else {
-                c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
-                        "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                        "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-                c.setReportBody("\t\t\t" + c.newNode.getXPath());
+                c.setReportHeader(c.newNode.getXPath() + " modifying " + (c.isElement ? "element: " : "attribute: ") +
+                        "old: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
+                        "new: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
             }
         /*
             "Changed type namespace from " + oldNode.getTypeNamespace() + " to " + newNode.getTypeNamespace()
@@ -178,45 +75,48 @@ public class SingleLineChangeTextReport implements TextReport {
             "Changed whitespace from " + oldNode.getWhitespace() + " to " + newNode.getWhitespace()
         */
             if (c.isNamespaceChanged()) {
-                c.setReportHeader(c.getReportHeader() + "\n\t\tChanged type namespace from " + c.oldNode.getTypeNamespace() + " to " + c.newNode.getTypeNamespace());
+                c.setReportHeader(c.getReportHeader() + " changed type namespace from " + c.oldNode.getTypeNamespace() + " to " + c.newNode.getTypeNamespace());
             }
             if (c.isTypeChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
+                c.setReportHeader(c.getReportHeader() + (" changed type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
             }
             if (c.isCardinalityChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
+                c.setReportHeader(c.getReportHeader() + (" changed cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
             }
             if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixedValue from " + c.oldNode.getFixedValue() + " to " + c.newNode.getFixedValue()));
+                c.setReportHeader(c.getReportHeader() + (" changed fixedValue from " + c.oldNode.getFixedValue() + " to " + c.newNode.getFixedValue()));
             }
             if (c.isPatternChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
+                c.setReportHeader(c.getReportHeader() + (" changed pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
             }
             if (c.isMaxLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength()));
+                c.setReportHeader(c.getReportHeader() + (" changed maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength()));
             }
             if (c.isMinLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength()));
+                c.setReportHeader(c.getReportHeader() + (" changed minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength()));
             }
             if (c.isLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
+                c.setReportHeader(c.getReportHeader() + (" changed length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
             }
             if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
+                c.setReportHeader(c.getReportHeader() + (" changed fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isEnumerationChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
+                c.setReportHeader(c.getReportHeader() + (" changed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
             }
             if (c.isWhitespaceChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
+                c.setReportHeader(c.getReportHeader() + (" changed whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
             }
         } else if (c.type == ChangeType.REMOVED) {
+            /*
+             *      3) REMOVAL
+             *      /CrossIndustryInvoice/SubordinateBasicWorkItem <SubordinateBasicWorkItem> {BasicWorkItemType}{0..*} in type {BasicWorkItemType}
+             *      /CrossIndustryInvoice/@format removed @format {string}{0..1} in type {NumericType}             *
+             */
             if (c.isElement) {
-                c.setReportHeader("Removed element <" + c.oldNode.getName() + "> {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getTypeName() + "}");
-                c.setReportBody("in " + c.oldNode.getParent().getName() + " at " + c.oldNode.getXPath());
+                c.setReportHeader(c.oldNode.getXPath() + " removed <" + c.oldNode.getName() + "> {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getTypeName() + "}");
             } else {
-                c.setReportHeader("Removed attribute @" + c.oldNode.getName() + " {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getTypeName() + "}");
-                c.setReportBody("in " + c.oldNode.getParent().getName() + " at " + c.oldNode.getXPath());
+                c.setReportHeader(c.oldNode.getXPath() + " removed @" + c.oldNode.getName() + " {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getTypeName() + "}");
             }
         }
     }
@@ -232,17 +132,9 @@ public class SingleLineChangeTextReport implements TextReport {
 
         createChangeMessage(c);
         String reportHeader = c.getReportHeader();
-        Set<String> bodyLines;
-        if(!report.containsKey(reportHeader)){
-            bodyLines = new TreeSet<>();
-            updateStatistic(c, true);
-        }else{
-            bodyLines = report.get(reportHeader);
-            updateStatistic(c, false);
-        }
-        bodyLines.add(c.getReportBody());
-        report.put(reportHeader, bodyLines);
+        report.add(reportHeader);
     }
+
     private void createMessages(){
         for(Change c : changes){
             createMessage(c);
@@ -252,29 +144,14 @@ public class SingleLineChangeTextReport implements TextReport {
     public String getReport(){
         createMessages();
         StringBuilder output = new StringBuilder();
-        output.append(getReportHeader());
-        for(String headerLine : this.report.keySet()){
+        for(String headerLine : report){
             output.append(headerLine).append("\n");
-            Set<String> bodyLines = report.get(headerLine);
-            for(String bodyLine : bodyLines){
-                output.append("\t").append(bodyLine).append("\n");
-            }
-            output.append("\n");
         }
-        output.append("\n");
-        output.append(getReportFooter());
         return output.toString();
     }
 
     public void reset() {
-        this.removedElementsInTypes = 0;
-        this.removedElementsInXML = 0;
-        this.removedAttributesInTypes = 0;
-        this.removedAttributesInXML = 0;
-        this.addedAttributesInTypes = 0;
-        this.addedAttributesInXML = 0;
-        this.addedElementsInTypes = 0;
-        this.addedElementsInXML = 0;
         this.report.clear();
+        this.changes.clear();
     }
 }

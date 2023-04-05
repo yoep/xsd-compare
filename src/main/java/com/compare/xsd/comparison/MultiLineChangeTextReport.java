@@ -14,7 +14,6 @@ public class MultiLineChangeTextReport implements TextReport {
     private String reportHeader = "";
     private String reportFooter = null;
 
-    private StringBuilder sb;
     /** creating a report with a header line and a set of body lines */
     private Map<String, Set<String>> report = new TreeMap<>();
     private List<Change> changes = new ArrayList<>();
@@ -274,5 +273,8 @@ public class MultiLineChangeTextReport implements TextReport {
         this.addedElementsInTypes = 0;
         this.addedElementsInXML = 0;
         this.report.clear();
+        this.changes.clear();
+        reportHeader = "";
+        reportFooter = null;
     }
 }
