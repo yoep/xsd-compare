@@ -28,7 +28,7 @@ public class XsdComparer {
 
     private Map<String, Integer> alreadyComparedAncestor_NewGrammar = new HashMap<>();
     private Map<String, Integer> alreadyComparedAncestor_OldGrammar = new HashMap<>();
-    private MultiLineTextReport textReport;
+    private TextReport textReport;
     /**
      * Initialize a new instance of {@link XsdComparer}.
      *

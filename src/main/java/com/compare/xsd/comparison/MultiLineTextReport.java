@@ -9,7 +9,7 @@ import lombok.Data;
 import java.util.*;
 
 @Data
-public class MultiLineTextReport {
+public class MultiLineTextReport implements TextReport {
 
     private String reportHeader = "";
     private String reportFooter = null;
@@ -38,7 +38,7 @@ public class MultiLineTextReport {
                 "\n\t new grammar: " + newNode.getName() + "\n\n\n";
     }
 
-    public String getReportHeader(){
+    private String getReportHeader(){
         if(reportHeader == null){
             reportHeader = "";
         }
@@ -116,7 +116,7 @@ public class MultiLineTextReport {
         Removed attributes from XML:	8703
 
      */
-    public String getReportFooter(){
+    private String getReportFooter(){
         if(reportFooter == null) {
             StringBuilder statistic = new StringBuilder();
 
@@ -219,7 +219,7 @@ public class MultiLineTextReport {
         }
     }
 
-    void addChange(Change c){
+    public void addChange(Change c){
         changes.add(c);
     }
 
@@ -241,7 +241,7 @@ public class MultiLineTextReport {
         bodyLines.add(c.getReportBody());
         report.put(reportHeader, bodyLines);
     }
-    void createMessages(){
+    private void createMessages(){
         for(Change c : changes){
             createMessage(c);
         }
