@@ -68,7 +68,7 @@ public class PropertyViewRender implements RenderView {
         items.add(new Property("Type", node.getTypeName(), modification.isTypeChanged()));
         items.add(new Property("Type Namespace", node.getTypeNamespace(), modification.isNamespaceChanged()));
         items.add(new Property("Cardinality", node.getCardinality(), modification.isCardinalityChanged()));
-        items.add(new Property("Fixed value", node.getFixedValue(), modification.isFixedValueChanged()));
+        items.add(new Property("Fixed default", node.getFixedValue(), modification.isFixedDefaultChanged()));
         items.add(new Property("Pattern", node.getPattern(), modification.isPatternChanged()));
         items.add(new Property("Enumeration", node.getEnumeration(), modification.isEnumerationChanged()));
         items.add(new Property("Length", node.getLength(), modification.isLengthChanged()));

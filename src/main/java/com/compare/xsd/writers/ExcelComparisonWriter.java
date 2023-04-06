@@ -232,7 +232,7 @@ public class ExcelComparisonWriter {
                     .range(new CellRange.Range(tableHeader.getFixedValueColumn().getRange().getColumnEndIndex(), rowIndex))
                     .autoSizeColumn(true)
                     .value(node.getFixedValue())
-                    .fontColor(isComparison && modification.isFixedValueChanged() ? Color.RED : Color.BLACK)
+                    .fontColor(isComparison && modification.isFixedDefaultChanged() ? Color.RED : Color.BLACK)
                     .backgroundColor(isComparison ? backgroundColor : transparent)
                     .fillPattern(isComparison ? FillPatternType.SOLID_FOREGROUND : FillPatternType.NO_FILL)
                     .build();

@@ -423,7 +423,7 @@ public class XsdComparer {
         boolean change = isPresenceDifferent(oldNode.getFixedValue(), newNode.getFixedValue()) ||
                 isValueDifferent(oldNode.getFixedValue(), newNode.getFixedValue());
         if(change){
-            modification.setFixedValueChanged(true);
+            modification.setFixedDefaultChanged(true);
         }
         return change;
     }
@@ -473,7 +473,7 @@ public class XsdComparer {
         if(change){
             if(oldNode instanceof XsdAttribute){
                 change = (((XsdAttribute) oldNode).getFixedDefaultValue()).equals(((XsdAttribute) newNode).getFixedDefaultValue());
-                modification.setFixedValueChanged(true);
+                modification.setFixedDefaultChanged(true);
             }
             modification.setEnumerationChanged(true);
         }

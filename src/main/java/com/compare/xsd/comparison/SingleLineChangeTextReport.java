@@ -77,8 +77,8 @@ public class SingleLineChangeTextReport implements TextReport {
             if (c.isCardinalityChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
             }
-            if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed fixedValue from " + c.oldNode.getFixedValue() + " to " + c.newNode.getFixedValue()));
+            if (c.isFixedDefaultChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isPatternChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
@@ -91,9 +91,6 @@ public class SingleLineChangeTextReport implements TextReport {
             }
             if (c.isLengthChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
-            }
-            if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isEnumerationChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));

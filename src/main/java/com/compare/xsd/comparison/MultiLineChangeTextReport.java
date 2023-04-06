@@ -176,8 +176,8 @@ public class MultiLineChangeTextReport implements TextReport {
             if (c.isCardinalityChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
             }
-            if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixedValue from " + c.oldNode.getFixedValue() + " to " + c.newNode.getFixedValue()));
+            if (c.isFixedDefaultChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isPatternChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
@@ -190,9 +190,6 @@ public class MultiLineChangeTextReport implements TextReport {
             }
             if (c.isLengthChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
-            }
-            if (c.isFixedValueChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isEnumerationChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));

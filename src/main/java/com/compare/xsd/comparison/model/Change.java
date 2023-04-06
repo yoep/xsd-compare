@@ -3,7 +3,6 @@ package com.compare.xsd.comparison.model;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.AbstractXsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdAttribute;
-import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.compare.xsd.comparison.model.xsd.impl.XsdElement;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class Change {
     private boolean namespaceChanged;
     private boolean typeChanged;
     private boolean cardinalityChanged;
-    private boolean fixedValueChanged;
+    private boolean fixedDefaultChanged;
     private boolean lengthChanged;
     private boolean maxLengthChanged;
     private boolean minLengthChanged;
@@ -67,7 +66,7 @@ public class Change {
      * @return Returns true if something changed, else false.
      */
     public boolean isModified() {
-        return nameChanged || namespaceChanged || typeChanged || cardinalityChanged || fixedValueChanged || lengthChanged || maxLengthChanged ||
+        return nameChanged || namespaceChanged || typeChanged || cardinalityChanged || fixedDefaultChanged || lengthChanged || maxLengthChanged ||
                 minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged;
     }
 

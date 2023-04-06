@@ -2141,7 +2141,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
 	new: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/SetTriggerCode/@listAgencyID
@@ -2264,7 +2263,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
 	new: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/SpecifiedDeliveryAdjustment/ReasonCode/@listAgencyID
@@ -2272,7 +2270,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
 	new: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ReasonCode/@listAgencyID
@@ -2285,7 +2282,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
 	new: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/AutomaticDataCaptureMethodTypeCode/@listAgencyID
@@ -2294,7 +2290,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
 	new: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/TypeCode/@listAgencyID
@@ -2303,7 +2298,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
 	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/OperationalCategoryCode/@listAgencyID
@@ -2312,7 +2306,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
 	new: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/PayingPartyRoleCode/@listAgencyID
@@ -2321,7 +2314,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
 	new: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/DirectTelephoneUniversalCommunication/ChannelCode/@listAgencyID
@@ -3568,7 +3560,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
 	new: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/TypeCode/@listAgencyID
@@ -3699,7 +3690,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
 	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
-		Changed fixedValue from 5 to 5
 		Changed fixed default from 5 to 5
 		Changed enumeration from [] to [5]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/CurrencyCode/@listAgencyID
@@ -3746,7 +3736,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
 	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ApplicableTradeDeliveryTerms/DeliveryTypeCode/@listAgencyID
@@ -3755,7 +3744,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
 	new: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/LinearSpatialDimension/TypeCode/@listAgencyID
@@ -3776,7 +3764,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
 	new: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/ExchangedDocument/TypeCode/@listAgencyID
@@ -3855,7 +3842,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
 	new: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/StatusCode/@listAgencyID
@@ -3933,7 +3919,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
 	new: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/TariffClassCode/@listAgencyID
@@ -3942,7 +3927,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
 	new: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/AssociatedDocumentLineDocument/LineStatusCode/@listAgencyID
@@ -3950,7 +3934,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
 	new: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/ExchangedDocument/PurposeCode/@listAgencyID
@@ -3960,7 +3943,6 @@ Modifying attribute:
 	new: @listAgencyID{token}{0..1} in type {PackageTypeCodeType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to http://www.w3.org/2001/XMLSchema
 		Changed type from PackageTypeCodeListAgencyIDContentType to token
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/TypeCode/@listAgencyID
@@ -3969,7 +3951,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
 	new: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/TypeCode/@listAgencyID
@@ -3978,7 +3959,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
 	new: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/RoleCode/@listAgencyID
@@ -4109,7 +4089,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
 	new: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/GuaranteeMethodCode/@listAgencyID
@@ -4117,7 +4096,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
 	new: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/PaymentChannelCode/@listAgencyID
@@ -4125,7 +4103,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
 	new: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/TypeCode/@listAgencyID
@@ -4133,7 +4110,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
 	new: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/FromEventCode/@listAgencyID
@@ -4142,7 +4118,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
 	new: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/TypeCode/@listAgencyID
@@ -4151,7 +4126,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
 	new: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/TypeCode/@listAgencyID
@@ -4162,7 +4136,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
 	new: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/ReferenceTypeCode/@listAgencyID
@@ -4240,7 +4213,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
 	new: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/CategoryCode/@listAgencyID
@@ -4265,7 +4237,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
 	new: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/TypeCode/@listAgencyID
@@ -4290,7 +4261,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
 	new: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/DueDateTypeCode/@listAgencyID
@@ -4315,7 +4285,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
 	new: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CategoryCode/@listAgencyID
@@ -4324,7 +4293,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
 	new: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/UsedCapacityCode/@listAgencyID
@@ -4335,7 +4303,6 @@ Modifying attribute:
 	new: @listAgencyID{token}{0..1} in type {CodeType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to http://www.w3.org/2001/XMLSchema
 		Changed type from TransportEquipmentSizeTypeCodeListAgencyIDContentType to token
-		Changed fixedValue from 6 to null
 		Changed fixed default from 6 to null
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CharacteristicCode/@listAgencyID
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CharacteristicCode/@listAgencyID
@@ -4343,7 +4310,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
 	new: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/TypeCode/@listAgencyID
@@ -4352,7 +4318,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
 	new: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/ModeCode/@listAgencyID
@@ -4361,7 +4326,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
 	new: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to [6]
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/StageCode/@listAgencyID
@@ -4370,7 +4334,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
 	new: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
-		Changed fixedValue from 210 to 210
 		Changed fixed default from 210 to 210
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
@@ -4493,7 +4456,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
 	new: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
-		Changed fixedValue from 210 to 210
 		Changed fixed default from 210 to 210
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
@@ -4616,7 +4578,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
 	new: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/TypeCode/@listAgencyID
@@ -4629,7 +4590,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
 	new: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/StatisticalClassificationCode/@listAgencyID
@@ -4640,7 +4600,6 @@ Modifying attribute:
 	new: @listAgencyID{LocationFunctionCodeListAgencyIDContentType}{0..1} in type {LocationFunctionCodeType}
 		Changed type namespace from http://www.w3.org/2001/XMLSchema to urn:un:unece:uncefact:data:standard:QualifiedDataType:100
 		Changed type from token to LocationFunctionCodeListAgencyIDContentType
-		Changed fixedValue from null to 6
 		Changed fixed default from null to 6
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceLogisticsLocation/TypeCode/@listAgencyID
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDespatchSupplyChainEvent/OccurrenceLogisticsLocation/TypeCode/@listAgencyID
@@ -4668,7 +4627,6 @@ Modifying attribute:
 	new: @listAgencyID{TransportServicePaymentArrangementCodeListAgencyIDContentType}{0..1} in type {TransportServicePaymentArrangementCodeType}
 		Changed type namespace from http://www.w3.org/2001/XMLSchema to urn:un:unece:uncefact:data:standard:QualifiedDataType:100
 		Changed type from token to TransportServicePaymentArrangementCodeListAgencyIDContentType
-		Changed fixedValue from null to 6
 		Changed fixed default from null to 6
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentArrangementCode/@listAgencyID
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentArrangementCode/@listAgencyID
@@ -4676,7 +4634,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
 	new: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeCode/@listAgencyID
@@ -4685,7 +4642,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
 	new: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeExtensionCode/@listAgencyID
@@ -4694,7 +4650,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
 	new: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
-		Changed fixedValue from 6 to 6
 		Changed fixed default from 6 to 6
 		Changed enumeration from [] to []
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/CalculationBasisCode/@listAgencyID
@@ -4703,7 +4658,6 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listID{token}{0..1} in type {TransportEquipmentSizeTypeCodeType}
 	new: @listID{token}{0..1} in type {CodeType}
-		Changed fixedValue from 8155 to null
 		Changed fixed default from 8155 to null
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CharacteristicCode/@listID
 				/CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CharacteristicCode/@listID
