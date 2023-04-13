@@ -82,7 +82,7 @@ public abstract class AbstractXsdNode implements XsdNode {
         String typeName = node.getTypeName();
         while(typeName == null){
             node = node.getParent();
-            if(node instanceof XsdDocument){
+            if(node instanceof XsdDocument || node == null){
                 return null;
             }
             typeName = node.getTypeName();

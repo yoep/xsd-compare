@@ -1043,7 +1043,7 @@ Added element <CustomsDutyIndicator> {IndicatorType}{0..1} in type {TradeTaxType
 	in CategoryTradeTax at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/CustomsDutyIndicator
 	in CategoryTradeTax at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/CustomsDutyIndicator
 
-Added element <DateTime> {dateTime}{1..1} in type {DateTimeType}
+Added element <DateTime> {dateTime}{0..1} in type {DateTimeType}
 	in DueDateDateTime at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/DueDateDateTime/DateTime
 	in EndDateTime at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/EndDateTime/DateTime
 	in EndDateTime at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/BillingSpecifiedPeriod/EndDateTime/DateTime
@@ -1289,7 +1289,7 @@ Added element <InclusiveIndicator> {IndicatorType}{0..1} in type {SpecifiedPerio
 	in BillingSpecifiedPeriod at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/InclusiveIndicator
 	in BillingSpecifiedPeriod at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/BillingSpecifiedPeriod/InclusiveIndicator
 
-Added element <IndicatorString> {null}{1..1} in type {IndicatorType}
+Added element <IndicatorString> {null}{0..1} in type {IndicatorType}
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ChargeIndicator/IndicatorString
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString

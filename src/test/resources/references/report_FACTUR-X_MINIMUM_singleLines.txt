@@ -14,7 +14,7 @@
 /CrossIndustryInvoice/ExchangedDocument/ID/@schemeURI added @schemeURI {anyURI}{0..1} in type {IDType}
 /CrossIndustryInvoice/ExchangedDocument/ID/@schemeVersionID added @schemeVersionID {token}{0..1} in type {IDType}
 /CrossIndustryInvoice/ExchangedDocument/IncludedNote added <IncludedNote> {NoteType}{0..*} in type {ExchangedDocumentType}
-/CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime added <DateTime> {dateTime}{1..1} in type {DateTimeType}
+/CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime added <DateTime> {dateTime}{0..1} in type {DateTimeType}
 /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTimeString/@format modifying attribute: old: @format{string}{1..1} in type {DateTimeType}new: @format{string}{0..1} in type {DateTimeType} changed cardinality from 1..1 to 0..1
 /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty added <IssuerTradeParty> {TradePartyType}{0..1} in type {ExchangedDocumentType}
 /CrossIndustryInvoice/ExchangedDocument/LanguageID added <LanguageID> {IDType}{0..*} in type {ExchangedDocumentType}

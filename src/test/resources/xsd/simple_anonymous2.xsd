@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="MyRootElement" type="DateTimeType" />
+
+	<!-- D22B  -->
+	<xs:complexType name="DateTimeType">
+		<xs:choice>
+			<xs:element name="DateTimeString">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="format" type="xs:string" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DateTime" type="xs:dateTime" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="IndicatorType2">
+		<xs:choice>
+			<xs:element name="IndicatorString">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="format" type="xs:string" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Indicator" type="xs:boolean" />
+		</xs:choice>
+	</xs:complexType>
+
+</xs:schema>

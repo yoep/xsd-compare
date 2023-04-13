@@ -77,29 +77,32 @@ public class XsdComparerTest {
     @Test
     public void recursiveGrammarsComparison() throws IOException {
 
+        String simpleAnonymous1 = XSD_DIR + "simple_anonymous.xsd";
+        String simpleAnonymous2 = XSD_DIR + "simple_anonymous2.xsd";
         for(TextReport.implementation reportType : TextReport.implementation.values()){
+
             compareTwoXsdGrammars(CII_D16B_XSD, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_MINIMUM, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_BASIC_WL, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_BASIC, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_EN16931, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, reportType);
+            compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
         }
-//        TextReport.implementation reportType = TextReport.implementation.DANGEROUS_CHANGE;
     }
 
 
     /** Comparing two XSD grammar with a specific text report for the output*/
-    public void compareTwoXsdGrammars(String inputXSD, String outputXSD, TextReport.implementation reportType) throws IOException {
-        String reportName = getReportName(inputXSD, reportType);
-        XsdComparer comparer = new XsdComparer(inputXSD, outputXSD, reportType);
+    public void compareTwoXsdGrammars(String newXsd, String oldXsd, TextReport.implementation reportType) throws IOException {
+        String reportName = getReportName(newXsd, reportType);
+        XsdComparer comparer = new XsdComparer(newXsd, oldXsd, reportType);
         String result = comparer.compareAsString();
         System.out.println(result);
         // if you change the programming, update the reference by copying new result as new reference!
         Files.writeString(Paths.get(new File(TARGET_DIR + reportName).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-//        String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + reportName).toURI()), Charset.forName("UTF-8"));
-//        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + reportName).toURI()), Charset.forName("UTF-8"));
-//        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
+        String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + reportName).toURI()), Charset.forName("UTF-8"));
+        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + reportName).toURI()), Charset.forName("UTF-8"));
+        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
 
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);

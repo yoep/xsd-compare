@@ -129,7 +129,6 @@ public class XsdElement extends AbstractXsdElementNode {
 
     /** We have to use particle as parameter, although we allow only particle.term() being ElementDeclaration as Cardinality is only on particle! */
     public static XsdElement newXsdElement(XSParticle particle, XsdElement parent, Boolean withinChoice) {
-
         // Cast save as we only allow particle as parameter having particle.term() as ElementDeclaration. Require particle as cardinality is only on particle! */
         XSElementDeclaration elementDeclaration = (XSElementDeclaration) particle.getTerm();
         /** The map is meant to avoid loop triggered by recursive grammars.
@@ -285,11 +284,11 @@ public class XsdElement extends AbstractXsdElementNode {
 
         if (particleDecl != null) {
             XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
-            /*if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
+            if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
                 processComplexGroup(modelGroup, Boolean.TRUE);
-            }else{*/
+            }else{
                 processComplexGroup(modelGroup, Boolean.FALSE);
-            //}
+            }
         } else {
             loadType(complexType);
         }
@@ -310,18 +309,15 @@ public class XsdElement extends AbstractXsdElementNode {
                 XSParticleDecl particleDecl = (XSParticleDecl) particle;
 
                 if (particleDecl.getTerm() instanceof XSElementDeclaration) {
-                    if(((XSElementDeclaration) particleDecl.getTerm()).getName().equals("DateTime") && this.getName().equals("CompleteDateTime")){
-                        System.out.println("xxx");
-                    }
                     //log.debug("##### Parent element " + this.getName() + " gets child element: " + ((XSElementDeclaration) particleDecl.getTerm()).getName());
                     this.elements.add(newXsdElement(particleDecl, this, withinChoice));
                 } else if (particleDecl.getTerm() instanceof XSModelGroupImpl) {
                     XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
-//                    if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
-//                        processComplexGroup(modelGroup, Boolean.TRUE);
-//                    }else{
+                    if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
+                        processComplexGroup(modelGroup, Boolean.TRUE);
+                    }else{
                         processComplexGroup(modelGroup, Boolean.FALSE);
-//                    }
+                    }
                 }
             }else{
                 log.error("Particles should be always be of class XSParticleDecl!");

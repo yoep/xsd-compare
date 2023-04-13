@@ -1,6 +1,0 @@
-In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime
-In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceDateTime/DateTime
-In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/EndDateTime/DateTime
-In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/StartDateTime/DateTime
-In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/DueDateDateTime/DateTime
-In type {IndicatorType} added <IndicatorString> {null}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ChargeIndicator/IndicatorString

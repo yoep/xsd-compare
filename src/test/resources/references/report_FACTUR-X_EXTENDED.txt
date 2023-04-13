@@ -3778,7 +3778,7 @@ Added element <CustomsImportAgentTradeParty> {TradePartyType}{0..1} in type {Sup
 Added element <Cycle> {TextType}{0..1} in type {LogisticsTransportMovementType}
 	in SpecifiedLogisticsTransportMovement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/Cycle
 
-Added element <Date> {date}{1..1} in type {DateType}
+Added element <Date> {date}{0..1} in type {DateType}
 	in TaxPointDate at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/TaxPointDate/Date
 	in TaxPointDate at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/TaxPointDate/Date
 	in TaxPointDate at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/TaxPointDate/Date
@@ -3790,7 +3790,7 @@ Added element <Date> {date}{1..1} in type {DateType}
 	in TaxPointDate at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/TaxPointDate/Date
 	in TaxPointDate at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/TaxPointDate/Date
 
-Added element <DateTime> {dateTime}{1..1} in type {DateTimeType}
+Added element <DateTime> {dateTime}{0..1} in type {DateTimeType}
 	in BasisDateTime at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/ApplicableTradePaymentDiscountTerms/BasisDateTime/DateTime
 	in BasisDateTime at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/ApplicableTradePaymentPenaltyTerms/BasisDateTime/DateTime
 	in CompleteDateTime at /CrossIndustryInvoice/ExchangedDocument/EffectiveSpecifiedPeriod/CompleteDateTime/DateTime
@@ -4250,7 +4250,7 @@ Added element <InclusiveIndicator> {IndicatorType}{0..1} in type {SpecifiedPerio
 Added element <IndianFinancialSystemID> {IDType}{0..1} in type {CreditorFinancialInstitutionType}
 	in PayeeSpecifiedCreditorFinancialInstitution at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/PayeeSpecifiedCreditorFinancialInstitution/IndianFinancialSystemID
 
-Added element <IndicatorString> {null}{1..1} in type {IndicatorType}
+Added element <IndicatorString> {null}{0..1} in type {IndicatorType}
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ChargeIndicator/IndicatorString
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString
 	in ChargeIndicator at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString
