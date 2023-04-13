@@ -1,0 +1,1 @@
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime

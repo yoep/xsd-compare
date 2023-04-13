@@ -62,7 +62,7 @@ public class XsdElement extends AbstractXsdElementNode {
      * @param particle          Only elementDefinition are supported as term to be process.
      * @param parent           Set the parent element of this element.
      */
-    private XsdElement(XSParticle particle, XsdElement parent) {
+    private XsdElement(XSParticle particle, XsdElement parent, Boolean withinChoice) {
         super(parent);
         Assert.notNull(particle, "elementDefinition cannot be null");
         /** a term could be as well <code>XSModelGroup</code> and <code>XSWildcard</code> */
@@ -82,6 +82,9 @@ public class XsdElement extends AbstractXsdElementNode {
         this.particle = particle;
         this.minOccurrence = particle.getMinOccurs();
         this.maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
+        if(withinChoice && this.minOccurrence == 1){
+            this.minOccurrence = 0;
+        }
         this.typeDefinition = this.elementDecl.getTypeDefinition();
         this.typeName = typeDefinition.getName();
         this.name = elementDecl.getName();
@@ -125,7 +128,7 @@ public class XsdElement extends AbstractXsdElementNode {
     }
 
     /** We have to use particle as parameter, although we allow only particle.term() being ElementDeclaration as Cardinality is only on particle! */
-    public static XsdElement newXsdElement(XSParticle particle, XsdElement parent) {
+    public static XsdElement newXsdElement(XSParticle particle, XsdElement parent, Boolean withinChoice) {
 
         // Cast save as we only allow particle as parameter having particle.term() as ElementDeclaration. Require particle as cardinality is only on particle! */
         XSElementDeclaration elementDeclaration = (XSElementDeclaration) particle.getTerm();
@@ -136,7 +139,7 @@ public class XsdElement extends AbstractXsdElementNode {
         if(hasTooManySameAncestors(parent.getDocument(), elementID)){
             return null;
         }else{
-            XsdElement xsdElement = new XsdElement(particle, parent);
+            XsdElement xsdElement = new XsdElement(particle, parent, withinChoice);
             // make sure to add the element before initiating the element & creating subcontents
             parent.getDocument().allElements.put(elementID, xsdElement);
             raiseAncestorNo(parent.getDocument(), elementID);
@@ -277,12 +280,16 @@ public class XsdElement extends AbstractXsdElementNode {
     }
 
     private void loadComplexType(XSComplexTypeDecl complexType) {
-        var particle = (XSParticleDecl) complexType.getParticle();
+        var particleDecl = (XSParticleDecl) complexType.getParticle();
         var attributes = complexType.getAttributeUses();
 
-        if (particle != null) {
-            var group = (XSModelGroupImpl) particle.getTerm();
-            processComplexGroup(group);
+        if (particleDecl != null) {
+            XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
+            /*if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
+                processComplexGroup(modelGroup, Boolean.TRUE);
+            }else{*/
+                processComplexGroup(modelGroup, Boolean.FALSE);
+            //}
         } else {
             loadType(complexType);
         }
@@ -294,18 +301,27 @@ public class XsdElement extends AbstractXsdElementNode {
         }
     }
 
-    private void processComplexGroup(XSModelGroupImpl group) {
+    private void processComplexGroup(XSModelGroupImpl group, Boolean withinChoice) {
         var particles = group.getParticles();
 
         for (Object particle : particles) {
             // before JDK 5 generics - particles are always XSParticleDecl
             if (particle instanceof XSParticleDecl) {
                 XSParticleDecl particleDecl = (XSParticleDecl) particle;
+
                 if (particleDecl.getTerm() instanceof XSElementDeclaration) {
+                    if(((XSElementDeclaration) particleDecl.getTerm()).getName().equals("DateTime") && this.getName().equals("CompleteDateTime")){
+                        System.out.println("xxx");
+                    }
                     //log.debug("##### Parent element " + this.getName() + " gets child element: " + ((XSElementDeclaration) particleDecl.getTerm()).getName());
-                    this.elements.add(newXsdElement(particleDecl, this));
+                    this.elements.add(newXsdElement(particleDecl, this, withinChoice));
                 } else if (particleDecl.getTerm() instanceof XSModelGroupImpl) {
-                    processComplexGroup((XSModelGroupImpl) particleDecl.getTerm());
+                    XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
+//                    if(modelGroup.getCompositor() == XSModelGroup.COMPOSITOR_CHOICE){
+//                        processComplexGroup(modelGroup, Boolean.TRUE);
+//                    }else{
+                        processComplexGroup(modelGroup, Boolean.FALSE);
+//                    }
                 }
             }else{
                 log.error("Particles should be always be of class XSParticleDecl!");

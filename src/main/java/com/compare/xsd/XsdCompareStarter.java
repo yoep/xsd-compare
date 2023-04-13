@@ -1,5 +1,6 @@
 package com.compare.xsd;
 
+import com.compare.xsd.comparison.TextReport;
 import com.compare.xsd.comparison.XsdComparer;
 
 import java.io.File;
@@ -68,7 +69,7 @@ public class XsdCompareStarter {
                 String[] guiArgs = {currentDir + fileNames.get(0), currentDir + fileNames.get(1)};
                 XsdCompareApplication.main(guiArgs);
             }else {
-                XsdComparer comparer = new XsdComparer(currentDir + fileNames.get(0), currentDir + fileNames.get(1), useSingleLineTextReport);
+                XsdComparer comparer = new XsdComparer(currentDir + fileNames.get(0), currentDir + fileNames.get(1), TextReport.implementation.SINGLE_LINE);
                 System.out.println(comparer.compareAsString());
             }
             return 0;

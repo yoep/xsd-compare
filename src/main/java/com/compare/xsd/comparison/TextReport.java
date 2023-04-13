@@ -6,6 +6,8 @@ import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 
 public interface TextReport {
 
+    public static enum implementation {MULTI_LINE_CHANGE, SINGLE_LINE, DANGEROUS_CHANGE}
+
     public void addDocuments(XsdDocument oldNode, XsdDocument newNode);
 
     public void addChange(Change c);

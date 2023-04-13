@@ -1,5 +1,6 @@
 package com.compare.xsd.comparison;
 
+import com.compare.xsd.XsdCompareStarter;
 import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.ChangeType;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
@@ -25,27 +26,39 @@ public class XsdComparer {
     private int added;
     private int removed;
     private int modified;
-    /** The SingleLineChangeTextReport creates only a single text line for every XSD change
-     * this harder to read, but assists  to compare the result with other XSD comparison tools */
-    private Boolean useSingleLineChangeTextReport = Boolean.FALSE;
 
     private Map<String, Integer> alreadyComparedAncestor_NewGrammar = new HashMap<>();
     private Map<String, Integer> alreadyComparedAncestor_OldGrammar = new HashMap<>();
     private TextReport textReport;
+
     /**
      * Initialize a new instance of {@link XsdComparer}.
      *
      * @param oldDocument Set the old document.
      * @param newDocument      Set the new document.
      */
-    public XsdComparer(String oldDocument, String newDocument, Boolean useSingleLineChangeTextReport) {
+    public XsdComparer(String oldDocument, String newDocument) {
+        this(oldDocument, newDocument, TextReport.implementation.MULTI_LINE_CHANGE);
+    }
+
+    /**
+     * Initialize a new instance of {@link XsdComparer}.
+     *
+     * @param oldDocument Set the old document.
+     * @param newDocument      Set the new document.
+     * @param reporterType determines the way the text output is provided
+     */
+    public XsdComparer(String oldDocument, String newDocument, TextReport.implementation reporterType) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-        this.useSingleLineChangeTextReport = useSingleLineChangeTextReport;
-        if(useSingleLineChangeTextReport){
+
+
+        if(reporterType == TextReport.implementation.SINGLE_LINE) {
             textReport = new SingleLineChangeTextReport();
-        }else{
+        }if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
             textReport = new MultiLineChangeTextReport();
+        }if(reporterType == TextReport.implementation.DANGEROUS_CHANGE){
+            textReport = new DangerousChangeTextReport();
         }
         XsdLoader xsdLoader = new XsdLoader(null);
         this.oldDocument = xsdLoader.load(new File(oldDocument));
@@ -54,20 +67,33 @@ public class XsdComparer {
         log.debug("Finished loading new grammar!");
     }
 
-
     /**
      * Initialize a new instance of {@link XsdComparer}.
      *
      * @param oldDocument Set the old document.
      * @param newDocument      Set the new document.
      */
-    public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument) {
+    public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument){
+        this(oldDocument, newDocument, TextReport.implementation.MULTI_LINE_CHANGE);
+    }
+
+
+    /**
+     * Initialize a new instance of {@link XsdComparer}.
+     *
+     * @param oldDocument Set the old document.
+     * @param newDocument  Set the new document.
+     * @param reporterType determines the way the text output is provided
+     */
+    public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument, TextReport.implementation reporterType) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-        if(useSingleLineChangeTextReport){
+        if(reporterType == TextReport.implementation.SINGLE_LINE) {
             textReport = new SingleLineChangeTextReport();
-        }else{
+        }if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
             textReport = new MultiLineChangeTextReport();
+        }if(reporterType == TextReport.implementation.DANGEROUS_CHANGE){
+            textReport = new DangerousChangeTextReport();
         }
         this.oldDocument = oldDocument;
         this.newDocument = newDocument;

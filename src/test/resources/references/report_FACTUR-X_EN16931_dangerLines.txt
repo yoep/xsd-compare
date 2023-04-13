@@ -1,0 +1,17 @@
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/EndDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod/StartDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/DueDateDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/BillingSpecifiedPeriod/EndDateTime/DateTime
+In type {DateTimeType} added <DateTime> {dateTime}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/BillingSpecifiedPeriod/StartDateTime/DateTime
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/TaxPointDate/Date
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/TaxPointDate/Date
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/TaxPointDate/Date
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/TaxPointDate/Date
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/TaxPointDate/Date
+In type {DateType} added <Date> {date}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/TaxPointDate/Date
+In type {IndicatorType} added <IndicatorString> {null}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ChargeIndicator/IndicatorString
+In type {IndicatorType} added <IndicatorString> {null}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString
+In type {IndicatorType} added <IndicatorString> {null}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ChargeIndicator/IndicatorString
+In type {IndicatorType} added <IndicatorString> {null}{1..1} /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/ChargeIndicator/IndicatorString
