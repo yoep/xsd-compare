@@ -57,6 +57,21 @@ public class XsdComparerTest {
     private static final String CII_D22B_XSD = XSD_DIR + "uncefact_22B_20230324" + File.separator
             + "CrossIndustryInvoice_100pD22B.xsd";
 
+
+    private static final String FACTUR_X_BASIC_WL = XSD_DIR + "factur-x" + File.separator + "FACTUR-X_BASIC-WL.xsd";
+    private static final String REPORT_FACTUR_X_BASIC_WL = "comparison-FACTUR-X_BASIC-WL.txt";
+
+    private static final String FACTUR_X_BASIC = XSD_DIR + "factur-x" + File.separator + "FACTUR-X_BASIC.xsd";
+    private static final String REPORT_FACTUR_X_BASIC = "comparison-FACTUR-X_BASIC.txt";
+
+    private static final String FACTUR_X_EN16931 = XSD_DIR + "factur-x" + File.separator + "FACTUR-X_EN16931.xsd";
+    private static final String REPORT_FACTUR_X_EN16931 = "comparison-FACTUR-X_EN16931.txt";
+
+    private static final String FACTUR_X_EXTENDED = XSD_DIR + "factur-x" + File.separator + "FACTUR-X_EXTENDED.xsd";
+    private static final String REPORT_FACTUR_X_EXTENDED = "comparison-FACTUR-X_EXTENDED.txt";
+
+    private static final String FACTUR_X_MINIMUM = XSD_DIR + "factur-x" + File.separator + "FACTUR-X_MINIMUM.xsd";
+    private static final String REPORT_FACTUR_X_MINIMUM = "comparison-FACTUR-X_MINIMUM.txt";
     private static final String REPORT_CII_D16D_WITH_D22B = "comparison-CII_D16B-with-D22B.txt";
     private static final String REPORT_CII_D16D_WITH_D22B_SINGLE_LINED = "comparison-CII_D16B-with-D22B_singleLined.txt";
 
@@ -69,9 +84,21 @@ public class XsdComparerTest {
     }
 
 
+
     @Test
     public void testCompare_recursiveGrammar() throws IOException {
-        File oldGrammarFile = new File(CII_D16B_XSD);
+        compareWithD22BGrammar(FACTUR_X_MINIMUM, REPORT_FACTUR_X_MINIMUM);
+        compareWithD22BGrammar(FACTUR_X_BASIC_WL, REPORT_FACTUR_X_BASIC_WL);
+        compareWithD22BGrammar(FACTUR_X_BASIC, REPORT_FACTUR_X_BASIC);
+        compareWithD22BGrammar(FACTUR_X_EN16931, REPORT_FACTUR_X_EN16931);
+        compareWithD22BGrammar(FACTUR_X_EXTENDED, REPORT_FACTUR_X_EXTENDED);
+        compareWithD22BGrammar(CII_D16B_XSD, REPORT_CII_D16D_WITH_D22B);
+    }
+
+    public void compareWithD22BGrammar(String inputXSD, String reportName) throws IOException {
+
+
+        File oldGrammarFile = new File(inputXSD);
         File newGrammarFile = new File(CII_D22B_XSD);
         
         XsdDocument oldGrammar = xsdLoader.load(oldGrammarFile);
@@ -82,10 +109,10 @@ public class XsdComparerTest {
         String result = comparer.compareAsString();
         System.out.println(result);
         // if you change the programming, update the reference by copying new result as new reference!
-        Files.writeString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
-        String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
-        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B).toURI()), Charset.forName("UTF-8"));
-        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + REPORT_CII_D16D_WITH_D22B +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + REPORT_CII_D16D_WITH_D22B);
+        Files.writeString(Paths.get(new File(TARGET_DIR + reportName).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+        String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + reportName).toURI()), Charset.forName("UTF-8"));
+        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + reportName).toURI()), Charset.forName("UTF-8"));
+        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
 
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);
@@ -95,6 +122,7 @@ public class XsdComparerTest {
         log.debug("Removed from grammar: " + removed);
         log.debug(comparer.toString());
     }
+
 
     @Test
     /** Comparing the recursive UN/CEFACT Cross-Industry-Invoice (CII) XSD grammar

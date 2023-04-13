@@ -1,0 +1,865 @@
+**** XSD COMPARISON ****
+	 old grammar: FACTUR-X_MINIMUM.xsd
+	 new grammar: CrossIndustryInvoice_100pD22B.xsd
+
+
+Added attribute @currencyCodeListVersionID {token}{0..1} in type {AmountType}
+	in DuePayableAmount at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/DuePayableAmount/@currencyCodeListVersionID
+	in GrandTotalAmount at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/GrandTotalAmount/@currencyCodeListVersionID
+	in TaxBasisTotalAmount at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxBasisTotalAmount/@currencyCodeListVersionID
+	in TaxTotalAmount at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount/@currencyCodeListVersionID
+
+Added attribute @languageID {token}{0..1} in type {TextType}
+	in BuyerReference at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerReference/@languageID
+	in Name at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Name/@languageID
+	in Name at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Name/@languageID
+
+Added attribute @languageLocaleID {token}{0..1} in type {TextType}
+	in BuyerReference at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerReference/@languageLocaleID
+	in Name at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Name/@languageLocaleID
+	in Name at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Name/@languageLocaleID
+
+Added attribute @listAgencyID {CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
+	in InvoiceCurrencyCode at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceCurrencyCode/@listAgencyID
+
+Added attribute @listAgencyID {DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
+	in TypeCode at /CrossIndustryInvoice/ExchangedDocument/TypeCode/@listAgencyID
+
+Added attribute @schemeAgencyID {CountryIDSchemeAgencyIDContentType}{0..1} in type {CountryIDType}
+	in CountryID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+	in CountryID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+
+Added attribute @schemeAgencyID {token}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeAgencyID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeAgencyID
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeAgencyID
+
+Added attribute @schemeAgencyName {string}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeAgencyName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeAgencyName
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeAgencyName
+
+Added attribute @schemeDataURI {anyURI}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeDataURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeDataURI
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeDataURI
+
+Added attribute @schemeName {string}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeName
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeName
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeName
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeName
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeName
+
+Added attribute @schemeURI {anyURI}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeURI
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeURI
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeURI
+
+Added attribute @schemeVersionID {token}{0..1} in type {IDType}
+	in ID at /CrossIndustryInvoice/ExchangedDocument/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/ID/@schemeVersionID
+	in ID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID/@schemeVersionID
+	in IssuerAssignedID at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID/@schemeVersionID
+
+Added element <ActualDeliverySupplyChainEvent> {SupplyChainEventType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent
+
+Added element <ActualDespatchSupplyChainEvent> {SupplyChainEventType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDespatchSupplyChainEvent
+
+Added element <ActualPickUpSupplyChainEvent> {SupplyChainEventType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualPickUpSupplyChainEvent
+
+Added element <ActualReceiptSupplyChainEvent> {SupplyChainEventType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualReceiptSupplyChainEvent
+
+Added element <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument
+
+Added element <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/AdditionalReferencedDocument
+
+Added element <AdditionalStreetName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/AdditionalStreetName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/AdditionalStreetName
+
+Added element <AllowanceTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/AllowanceTotalAmount
+
+Added element <ApplicableTradeDeliveryTerms> {TradeDeliveryTermsType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ApplicableTradeDeliveryTerms
+
+Added element <ApplicableTradeTax> {TradeTaxType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax
+
+Added element <ApplicationSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/ApplicationSpecifiedDocumentContextParameter
+
+Added element <AssociatedRegisteredTax> {RegisteredTaxType}{0..1} in type {TaxRegistrationType}
+	in SpecifiedTaxRegistration at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/AssociatedRegisteredTax
+	in SpecifiedTaxRegistration at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/AssociatedRegisteredTax
+
+Added element <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/AttachedSpecifiedBinaryFile
+
+Added element <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/AttachedSpecifiedBinaryFile
+
+Added element <AttachmentBinaryObject> {BinaryObjectType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/AttachmentBinaryObject
+
+Added element <AttentionOf> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/AttentionOf
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/AttentionOf
+
+Added element <AuthorizedLegalRegistration> {LegalRegistrationType}{0..*} in type {LegalOrganizationType}
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/AuthorizedLegalRegistration
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/AuthorizedLegalRegistration
+
+Added element <BIMSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/BIMSpecifiedDocumentContextParameter
+
+Added element <BillingSpecifiedPeriod> {SpecifiedPeriodType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/BillingSpecifiedPeriod
+
+Added element <BuildingName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/BuildingName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/BuildingName
+
+Added element <BuildingNumber> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/BuildingNumber
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/BuildingNumber
+
+Added element <BuyerAgentTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAgentTradeParty
+
+Added element <BuyerAssignedAccountantTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAssignedAccountantTradeParty
+
+Added element <BuyerRequisitionerTradeParty> {TradePartyType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerRequisitionerTradeParty
+
+Added element <BuyerTaxRepresentativeTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTaxRepresentativeTradeParty
+
+Added element <CareOf> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CareOf
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CareOf
+
+Added element <CategoryCode> {CodeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/CategoryCode
+
+Added element <CategoryCode> {CodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/CategoryCode
+
+Added element <ChargeTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/ChargeTotalAmount
+
+Added element <CityID> {IDType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CityID
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CityID
+
+Added element <CityName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CityName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CityName
+
+Added element <CitySubDivisionName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CitySubDivisionName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CitySubDivisionName
+
+Added element <ConsumptionReportReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ConsumptionReportReferencedDocument
+
+Added element <ContractReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument
+
+Added element <ControlRequirementIndicator> {IndicatorType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/ControlRequirementIndicator
+
+Added element <CopyIndicator> {IndicatorType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/CopyIndicator
+
+Added element <CopyIndicator> {IndicatorType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/CopyIndicator
+
+Added element <CountryName> {TextType}{0..*} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryName
+
+Added element <CountrySubDivisionID> {IDType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountrySubDivisionID
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountrySubDivisionID
+
+Added element <CountrySubDivisionName> {TextType}{0..*} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountrySubDivisionName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountrySubDivisionName
+
+Added element <CreationDateTime> {FormattedDateTimeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/CreationDateTime
+
+Added element <CreditReason> {TextType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditReason
+
+Added element <CreditReasonCode> {CodeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditReasonCode
+
+Added element <CreditorReferenceID> {IDType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditorReferenceID
+
+Added element <CreditorReferenceIssuerID> {IDType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditorReferenceIssuerID
+
+Added element <CreditorReferenceType> {TextType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditorReferenceType
+
+Added element <CreditorReferenceTypeCode> {CodeType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/CreditorReferenceTypeCode
+
+Added element <DateTime> {dateTime}{1..1} in type {DateTimeType}
+	in IssueDateTime at /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTime
+
+Added element <DefinedTradeContact> {TradeContactType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/DefinedTradeContact
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/DefinedTradeContact
+
+Added element <DeliveryNoteReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DeliveryNoteReferencedDocument
+
+Added element <DemandForecastReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/DemandForecastReferencedDocument
+
+Added element <DepartmentName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/DepartmentName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/DepartmentName
+
+Added element <Description> {TextType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Description
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Description
+
+Added element <DespatchAdviceReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DespatchAdviceReferencedDocument
+
+Added element <DuePayableAmount> {AmountType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/DuePayableAmount
+
+Added element <EffectiveSpecifiedPeriod> {SpecifiedPeriodType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/EffectiveSpecifiedPeriod
+
+Added element <EffectiveSpecifiedPeriod> {SpecifiedPeriodType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/EffectiveSpecifiedPeriod
+
+Added element <EndPointURIUniversalCommunication> {UniversalCommunicationType}{0..1} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/EndPointURIUniversalCommunication
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/EndPointURIUniversalCommunication
+
+Added element <FactoringAgreementReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringAgreementReferencedDocument
+
+Added element <FactoringListReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringListReferencedDocument
+
+Added element <FirstVersionIssueDateTime> {DateTimeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/FirstVersionIssueDateTime
+
+Added element <FormattedIssueDateTime> {FormattedDateTimeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/FormattedIssueDateTime
+
+Added element <GlobalID> {IDType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/GlobalID
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/GlobalID
+
+Added element <GlobalID> {IDType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/GlobalID
+
+Added element <GlobalID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/GlobalID
+
+Added element <GrossLineTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/GrossLineTotalAmount
+
+Added element <ID> {IDType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/ID
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/ID
+
+Added element <ID> {IDType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/ID
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/ID
+
+Added element <IOSSID> {IDType}{0..1} in type {TaxRegistrationType}
+	in SpecifiedTaxRegistration at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/IOSSID
+	in SpecifiedTaxRegistration at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/IOSSID
+
+Added element <IncludedNote> {NoteType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/IncludedNote
+
+Added element <IncludedNote> {NoteType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IncludedNote
+
+Added element <IncludedSupplyChainTradeLineItem> {SupplyChainTradeLineItemType}{0..*} in type {SupplyChainTradeTransactionType}
+	in SupplyChainTradeTransaction at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem
+
+Added element <IncludingTaxesLineTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/IncludingTaxesLineTotalAmount
+
+Added element <Information> {TextType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/Information
+
+Added element <InformationAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/InformationAmount
+
+Added element <InsuranceChargeTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/InsuranceChargeTotalAmount
+
+Added element <InvoiceApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceApplicableTradeCurrencyExchange
+
+Added element <InvoiceDateTime> {DateTimeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceDateTime
+
+Added element <InvoiceIssuerReference> {TextType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceIssuerReference
+
+Added element <InvoiceReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceReferencedDocument
+
+Added element <InvoiceeTradeParty> {TradePartyType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceeTradeParty
+
+Added element <InvoicerTradeParty> {TradePartyType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoicerTradeParty
+
+Added element <IssuerTradeParty> {TradePartyType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty
+
+Added element <IssuerTradeParty> {TradePartyType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty
+
+Added element <LanguageID> {IDType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/LanguageID
+
+Added element <LegalClassificationCode> {CodeType}{0..1} in type {LegalOrganizationType}
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/LegalClassificationCode
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/LegalClassificationCode
+
+Added element <LetterOfCreditReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/LetterOfCreditReferencedDocument
+
+Added element <LineFive> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/LineFive
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/LineFive
+
+Added element <LineFour> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/LineFour
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/LineFour
+
+Added element <LineID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/LineID
+
+Added element <LineOne> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/LineOne
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/LineOne
+
+Added element <LineThree> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/LineThree
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/LineThree
+
+Added element <LineTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/LineTotalAmount
+
+Added element <LineTwo> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/LineTwo
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/LineTwo
+
+Added element <LogoAssociatedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/LogoAssociatedSpecifiedBinaryFile
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/LogoAssociatedSpecifiedBinaryFile
+
+Added element <MessageStandardSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/MessageStandardSpecifiedDocumentContextParameter
+
+Added element <Name> {TextType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/Name
+
+Added element <Name> {TextType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/Name
+
+Added element <Name> {TextType}{0..1} in type {LegalOrganizationType}
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/Name
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/Name
+
+Added element <NetIncludingTaxesLineTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/NetIncludingTaxesLineTotalAmount
+
+Added element <NetLineTotalAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/NetLineTotalAmount
+
+Added element <NextInvoiceDateTime> {DateTimeType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/NextInvoiceDateTime
+
+Added element <OrderResponseReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/OrderResponseReferencedDocument
+
+Added element <PackingListReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/PackingListReferencedDocument
+
+Added element <PageID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/PageID
+
+Added element <PayableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayableSpecifiedTradeAccountingAccount
+
+Added element <PayeeTradeParty> {TradePartyType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayeeTradeParty
+
+Added element <PayerTradeParty> {TradePartyType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayerTradeParty
+
+Added element <PaymentApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PaymentApplicableTradeCurrencyExchange
+
+Added element <PaymentCurrencyCode> {CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PaymentCurrencyCode
+
+Added element <PaymentReference> {TextType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PaymentReference
+
+Added element <PostOfficeBox> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/PostOfficeBox
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/PostOfficeBox
+
+Added element <PostalTradeAddress> {TradeAddressType}{0..1} in type {LegalOrganizationType}
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress
+
+Added element <PostcodeCode> {CodeType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/PostcodeCode
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/PostcodeCode
+
+Added element <PreviousDeliverySupplyChainEvent> {SupplyChainEventType}{0..*} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/PreviousDeliverySupplyChainEvent
+
+Added element <PreviousRevisionID> {IDType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/PreviousRevisionID
+
+Added element <PreviousRevisionID> {IDType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/PreviousRevisionID
+
+Added element <PriceListReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PriceListReferencedDocument
+
+Added element <PricingBaseApplicableLogisticsLocation> {LogisticsLocationType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PricingBaseApplicableLogisticsLocation
+
+Added element <ProFormaInvoiceReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ProFormaInvoiceReferencedDocument
+
+Added element <ProductEndUserTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ProductEndUserTradeParty
+
+Added element <ProductValueExcludingTobaccoTaxInformationAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/ProductValueExcludingTobaccoTaxInformationAmount
+
+Added element <PromotionalDealReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PromotionalDealReferencedDocument
+
+Added element <PurchaseConditionsReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PurchaseConditionsReferencedDocument
+
+Added element <PurchaseSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PurchaseSpecifiedTradeAccountingAccount
+
+Added element <Purpose> {TextType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/Purpose
+
+Added element <PurposeCode> {MessageFunctionCodeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/PurposeCode
+
+Added element <QuotationReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/QuotationReferencedDocument
+
+Added element <ReceiptDateTime> {DateTimeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/ReceiptDateTime
+
+Added element <ReceivableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ReceivableSpecifiedTradeAccountingAccount
+
+Added element <ReceivingAdviceReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ReceivingAdviceReferencedDocument
+
+Added element <Reference> {TextType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/Reference
+
+Added element <ReferenceReferencedDocument> {ReferencedDocumentType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/ReferenceReferencedDocument
+
+Added element <ReferenceTypeCode> {ReferenceCodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/ReferenceTypeCode
+
+Added element <RegisteredID> {IDType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/RegisteredID
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/RegisteredID
+
+Added element <RelatedSupplyChainConsignment> {SupplyChainConsignmentType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment
+
+Added element <RequestedResponseTypeCode> {CodeType}{0..*} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/RequestedResponseTypeCode
+
+Added element <RequisitionerReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/RequisitionerReferencedDocument
+
+Added element <RetailValueExcludingTaxInformationAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/RetailValueExcludingTaxInformationAmount
+
+Added element <RevisionDateTime> {DateTimeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/RevisionDateTime
+
+Added element <RevisionID> {IDType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/RevisionID
+
+Added element <RevisionID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/RevisionID
+
+Added element <Role> {TextType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Role
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Role
+
+Added element <RoleCode> {PartyRoleCodeType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/RoleCode
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/RoleCode
+
+Added element <RoundingAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/RoundingAmount
+
+Added element <SalesAgentTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SalesAgentTradeParty
+
+Added element <SalesSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SalesSpecifiedTradeAccountingAccount
+
+Added element <ScenarioSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/ScenarioSpecifiedDocumentContextParameter
+
+Added element <SectionName> {TextType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/SectionName
+
+Added element <SellerAssignedAccountantTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerAssignedAccountantTradeParty
+
+Added element <SellerOrderReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerOrderReferencedDocument
+
+Added element <SellerTaxRepresentativeTradeParty> {TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTaxRepresentativeTradeParty
+
+Added element <ShipFromTradeParty> {TradePartyType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipFromTradeParty
+
+Added element <ShipToTradeParty> {TradePartyType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipToTradeParty
+
+Added element <SignatoryDocumentAuthentication> {DocumentAuthenticationType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/SignatoryDocumentAuthentication
+
+Added element <SpecifiedAdvancePayment> {AdvancePaymentType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment
+
+Added element <SpecifiedDocumentVersion> {DocumentVersionType}{0..1} in type {DocumentContextParameterType}
+	in BusinessProcessSpecifiedDocumentContextParameter at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/SpecifiedDocumentVersion
+	in GuidelineSpecifiedDocumentContextParameter at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/SpecifiedDocumentVersion
+
+Added element <SpecifiedFinancialAdjustment> {FinancialAdjustmentType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedFinancialAdjustment
+
+Added element <SpecifiedLogisticsLocation> {LogisticsLocationType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLogisticsLocation
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLogisticsLocation
+
+Added element <SpecifiedLogisticsServiceCharge> {LogisticsServiceChargeType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge
+
+Added element <SpecifiedProcuringProject> {ProcuringProjectType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SpecifiedProcuringProject
+
+Added element <SpecifiedTradeAllowanceCharge> {TradeAllowanceChargeType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge
+
+Added element <SpecifiedTradePaymentTerms> {TradePaymentTermsType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms
+
+Added element <SpecifiedTradeSettlementFinancialCard> {TradeSettlementFinancialCardType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementFinancialCard
+
+Added element <SpecifiedTradeSettlementPaymentMeans> {TradeSettlementPaymentMeansType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans
+
+Added element <SpecifiedTransactionID> {IDType}{0..1} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/SpecifiedTransactionID
+
+Added element <StatusCode> {DocumentStatusCodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/StatusCode
+
+Added element <StreetName> {TextType}{0..1} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/StreetName
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/StreetName
+
+Added element <SubordinateLineID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/SubordinateLineID
+
+Added element <SubsetSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/SubsetSpecifiedDocumentContextParameter
+
+Added element <SubtotalCalculatedTradeTax> {TradeTaxType}{0..*} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax
+
+Added element <SubtypeCode> {CodeType}{0..*} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/SubtypeCode
+
+Added element <SubtypeCode> {CodeType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/SubtypeCode
+
+Added element <SupplyInstructionReferencedDocument> {ReferencedDocumentType}{0..1} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SupplyInstructionReferencedDocument
+
+Added element <TaxApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/TaxApplicableTradeCurrencyExchange
+
+Added element <TaxCurrencyCode> {CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/TaxCurrencyCode
+
+Added element <TestIndicator> {IndicatorType}{0..1} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/TestIndicator
+
+Added element <TotalAllowanceChargeAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TotalAllowanceChargeAmount
+
+Added element <TotalDepositFeeInformationAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TotalDepositFeeInformationAmount
+
+Added element <TotalDiscountAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TotalDiscountAmount
+
+Added element <TotalPrepaidAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TotalPrepaidAmount
+
+Added element <TotalRetailValueInformationAmount> {AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	in SpecifiedTradeSettlementHeaderMonetarySummation at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TotalRetailValueInformationAmount
+
+Added element <TradingBusinessName> {TextType}{0..1} in type {LegalOrganizationType}
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/TradingBusinessName
+	in SpecifiedLegalOrganization at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/TradingBusinessName
+
+Added element <TypeCode> {AddressTypeCodeType}{0..*} in type {TradeAddressType}
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/TypeCode
+	in PostalTradeAddress at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/TypeCode
+
+Added element <TypeCode> {CodeType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/TypeCode
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/TypeCode
+
+Added element <TypeCode> {DocumentCodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/TypeCode
+
+Added element <URIID> {IDType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/URIID
+
+Added element <URIUniversalCommunication> {UniversalCommunicationType}{0..*} in type {TradePartyType}
+	in BuyerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/URIUniversalCommunication
+	in SellerTradeParty at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/URIUniversalCommunication
+
+Added element <UltimateCustomerOrderReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/UltimateCustomerOrderReferencedDocument
+
+Added element <UltimatePayeeTradeParty> {TradePartyType}{0..1} in type {HeaderTradeSettlementType}
+	in ApplicableHeaderTradeSettlement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/UltimatePayeeTradeParty
+
+Added element <UltimateShipToTradeParty> {TradePartyType}{0..1} in type {HeaderTradeDeliveryType}
+	in ApplicableHeaderTradeDelivery at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/UltimateShipToTradeParty
+
+Added element <UserSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	in ExchangedDocumentContext at /CrossIndustryInvoice/ExchangedDocumentContext/UserSpecifiedDocumentContextParameter
+
+Added element <ValuationBreakdownStatement> {ValuationBreakdownStatementType}{0..1} in type {CrossIndustryInvoiceType}
+	in CrossIndustryInvoice at /CrossIndustryInvoice/ValuationBreakdownStatement
+
+Added element <Value> {TextType}{0..1} in type {DocumentContextParameterType}
+	in BusinessProcessSpecifiedDocumentContextParameter at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/Value
+	in GuidelineSpecifiedDocumentContextParameter at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/Value
+
+Added element <VersionID> {IDType}{0..1} in type {ExchangedDocumentType}
+	in ExchangedDocument at /CrossIndustryInvoice/ExchangedDocument/VersionID
+
+Modifying attribute: 
+	old: @format{string}{1..1} in type {DateTimeType}
+	new: @format{string}{0..1} in type {DateTimeType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTimeString/@format
+
+Modifying element: 
+	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+		Changed cardinality from 0..1 to 0..*
+				/CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter
+
+Modifying element: 
+	old: <BuyerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+	new: <BuyerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty
+
+Modifying element: 
+	old: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+	new: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID
+
+Modifying element: 
+	old: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Changed cardinality from 1..1 to 0..*
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/DuePayableAmount
+
+Modifying element: 
+	old: <GrandTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <GrandTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Changed cardinality from 1..1 to 0..*
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/GrandTotalAmount
+
+Modifying element: 
+	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
+	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+		Changed cardinality from 1..1 to 0..*
+				/CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter
+
+Modifying element: 
+	old: <ID>{IDType}{1..1} in type {DocumentContextParameterType}
+	new: <ID>{IDType}{0..1} in type {DocumentContextParameterType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID
+				/CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID
+
+Modifying element: 
+	old: <ID>{IDType}{1..1} in type {ExchangedDocumentType}
+	new: <ID>{IDType}{0..1} in type {ExchangedDocumentType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/ExchangedDocument/ID
+
+Modifying element: 
+	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID
+
+Modifying element: 
+	old: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceCurrencyCode
+
+Modifying element: 
+	old: <IssuerAssignedID>{IDType}{1..1} in type {ReferencedDocumentType}
+	new: <IssuerAssignedID>{IDType}{0..1} in type {ReferencedDocumentType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID
+
+Modifying element: 
+	old: <Name>{TextType}{1..1} in type {TradePartyType}
+	new: <Name>{TextType}{0..1} in type {TradePartyType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Name
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Name
+
+Modifying element: 
+	old: <SellerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+	new: <SellerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty
+
+Modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+		Changed cardinality from 0..2 to 0..*
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration
+
+Modifying element: 
+	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation
+
+Modifying element: 
+	old: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Changed cardinality from 1..1 to 0..*
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxBasisTotalAmount
+
+Modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Changed cardinality from 0..1 to 0..*
+				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount
+
+Modifying element: 
+	old: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+	new: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
+		Changed cardinality from 1..1 to 0..1
+				/CrossIndustryInvoice/ExchangedDocument/TypeCode
+
+
+
+**** STATISTIC ****
+
+
+ELEMENTS:
+
+	Added elements in XSD:	195
+	Added elements in XML:	238
+
+	Modified elements in XSD:	18
+	Modified elements in XML:	23
+
+	Removed elements from XSD:	0
+	Removed elements from XML:	0
+
+
+ATTRIBUTES:
+
+	Added attributes in XSD:	12
+	Added attributes in XML:	62
+
+	Modified attributes in XSD:	1
+	Modified attributes in XML:	1
+
+	Removed attributes from XSD:	0
+	Removed attributes from XML:	0
