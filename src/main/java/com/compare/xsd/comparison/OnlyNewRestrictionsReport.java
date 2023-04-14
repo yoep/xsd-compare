@@ -8,12 +8,21 @@ import lombok.Data;
 
 import java.util.*;
 
-/** The SingleLineChangeTextReport creates only a single text line for every XSD change
- * this harder to read, but assists  to compare the result with other XSD comparison tools */
+/**
+ * The purpose of this report shows if the new version provides new restrictions, requirements or limitations in comparison to the old grammar.
+ * For instance, if the old grammar is a subset of the new grammar, the new grammar should not provide any new restrictions, requirements or limitations!
+ *
+ * The OnlyNewRestrictionsReport creates only a single text line for every XSD change sorted by Type
+ * this harder to read, but assists  to compare the result with other XSD comparison tools
+ *
+ * 1) Any Removal is a new restriction.
+ * 2) Every Modification that limits the possible values
+ * 3) If there is a new XML node which did not previously existed but is now mandatory on the elements of the old grammar (being the subset)!
+ *
+ * */
 @Data
-public class DangerousChangeTextReport implements TextReport {
+public class OnlyNewRestrictionsReport implements TextReport {
 
-    private StringBuilder sb;
     /** creating a report with a header line and a set of body lines */
     private Set<String> report = new TreeSet<>();
     private List<Change> changes = new ArrayList<>();
@@ -42,9 +51,9 @@ public class DangerousChangeTextReport implements TextReport {
              *      /CrossIndustryInvoice/@languageID added @languageID {token}{0..1} in type {CodeType}
              */
             if (c.isElement) {
-                c.setReportHeader("In type {" + c.newNode.getParent().getTypeName() + "} added <" + c.newNode.getName() + "> {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} " + c.newNode.getXPath());
+                c.setReportHeader("In type {" + c.newNode.getParent().getTypeName() + "} added <" + c.newNode.getName() + "> {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} "); // + c.newNode.getXPath());
             } else {
-                c.setReportHeader("In type {" + c.newNode.getParent().getTypeName() + "} added @" + c.newNode.getName() + " {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} " + c.newNode.getXPath());
+                c.setReportHeader("In type {" + c.newNode.getParent().getTypeName() + "} added @" + c.newNode.getName() + " {" + c.newNode.getTypeName() + "}{" + c.newNode.getCardinality() + "} "); // + c.newNode.getXPath());
             }
         } else if (c.type == ChangeType.MODIFIED && c.oldNode.getCardinality().startsWith("0..") && c.newNode.getCardinality().startsWith("1..")) {
             /*
@@ -52,10 +61,10 @@ public class DangerousChangeTextReport implements TextReport {
              *      /CrossIndustryInvoice/@format modifying attribute: old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType} new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType} Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
              *      /CrossIndustryInvoice/AssociatedDocumentLineDocument modifying element: old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType} new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType} Changed cardinality from 1..1 to 0..1
              */
-        c.setReportHeader("In type {" + c.newNode.getParent().getNextTypeName() + "}" + c.newNode.getXPath() + " modifying " + (c.isElement ? "element: " : "attribute: ") +
-                "old: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                "new: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-        /*
+        c.setReportHeader("In type {" + c.newNode.getParent().getNextTypeName() + "} modifying " + (c.isElement ? "element: " : "attribute: ") +
+                "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
+                "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
+        /*  Example of complete list:
             "Changed type namespace from " + oldNode.getTypeNamespace() + " to " + newNode.getTypeNamespace()
             "Changed type from " + oldNode.getTypeName() + " to " + newNode.getTypeName()
             "Changed cardinality from " + oldNode.getCardinality() + " to " + newNode.getCardinality()
@@ -68,35 +77,41 @@ public class DangerousChangeTextReport implements TextReport {
             "Changed enumeration from " + oldNode.getEnumeration() + " to " + newNode.getEnumeration()
             "Changed whitespace from " + oldNode.getWhitespace() + " to " + newNode.getWhitespace()
         */
+            /**
             if (c.isNamespaceChanged()) {
-                c.setReportHeader(c.getReportHeader() + " changed type namespace from " + c.oldNode.getTypeNamespace() + " to " + c.newNode.getTypeNamespace());
+                c.setReportHeader(c.getReportHeader() + "\n\t\tChanged type namespace from " + c.oldNode.getTypeNamespace() + " to " + c.newNode.getTypeNamespace());
             }
             if (c.isTypeChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
-            }
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
+            }**/
             if (c.isCardinalityChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
+                if(c.oldNode.getMinOccurrence() < c.newNode.getMinOccurrence() || c.oldNode.getMaxOccurrence() == null && c.newNode.getMaxOccurrence() != null ||  c.oldNode.getMaxOccurrence() != null && c.newNode.getMaxOccurrence() != null && c.oldNode.getMaxOccurrence() > c.newNode.getMaxOccurrence()){
+                    c.setReportHeader(c.getReportHeader() + ("\n\t\tRestricted cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
+                }
             }
             if (c.isFixedDefaultChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
             }
             if (c.isPatternChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
-            }
-            if (c.isMaxLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength()));
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
             }
             if (c.isMinLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength()));
-            }
-            if (c.isLengthChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
-            }
-            if (c.isEnumerationChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
+                if (c.newNode.getMinLength() != null || c.oldNode.getMinLength() != null && (c.oldNode.getMinLength() < c.newNode.getMinLength())) {
+                    c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength()));
+                }
+            }if (c.isMaxLengthChanged()){
+                    if(c.newNode.getMaxLength() == null || (c.oldNode.getMaxLength() != null && (c.oldNode.getMaxLength() > c.newNode.getMaxLength()))) {
+                        c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength()));
+                    }
+            }if (c.isEnumerationChanged()) {
+                ArrayList<String> oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
+                oldEnumerationList.removeAll(c.newNode.getEnumeration());
+                if(oldEnumerationList.size() > 0){
+                    c.setReportHeader(c.getReportHeader() + ("\n\t\tRestricted enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
+                }
             }
             if (c.isWhitespaceChanged()) {
-                c.setReportHeader(c.getReportHeader() + (" changed whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
             }
         } else if (c.type == ChangeType.REMOVED) {
             /*
@@ -105,9 +120,9 @@ public class DangerousChangeTextReport implements TextReport {
              *      /CrossIndustryInvoice/@format removed @format {string}{0..1} in type {NumericType}             *
              */
             if (c.isElement) {
-                c.setReportHeader("In type {" + c.oldNode.getParent().getTypeName() + "}" + c.oldNode.getXPath() + " removed <" + c.oldNode.getName() + "> {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "}");
+                c.setReportHeader("In type {" + c.oldNode.getParent().getTypeName() + "} removed <" + c.oldNode.getName() + "> {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "}");
             } else {
-                c.setReportHeader("In type {" + c.oldNode.getParent().getTypeName() + "}" + c.oldNode.getXPath() + " removed @" + c.oldNode.getName() + " {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "}");
+                c.setReportHeader("In type {" + c.oldNode.getParent().getTypeName() + "} removed @" + c.oldNode.getName() + " {" + c.oldNode.getTypeName() + "}{" + c.oldNode.getCardinality() + "}");
             }
         }
     }

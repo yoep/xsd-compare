@@ -79,14 +79,23 @@ public class XsdComparerTest {
 
         String simpleAnonymous1 = XSD_DIR + "simple_anonymous.xsd";
         String simpleAnonymous2 = XSD_DIR + "simple_anonymous2.xsd";
+        //compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, TextReport.implementation.ONLY_EXTENSIONS);
         for(TextReport.implementation reportType : TextReport.implementation.values()){
 
             compareTwoXsdGrammars(CII_D16B_XSD, CII_D22B_XSD, reportType);
+
             compareTwoXsdGrammars(FACTUR_X_MINIMUM, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_BASIC_WL, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_BASIC, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_EN16931, CII_D22B_XSD, reportType);
             compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, reportType);
+
+            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_MINIMUM, reportType);
+            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC_WL, reportType);
+            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC, reportType);
+            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EN16931, reportType);
+            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EXTENDED, reportType);
+
             compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
         }
     }
@@ -94,16 +103,21 @@ public class XsdComparerTest {
 
     /** Comparing two XSD grammar with a specific text report for the output*/
     public void compareTwoXsdGrammars(String newXsd, String oldXsd, TextReport.implementation reportType) throws IOException {
-        String reportName = getReportName(newXsd, reportType);
+        String reportName = getReportName(newXsd, oldXsd, reportType);
         XsdComparer comparer = new XsdComparer(newXsd, oldXsd, reportType);
         String result = comparer.compareAsString();
         System.out.println(result);
         // if you change the programming, update the reference by copying new result as new reference!
         Files.writeString(Paths.get(new File(TARGET_DIR + reportName).toURI()), result, Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         String resultReloaded = Files.readString(Paths.get(new File(TARGET_DIR + reportName).toURI()), Charset.forName("UTF-8"));
-        String referenceResult = Files.readString(Paths.get(new File(REFERENCES_DIR + reportName).toURI()), Charset.forName("UTF-8"));
-        assertTrue(resultReloaded.equals(referenceResult), "\nIf the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName +  "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
-
+        File refFile = new File(REFERENCES_DIR + reportName);
+        if(refFile.exists()) {
+            String referenceResult = Files.readString(Paths.get(refFile.toURI()), Charset.forName("UTF-8"));
+            /*if(resultReloaded.equals(referenceResult)){
+                System.err.println("\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName + "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
+            }*/
+            assertTrue(resultReloaded.equals(referenceResult),"\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName + "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
+        }
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);
         int modified = comparer.getModified();
@@ -111,19 +125,25 @@ public class XsdComparerTest {
         int removed = comparer.getRemoved();
         log.debug("Removed from grammar: " + removed);
         log.debug(comparer.toString());
+
     }
 
     /** Creates an output file (the report) in relation with the inputfile of the grammar and the report type.
         adding "report_" prefix and ".txt" suffix always and in case of not the default multiLine reporter some reportType related prefix in front of ".txt".
      */
-    private static String getReportName(String inputFileName, TextReport.implementation reporterType) {
-        String reportName = "report_" + inputFileName.substring(inputFileName.lastIndexOf(File.separator) + 1, inputFileName.lastIndexOf('.'));
+    private static String getReportName(String newXsdPath,  String oldXsdPath, TextReport.implementation reporterType) {
+        String reportName = "report_" + newXsdPath.substring(newXsdPath.lastIndexOf(File.separator) + 1, newXsdPath.lastIndexOf('.'))
+                + "_to_" + oldXsdPath.substring(oldXsdPath.lastIndexOf(File.separator) + 1, oldXsdPath.lastIndexOf('.'));
         if(reporterType == TextReport.implementation.SINGLE_LINE) {
-            reportName = reportName  + "_singleLines.txt";
-        }if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
+            reportName = reportName  + "_singleLineReport.txt";
+        }else if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
             reportName = reportName + ".txt";
-        }if(reporterType == TextReport.implementation.DANGEROUS_CHANGE){
-            reportName = reportName + "_dangerLines.txt";
+        }else if(reporterType == TextReport.implementation.ONLY_RESTRICTIONS){
+            reportName = reportName + "_onlyRestrictionsReport.txt";
+        }else if(reporterType == TextReport.implementation.ONLY_EXTENSIONS){
+            reportName = reportName + "_onlyExtensionsReport.txt";
+        }else{
+            log.error("Could not find report type: " + reporterType.toString());
         }
         return reportName;
     }

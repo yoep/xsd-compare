@@ -1,0 +1,650 @@
+In type {AccountingAccountTypeCodeType} removed @listAgencyID {token}{0..1}
+In type {AccountingAccountTypeCodeType} removed @listID {token}{0..1}
+In type {AccountingAccountTypeCodeType} removed @listURI {anyURI}{0..1}
+In type {AccountingAccountTypeCodeType} removed @listVersionID {token}{0..1}
+In type {AdvancePaymentType} modifying element: 
+	old: <IncludedTradeTax>{TradeTaxType}{0..*} in type {AdvancePaymentType}
+	new: <IncludedTradeTax>{TradeTaxType}{1..*} in type {AdvancePaymentType}
+		Restricted cardinality from 0..* to 1..*
+In type {AllowanceChargeReasonCodeType} removed @listAgencyID {AllowanceChargeReasonCodeListAgencyIDContentType}{0..1}
+In type {AllowanceChargeReasonCodeType} removed @listID {token}{0..1}
+In type {AllowanceChargeReasonCodeType} removed @listURI {anyURI}{0..1}
+In type {AllowanceChargeReasonCodeType} removed @listVersionID {token}{0..1}
+In type {AmountType} removed @currencyCodeListVersionID {token}{0..1}
+In type {BinaryObjectType} modifying attribute: 
+	old: @filename{string}{0..1} in type {BinaryObjectType}
+	new: @filename{string}{1..1} in type {BinaryObjectType}
+		Restricted cardinality from 0..1 to 1..1
+In type {BinaryObjectType} modifying attribute: 
+	old: @mimeCode{token}{0..1} in type {BinaryObjectType}
+	new: @mimeCode{token}{1..1} in type {BinaryObjectType}
+		Restricted cardinality from 0..1 to 1..1
+In type {BinaryObjectType} removed @characterSetCode {token}{0..1}
+In type {BinaryObjectType} removed @encodingCode {token}{0..1}
+In type {BinaryObjectType} removed @format {string}{0..1}
+In type {BinaryObjectType} removed @uri {anyURI}{0..1}
+In type {CodeType} removed @languageID {token}{0..1}
+In type {CodeType} removed @listAgencyID {token}{0..1}
+In type {CodeType} removed @listAgencyName {string}{0..1}
+In type {CodeType} removed @listName {string}{0..1}
+In type {CodeType} removed @listSchemeURI {anyURI}{0..1}
+In type {CodeType} removed @listURI {anyURI}{0..1}
+In type {CodeType} removed @name {string}{0..1}
+In type {ContactTypeCodeType} removed @listAgencyID {ContactTypeCodeListAgencyIDContentType}{0..1}
+In type {ContactTypeCodeType} removed @listID {token}{0..1}
+In type {ContactTypeCodeType} removed @listURI {anyURI}{0..1}
+In type {ContactTypeCodeType} removed @listVersionID {token}{0..1}
+In type {CountryIDType} removed @schemeAgencyID {CountryIDSchemeAgencyIDContentType}{0..1}
+In type {CountryIDType} removed @schemeID {token}{0..1}
+In type {CountryIDType} removed @schemeVersionID {token}{0..1}
+In type {CreditorFinancialInstitutionType} modifying element: 
+	old: <BICID>{IDType}{0..1} in type {CreditorFinancialInstitutionType}
+	new: <BICID>{IDType}{1..1} in type {CreditorFinancialInstitutionType}
+		Restricted cardinality from 0..1 to 1..1
+In type {CreditorFinancialInstitutionType} removed <AustralianBSBID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <AustrianBankleitzahlID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <CHIPSParticipantID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <CHIPSUniversalID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <CanadianPaymentsAssociationID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <ClearingSystemName> {TextType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <FedwireRoutingNumberID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <GermanBankleitzahlID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <HellenicBankID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <HongKongBankID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <IndianFinancialSystemID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <IrishNSCID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <ItalianDomesticID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <JapanFinancialInstitutionCommonID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <LocationFinancialInstitutionAddress> {FinancialInstitutionAddressType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <Name> {TextType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <NewZealandNCCID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <PolishNationalClearingID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <PortugueseNCCID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <RussianCentralBankID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <SICID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <SouthAfricanNCCID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <SpanishDomesticInterbankingID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <SubDivisionBranchFinancialInstitution> {BranchFinancialInstitutionType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <SwissBCID> {IDType}{0..1}
+In type {CreditorFinancialInstitutionType} removed <UKSortCodeID> {IDType}{0..1}
+In type {CrossIndustryInvoiceType} removed <ValuationBreakdownStatement> {ValuationBreakdownStatementType}{0..1}
+In type {CurrencyCodeType} removed @listAgencyID {CurrencyCodeListAgencyIDContentType}{0..1}
+In type {CurrencyCodeType} removed @listID {token}{0..1}
+In type {CurrencyCodeType} removed @listURI {anyURI}{0..1}
+In type {CurrencyCodeType} removed @listVersionID {token}{0..1}
+In type {DateTimeType} modifying attribute: 
+	old: @format{string}{0..1} in type {DateTimeType}
+	new: @format{string}{1..1} in type {DateTimeType}
+		Restricted cardinality from 0..1 to 1..1
+In type {DateTimeType} removed <DateTime> {dateTime}{0..1}
+In type {DateType} modifying attribute: 
+	old: @format{string}{0..1} in type {DateType}
+	new: @format{string}{1..1} in type {DateType}
+		Restricted cardinality from 0..1 to 1..1
+In type {DateType} removed <Date> {date}{0..1}
+In type {DebtorFinancialAccountType} modifying element: 
+	old: <IBANID>{IDType}{0..1} in type {DebtorFinancialAccountType}
+	new: <IBANID>{IDType}{1..1} in type {DebtorFinancialAccountType}
+		Restricted cardinality from 0..1 to 1..1
+In type {DebtorFinancialAccountType} removed <AccountName> {TextType}{0..1}
+In type {DebtorFinancialAccountType} removed <ProprietaryID> {IDType}{0..1}
+In type {DeliveryTermsCodeType} removed @listAgencyID {DeliveryTermsCodeListAgencyIDContentType}{0..1}
+In type {DeliveryTermsCodeType} removed @listID {token}{0..1}
+In type {DeliveryTermsCodeType} removed @listVersionID {token}{0..1}
+In type {DocumentCodeType} removed @listAgencyID {DocumentCodeListAgencyIDContentType}{0..1}
+In type {DocumentCodeType} removed @listID {token}{0..1}
+In type {DocumentCodeType} removed @listURI {anyURI}{0..1}
+In type {DocumentCodeType} removed @listVersionID {token}{0..1}
+In type {DocumentCodeType} removed @name {string}{0..1}
+In type {DocumentContextParameterType} modifying element: 
+	old: <ID>{IDType}{0..1} in type {DocumentContextParameterType}
+	new: <ID>{IDType}{1..1} in type {DocumentContextParameterType}
+		Restricted cardinality from 0..1 to 1..1
+In type {DocumentContextParameterType} removed <SpecifiedDocumentVersion> {DocumentVersionType}{0..1}
+In type {DocumentContextParameterType} removed <Value> {TextType}{0..1}
+In type {DocumentLineDocumentType} modifying element: 
+	old: <LineID>{IDType}{0..1} in type {DocumentLineDocumentType}
+	new: <LineID>{IDType}{1..1} in type {DocumentLineDocumentType}
+		Restricted cardinality from 0..1 to 1..1
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
+		Restricted cardinality from 0..* to 1..1
+In type {ExchangedDocumentContextType} removed <ApplicationSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*}
+In type {ExchangedDocumentContextType} removed <BIMSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*}
+In type {ExchangedDocumentContextType} removed <MessageStandardSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..1}
+In type {ExchangedDocumentContextType} removed <ScenarioSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*}
+In type {ExchangedDocumentContextType} removed <SpecifiedTransactionID> {IDType}{0..1}
+In type {ExchangedDocumentContextType} removed <SubsetSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*}
+In type {ExchangedDocumentType} modifying element: 
+	old: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
+	new: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+		Restricted cardinality from 0..1 to 1..1
+In type {ExchangedDocumentType} removed <CategoryCode> {CodeType}{0..1}
+In type {ExchangedDocumentType} removed <ControlRequirementIndicator> {IndicatorType}{0..1}
+In type {ExchangedDocumentType} removed <GlobalID> {IDType}{0..1}
+In type {ExchangedDocumentType} removed <IssuerTradeParty> {TradePartyType}{0..1}
+In type {ExchangedDocumentType} removed <PreviousRevisionID> {IDType}{0..1}
+In type {ExchangedDocumentType} removed <Purpose> {TextType}{0..1}
+In type {ExchangedDocumentType} removed <PurposeCode> {MessageFunctionCodeType}{0..1}
+In type {ExchangedDocumentType} removed <RevisionDateTime> {DateTimeType}{0..1}
+In type {ExchangedDocumentType} removed <RevisionID> {IDType}{0..1}
+In type {ExchangedDocumentType} removed <VersionID> {IDType}{0..1}
+In type {FormattedDateTimeType} modifying attribute: 
+	old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType}
+	new: @format{FormattedDateTimeFormatContentType}{1..1} in type {FormattedDateTimeType}
+		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <BuyerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	new: <BuyerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <SellerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	new: <SellerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeAgreementType} removed <BuyerAssignedAccountantTradeParty> {TradePartyType}{0..1}
+In type {HeaderTradeAgreementType} removed <BuyerRequisitionerTradeParty> {TradePartyType}{0..*}
+In type {HeaderTradeAgreementType} removed <DemandForecastReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeAgreementType} removed <OrderResponseReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeAgreementType} removed <PriceListReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeAgreementType} removed <PromotionalDealReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeAgreementType} removed <PurchaseConditionsReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {HeaderTradeAgreementType} removed <Reference> {TextType}{0..*}
+In type {HeaderTradeAgreementType} removed <RequisitionerReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {HeaderTradeAgreementType} removed <SellerAssignedAccountantTradeParty> {TradePartyType}{0..1}
+In type {HeaderTradeAgreementType} removed <SupplyInstructionReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeDeliveryType} removed <ActualDespatchSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {HeaderTradeDeliveryType} removed <ActualPickUpSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {HeaderTradeDeliveryType} removed <ActualReceiptSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {HeaderTradeDeliveryType} removed <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {HeaderTradeDeliveryType} removed <ConsumptionReportReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeDeliveryType} removed <PackingListReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeDeliveryType} removed <PreviousDeliverySupplyChainEvent> {SupplyChainEventType}{0..*}
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <ApplicableTradeTax>{TradeTaxType}{0..*} in type {HeaderTradeSettlementType}
+	new: <ApplicableTradeTax>{TradeTaxType}{1..*} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..* to 1..*
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeSettlementType} removed <CreditReason> {TextType}{0..*}
+In type {HeaderTradeSettlementType} removed <CreditReasonCode> {CodeType}{0..1}
+In type {HeaderTradeSettlementType} removed <CreditorReferenceIssuerID> {IDType}{0..*}
+In type {HeaderTradeSettlementType} removed <CreditorReferenceType> {TextType}{0..*}
+In type {HeaderTradeSettlementType} removed <CreditorReferenceTypeCode> {CodeType}{0..*}
+In type {HeaderTradeSettlementType} removed <DuePayableAmount> {AmountType}{0..*}
+In type {HeaderTradeSettlementType} removed <FactoringAgreementReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {HeaderTradeSettlementType} removed <FactoringListReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {HeaderTradeSettlementType} removed <InvoiceApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1}
+In type {HeaderTradeSettlementType} removed <InvoiceDateTime> {DateTimeType}{0..1}
+In type {HeaderTradeSettlementType} removed <LetterOfCreditReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeSettlementType} removed <NextInvoiceDateTime> {DateTimeType}{0..*}
+In type {HeaderTradeSettlementType} removed <PayableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {HeaderTradeSettlementType} removed <PaymentApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1}
+In type {HeaderTradeSettlementType} removed <PaymentCurrencyCode> {CurrencyCodeType}{0..1}
+In type {HeaderTradeSettlementType} removed <ProFormaInvoiceReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {HeaderTradeSettlementType} removed <PurchaseSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {HeaderTradeSettlementType} removed <SalesSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {HeaderTradeSettlementType} removed <SpecifiedFinancialAdjustment> {FinancialAdjustmentType}{0..*}
+In type {HeaderTradeSettlementType} removed <SpecifiedTradeSettlementFinancialCard> {TradeSettlementFinancialCardType}{0..*}
+In type {HeaderTradeSettlementType} removed <SubtotalCalculatedTradeTax> {TradeTaxType}{0..*}
+In type {HeaderTradeSettlementType} removed <UltimatePayeeTradeParty> {TradePartyType}{0..1}
+In type {IDType} removed @schemeAgencyID {token}{0..1}
+In type {IDType} removed @schemeAgencyName {string}{0..1}
+In type {IDType} removed @schemeDataURI {anyURI}{0..1}
+In type {IDType} removed @schemeName {string}{0..1}
+In type {IDType} removed @schemeURI {anyURI}{0..1}
+In type {IDType} removed @schemeVersionID {token}{0..1}
+In type {IndicatorType} removed <IndicatorString> {null}{0..1}
+In type {LegalOrganizationType} removed <AuthorizedLegalRegistration> {LegalRegistrationType}{0..*}
+In type {LegalOrganizationType} removed <LegalClassificationCode> {CodeType}{0..1}
+In type {LegalOrganizationType} removed <Name> {TextType}{0..1}
+In type {LineStatusCodeType} removed @listAgencyID {LineStatusCodeListAgencyIDContentType}{0..1}
+In type {LineStatusCodeType} removed @listID {token}{0..1}
+In type {LineStatusCodeType} removed @listURI {anyURI}{0..1}
+In type {LineStatusCodeType} removed @listVersionID {token}{0..1}
+In type {LineTradeAgreementType} modifying element: 
+	old: <NetPriceProductTradePrice>{TradePriceType}{0..1} in type {LineTradeAgreementType}
+	new: <NetPriceProductTradePrice>{TradePriceType}{1..1} in type {LineTradeAgreementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {LineTradeAgreementType} removed <ApplicableTradeDeliveryTerms> {TradeDeliveryTermsType}{0..1}
+In type {LineTradeAgreementType} removed <BuyerReference> {TextType}{0..1}
+In type {LineTradeAgreementType} removed <BuyerRequisitionerTradeParty> {TradePartyType}{0..*}
+In type {LineTradeAgreementType} removed <DemandForecastReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {LineTradeAgreementType} removed <IncludedSpecifiedMarketplace> {SpecifiedMarketplaceType}{0..1}
+In type {LineTradeAgreementType} removed <ItemBuyerTradeParty> {TradePartyType}{0..1}
+In type {LineTradeAgreementType} removed <ItemSellerTradeParty> {TradePartyType}{0..1}
+In type {LineTradeAgreementType} removed <PromotionalDealReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {LineTradeAgreementType} removed <RequisitionerReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {LineTradeAgreementType} removed <SellerOrderReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {LineTradeDeliveryType} modifying element: 
+	old: <BilledQuantity>{QuantityType}{0..1} in type {LineTradeDeliveryType}
+	new: <BilledQuantity>{QuantityType}{1..1} in type {LineTradeDeliveryType}
+		Restricted cardinality from 0..1 to 1..1
+In type {LineTradeDeliveryType} removed <ActualDespatchSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {LineTradeDeliveryType} removed <ActualPickUpSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {LineTradeDeliveryType} removed <ActualReceiptSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {LineTradeDeliveryType} removed <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {LineTradeDeliveryType} removed <ConsumptionReportReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {LineTradeDeliveryType} removed <DespatchedQuantity> {QuantityType}{0..1}
+In type {LineTradeDeliveryType} removed <GrossWeightMeasure> {WeightUnitMeasureType}{0..1}
+In type {LineTradeDeliveryType} removed <IncludedSupplyChainPackaging> {SupplyChainPackagingType}{0..*}
+In type {LineTradeDeliveryType} removed <NetWeightMeasure> {WeightUnitMeasureType}{0..1}
+In type {LineTradeDeliveryType} removed <PackingListReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {LineTradeDeliveryType} removed <PerPackageUnitQuantity> {QuantityType}{0..1}
+In type {LineTradeDeliveryType} removed <ProductUnitQuantity> {QuantityType}{0..1}
+In type {LineTradeDeliveryType} removed <ReceivedQuantity> {QuantityType}{0..1}
+In type {LineTradeDeliveryType} removed <RelatedSupplyChainConsignment> {SupplyChainConsignmentType}{0..1}
+In type {LineTradeDeliveryType} removed <RequestedDeliverySupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {LineTradeDeliveryType} removed <RequestedQuantity> {QuantityType}{0..1}
+In type {LineTradeDeliveryType} removed <ShipFromTradeParty> {TradePartyType}{0..1}
+In type {LineTradeDeliveryType} removed <SpecifiedDeliveryAdjustment> {DeliveryAdjustmentType}{0..*}
+In type {LineTradeDeliveryType} removed <TheoreticalWeightMeasure> {WeightUnitMeasureType}{0..1}
+In type {LineTradeSettlementType} modifying element: 
+	old: <ApplicableTradeTax>{TradeTaxType}{0..*} in type {LineTradeSettlementType}
+	new: <ApplicableTradeTax>{TradeTaxType}{1..*} in type {LineTradeSettlementType}
+		Restricted cardinality from 0..* to 1..*
+In type {LineTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementLineMonetarySummation>{TradeSettlementLineMonetarySummationType}{0..1} in type {LineTradeSettlementType}
+	new: <SpecifiedTradeSettlementLineMonetarySummation>{TradeSettlementLineMonetarySummationType}{1..1} in type {LineTradeSettlementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {LineTradeSettlementType} removed <DiscountIndicator> {IndicatorType}{0..1}
+In type {LineTradeSettlementType} removed <InvoiceIssuerReference> {TextType}{0..1}
+In type {LineTradeSettlementType} removed <PayableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {LineTradeSettlementType} removed <PaymentReference> {TextType}{0..*}
+In type {LineTradeSettlementType} removed <PurchaseSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {LineTradeSettlementType} removed <SalesSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {LineTradeSettlementType} removed <SpecifiedFinancialAdjustment> {FinancialAdjustmentType}{0..*}
+In type {LineTradeSettlementType} removed <SpecifiedLogisticsServiceCharge> {LogisticsServiceChargeType}{0..*}
+In type {LineTradeSettlementType} removed <SpecifiedTradePaymentTerms> {TradePaymentTermsType}{0..*}
+In type {LineTradeSettlementType} removed <SpecifiedTradeSettlementFinancialCard> {TradeSettlementFinancialCardType}{0..1}
+In type {LineTradeSettlementType} removed <SubtotalCalculatedTradeTax> {TradeTaxType}{0..*}
+In type {LineTradeSettlementType} removed <TotalAdjustmentAmount> {AmountType}{0..1}
+In type {LogisticsServiceChargeType} modifying element: 
+	old: <AppliedAmount>{AmountType}{0..*} in type {LogisticsServiceChargeType}
+	new: <AppliedAmount>{AmountType}{1..1} in type {LogisticsServiceChargeType}
+		Restricted cardinality from 0..* to 1..1
+In type {LogisticsServiceChargeType} modifying element: 
+	old: <Description>{TextType}{0..*} in type {LogisticsServiceChargeType}
+	new: <Description>{TextType}{1..1} in type {LogisticsServiceChargeType}
+		Restricted cardinality from 0..* to 1..1
+In type {LogisticsServiceChargeType} removed <AllowanceCharge> {TextType}{0..1}
+In type {LogisticsServiceChargeType} removed <AppliedFromLogisticsLocation> {LogisticsLocationType}{0..1}
+In type {LogisticsServiceChargeType} removed <AppliedToLogisticsLocation> {LogisticsLocationType}{0..1}
+In type {LogisticsServiceChargeType} removed <CalculationBasis> {TextType}{0..1}
+In type {LogisticsServiceChargeType} removed <CalculationBasisCode> {LogisticsChargeCalculationBasisCodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <ChargeCategoryCode> {CodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <DisbursementAmount> {AmountType}{0..*}
+In type {LogisticsServiceChargeType} removed <ID> {FreightChargeTypeIDType}{0..1}
+In type {LogisticsServiceChargeType} removed <PayingPartyRoleCode> {ChargePayingPartyRoleCodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <PaymentArrangementCode> {CodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <PaymentPlaceLogisticsLocation> {LogisticsLocationType}{0..1}
+In type {LogisticsServiceChargeType} removed <ServiceCategoryCode> {CodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <TariffClassCode> {FreightChargeTariffClassCodeType}{0..1}
+In type {LogisticsServiceChargeType} removed <TransportPaymentMethodCode> {CodeType}{0..1}
+In type {LogisticsTransportMovementType} modifying element: 
+	old: <ModeCode>{TransportModeCodeType}{0..1} in type {LogisticsTransportMovementType}
+	new: <ModeCode>{TransportModeCodeType}{1..1} in type {LogisticsTransportMovementType}
+		Restricted cardinality from 0..1 to 1..1
+In type {LogisticsTransportMovementType} removed <Mode> {TextType}{0..1}
+In type {LogisticsTransportMovementType} removed <StageCode> {TransportMovementStageCodeType}{0..1}
+In type {LogisticsTransportMovementType} removed <UsedLogisticsTransportMeans> {LogisticsTransportMeansType}{0..1}
+In type {MeasureType} removed @unitCodeListVersionID {token}{0..1}
+In type {NoteType} modifying element: 
+	old: <Content>{TextType}{0..*} in type {NoteType}
+	new: <Content>{TextType}{1..1} in type {NoteType}
+		Restricted cardinality from 0..* to 1..1
+In type {NoteType} removed <ID> {IDType}{0..1}
+In type {NoteType} removed <Subject> {TextType}{0..1}
+In type {NumericType} removed @format {string}{0..1}
+In type {PartyRoleCodeType} removed @listAgencyID {PartyRoleCodeListAgencyIDContentType}{0..1}
+In type {PartyRoleCodeType} removed @listID {token}{0..1}
+In type {PartyRoleCodeType} removed @listVersionID {token}{0..1}
+In type {PartyRoleCodeType} removed @name {string}{0..1}
+In type {PaymentMeansCodeType} removed @listAgencyID {PaymentMeansCodeListAgencyIDContentType}{0..1}
+In type {PaymentMeansCodeType} removed @listID {token}{0..1}
+In type {PaymentMeansCodeType} removed @listVersionID {token}{0..1}
+In type {PercentType} removed @format {string}{0..1}
+In type {ProcuringProjectType} removed <Description> {TextType}{0..1}
+In type {ProductCharacteristicType} modifying element: 
+	old: <Description>{TextType}{0..*} in type {ProductCharacteristicType}
+	new: <Description>{TextType}{1..1} in type {ProductCharacteristicType}
+		Restricted cardinality from 0..* to 1..1
+In type {ProductCharacteristicType} modifying element: 
+	old: <Value>{TextType}{0..*} in type {ProductCharacteristicType}
+	new: <Value>{TextType}{1..1} in type {ProductCharacteristicType}
+		Restricted cardinality from 0..* to 1..1
+In type {ProductCharacteristicType} removed <ApplicableProductCharacteristicCondition> {ProductCharacteristicConditionType}{0..*}
+In type {ProductCharacteristicType} removed <ApplicableReferencedStandard> {ReferencedStandardType}{0..1}
+In type {ProductCharacteristicType} removed <ContentTypeCode> {CodeType}{0..1}
+In type {ProductCharacteristicType} removed <ID> {IDType}{0..*}
+In type {ProductCharacteristicType} removed <MeasurementMethodCode> {CodeType}{0..1}
+In type {ProductCharacteristicType} removed <ValueCode> {CodeType}{0..1}
+In type {ProductCharacteristicType} removed <ValueDateTime> {DateTimeType}{0..1}
+In type {ProductCharacteristicType} removed <ValueIndicator> {IndicatorType}{0..1}
+In type {ProductCharacteristicType} removed <ValueSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..1}
+In type {ProductClassificationType} removed <ApplicableReferencedStandard> {ReferencedStandardType}{0..1}
+In type {ProductClassificationType} removed <ClassProductCharacteristic> {ProductCharacteristicType}{0..*}
+In type {ProductClassificationType} removed <SubClassCode> {CodeType}{0..1}
+In type {ProductClassificationType} removed <SystemID> {IDType}{0..1}
+In type {ProductClassificationType} removed <SystemName> {TextType}{0..*}
+In type {QuantityType} removed @unitCodeListAgencyID {token}{0..1}
+In type {QuantityType} removed @unitCodeListAgencyName {string}{0..1}
+In type {QuantityType} removed @unitCodeListID {token}{0..1}
+In type {RateType} removed @format {string}{0..1}
+In type {ReferenceCodeType} removed @listAgencyID {ReferenceCodeListAgencyIDContentType}{0..1}
+In type {ReferenceCodeType} removed @listID {token}{0..1}
+In type {ReferenceCodeType} removed @listVersionID {token}{0..1}
+In type {ReferenceCodeType} removed @name {string}{0..1}
+In type {ReferencedDocumentType} removed <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*}
+In type {ReferencedDocumentType} removed <CopyIndicator> {IndicatorType}{0..1}
+In type {ReferencedDocumentType} removed <EffectiveSpecifiedPeriod> {SpecifiedPeriodType}{0..1}
+In type {ReferencedDocumentType} removed <GlobalID> {IDType}{0..1}
+In type {ReferencedDocumentType} removed <Information> {TextType}{0..*}
+In type {ReferencedDocumentType} removed <IssuerTradeParty> {TradePartyType}{0..1}
+In type {ReferencedDocumentType} removed <PreviousRevisionID> {IDType}{0..*}
+In type {ReferencedDocumentType} removed <RevisionID> {IDType}{0..1}
+In type {ReferencedDocumentType} removed <SectionName> {TextType}{0..*}
+In type {ReferencedDocumentType} removed <StatusCode> {DocumentStatusCodeType}{0..1}
+In type {ReferencedProductType} modifying element: 
+	old: <Name>{TextType}{0..*} in type {ReferencedProductType}
+	new: <Name>{TextType}{1..1} in type {ReferencedProductType}
+		Restricted cardinality from 0..* to 1..1
+In type {ReferencedProductType} removed <ManufacturerAssignedID> {IDType}{0..*}
+In type {ReferencedProductType} removed <RelationshipTypeCode> {CodeType}{0..*}
+In type {SpecifiedPeriodType} removed <ContinuousIndicator> {IndicatorType}{0..1}
+In type {SpecifiedPeriodType} removed <DurationMeasure> {MeasureType}{0..*}
+In type {SpecifiedPeriodType} removed <ID> {IDType}{0..1}
+In type {SpecifiedPeriodType} removed <InclusiveIndicator> {IndicatorType}{0..1}
+In type {SpecifiedPeriodType} removed <Name> {TextType}{0..*}
+In type {SpecifiedPeriodType} removed <OpenIndicator> {IndicatorType}{0..1}
+In type {SpecifiedPeriodType} removed <PurposeCode> {CodeType}{0..1}
+In type {SpecifiedPeriodType} removed <SeasonCode> {CodeType}{0..1}
+In type {SpecifiedPeriodType} removed <SequenceNumeric> {NumericType}{0..1}
+In type {SpecifiedPeriodType} removed <StartDateFlexibilityCode> {CodeType}{0..1}
+In type {SupplyChainConsignmentType} removed <AssociatedInvoiceAmount> {AmountType}{0..*}
+In type {SupplyChainConsignmentType} removed <AssociatedReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {SupplyChainConsignmentType} removed <CarrierTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <ConsigneeTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <ConsignorTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <CustomsExportAgentTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <CustomsImportAgentTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <DeclaredValueForCustomsAmount> {AmountType}{0..1}
+In type {SupplyChainConsignmentType} removed <DeliveryTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <FreightForwarderTradeParty> {TradePartyType}{0..1}
+In type {SupplyChainConsignmentType} removed <GrossVolumeMeasure> {VolumeUnitMeasureType}{0..*}
+In type {SupplyChainConsignmentType} removed <GrossWeightMeasure> {WeightUnitMeasureType}{0..*}
+In type {SupplyChainConsignmentType} removed <GroupingCentreTradeParty> {TradePartyType}{0..*}
+In type {SupplyChainConsignmentType} removed <IncludedSupplyChainConsignmentItem> {SupplyChainConsignmentItemType}{0..*}
+In type {SupplyChainConsignmentType} removed <InsurancePremiumAmount> {AmountType}{0..1}
+In type {SupplyChainConsignmentType} removed <NetWeightMeasure> {MeasureType}{0..*}
+In type {SupplyChainConsignmentType} removed <PackageQuantity> {QuantityType}{0..1}
+In type {SupplyChainConsignmentType} removed <TotalChargeAmount> {AmountType}{0..1}
+In type {SupplyChainConsignmentType} removed <TransportContractReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {SupplyChainConsignmentType} removed <UtilizedLogisticsTransportEquipment> {LogisticsTransportEquipmentType}{0..*}
+In type {SupplyChainEventType} modifying element: 
+	old: <OccurrenceDateTime>{DateTimeType}{0..1} in type {SupplyChainEventType}
+	new: <OccurrenceDateTime>{DateTimeType}{1..1} in type {SupplyChainEventType}
+		Restricted cardinality from 0..1 to 1..1
+In type {SupplyChainEventType} removed <Description> {TextType}{0..*}
+In type {SupplyChainEventType} removed <DescriptionBinaryObject> {BinaryObjectType}{0..*}
+In type {SupplyChainEventType} removed <EarliestOccurrenceDateTime> {DateTimeType}{0..1}
+In type {SupplyChainEventType} removed <ID> {IDType}{0..1}
+In type {SupplyChainEventType} removed <LatestOccurrenceDateTime> {DateTimeType}{0..1}
+In type {SupplyChainEventType} removed <OccurrenceLogisticsLocation> {LogisticsLocationType}{0..1}
+In type {SupplyChainEventType} removed <OccurrenceSpecifiedPeriod> {SpecifiedPeriodType}{0..1}
+In type {SupplyChainEventType} removed <TypeCode> {CodeType}{0..1}
+In type {SupplyChainEventType} removed <UnitQuantity> {QuantityType}{0..1}
+In type {SupplyChainTradeLineItemType} modifying element: 
+	old: <SpecifiedLineTradeAgreement>{LineTradeAgreementType}{0..1} in type {SupplyChainTradeLineItemType}
+	new: <SpecifiedLineTradeAgreement>{LineTradeAgreementType}{1..1} in type {SupplyChainTradeLineItemType}
+		Restricted cardinality from 0..1 to 1..1
+In type {SupplyChainTradeLineItemType} modifying element: 
+	old: <SpecifiedLineTradeDelivery>{LineTradeDeliveryType}{0..1} in type {SupplyChainTradeLineItemType}
+	new: <SpecifiedLineTradeDelivery>{LineTradeDeliveryType}{1..1} in type {SupplyChainTradeLineItemType}
+		Restricted cardinality from 0..1 to 1..1
+In type {SupplyChainTradeLineItemType} modifying element: 
+	old: <SpecifiedTradeProduct>{TradeProductType}{0..1} in type {SupplyChainTradeLineItemType}
+	new: <SpecifiedTradeProduct>{TradeProductType}{1..1} in type {SupplyChainTradeLineItemType}
+		Restricted cardinality from 0..1 to 1..1
+In type {SupplyChainTradeLineItemType} removed <DescriptionCode> {CodeType}{0..1}
+In type {SupplyChainTradeLineItemType} removed <IncludedSubordinateTradeLineItem> {SubordinateTradeLineItemType}{0..*}
+In type {SupplyChainTradeTransactionType} modifying element: 
+	old: <IncludedSupplyChainTradeLineItem>{SupplyChainTradeLineItemType}{0..*} in type {SupplyChainTradeTransactionType}
+	new: <IncludedSupplyChainTradeLineItem>{SupplyChainTradeLineItemType}{1..*} in type {SupplyChainTradeTransactionType}
+		Restricted cardinality from 0..* to 1..*
+In type {TaxCategoryCodeType} removed @listAgencyID {TaxCategoryCodeListAgencyIDContentType}{0..1}
+In type {TaxCategoryCodeType} removed @listID {token}{0..1}
+In type {TaxCategoryCodeType} removed @listURI {anyURI}{0..1}
+In type {TaxCategoryCodeType} removed @listVersionID {token}{0..1}
+In type {TaxRegistrationType} modifying element: 
+	old: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TaxRegistrationType} removed <AssociatedRegisteredTax> {RegisteredTaxType}{0..1}
+In type {TaxTypeCodeType} removed @listAgencyID {TaxTypeCodeListAgencyIDContentType}{0..1}
+In type {TaxTypeCodeType} removed @listID {token}{0..1}
+In type {TaxTypeCodeType} removed @listURI {anyURI}{0..1}
+In type {TaxTypeCodeType} removed @listVersionID {token}{0..1}
+In type {TextType} removed @languageID {token}{0..1}
+In type {TextType} removed @languageLocaleID {token}{0..1}
+In type {TimeReferenceCodeType} removed @listAgencyID {TimeReferenceCodeListAgencyIDContentType}{0..1}
+In type {TimeReferenceCodeType} removed @listID {token}{0..1}
+In type {TimeReferenceCodeType} removed @listVersionID {token}{0..1}
+In type {TimeReferenceCodeType} removed @name {string}{0..1}
+In type {TradeAccountingAccountType} removed <AmountTypeCode> {AccountingAmountTypeCodeType}{0..1}
+In type {TradeAccountingAccountType} removed <CostReferenceDimensionPattern> {TextType}{0..1}
+In type {TradeAccountingAccountType} removed <Name> {TextType}{0..1}
+In type {TradeAccountingAccountType} removed <SetTriggerCode> {AccountingDocumentCodeType}{0..1}
+In type {TradeAddressType} modifying element: 
+	old: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
+	new: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeAddressType} removed <AdditionalStreetName> {TextType}{0..1}
+In type {TradeAddressType} removed <AttentionOf> {TextType}{0..1}
+In type {TradeAddressType} removed <BuildingName> {TextType}{0..1}
+In type {TradeAddressType} removed <BuildingNumber> {TextType}{0..1}
+In type {TradeAddressType} removed <CareOf> {TextType}{0..1}
+In type {TradeAddressType} removed <CitySubDivisionName> {TextType}{0..1}
+In type {TradeAddressType} removed <CountryName> {TextType}{0..*}
+In type {TradeAddressType} removed <CountrySubDivisionID> {IDType}{0..1}
+In type {TradeAddressType} removed <DepartmentName> {TextType}{0..1}
+In type {TradeAddressType} removed <ID> {IDType}{0..1}
+In type {TradeAddressType} removed <LineFive> {TextType}{0..1}
+In type {TradeAddressType} removed <LineFour> {TextType}{0..1}
+In type {TradeAddressType} removed <PostOfficeBox> {TextType}{0..1}
+In type {TradeAddressType} removed <StreetName> {TextType}{0..1}
+In type {TradeAllowanceChargeType} modifying element: 
+	old: <ActualAmount>{AmountType}{0..*} in type {TradeAllowanceChargeType}
+	new: <ActualAmount>{AmountType}{1..1} in type {TradeAllowanceChargeType}
+		Restricted cardinality from 0..* to 1..1
+In type {TradeAllowanceChargeType} modifying element: 
+	old: <ChargeIndicator>{IndicatorType}{0..1} in type {TradeAllowanceChargeType}
+	new: <ChargeIndicator>{IndicatorType}{1..1} in type {TradeAllowanceChargeType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeAllowanceChargeType} removed <ActualTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1}
+In type {TradeAllowanceChargeType} removed <ID> {IDType}{0..1}
+In type {TradeAllowanceChargeType} removed <PrepaidIndicator> {IndicatorType}{0..1}
+In type {TradeAllowanceChargeType} removed <TypeCode> {AllowanceChargeIdentificationCodeType}{0..1}
+In type {TradeAllowanceChargeType} removed <UnitBasisAmount> {AmountType}{0..1}
+In type {TradeContactType} removed <DirectTelephoneUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradeContactType} removed <ID> {IDType}{0..1}
+In type {TradeContactType} removed <InstantMessagingUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradeContactType} removed <JobTitle> {TextType}{0..1}
+In type {TradeContactType} removed <MobileTelephoneUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradeContactType} removed <PersonID> {IDType}{0..*}
+In type {TradeContactType} removed <Responsibility> {TextType}{0..1}
+In type {TradeContactType} removed <SpecifiedContactPerson> {ContactPersonType}{0..1}
+In type {TradeContactType} removed <SpecifiedNote> {NoteType}{0..*}
+In type {TradeContactType} removed <TelexUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradeContactType} removed <VOIPUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradeCountryType} removed <Name> {TextType}{0..*}
+In type {TradeCountryType} removed <SubordinateTradeCountrySubDivision> {TradeCountrySubDivisionType}{0..*}
+In type {TradeCurrencyExchangeType} removed <AssociatedReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {TradeCurrencyExchangeType} removed <MarketID> {IDType}{0..1}
+In type {TradeCurrencyExchangeType} removed <SourceUnitBasisNumeric> {NumericType}{0..1}
+In type {TradeCurrencyExchangeType} removed <TargetUnitBaseNumeric> {NumericType}{0..1}
+In type {TradeDeliveryTermsType} modifying element: 
+	old: <DeliveryTypeCode>{DeliveryTermsCodeType}{0..1} in type {TradeDeliveryTermsType}
+	new: <DeliveryTypeCode>{DeliveryTermsCodeType}{1..1} in type {TradeDeliveryTermsType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeDeliveryTermsType} removed <Description> {TextType}{0..*}
+In type {TradeDeliveryTermsType} removed <RelevantTradeLocation> {TradeLocationType}{0..1}
+In type {TradePartyType} removed <EndPointURIUniversalCommunication> {UniversalCommunicationType}{0..1}
+In type {TradePartyType} removed <LogoAssociatedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*}
+In type {TradePaymentTermsType} removed <FromEventCode> {PaymentTermsEventTimeReferenceCodeType}{0..1}
+In type {TradePaymentTermsType} removed <ID> {PaymentTermsIDType}{0..1}
+In type {TradePaymentTermsType} removed <InstructionTypeCode> {CodeType}{0..1}
+In type {TradePaymentTermsType} removed <PartialPaymentPercent> {PercentType}{0..1}
+In type {TradePaymentTermsType} removed <PaymentMeansID> {IDType}{0..*}
+In type {TradePaymentTermsType} removed <SettlementPeriodMeasure> {MeasureType}{0..1}
+In type {TradePaymentTermsType} removed <TypeCode> {PaymentTermsTypeCodeType}{0..1}
+In type {TradePriceType} removed <AssociatedReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {TradePriceType} removed <ChangeReason> {TextType}{0..*}
+In type {TradePriceType} removed <DeliveryTradeLocation> {TradeLocationType}{0..*}
+In type {TradePriceType} removed <MaximumQuantity> {QuantityType}{0..1}
+In type {TradePriceType} removed <MinimumQuantity> {QuantityType}{0..1}
+In type {TradePriceType} removed <OrderUnitConversionFactorNumeric> {NumericType}{0..1}
+In type {TradePriceType} removed <TradeComparisonReferencePrice> {ReferencePriceType}{0..*}
+In type {TradePriceType} removed <TypeCode> {PriceTypeCodeType}{0..1}
+In type {TradePriceType} removed <ValiditySpecifiedPeriod> {SpecifiedPeriodType}{0..1}
+In type {TradeProductInstanceType} removed <ApplicableMaterialGoodsCharacteristic> {MaterialGoodsCharacteristicType}{0..*}
+In type {TradeProductInstanceType} removed <ApplicableProductCharacteristic> {ProductCharacteristicType}{0..*}
+In type {TradeProductInstanceType} removed <BestBeforeDateTime> {DateTimeType}{0..1}
+In type {TradeProductInstanceType} removed <ExpiryDateTime> {DateTimeType}{0..1}
+In type {TradeProductInstanceType} removed <GlobalSerialID> {IDType}{0..1}
+In type {TradeProductInstanceType} removed <KanbanID> {IDType}{0..1}
+In type {TradeProductInstanceType} removed <PackagingSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {TradeProductInstanceType} removed <ProductionSupplyChainEvent> {SupplyChainEventType}{0..1}
+In type {TradeProductInstanceType} removed <RegistrationID> {IDType}{0..*}
+In type {TradeProductInstanceType} removed <SellByDateTime> {DateTimeType}{0..1}
+In type {TradeProductInstanceType} removed <SerialID> {IDType}{0..*}
+In type {TradeProductType} modifying element: 
+	old: <Name>{TextType}{0..*} in type {TradeProductType}
+	new: <Name>{TextType}{1..1} in type {TradeProductType}
+		Restricted cardinality from 0..* to 1..1
+In type {TradeProductType} removed <AdditionalReferenceReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {TradeProductType} removed <ApplicableMaterialGoodsCharacteristic> {MaterialGoodsCharacteristicType}{0..*}
+In type {TradeProductType} removed <AreaDensityMeasure> {MeasureType}{0..1}
+In type {TradeProductType} removed <BrandName> {TextType}{0..1}
+In type {TradeProductType} removed <BrandOwnerTradeParty> {TradePartyType}{0..1}
+In type {TradeProductType} removed <CertificationEvidenceReferenceReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {TradeProductType} removed <ColourCode> {CodeType}{0..1}
+In type {TradeProductType} removed <ColourDescription> {TextType}{0..*}
+In type {TradeProductType} removed <Designation> {TextType}{0..*}
+In type {TradeProductType} removed <DrainedNetWeightMeasure> {MeasureType}{0..1}
+In type {TradeProductType} removed <EndItemName> {TextType}{0..*}
+In type {TradeProductType} removed <EndItemTypeCode> {CodeType}{0..*}
+In type {TradeProductType} removed <FormattedCancellationAnnouncedLaunchDateTime> {FormattedDateTimeType}{0..1}
+In type {TradeProductType} removed <FormattedLatestProductDataChangeDateTime> {FormattedDateTimeType}{0..1}
+In type {TradeProductType} removed <GrossWeightMeasure> {MeasureType}{0..1}
+In type {TradeProductType} removed <InformationNote> {NoteType}{0..*}
+In type {TradeProductType} removed <InspectionReferenceReferencedDocument> {ReferencedDocumentType}{0..*}
+In type {TradeProductType} removed <LegalRightsOwnerTradeParty> {TradePartyType}{0..1}
+In type {TradeProductType} removed <LinearSpatialDimension> {SpatialDimensionType}{0..1}
+In type {TradeProductType} removed <MSDSReferenceReferencedDocument> {ReferencedDocumentType}{0..1}
+In type {TradeProductType} removed <ManufacturerAssignedID> {IDType}{0..1}
+In type {TradeProductType} removed <ManufacturerTradeParty> {TradePartyType}{0..1}
+In type {TradeProductType} removed <MaximumLinearSpatialDimension> {SpatialDimensionType}{0..1}
+In type {TradeProductType} removed <MinimumLinearSpatialDimension> {SpatialDimensionType}{0..1}
+In type {TradeProductType} removed <NetWeightMeasure> {MeasureType}{0..1}
+In type {TradeProductType} removed <PresentationSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*}
+In type {TradeProductType} removed <ProductGroupID> {IDType}{0..*}
+In type {TradeProductType} removed <SubBrandName> {TextType}{0..1}
+In type {TradeProductType} removed <TradeName> {TextType}{0..1}
+In type {TradeProductType} removed <TypeCode> {CodeType}{0..1}
+In type {TradeProductType} removed <UseDescription> {TextType}{0..*}
+In type {TradeProductType} removed <VariableMeasureIndicator> {IndicatorType}{0..1}
+In type {TradeSettlementFinancialCardType} modifying element: 
+	old: <ID>{IDType}{0..1} in type {TradeSettlementFinancialCardType}
+	new: <ID>{IDType}{1..1} in type {TradeSettlementFinancialCardType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeSettlementFinancialCardType} removed <CreditAvailableAmount> {AmountType}{0..*}
+In type {TradeSettlementFinancialCardType} removed <CreditLimitAmount> {AmountType}{0..*}
+In type {TradeSettlementFinancialCardType} removed <Description> {TextType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <ExpiryDate> {DateType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <InterestRatePercent> {PercentType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <IssuingCompanyName> {TextType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <MicrochipIndicator> {IndicatorType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <TypeCode> {CodeType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <ValidFromDateTime> {DateTimeType}{0..1}
+In type {TradeSettlementFinancialCardType} removed <VerificationNumeric> {NumericType}{0..1}
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 1..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <GrandTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <GrandTotalAmount>{AmountType}{1..2} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 1..2
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <LineTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <LineTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 1..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxBasisTotalAmount>{AmountType}{1..2} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 1..2
+In type {TradeSettlementHeaderMonetarySummationType} removed <GrossLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <InformationAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <NetIncludingTaxesLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <NetLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <ProductValueExcludingTobaccoTaxInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <RetailValueExcludingTaxInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <TotalAllowanceChargeAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <TotalDepositFeeInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <TotalDiscountAmount> {AmountType}{0..*}
+In type {TradeSettlementHeaderMonetarySummationType} removed <TotalRetailValueInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} modifying element: 
+	old: <LineTotalAmount>{AmountType}{0..*} in type {TradeSettlementLineMonetarySummationType}
+	new: <LineTotalAmount>{AmountType}{1..1} in type {TradeSettlementLineMonetarySummationType}
+		Restricted cardinality from 0..* to 1..1
+In type {TradeSettlementLineMonetarySummationType} removed <GrossLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <InformationAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <NetIncludingTaxesLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <NetLineTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <ProductWeightLossInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <TaxBasisTotalAmount> {AmountType}{0..*}
+In type {TradeSettlementLineMonetarySummationType} removed <TotalRetailValueInformationAmount> {AmountType}{0..*}
+In type {TradeSettlementPaymentMeansType} modifying element: 
+	old: <TypeCode>{PaymentMeansCodeType}{0..1} in type {TradeSettlementPaymentMeansType}
+	new: <TypeCode>{PaymentMeansCodeType}{1..1} in type {TradeSettlementPaymentMeansType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeSettlementPaymentMeansType} removed <GuaranteeMethodCode> {PaymentGuaranteeMeansCodeType}{0..1}
+In type {TradeSettlementPaymentMeansType} removed <ID> {IDType}{0..*}
+In type {TradeSettlementPaymentMeansType} removed <PayerSpecifiedDebtorFinancialInstitution> {DebtorFinancialInstitutionType}{0..1}
+In type {TradeSettlementPaymentMeansType} removed <PaymentChannelCode> {PaymentMeansChannelCodeType}{0..1}
+In type {TradeSettlementPaymentMeansType} removed <PaymentMethodCode> {CodeType}{0..1}
+In type {TradeTaxType} modifying element: 
+	old: <CategoryCode>{TaxCategoryCodeType}{0..1} in type {TradeTaxType}
+	new: <CategoryCode>{TaxCategoryCodeType}{1..1} in type {TradeTaxType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradeTaxType} removed <BasisQuantity> {QuantityType}{0..1}
+In type {TradeTaxType} removed <BuyerDeductibleTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}
+In type {TradeTaxType} removed <BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}
+In type {TradeTaxType} removed <BuyerRepayableTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}
+In type {TradeTaxType} removed <CalculatedRate> {RateType}{0..1}
+In type {TradeTaxType} removed <CalculationSequenceNumeric> {NumericType}{0..1}
+In type {TradeTaxType} removed <CategoryName> {TextType}{0..*}
+In type {TradeTaxType} removed <CurrencyCode> {CurrencyCodeType}{0..1}
+In type {TradeTaxType} removed <CustomsDutyIndicator> {IndicatorType}{0..1}
+In type {TradeTaxType} removed <InformationAmount> {AmountType}{0..*}
+In type {TradeTaxType} removed <Jurisdiction> {TextType}{0..*}
+In type {TradeTaxType} removed <PlaceApplicableTradeLocation> {TradeLocationType}{0..*}
+In type {TradeTaxType} removed <SellerPayableTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}
+In type {TradeTaxType} removed <SellerRefundableTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}
+In type {TradeTaxType} removed <ServiceSupplyTradeCountry> {TradeCountryType}{0..1}
+In type {TradeTaxType} removed <SpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*}
+In type {TradeTaxType} removed <TaxBasisAllowanceRate> {RateType}{0..1}
+In type {TradeTaxType} removed <Type> {TextType}{0..1}
+In type {TradeTaxType} removed <UnitBasisAmount> {AmountType}{0..*}
+In type {TransportModeCodeType} removed @listAgencyID {TransportModeCodeListAgencyIDContentType}{0..1}
+In type {TransportModeCodeType} removed @listID {token}{0..1}
+In type {TransportModeCodeType} removed @listVersionID {token}{0..1}
+In type {TransportModeCodeType} removed @name {string}{0..1}
+In type {UniversalCommunicationType} removed <ChannelCode> {CommunicationChannelCodeType}{0..1}

@@ -1,6 +1,5 @@
 package com.compare.xsd.comparison;
 
-import com.compare.xsd.XsdCompareStarter;
 import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.ChangeType;
 import com.compare.xsd.comparison.model.xsd.NodeNotFoundException;
@@ -51,15 +50,7 @@ public class XsdComparer {
     public XsdComparer(String oldDocument, String newDocument, TextReport.implementation reporterType) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
-
-
-        if(reporterType == TextReport.implementation.SINGLE_LINE) {
-            textReport = new SingleLineChangeTextReport();
-        }if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
-            textReport = new MultiLineChangeTextReport();
-        }if(reporterType == TextReport.implementation.DANGEROUS_CHANGE){
-            textReport = new DangerousChangeTextReport();
-        }
+        this.textReport = getTextReporter(reporterType);
         XsdLoader xsdLoader = new XsdLoader(null);
         this.oldDocument = xsdLoader.load(new File(oldDocument));
         log.debug("Finished loading original grammar!");
@@ -88,15 +79,24 @@ public class XsdComparer {
     public XsdComparer(XsdDocument oldDocument, XsdDocument newDocument, TextReport.implementation reporterType) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
+        this.textReport = getTextReporter(reporterType);
+        this.oldDocument = oldDocument;
+        this.newDocument = newDocument;
+    }
+
+
+    private static TextReport getTextReporter(TextReport.implementation reporterType){
+        TextReport textReport = null;
         if(reporterType == TextReport.implementation.SINGLE_LINE) {
             textReport = new SingleLineChangeTextReport();
         }if(reporterType == TextReport.implementation.MULTI_LINE_CHANGE){
             textReport = new MultiLineChangeTextReport();
-        }if(reporterType == TextReport.implementation.DANGEROUS_CHANGE){
-            textReport = new DangerousChangeTextReport();
+        }if(reporterType == TextReport.implementation.ONLY_RESTRICTIONS){
+            textReport = new OnlyNewRestrictionsReport();
+        }if(reporterType == TextReport.implementation.ONLY_EXTENSIONS){
+            textReport = new OnlyNewExtensionsReport();
         }
-        this.oldDocument = oldDocument;
-        this.newDocument = newDocument;
+        return textReport;
     }
 
     //region Methods

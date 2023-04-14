@@ -1,0 +1,283 @@
+In type {AmountType} added @currencyCodeListVersionID {token}{0..1} 
+In type {CountryIDType} added @schemeAgencyID {CountryIDSchemeAgencyIDContentType}{0..1} 
+In type {CrossIndustryInvoiceType} added <ValuationBreakdownStatement> {ValuationBreakdownStatementType}{0..1} 
+In type {CurrencyCodeType} added @listAgencyID {CurrencyCodeListAgencyIDContentType}{0..1} 
+In type {DateTimeType} added <DateTime> {dateTime}{0..1} 
+In type {DateTimeType} modifying attribute: 
+	old: @format{string}{1..1} in type {DateTimeType}
+	new: @format{string}{0..1} in type {DateTimeType}
+		Extended cardinality from 1..1 to 0..1
+In type {DocumentCodeType} added @listAgencyID {DocumentCodeListAgencyIDContentType}{0..1} 
+In type {DocumentContextParameterType} added <SpecifiedDocumentVersion> {DocumentVersionType}{0..1} 
+In type {DocumentContextParameterType} added <Value> {TextType}{0..1} 
+In type {DocumentContextParameterType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {DocumentContextParameterType}
+	new: <ID>{IDType}{0..1} in type {DocumentContextParameterType}
+		Extended cardinality from 1..1 to 0..1
+In type {ExchangedDocumentContextType} added <ApplicationSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentContextType} added <BIMSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentContextType} added <MessageStandardSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..1} 
+In type {ExchangedDocumentContextType} added <ScenarioSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentContextType} added <SpecifiedTransactionID> {IDType}{0..1} 
+In type {ExchangedDocumentContextType} added <SubsetSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentContextType} added <TestIndicator> {IndicatorType}{0..1} 
+In type {ExchangedDocumentContextType} added <UserSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+		Extended cardinality from 0..1 to 0..*
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
+	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+		Extended cardinality from 1..1 to 0..*
+In type {ExchangedDocumentType} added <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} 
+In type {ExchangedDocumentType} added <CategoryCode> {CodeType}{0..1} 
+In type {ExchangedDocumentType} added <ControlRequirementIndicator> {IndicatorType}{0..1} 
+In type {ExchangedDocumentType} added <CopyIndicator> {IndicatorType}{0..1} 
+In type {ExchangedDocumentType} added <CreationDateTime> {FormattedDateTimeType}{0..1} 
+In type {ExchangedDocumentType} added <EffectiveSpecifiedPeriod> {SpecifiedPeriodType}{0..1} 
+In type {ExchangedDocumentType} added <FirstVersionIssueDateTime> {DateTimeType}{0..1} 
+In type {ExchangedDocumentType} added <GlobalID> {IDType}{0..1} 
+In type {ExchangedDocumentType} added <IncludedNote> {NoteType}{0..*} 
+In type {ExchangedDocumentType} added <IssuerTradeParty> {TradePartyType}{0..1} 
+In type {ExchangedDocumentType} added <LanguageID> {IDType}{0..*} 
+In type {ExchangedDocumentType} added <Name> {TextType}{0..*} 
+In type {ExchangedDocumentType} added <PreviousRevisionID> {IDType}{0..1} 
+In type {ExchangedDocumentType} added <Purpose> {TextType}{0..1} 
+In type {ExchangedDocumentType} added <PurposeCode> {MessageFunctionCodeType}{0..1} 
+In type {ExchangedDocumentType} added <ReferenceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {ExchangedDocumentType} added <RequestedResponseTypeCode> {CodeType}{0..*} 
+In type {ExchangedDocumentType} added <RevisionDateTime> {DateTimeType}{0..1} 
+In type {ExchangedDocumentType} added <RevisionID> {IDType}{0..1} 
+In type {ExchangedDocumentType} added <SignatoryDocumentAuthentication> {DocumentAuthenticationType}{0..1} 
+In type {ExchangedDocumentType} added <SubtypeCode> {CodeType}{0..1} 
+In type {ExchangedDocumentType} added <VersionID> {IDType}{0..1} 
+In type {ExchangedDocumentType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {ExchangedDocumentType}
+	new: <ID>{IDType}{0..1} in type {ExchangedDocumentType}
+		Extended cardinality from 1..1 to 0..1
+In type {ExchangedDocumentType} modifying element: 
+	old: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+	new: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
+		Extended cardinality from 1..1 to 0..1
+In type {HeaderTradeAgreementType} added <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeAgreementType} added <ApplicableTradeDeliveryTerms> {TradeDeliveryTermsType}{0..1} 
+In type {HeaderTradeAgreementType} added <BuyerAgentTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <BuyerAssignedAccountantTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <BuyerRequisitionerTradeParty> {TradePartyType}{0..*} 
+In type {HeaderTradeAgreementType} added <BuyerTaxRepresentativeTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <ContractReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <DemandForecastReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <OrderResponseReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <PriceListReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <PricingBaseApplicableLogisticsLocation> {LogisticsLocationType}{0..1} 
+In type {HeaderTradeAgreementType} added <ProductEndUserTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <PromotionalDealReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <PurchaseConditionsReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeAgreementType} added <QuotationReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <Reference> {TextType}{0..*} 
+In type {HeaderTradeAgreementType} added <RequisitionerReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeAgreementType} added <SalesAgentTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <SellerAssignedAccountantTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <SellerOrderReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <SellerTaxRepresentativeTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeAgreementType} added <SpecifiedProcuringProject> {ProcuringProjectType}{0..1} 
+In type {HeaderTradeAgreementType} added <SupplyInstructionReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeAgreementType} added <UltimateCustomerOrderReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <BuyerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+	new: <BuyerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+		Extended cardinality from 1..1 to 0..1
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <SellerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+	new: <SellerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+		Extended cardinality from 1..1 to 0..1
+In type {HeaderTradeDeliveryType} added <ActualDeliverySupplyChainEvent> {SupplyChainEventType}{0..1} 
+In type {HeaderTradeDeliveryType} added <ActualDespatchSupplyChainEvent> {SupplyChainEventType}{0..1} 
+In type {HeaderTradeDeliveryType} added <ActualPickUpSupplyChainEvent> {SupplyChainEventType}{0..1} 
+In type {HeaderTradeDeliveryType} added <ActualReceiptSupplyChainEvent> {SupplyChainEventType}{0..1} 
+In type {HeaderTradeDeliveryType} added <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeDeliveryType} added <ConsumptionReportReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <DeliveryNoteReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <DespatchAdviceReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <PackingListReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <PreviousDeliverySupplyChainEvent> {SupplyChainEventType}{0..*} 
+In type {HeaderTradeDeliveryType} added <ReceivingAdviceReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <RelatedSupplyChainConsignment> {SupplyChainConsignmentType}{0..1} 
+In type {HeaderTradeDeliveryType} added <ShipFromTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeDeliveryType} added <ShipToTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeDeliveryType} added <UltimateShipToTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} added <ApplicableTradeTax> {TradeTaxType}{0..*} 
+In type {HeaderTradeSettlementType} added <BillingSpecifiedPeriod> {SpecifiedPeriodType}{0..1} 
+In type {HeaderTradeSettlementType} added <CreditReason> {TextType}{0..*} 
+In type {HeaderTradeSettlementType} added <CreditReasonCode> {CodeType}{0..1} 
+In type {HeaderTradeSettlementType} added <CreditorReferenceID> {IDType}{0..1} 
+In type {HeaderTradeSettlementType} added <CreditorReferenceIssuerID> {IDType}{0..*} 
+In type {HeaderTradeSettlementType} added <CreditorReferenceType> {TextType}{0..*} 
+In type {HeaderTradeSettlementType} added <CreditorReferenceTypeCode> {CodeType}{0..*} 
+In type {HeaderTradeSettlementType} added <DuePayableAmount> {AmountType}{0..*} 
+In type {HeaderTradeSettlementType} added <FactoringAgreementReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeSettlementType} added <FactoringListReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeSettlementType} added <InvoiceApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} 
+In type {HeaderTradeSettlementType} added <InvoiceDateTime> {DateTimeType}{0..1} 
+In type {HeaderTradeSettlementType} added <InvoiceIssuerReference> {TextType}{0..1} 
+In type {HeaderTradeSettlementType} added <InvoiceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeSettlementType} added <InvoiceeTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} added <InvoicerTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} added <LetterOfCreditReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeSettlementType} added <NextInvoiceDateTime> {DateTimeType}{0..*} 
+In type {HeaderTradeSettlementType} added <PayableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} 
+In type {HeaderTradeSettlementType} added <PayeeTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} added <PayerTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} added <PaymentApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} 
+In type {HeaderTradeSettlementType} added <PaymentCurrencyCode> {CurrencyCodeType}{0..1} 
+In type {HeaderTradeSettlementType} added <PaymentReference> {TextType}{0..*} 
+In type {HeaderTradeSettlementType} added <ProFormaInvoiceReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {HeaderTradeSettlementType} added <PurchaseSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} 
+In type {HeaderTradeSettlementType} added <ReceivableSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} 
+In type {HeaderTradeSettlementType} added <SalesSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedAdvancePayment> {AdvancePaymentType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedFinancialAdjustment> {FinancialAdjustmentType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedLogisticsServiceCharge> {LogisticsServiceChargeType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedTradeAllowanceCharge> {TradeAllowanceChargeType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedTradePaymentTerms> {TradePaymentTermsType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedTradeSettlementFinancialCard> {TradeSettlementFinancialCardType}{0..*} 
+In type {HeaderTradeSettlementType} added <SpecifiedTradeSettlementPaymentMeans> {TradeSettlementPaymentMeansType}{0..*} 
+In type {HeaderTradeSettlementType} added <SubtotalCalculatedTradeTax> {TradeTaxType}{0..*} 
+In type {HeaderTradeSettlementType} added <TaxApplicableTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1} 
+In type {HeaderTradeSettlementType} added <TaxCurrencyCode> {CurrencyCodeType}{0..1} 
+In type {HeaderTradeSettlementType} added <UltimatePayeeTradeParty> {TradePartyType}{0..1} 
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+		Extended cardinality from 1..1 to 0..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
+		Extended cardinality from 1..1 to 0..1
+In type {IDType} added @schemeAgencyID {token}{0..1} 
+In type {IDType} added @schemeAgencyName {string}{0..1} 
+In type {IDType} added @schemeDataURI {anyURI}{0..1} 
+In type {IDType} added @schemeName {string}{0..1} 
+In type {IDType} added @schemeURI {anyURI}{0..1} 
+In type {IDType} added @schemeVersionID {token}{0..1} 
+In type {LegalOrganizationType} added <AuthorizedLegalRegistration> {LegalRegistrationType}{0..*} 
+In type {LegalOrganizationType} added <LegalClassificationCode> {CodeType}{0..1} 
+In type {LegalOrganizationType} added <Name> {TextType}{0..1} 
+In type {LegalOrganizationType} added <PostalTradeAddress> {TradeAddressType}{0..1} 
+In type {LegalOrganizationType} added <TradingBusinessName> {TextType}{0..1} 
+In type {ReferencedDocumentType} added <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} 
+In type {ReferencedDocumentType} added <AttachmentBinaryObject> {BinaryObjectType}{0..*} 
+In type {ReferencedDocumentType} added <CategoryCode> {CodeType}{0..1} 
+In type {ReferencedDocumentType} added <CopyIndicator> {IndicatorType}{0..1} 
+In type {ReferencedDocumentType} added <EffectiveSpecifiedPeriod> {SpecifiedPeriodType}{0..1} 
+In type {ReferencedDocumentType} added <FormattedIssueDateTime> {FormattedDateTimeType}{0..1} 
+In type {ReferencedDocumentType} added <GlobalID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <IncludedNote> {NoteType}{0..*} 
+In type {ReferencedDocumentType} added <Information> {TextType}{0..*} 
+In type {ReferencedDocumentType} added <IssuerTradeParty> {TradePartyType}{0..1} 
+In type {ReferencedDocumentType} added <LineID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <Name> {TextType}{0..*} 
+In type {ReferencedDocumentType} added <PageID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <PreviousRevisionID> {IDType}{0..*} 
+In type {ReferencedDocumentType} added <ReceiptDateTime> {DateTimeType}{0..1} 
+In type {ReferencedDocumentType} added <ReferenceTypeCode> {ReferenceCodeType}{0..1} 
+In type {ReferencedDocumentType} added <RevisionID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <SectionName> {TextType}{0..*} 
+In type {ReferencedDocumentType} added <StatusCode> {DocumentStatusCodeType}{0..1} 
+In type {ReferencedDocumentType} added <SubordinateLineID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <SubtypeCode> {CodeType}{0..*} 
+In type {ReferencedDocumentType} added <TypeCode> {DocumentCodeType}{0..1} 
+In type {ReferencedDocumentType} added <URIID> {IDType}{0..1} 
+In type {ReferencedDocumentType} modifying element: 
+	old: <IssuerAssignedID>{IDType}{1..1} in type {ReferencedDocumentType}
+	new: <IssuerAssignedID>{IDType}{0..1} in type {ReferencedDocumentType}
+		Extended cardinality from 1..1 to 0..1
+In type {SupplyChainTradeTransactionType} added <IncludedSupplyChainTradeLineItem> {SupplyChainTradeLineItemType}{0..*} 
+In type {TaxRegistrationType} added <AssociatedRegisteredTax> {RegisteredTaxType}{0..1} 
+In type {TaxRegistrationType} added <IOSSID> {IDType}{0..1} 
+In type {TaxRegistrationType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+		Extended cardinality from 1..1 to 0..1
+In type {TextType} added @languageID {token}{0..1} 
+In type {TextType} added @languageLocaleID {token}{0..1} 
+In type {TradeAddressType} added <AdditionalStreetName> {TextType}{0..1} 
+In type {TradeAddressType} added <AttentionOf> {TextType}{0..1} 
+In type {TradeAddressType} added <BuildingName> {TextType}{0..1} 
+In type {TradeAddressType} added <BuildingNumber> {TextType}{0..1} 
+In type {TradeAddressType} added <CareOf> {TextType}{0..1} 
+In type {TradeAddressType} added <CityID> {IDType}{0..1} 
+In type {TradeAddressType} added <CityName> {TextType}{0..1} 
+In type {TradeAddressType} added <CitySubDivisionName> {TextType}{0..1} 
+In type {TradeAddressType} added <CountryName> {TextType}{0..*} 
+In type {TradeAddressType} added <CountrySubDivisionID> {IDType}{0..1} 
+In type {TradeAddressType} added <CountrySubDivisionName> {TextType}{0..*} 
+In type {TradeAddressType} added <DepartmentName> {TextType}{0..1} 
+In type {TradeAddressType} added <ID> {IDType}{0..1} 
+In type {TradeAddressType} added <LineFive> {TextType}{0..1} 
+In type {TradeAddressType} added <LineFour> {TextType}{0..1} 
+In type {TradeAddressType} added <LineOne> {TextType}{0..1} 
+In type {TradeAddressType} added <LineThree> {TextType}{0..1} 
+In type {TradeAddressType} added <LineTwo> {TextType}{0..1} 
+In type {TradeAddressType} added <PostOfficeBox> {TextType}{0..1} 
+In type {TradeAddressType} added <PostcodeCode> {CodeType}{0..1} 
+In type {TradeAddressType} added <StreetName> {TextType}{0..1} 
+In type {TradeAddressType} added <TypeCode> {AddressTypeCodeType}{0..*} 
+In type {TradeAddressType} modifying element: 
+	old: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+	new: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
+		Extended cardinality from 1..1 to 0..1
+In type {TradePartyType} added <DefinedTradeContact> {TradeContactType}{0..*} 
+In type {TradePartyType} added <Description> {TextType}{0..*} 
+In type {TradePartyType} added <EndPointURIUniversalCommunication> {UniversalCommunicationType}{0..1} 
+In type {TradePartyType} added <GlobalID> {IDType}{0..*} 
+In type {TradePartyType} added <ID> {IDType}{0..*} 
+In type {TradePartyType} added <LogoAssociatedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} 
+In type {TradePartyType} added <RegisteredID> {IDType}{0..*} 
+In type {TradePartyType} added <Role> {TextType}{0..*} 
+In type {TradePartyType} added <RoleCode> {PartyRoleCodeType}{0..*} 
+In type {TradePartyType} added <SpecifiedLogisticsLocation> {LogisticsLocationType}{0..*} 
+In type {TradePartyType} added <TypeCode> {CodeType}{0..*} 
+In type {TradePartyType} added <URIUniversalCommunication> {UniversalCommunicationType}{0..*} 
+In type {TradePartyType} modifying element: 
+	old: <Name>{TextType}{1..1} in type {TradePartyType}
+	new: <Name>{TextType}{0..1} in type {TradePartyType}
+		Extended cardinality from 1..1 to 0..1
+In type {TradePartyType} modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+		Extended cardinality from 0..2 to 0..*
+In type {TradeSettlementHeaderMonetarySummationType} added <AllowanceTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <ChargeTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <GrossLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <IncludingTaxesLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <InformationAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <InsuranceChargeTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <LineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <NetIncludingTaxesLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <NetLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <ProductValueExcludingTobaccoTaxInformationAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <RetailValueExcludingTaxInformationAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <RoundingAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <TotalAllowanceChargeAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <TotalDepositFeeInformationAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <TotalDiscountAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <TotalPrepaidAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <TotalRetailValueInformationAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Extended cardinality from 1..1 to 0..*
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <GrandTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <GrandTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Extended cardinality from 1..1 to 0..*
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Extended cardinality from 1..1 to 0..*
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+		Extended cardinality from 0..1 to 0..*

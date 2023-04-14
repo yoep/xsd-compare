@@ -1,0 +1,54 @@
+In type {DateTimeType} modifying attribute: 
+	old: @format{string}{0..1} in type {DateTimeType}
+	new: @format{string}{1..1} in type {DateTimeType}
+In type {DocumentContextParameterType} modifying element: 
+	old: <ID>{IDType}{0..1} in type {DocumentContextParameterType}
+	new: <ID>{IDType}{1..1} in type {DocumentContextParameterType}
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
+In type {ExchangedDocumentType} modifying element: 
+	old: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
+	new: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <BuyerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	new: <BuyerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+In type {HeaderTradeAgreementType} modifying element: 
+	old: <SellerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
+	new: <SellerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
+In type {ReferencedDocumentType} modifying element: 
+	old: <IssuerAssignedID>{IDType}{0..1} in type {ReferencedDocumentType}
+	new: <IssuerAssignedID>{IDType}{1..1} in type {ReferencedDocumentType}
+In type {TaxRegistrationType} modifying element: 
+	old: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+In type {TradeAddressType} modifying element: 
+	old: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
+	new: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+In type {TradePartyType} modifying element: 
+	old: <Name>{TextType}{0..1} in type {TradePartyType}
+	new: <Name>{TextType}{1..1} in type {TradePartyType}
+In type {TradePartyType} modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <GrandTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <GrandTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
