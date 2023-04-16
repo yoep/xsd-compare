@@ -27,7 +27,21 @@ import java.util.Objects;
 public abstract class AbstractXsdNode implements XsdNode {
     private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
     private static final String ICON_DIRECTORY = "/images/";
+/*
+                case XSSimpleTypeDefinition.FACET_MAXINCLUSIVE:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_MININCLUSIVE:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_TOTALDIGITS:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_FRACTIONDIGITS:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
 
+ */
     public String xpath;
     protected String name;
     protected String typeNamespace;
@@ -41,6 +55,12 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected Integer length;
     protected Integer minLength;
     protected Integer maxLength;
+    protected Integer minInclusive;
+    protected Integer maxInclusive;
+    protected Integer minExclusive;
+    protected Integer maxExclusive;
+    protected Integer totalDigits;
+    protected Integer fractionDigits;
     protected List<String> enumeration = new ArrayList<>();
 
     protected AbstractXsdNode parent;
@@ -207,12 +227,39 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     /**
      * Load facets from the simple type definition for this node.
+     * Examples:
+     *          <xs:pattern value="([a-z])*"/>
      *
      * @param simpleType Set the simple type definition to load.
      */
     protected void loadSimpleType(XSSimpleTypeDefinition simpleType) {
         loadType(simpleType);
+/*
+FACET_NONE
+No facets defined.
 
+
+FACET_MAXINCLUSIVE
+4.3.7 maxInclusive.
+
+FACET_MAXEXCLUSIVE
+4.3.9 maxExclusive.
+
+FACET_MINEXCLUSIVE
+4.3.9 minExclusive.
+
+FACET_MININCLUSIVE
+4.3.10 minInclusive.
+
+FACET_TOTALDIGITS
+4.3.11 totalDigits .
+
+FACET_FRACTIONDIGITS
+4.3.12 fractionDigits.
+
+FACET_ENUMERATION
+4.3.5 enumeration.
+* */
         for (Object facetObject : simpleType.getFacets()) {
             var facet = (XSFacet) facetObject;
 
@@ -231,6 +278,24 @@ public abstract class AbstractXsdNode implements XsdNode {
                     break;
                 case XSSimpleTypeDefinition.FACET_WHITESPACE:
                     this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_MAXINCLUSIVE:
+                    this.maxInclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MAXEXCLUSIVE:
+                    this.maxExclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MININCLUSIVE:
+                    this.minInclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MINEXCLUSIVE:
+                    this.minExclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_TOTALDIGITS:
+                    this.totalDigits = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_FRACTIONDIGITS:
+                    this.fractionDigits = Integer.valueOf(facet.getLexicalFacetValue());
                     break;
                 default:
                     log.warn("Facet type " + facet.getFacetKind() + " is not implemented at the moment");

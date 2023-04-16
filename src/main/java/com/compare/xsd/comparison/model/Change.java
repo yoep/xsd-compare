@@ -22,6 +22,12 @@ public class Change {
     private boolean fixedDefaultChanged;
     private boolean lengthChanged;
     private boolean maxLengthChanged;
+    private boolean maxExclusiveChanged;
+    private boolean maxInclusiveChanged;
+    private boolean minExclusiveChanged;
+    private boolean minInclusiveChanged;
+    private boolean totalDigitsChanged;
+    private boolean fractionDigitsChanged;
     private boolean minLengthChanged;
     private boolean patternChanged;
     private boolean enumerationChanged;
@@ -67,7 +73,7 @@ public class Change {
      */
     public boolean isModified() {
         return nameChanged || namespaceChanged || typeChanged || cardinalityChanged || fixedDefaultChanged || lengthChanged || maxLengthChanged ||
-                minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged;
+                minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged || maxExclusiveChanged  || maxInclusiveChanged  || minExclusiveChanged  || minInclusiveChanged  || totalDigitsChanged  || fractionDigitsChanged;
     }
 
     //endregion

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="MyRootElement0" type="FacetsOwner0" />
+	<xs:element name="MyRootElement1" type="FacetsOwner1" />
+	<xs:element name="MyRootElement2" type="FacetsOwner2" />
+
+	<xs:complexType name="FacetsOwner0">
+		<xs:all>
+			<!-- means A is required and must appear exactly once. -->
+			<xs:element name="A1" />
+
+			<!-- means A is optional and may appear at most once. -->
+			<xs:element name="A2" minOccurs="0" />
+
+			<!-- means A is required and may repeat 1 time. -->
+			<xs:element name="A3" maxOccurs="1" />
+
+			<!-- means A is optional and may repeat 1 time1. -->
+			<xs:element name="A4" minOccurs="0" maxOccurs="1" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="FacetsOwner1">
+		<xs:sequence>
+			<!-- means A is required and must appear exactly once. -->
+			<xs:element name="A1" />
+
+			<!-- means A is optional and may appear at most once. -->
+			<xs:element name="A2" minOccurs="0" />
+
+			<!-- means A is required and may repeat an unlimited number of times. -->
+			<xs:element name="A3" maxOccurs="unbounded" />
+
+			<!-- means A is optional and may repeat an unlimited number of times. -->
+			<xs:element name="A4" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FacetsOwner2">
+		<xs:choice>
+			<!-- means A not required (as in choice) -->
+			<xs:element name="A1" />
+
+			<!-- means A is optional and may appear at most once. -->
+			<xs:element name="A2" minOccurs="0" />
+
+			<!-- means A not required (as in choice) and may repeat an unlimited number of times. -->
+			<xs:element name="A3" maxOccurs="unbounded" />
+
+			<!-- means A is optional and may repeat an unlimited number of times. -->
+			<xs:element name="A4" minOccurs="0" maxOccurs="unbounded" />
+
+			<!-- https://www.w3schools.com/xml/schema_facets.asp -->
+			<xs:element name="age">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="120" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sometime">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minExclusive value="1" />
+						<xs:maxExclusive value="121" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="car">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Audi" />
+						<xs:enumeration value="Golf" />
+						<xs:enumeration value="BMW" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="carGettingBigger">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Audi" />
+						<xs:enumeration value="Golf" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="carGettingSmaller">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Audi" />
+						<xs:enumeration value="Golf" />
+						<xs:enumeration value="BMW" />
+						<xs:enumeration value="Porsche" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="letter">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[a-z]" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="address">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="replace" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="password1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="8" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="password2">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="5" />
+						<xs:maxLength value="8" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Pi1">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="42" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Pi2">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:fractionDigits value="12" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

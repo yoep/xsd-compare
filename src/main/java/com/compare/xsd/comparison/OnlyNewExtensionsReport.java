@@ -61,9 +61,6 @@ public class OnlyNewExtensionsReport implements TextReport {
              *      /CrossIndustryInvoice/@format modifying attribute: old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType} new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType} Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
              *      /CrossIndustryInvoice/AssociatedDocumentLineDocument modifying element: old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType} new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType} Changed cardinality from 1..1 to 0..1
              */
-        c.setReportHeader("In type {" + c.newNode.getParent().getNextTypeName() + "} modifying " + (c.isElement ? "element: " : "attribute: ") +
-                "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
-                "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
         /*  Example of complete list:
             "Changed type namespace from " + oldNode.getTypeNamespace() + " to " + newNode.getTypeNamespace()
             "Changed type from " + oldNode.getTypeName() + " to " + newNode.getTypeName()
@@ -82,42 +79,93 @@ public class OnlyNewExtensionsReport implements TextReport {
                 c.setReportHeader(c.getReportHeader() + "\n\t\tChanged type namespace from " + c.oldNode.getTypeNamespace() + " to " + c.newNode.getTypeNamespace());
             }
             if (c.isTypeChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
+                getModificationStringBuilder().append("\n\t\tChanged type from " + c.oldNode.getTypeName() + " to " + c.newNode.getTypeName()));
             }*/
             if (c.isCardinalityChanged()) {
                 if(c.oldNode.getMinOccurrence() > c.newNode.getMinOccurrence() || c.oldNode.getMaxOccurrence() != null && c.newNode.getMaxOccurrence() == null ||  c.oldNode.getMaxOccurrence() != null && c.newNode.getMaxOccurrence() != null && c.oldNode.getMaxOccurrence() < c.newNode.getMaxOccurrence()){
-                    c.setReportHeader(c.getReportHeader() + ("\n\t\tExtended cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality()));
+                    getModificationStringBuilder().append("\n\t\tExtended cardinality from " + c.oldNode.getCardinality() + " to " + c.newNode.getCardinality());
                 }
             }
             if (c.isFixedDefaultChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue()));
+                getModificationStringBuilder().append("\n\t\tChanged fixed default from " + ((XsdAttribute) c.oldNode).getFixedDefaultValue() + " to " + ((XsdAttribute) c.newNode).getFixedDefaultValue());
             }
             if (c.isPatternChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern()));
+                getModificationStringBuilder().append("\n\t\tChanged pattern from " + c.oldNode.getPattern() + " to " + c.newNode.getPattern());
             }
             if (c.isMinLengthChanged()) {
-                if (c.newNode.getMinLength() != null || c.oldNode.getMinLength() != null && (c.oldNode.getMinLength() > c.newNode.getMinLength())) {
-                    c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength()));
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMinLength() != null && c.newNode.getMinLength() == null) ||
+                    // or if the new min value is smaller it is an extension
+                    c.newNode.getMinLength() != null && c.oldNode.getMinLength() != null && (c.oldNode.getMinLength() > c.newNode.getMinLength())) {
+                    getModificationStringBuilder().append("\n\t\tChanged minLength from " + c.oldNode.getMinLength() + " to " + c.newNode.getMinLength());
+                }
+            }if (c.isMaxLengthChanged()){
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMaxLength() != null && c.newNode.getMaxLength() == null) ||
+                    // or if the new max value is larger it is an extension
+                    c.newNode.getMaxLength() != null && c.oldNode.getMaxLength() != null && (c.oldNode.getMaxLength() < c.newNode.getMaxLength())) {
+                    getModificationStringBuilder().append("\n\t\tChanged maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength());
                 }
             }
-            if (c.isMaxLengthChanged()){
-                if(c.newNode.getMaxLength() == null || (c.oldNode.getMaxLength() != null && (c.oldNode.getMaxLength() < c.newNode.getMaxLength()))) {
-                    c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged maxLength from " + c.oldNode.getMaxLength() + " to " + c.newNode.getMaxLength()));
+            if (c.isMaxInclusiveChanged()) {
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMaxInclusive() != null && c.newNode.getMaxInclusive() == null) ||
+                    // or if the new max value is larger it is an extension
+                    c.newNode.getMaxInclusive() != null && (c.oldNode.getMaxInclusive() != null && (c.oldNode.getMaxInclusive() < c.newNode.getMaxInclusive()))) {
+                    getModificationStringBuilder().append("\n\t\tChanged maxInclusive from " + c.oldNode.getMaxInclusive() + " to " + c.newNode.getMaxInclusive());
                 }
+            }
+            if (c.isMaxExclusiveChanged()) {
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMaxExclusive() != null && c.newNode.getMaxExclusive() == null) ||
+                    // or if the new max value is larger it is an extension
+                    c.newNode.getMaxExclusive() != null && (c.oldNode.getMaxExclusive() != null && (c.oldNode.getMaxExclusive() < c.newNode.getMaxExclusive()))) {
+                    getModificationStringBuilder().append("\n\t\tChanged maxExclusive from " + c.oldNode.getMaxExclusive() + " to " + c.newNode.getMaxExclusive());
+                }
+            }
+            if (c.isMinInclusiveChanged()) {
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMinInclusive() != null && c.newNode.getMinInclusive() == null) ||
+                    // or if the new min value is smaller it is an extension
+                    c.newNode.getMinInclusive() != null && c.oldNode.getMinInclusive() != null && (c.oldNode.getMinInclusive() > c.newNode.getMinInclusive())) {
+                    getModificationStringBuilder().append("\n\t\tChanged minInclusive from " + c.oldNode.getMinInclusive() + " to " + c.newNode.getMinInclusive());
+                }
+            }
+            if (c.isMinExclusiveChanged()) {
+                // if there is no longer a restriction, is an extension
+                if ((c.oldNode.getMinExclusive() != null && c.newNode.getMinExclusive() == null) ||
+                    // or if the new min value is smaller it is an extension
+                    c.newNode.getMinExclusive() != null && c.oldNode.getMinExclusive() != null && (c.oldNode.getMinExclusive() > c.newNode.getMinExclusive())) {
+                    getModificationStringBuilder().append("\n\t\tChanged minExclusive from " + c.oldNode.getMinExclusive() + " to " + c.newNode.getMinExclusive());
+                }
+            }
+            if (c.isTotalDigitsChanged()) {
+                getModificationStringBuilder().append("\n\t\tChanged totalDigits from " + c.oldNode.getTotalDigits() + " to " + c.newNode.getTotalDigits());
+            }
+            if (c.isFractionDigitsChanged()) {
+                getModificationStringBuilder().append("\n\t\tChanged fractionDigits from " + c.oldNode.getFractionDigits() + " to " + c.newNode.getFractionDigits());
             }
             if (c.isLengthChanged()) {
                 // any length change must be reported
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
+                getModificationStringBuilder().append("\n\t\tChanged length from " + c.oldNode.getLength() + " to " + c.newNode.getLength());
             }
             if (c.isEnumerationChanged()) {
                 ArrayList<String> newEnumerationList = new ArrayList<>(c.newNode.getEnumeration());
                 newEnumerationList.removeAll(c.oldNode.getEnumeration());
                 if(newEnumerationList.size() > 0){
-                    c.setReportHeader(c.getReportHeader() + ("\n\t\tExtended enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
+                    getModificationStringBuilder().append("\n\t\tExtended enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
                 }
             }
             if (c.isWhitespaceChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
+                getModificationStringBuilder().append("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace());
+            }
+            String writtenModificdations = getModificationStringBuilder().toString();
+            if(writtenModificdations != null && !writtenModificdations.isEmpty()){
+                modifications = null;
+                c.setReportHeader((c.getReportHeader() != null ? c.getReportHeader() : "") + "In type {" + c.newNode.getParent().getNextTypeName() + "} modifying " + (c.isElement ? "element: " : "attribute: ") +
+                        "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
+                        "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}"
+                        + writtenModificdations);
             }
         } else if (c.type == ChangeType.REMOVED) {
             /*
@@ -167,5 +215,13 @@ public class OnlyNewExtensionsReport implements TextReport {
     public void reset() {
         this.report.clear();
         this.changes.clear();
+    }
+
+    StringBuilder modifications;
+    private StringBuilder getModificationStringBuilder(){
+        if(modifications == null){
+            modifications = new StringBuilder();
+        }
+        return modifications;
     }
 }

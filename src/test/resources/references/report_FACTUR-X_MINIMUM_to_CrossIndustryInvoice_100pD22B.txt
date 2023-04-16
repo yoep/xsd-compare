@@ -721,120 +721,120 @@ Modifying attribute:
 	old: @format{string}{1..1} in type {DateTimeType}
 	new: @format{string}{0..1} in type {DateTimeType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTimeString/@format
+				at /CrossIndustryInvoice/ExchangedDocument/IssueDateTime/DateTimeString/@format
 
 Modifying element: 
 	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
 	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
 		Changed cardinality from 0..1 to 0..*
-				/CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter
+				at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter
 
 Modifying element: 
 	old: <BuyerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
 	new: <BuyerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty
 
 Modifying element: 
 	old: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
 	new: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID
 
 Modifying element: 
 	old: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 		Changed cardinality from 1..1 to 0..*
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/DuePayableAmount
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/DuePayableAmount
 
 Modifying element: 
 	old: <GrandTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <GrandTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 		Changed cardinality from 1..1 to 0..*
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/GrandTotalAmount
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/GrandTotalAmount
 
 Modifying element: 
 	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
 	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
 		Changed cardinality from 1..1 to 0..*
-				/CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter
+				at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter
 
 Modifying element: 
 	old: <ID>{IDType}{1..1} in type {DocumentContextParameterType}
 	new: <ID>{IDType}{0..1} in type {DocumentContextParameterType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID
-				/CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID
+				at /CrossIndustryInvoice/ExchangedDocumentContext/BusinessProcessSpecifiedDocumentContextParameter/ID
+				at /CrossIndustryInvoice/ExchangedDocumentContext/GuidelineSpecifiedDocumentContextParameter/ID
 
 Modifying element: 
 	old: <ID>{IDType}{1..1} in type {ExchangedDocumentType}
 	new: <ID>{IDType}{0..1} in type {ExchangedDocumentType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/ExchangedDocument/ID
+				at /CrossIndustryInvoice/ExchangedDocument/ID
 
 Modifying element: 
 	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
 	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID
 
 Modifying element: 
 	old: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
 	new: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceCurrencyCode
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceCurrencyCode
 
 Modifying element: 
 	old: <IssuerAssignedID>{IDType}{1..1} in type {ReferencedDocumentType}
 	new: <IssuerAssignedID>{IDType}{0..1} in type {ReferencedDocumentType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerAssignedID
 
 Modifying element: 
 	old: <Name>{TextType}{1..1} in type {TradePartyType}
 	new: <Name>{TextType}{0..1} in type {TradePartyType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Name
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Name
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/Name
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/Name
 
 Modifying element: 
 	old: <SellerTradeParty>{TradePartyType}{1..1} in type {HeaderTradeAgreementType}
 	new: <SellerTradeParty>{TradePartyType}{0..1} in type {HeaderTradeAgreementType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty
 
 Modifying element: 
 	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
 	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
 		Changed cardinality from 0..2 to 0..*
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration
 
 Modifying element: 
 	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
 	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation
 
 Modifying element: 
 	old: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 		Changed cardinality from 1..1 to 0..*
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxBasisTotalAmount
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxBasisTotalAmount
 
 Modifying element: 
 	old: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 		Changed cardinality from 0..1 to 0..*
-				/CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount
 
 Modifying element: 
 	old: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
 	new: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
 		Changed cardinality from 1..1 to 0..1
-				/CrossIndustryInvoice/ExchangedDocument/TypeCode
+				at /CrossIndustryInvoice/ExchangedDocument/TypeCode
 
 
 

@@ -1,0 +1,56 @@
+In type {FacetsOwner1} modifying element: 
+	old: <A1>{anyType}{1..1} in type {FacetsOwner1}
+	new: <A1>{anyType}{0..1} in type {FacetsOwner1}
+		Extended cardinality from 1..1 to 0..1
+In type {FacetsOwner1} modifying element: 
+	old: <A2>{anyType}{0..1} in type {FacetsOwner1}
+	new: <A2>{anyType}{1..*} in type {FacetsOwner1}
+		Extended cardinality from 0..1 to 1..*
+In type {FacetsOwner1} modifying element: 
+	old: <A3>{anyType}{1..*} in type {FacetsOwner1}
+	new: <A3>{anyType}{0..*} in type {FacetsOwner1}
+		Extended cardinality from 1..* to 0..*
+In type {FacetsOwner2} modifying element: 
+	old: <A2>{anyType}{0..1} in type {FacetsOwner2}
+	new: <A2>{anyType}{0..*} in type {FacetsOwner2}
+		Extended cardinality from 0..1 to 0..*
+In type {FacetsOwner2} modifying element: 
+	old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed totalDigits from 42 to 52
+In type {FacetsOwner2} modifying element: 
+	old: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed fractionDigits from 12 to 22
+In type {FacetsOwner2} modifying element: 
+	old: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed whitespace from replace to preserve
+In type {FacetsOwner2} modifying element: 
+	old: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxInclusive from 120 to 121
+In type {FacetsOwner2} modifying element: 
+	old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Extended enumeration from [Audi, Golf, BMW] to [VW, Porsche, Lamborghini]
+In type {FacetsOwner2} modifying element: 
+	old: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Extended enumeration from [Audi, Golf] to [Audi, Golf, BMW, Porsche]
+In type {FacetsOwner2} modifying element: 
+	old: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed pattern from [a-z] to ([a-z][A-Z])+
+In type {FacetsOwner2} modifying element: 
+	old: <password1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <password1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed length from 8 to 18
+In type {FacetsOwner2} modifying element: 
+	old: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxLength from 8 to 18
+In type {FacetsOwner2} modifying element: 
+	old: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxExclusive from 121 to 242

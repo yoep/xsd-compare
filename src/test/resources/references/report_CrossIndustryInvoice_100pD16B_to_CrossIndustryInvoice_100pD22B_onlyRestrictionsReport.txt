@@ -1,20 +1,48 @@
+In type {AccountingAccountTypeCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
+		Changed fixed default from 210 to 210
 In type {AccountingAccountTypeCodeType} removed @listID {token}{0..1}
 In type {AccountingAccountTypeCodeType} removed @listURI {anyURI}{0..1}
 In type {AccountingAccountTypeCodeType} removed @listVersionID {token}{0..1}
+In type {AccountingAmountTypeCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
+		Changed fixed default from 210 to 210
 In type {AccountingAmountTypeCodeType} removed @listID {token}{0..1}
 In type {AccountingAmountTypeCodeType} removed @listURI {anyURI}{0..1}
 In type {AccountingAmountTypeCodeType} removed @listVersionID {token}{0..1}
+In type {AccountingDocumentCodeType} modifying attribute: 
+	old: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
+	new: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
+		Changed fixed default from 6 to 6
 In type {AccountingDocumentCodeType} removed @listID {token}{0..1}
 In type {AccountingDocumentCodeType} removed @listURI {anyURI}{0..1}
 In type {AccountingDocumentCodeType} removed @listVersionID {token}{0..1}
+In type {AdjustmentReasonCodeType} modifying attribute: 
+	old: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
+	new: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
+		Changed fixed default from 6 to 6
 In type {AdjustmentReasonCodeType} removed @listID {token}{0..1}
 In type {AdjustmentReasonCodeType} removed @listVersionID {token}{0..1}
+In type {AllowanceChargeIdentificationCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
+	new: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
+		Changed fixed default from 6 to 6
 In type {AllowanceChargeIdentificationCodeType} removed @listID {token}{0..1}
 In type {AllowanceChargeIdentificationCodeType} removed @listURI {anyURI}{0..1}
 In type {AllowanceChargeIdentificationCodeType} removed @listVersionID {token}{0..1}
+In type {AllowanceChargeReasonCodeType} modifying attribute: 
+	old: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
+	new: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
+		Changed fixed default from 6 to 6
 In type {AllowanceChargeReasonCodeType} removed @listID {token}{0..1}
 In type {AllowanceChargeReasonCodeType} removed @listURI {anyURI}{0..1}
 In type {AllowanceChargeReasonCodeType} removed @listVersionID {token}{0..1}
+In type {AutomaticDataCaptureMethodCodeType} modifying attribute: 
+	old: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
+	new: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
+		Changed fixed default from 6 to 6
 In type {AutomaticDataCaptureMethodCodeType} removed @listID {token}{0..1}
 In type {AutomaticDataCaptureMethodCodeType} removed @listURI {anyURI}{0..1}
 In type {AutomaticDataCaptureMethodCodeType} removed @listVersionID {token}{0..1}
@@ -22,18 +50,42 @@ In type {BasicWorkItemType} removed <IndexValue> {ValueType}{0..1}
 In type {BasicWorkItemType} removed <ReferenceFileBinaryObject> {BinaryObjectType}{0..*}
 In type {BasicWorkItemType} removed <StatusCode> {CodeType}{0..*}
 In type {BasicWorkItemType} removed <SubordinateBasicWorkItem> {BasicWorkItemType}{0..*}
+In type {CargoCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
+	new: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
+		Changed fixed default from 6 to 6
 In type {CargoCategoryCodeType} removed @listID {token}{0..1}
 In type {CargoCategoryCodeType} removed @listVersionID {token}{0..1}
 In type {CargoCategoryCodeType} removed @name {string}{0..1}
+In type {CargoCommodityCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
+	new: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
+		Changed fixed default from 6 to 6
 In type {CargoCommodityCategoryCodeType} removed @listID {token}{0..1}
 In type {CargoCommodityCategoryCodeType} removed @listVersionID {token}{0..1}
 In type {CargoCommodityCategoryCodeType} removed @name {string}{0..1}
+In type {CargoOperationalCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+		Changed fixed default from 6 to 6
 In type {CargoOperationalCategoryCodeType} removed @listID {token}{0..1}
 In type {CargoOperationalCategoryCodeType} removed @listVersionID {token}{0..1}
 In type {CargoOperationalCategoryCodeType} removed @name {string}{0..1}
+In type {ChargePayingPartyRoleCodeType} modifying attribute: 
+	old: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
+	new: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
+		Changed fixed default from 6 to 6
 In type {ChargePayingPartyRoleCodeType} removed @listID {token}{0..1}
 In type {ChargePayingPartyRoleCodeType} removed @listVersionID {token}{0..1}
 In type {ChargePayingPartyRoleCodeType} removed @name {string}{0..1}
+In type {CodeType} modifying attribute: 
+	old: @listAgencyID{TransportEquipmentSizeTypeCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentSizeTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {CodeType}
+		Changed fixed default from 6 to null
+In type {CodeType} modifying attribute: 
+	old: @listID{token}{0..1} in type {TransportEquipmentSizeTypeCodeType}
+	new: @listID{token}{0..1} in type {CodeType}
+		Changed fixed default from 8155 to null
 In type {CodeType} removed @languageID {token}{0..1}
 In type {CodeType} removed @listAgencyName {string}{0..1}
 In type {CodeType} removed @listID {token}{0..1}
@@ -42,14 +94,26 @@ In type {CodeType} removed @listSchemeURI {anyURI}{0..1}
 In type {CodeType} removed @listURI {anyURI}{0..1}
 In type {CodeType} removed @listVersionID {token}{0..1}
 In type {CodeType} removed @name {string}{0..1}
+In type {CommunicationChannelCodeType} modifying attribute: 
+	old: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
+	new: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
+		Changed fixed default from 6 to 6
 In type {CommunicationChannelCodeType} removed @listID {token}{0..1}
 In type {CommunicationChannelCodeType} removed @listURI {anyURI}{0..1}
 In type {CommunicationChannelCodeType} removed @listVersionID {token}{0..1}
+In type {ContactTypeCodeType} modifying attribute: 
+	old: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
+	new: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {ContactTypeCodeType} removed @listID {token}{0..1}
 In type {ContactTypeCodeType} removed @listURI {anyURI}{0..1}
 In type {ContactTypeCodeType} removed @listVersionID {token}{0..1}
 In type {CountryIDType} removed @schemeID {token}{0..1}
 In type {CountryIDType} removed @schemeVersionID {token}{0..1}
+In type {CurrencyCodeType} modifying attribute: 
+	old: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
+	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
+		Changed fixed default from 5 to 5
 In type {CurrencyCodeType} removed @listID {token}{0..1}
 In type {CurrencyCodeType} removed @listURI {anyURI}{0..1}
 In type {CurrencyCodeType} removed @listVersionID {token}{0..1}
@@ -58,94 +122,219 @@ In type {DateOnlyFormattedDateTimeType} modifying element:
 	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
 		Restricted cardinality from 0..1 to 1..1
 In type {DateTimeType} removed <DateTime> {dateTime}{0..1}
+In type {DeliveryTermsCodeType} modifying attribute: 
+	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
+	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
+		Changed fixed default from 6 to 6
 In type {DeliveryTermsCodeType} removed @listID {token}{0..1}
 In type {DeliveryTermsCodeType} removed @listVersionID {token}{0..1}
+In type {DimensionTypeCodeType} modifying attribute: 
+	old: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
+	new: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {DimensionTypeCodeType} removed @listID {token}{0..1}
 In type {DimensionTypeCodeType} removed @listVersionID {token}{0..1}
 In type {DimensionTypeCodeType} removed @name {string}{0..1}
+In type {DocumentCodeType} modifying attribute: 
+	old: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
+	new: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
+		Changed fixed default from 6 to 6
 In type {DocumentCodeType} removed @listID {token}{0..1}
 In type {DocumentCodeType} removed @listURI {anyURI}{0..1}
 In type {DocumentCodeType} removed @listVersionID {token}{0..1}
 In type {DocumentCodeType} removed @name {string}{0..1}
+In type {DocumentStatusCodeType} modifying attribute: 
+	old: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
+	new: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
+		Changed fixed default from 6 to 6
 In type {DocumentStatusCodeType} removed @listID {token}{0..1}
 In type {DocumentStatusCodeType} removed @listVersionID {token}{0..1}
 In type {DocumentStatusCodeType} removed @name {string}{0..1}
+In type {FreightChargeTariffClassCodeType} modifying attribute: 
+	old: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
+	new: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
+		Changed fixed default from 6 to 6
 In type {FreightChargeTariffClassCodeType} removed @listID {token}{0..1}
 In type {FreightChargeTariffClassCodeType} removed @listVersionID {token}{0..1}
 In type {FreightChargeTariffClassCodeType} removed @name {string}{0..1}
 In type {FreightChargeTypeIDType} removed @schemeID {token}{0..1}
 In type {FreightChargeTypeIDType} removed @schemeVersionID {token}{0..1}
+In type {GoodsTypeCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {GoodsTypeCodeType} removed @listID {token}{0..1}
 In type {GoodsTypeCodeType} removed @listVersionID {token}{0..1}
 In type {GoodsTypeCodeType} removed @name {string}{0..1}
+In type {GoodsTypeExtensionCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
+	new: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
+		Changed fixed default from 6 to 6
 In type {GoodsTypeExtensionCodeType} removed @listID {token}{0..1}
 In type {GoodsTypeExtensionCodeType} removed @listVersionID {token}{0..1}
 In type {GoodsTypeExtensionCodeType} removed @name {string}{0..1}
+In type {LineStatusCodeType} modifying attribute: 
+	old: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
+	new: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
+		Changed fixed default from 6 to 6
 In type {LineStatusCodeType} removed @listID {token}{0..1}
 In type {LineStatusCodeType} removed @listURI {anyURI}{0..1}
 In type {LineStatusCodeType} removed @listVersionID {token}{0..1}
 In type {LinearUnitMeasureType} removed @unitCodeListVersionID {token}{0..1}
+In type {LocationFunctionCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {CodeType}
+	new: @listAgencyID{LocationFunctionCodeListAgencyIDContentType}{0..1} in type {LocationFunctionCodeType}
+		Changed fixed default from null to 6
+In type {LogisticsChargeCalculationBasisCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
+	new: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
+		Changed fixed default from 6 to 6
 In type {LogisticsChargeCalculationBasisCodeType} removed @listID {token}{0..1}
 In type {LogisticsChargeCalculationBasisCodeType} removed @listVersionID {token}{0..1}
 In type {LogisticsChargeCalculationBasisCodeType} removed @name {string}{0..1}
 In type {MeasureType} removed @unitCodeListVersionID {token}{0..1}
+In type {MessageFunctionCodeType} modifying attribute: 
+	old: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
+	new: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
+		Changed fixed default from 6 to 6
 In type {MessageFunctionCodeType} removed @listID {token}{0..1}
 In type {MessageFunctionCodeType} removed @listURI {anyURI}{0..1}
 In type {MessageFunctionCodeType} removed @listVersionID {token}{0..1}
 In type {NumericType} removed @format {string}{0..1}
+In type {PackageTypeCodeType} modifying attribute: 
+	old: @listAgencyID{PackageTypeCodeListAgencyIDContentType}{0..1} in type {PackageTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {PackageTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {PackageTypeCodeType} removed @listID {token}{0..1}
 In type {PackageTypeCodeType} removed @listVersionID {token}{0..1}
 In type {PackageTypeCodeType} removed @name {string}{0..1}
+In type {PackagingMarkingCodeType} modifying attribute: 
+	old: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
+	new: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
+		Changed fixed default from 6 to 6
 In type {PackagingMarkingCodeType} removed @listID {token}{0..1}
 In type {PackagingMarkingCodeType} removed @listURI {anyURI}{0..1}
 In type {PackagingMarkingCodeType} removed @listVersionID {token}{0..1}
+In type {PartyRoleCodeType} modifying attribute: 
+	old: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
+	new: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
+		Changed fixed default from 6 to 6
 In type {PartyRoleCodeType} removed @listID {token}{0..1}
 In type {PartyRoleCodeType} removed @listVersionID {token}{0..1}
 In type {PartyRoleCodeType} removed @name {string}{0..1}
+In type {PaymentGuaranteeMeansCodeType} modifying attribute: 
+	old: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
+	new: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
+		Changed fixed default from 6 to 6
 In type {PaymentGuaranteeMeansCodeType} removed @listID {token}{0..1}
 In type {PaymentGuaranteeMeansCodeType} removed @listVersionID {token}{0..1}
+In type {PaymentMeansChannelCodeType} modifying attribute: 
+	old: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
+	new: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
+		Changed fixed default from 6 to 6
 In type {PaymentMeansChannelCodeType} removed @listID {token}{0..1}
 In type {PaymentMeansChannelCodeType} removed @listVersionID {token}{0..1}
 In type {PaymentMeansChannelCodeType} removed @name {string}{0..1}
+In type {PaymentMeansCodeType} modifying attribute: 
+	old: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
+	new: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
+		Changed fixed default from 6 to 6
 In type {PaymentMeansCodeType} removed @listID {token}{0..1}
 In type {PaymentMeansCodeType} removed @listVersionID {token}{0..1}
+In type {PaymentTermsEventTimeReferenceCodeType} modifying attribute: 
+	old: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
+	new: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
+		Changed fixed default from 6 to 6
 In type {PaymentTermsEventTimeReferenceCodeType} removed @listID {token}{0..1}
 In type {PaymentTermsEventTimeReferenceCodeType} removed @listVersionID {token}{0..1}
 In type {PaymentTermsIDType} removed @schemeID {token}{0..1}
 In type {PaymentTermsIDType} removed @schemeVersionID {token}{0..1}
+In type {PaymentTermsTypeCodeType} modifying attribute: 
+	old: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
+	new: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {PaymentTermsTypeCodeType} removed @listID {token}{0..1}
 In type {PaymentTermsTypeCodeType} removed @listVersionID {token}{0..1}
 In type {PaymentTermsTypeCodeType} removed @name {string}{0..1}
+In type {PriceTypeCodeType} modifying attribute: 
+	old: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
+	new: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {PriceTypeCodeType} removed @listID {token}{0..1}
 In type {PriceTypeCodeType} removed @listVersionID {token}{0..1}
 In type {RateType} removed @format {string}{0..1}
+In type {ReferenceCodeType} modifying attribute: 
+	old: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
+	new: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
+		Changed fixed default from 6 to 6
 In type {ReferenceCodeType} removed @listID {token}{0..1}
 In type {ReferenceCodeType} removed @listVersionID {token}{0..1}
 In type {ReferenceCodeType} removed @name {string}{0..1}
+In type {TaxCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
+	new: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
+		Changed fixed default from 6 to 6
 In type {TaxCategoryCodeType} removed @listID {token}{0..1}
 In type {TaxCategoryCodeType} removed @listURI {anyURI}{0..1}
 In type {TaxCategoryCodeType} removed @listVersionID {token}{0..1}
+In type {TaxTypeCodeType} modifying attribute: 
+	old: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
+	new: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {TaxTypeCodeType} removed @listID {token}{0..1}
 In type {TaxTypeCodeType} removed @listURI {anyURI}{0..1}
 In type {TaxTypeCodeType} removed @listVersionID {token}{0..1}
+In type {TimeReferenceCodeType} modifying attribute: 
+	old: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
+	new: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
+		Changed fixed default from 6 to 6
 In type {TimeReferenceCodeType} removed @listID {token}{0..1}
 In type {TimeReferenceCodeType} removed @listVersionID {token}{0..1}
 In type {TimeReferenceCodeType} removed @name {string}{0..1}
+In type {TransportEquipmentCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
+	new: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
+		Changed fixed default from 6 to 6
 In type {TransportEquipmentCategoryCodeType} removed @listID {token}{0..1}
 In type {TransportEquipmentCategoryCodeType} removed @listVersionID {token}{0..1}
 In type {TransportEquipmentCategoryCodeType} removed @name {string}{0..1}
+In type {TransportEquipmentFullnessCodeType} modifying attribute: 
+	old: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
+	new: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
+		Changed fixed default from 6 to 6
 In type {TransportEquipmentFullnessCodeType} removed @listID {token}{0..1}
 In type {TransportEquipmentFullnessCodeType} removed @listVersionID {token}{0..1}
 In type {TransportEquipmentFullnessCodeType} removed @name {string}{0..1}
+In type {TransportMeansTypeCodeType} modifying attribute: 
+	old: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
+	new: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
+		Changed fixed default from 6 to 6
 In type {TransportMeansTypeCodeType} removed @listID {token}{0..1}
 In type {TransportMeansTypeCodeType} removed @listVersionID {token}{0..1}
 In type {TransportMeansTypeCodeType} removed @name {string}{0..1}
+In type {TransportModeCodeType} modifying attribute: 
+	old: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
+	new: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
+		Changed fixed default from 6 to 6
 In type {TransportModeCodeType} removed @listID {token}{0..1}
 In type {TransportModeCodeType} removed @listVersionID {token}{0..1}
 In type {TransportModeCodeType} removed @name {string}{0..1}
+In type {TransportMovementStageCodeType} modifying attribute: 
+	old: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
+	new: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
+		Changed fixed default from 6 to 6
 In type {TransportMovementStageCodeType} removed @listID {token}{0..1}
 In type {TransportMovementStageCodeType} removed @listVersionID {token}{0..1}
 In type {TransportMovementStageCodeType} removed @name {string}{0..1}
+In type {TransportServicePaymentArrangementCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {CodeType}
+	new: @listAgencyID{TransportServicePaymentArrangementCodeListAgencyIDContentType}{0..1} in type {TransportServicePaymentArrangementCodeType}
+		Changed fixed default from null to 6
 In type {VolumeUnitMeasureType} removed @unitCodeListVersionID {token}{0..1}
+In type {WeightUnitMeasureType} modifying attribute: 
+	old: @unitCode{token}{0..1} in type {MeasureType}
+	new: @unitCode{MeasurementUnitCommonCodeWeightContentType}{0..1} in type {WeightUnitMeasureType}
+		Changed minLength from null to 1
+		Changed maxLength from null to 3
 In type {WeightUnitMeasureType} removed @unitCodeListVersionID {token}{0..1}
 In type {WorkItemQuantityAnalysisType} removed <StatusCode> {CodeType}{0..1}

@@ -337,6 +337,12 @@ public class XsdComparer {
             testPatternChange(oldNode, newNode, change);
             testEnumerationChange(oldNode, newNode, change);
             testWhitespaceChange(oldNode, newNode, change);
+            testMaxInclusiveChange(oldNode, newNode, change);
+            testMaxExclusiveChange(oldNode, newNode, change);
+            testMinInclusiveChange(oldNode, newNode, change);
+            testMinExclusiveChange(oldNode, newNode, change);
+            testTotalDigitsChange(oldNode, newNode, change);
+            testFractionDigitsChange(oldNode, newNode, change);
 
             if (change.isModified() && !(newNode instanceof XsdDocument)) {
                 modified++;
@@ -512,6 +518,60 @@ public class XsdComparer {
                 isValueDifferent(oldNode.getWhitespace(), newNode.getWhitespace());
         if(change){
             modification.setWhitespaceChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testMaxInclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getMaxInclusive(), newNode.getMaxInclusive()) ||
+                isValueDifferent(oldNode.getMaxInclusive(), newNode.getMaxInclusive());
+        if(change){
+            modification.setMaxInclusiveChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testMaxExclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getMaxExclusive(), newNode.getMaxExclusive()) ||
+                isValueDifferent(oldNode.getMaxExclusive(), newNode.getMaxExclusive());
+        if(change){
+            modification.setMaxExclusiveChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testMinInclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getMinInclusive(), newNode.getMinInclusive()) ||
+                isValueDifferent(oldNode.getMinInclusive(), newNode.getMinInclusive());
+        if(change){
+            modification.setMinInclusiveChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testMinExclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getMinExclusive(), newNode.getMinExclusive()) ||
+                isValueDifferent(oldNode.getMinExclusive(), newNode.getMinExclusive());
+        if(change){
+            modification.setMinExclusiveChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testTotalDigitsChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getTotalDigits(), newNode.getTotalDigits()) ||
+                isValueDifferent(oldNode.getTotalDigits(), newNode.getTotalDigits());
+        if(change){
+            modification.setTotalDigitsChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testFractionDigitsChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getFractionDigits(), newNode.getFractionDigits()) ||
+                isValueDifferent(oldNode.getFractionDigits(), newNode.getFractionDigits());
+        if(change){
+            modification.setFractionDigitsChanged(true);
         }
         return change;
     }

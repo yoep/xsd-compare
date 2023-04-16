@@ -77,32 +77,40 @@ public class XsdComparerTest {
     @Test
     public void recursiveGrammarsComparison() throws IOException {
 
-        String simpleAnonymous1 = XSD_DIR + "simple_anonymous.xsd";
+        String simpleAnonymous1 = XSD_DIR + "simple_anonymous1.xsd";
         String simpleAnonymous2 = XSD_DIR + "simple_anonymous2.xsd";
-        //compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, TextReport.implementation.ONLY_EXTENSIONS);
+        String facets1 = XSD_DIR + "facets1.xsd";
+        String facets2 = XSD_DIR + "facets2.xsd";
+        Boolean compareCorrect = Boolean.TRUE;
+        // compareCorrect &= compareTwoXsdGrammars(facets1, facets2, TextReport.implementation.ONLY_EXTENSIONS);
+        // compareTwoXsdGrammars(facets1, facets2, TextReport.implementation.MULTI_LINE_CHANGE);
         for(TextReport.implementation reportType : TextReport.implementation.values()){
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, CII_D22B_XSD, reportType);
 
-            compareTwoXsdGrammars(CII_D16B_XSD, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_MINIMUM, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_BASIC_WL, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_BASIC, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_EN16931, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, reportType);
 
-            compareTwoXsdGrammars(FACTUR_X_MINIMUM, CII_D22B_XSD, reportType);
-            compareTwoXsdGrammars(FACTUR_X_BASIC_WL, CII_D22B_XSD, reportType);
-            compareTwoXsdGrammars(FACTUR_X_BASIC, CII_D22B_XSD, reportType);
-            compareTwoXsdGrammars(FACTUR_X_EN16931, CII_D22B_XSD, reportType);
-            compareTwoXsdGrammars(FACTUR_X_EXTENDED, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_MINIMUM, reportType);
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC_WL, reportType);
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC, reportType);
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EN16931, reportType);
+            compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EXTENDED, reportType);
 
-            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_MINIMUM, reportType);
-            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC_WL, reportType);
-            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_BASIC, reportType);
-            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EN16931, reportType);
-            compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_EXTENDED, reportType);
-
-            compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
+            compareCorrect &= compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
+            compareCorrect &= compareTwoXsdGrammars(facets1, facets2, reportType);
         }
+
+
+        assertTrue(compareCorrect,"\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + "\n\t\tto" + "\n\t" + REFERENCES_DIR);
     }
 
 
     /** Comparing two XSD grammar with a specific text report for the output*/
-    public void compareTwoXsdGrammars(String newXsd, String oldXsd, TextReport.implementation reportType) throws IOException {
+    private boolean compareTwoXsdGrammars(String newXsd, String oldXsd, TextReport.implementation reportType) throws IOException {
+        Boolean compareCorrect = Boolean.TRUE;
         String reportName = getReportName(newXsd, oldXsd, reportType);
         XsdComparer comparer = new XsdComparer(newXsd, oldXsd, reportType);
         String result = comparer.compareAsString();
@@ -113,10 +121,10 @@ public class XsdComparerTest {
         File refFile = new File(REFERENCES_DIR + reportName);
         if(refFile.exists()) {
             String referenceResult = Files.readString(Paths.get(refFile.toURI()), Charset.forName("UTF-8"));
-            /*if(resultReloaded.equals(referenceResult)){
+            if(!resultReloaded.equals(referenceResult)){
                 System.err.println("\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName + "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
-            }*/
-            assertTrue(resultReloaded.equals(referenceResult),"\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + reportName + "\n\t\tto" + "\n\t" + REFERENCES_DIR + reportName);
+                compareCorrect = Boolean.FALSE;
+            }
         }
         int added = comparer.getAdded();
         log.debug("Added to grammar: " + added);
@@ -125,7 +133,7 @@ public class XsdComparerTest {
         int removed = comparer.getRemoved();
         log.debug("Removed from grammar: " + removed);
         log.debug(comparer.toString());
-
+        return compareCorrect;
     }
 
     /** Creates an output file (the report) in relation with the inputfile of the grammar and the report type.

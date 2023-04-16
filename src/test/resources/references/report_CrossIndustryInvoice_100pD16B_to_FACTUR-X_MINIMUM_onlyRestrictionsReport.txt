@@ -24,6 +24,10 @@ In type {DocumentContextParameterType} modifying element:
 In type {DocumentContextParameterType} removed <SpecifiedDocumentVersion> {DocumentVersionType}{0..1}
 In type {DocumentContextParameterType} removed <Value> {TextType}{0..1}
 In type {ExchangedDocumentContextType} modifying element: 
+	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+		Restricted cardinality from 0..* to 0..1
+In type {ExchangedDocumentContextType} modifying element: 
 	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
 	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
 		Restricted cardinality from 0..* to 1..1
@@ -215,6 +219,10 @@ In type {TradePartyType} modifying element:
 	old: <Name>{TextType}{0..1} in type {TradePartyType}
 	new: <Name>{TextType}{1..1} in type {TradePartyType}
 		Restricted cardinality from 0..1 to 1..1
+In type {TradePartyType} modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+		Restricted cardinality from 0..* to 0..2
 In type {TradePartyType} removed <DefinedTradeContact> {TradeContactType}{0..*}
 In type {TradePartyType} removed <Description> {TextType}{0..*}
 In type {TradePartyType} removed <EndPointURIUniversalCommunication> {UniversalCommunicationType}{0..1}
@@ -235,6 +243,10 @@ In type {TradeSettlementHeaderMonetarySummationType} modifying element:
 	old: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 		Restricted cardinality from 0..* to 1..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradeSettlementHeaderMonetarySummationType} removed <AllowanceTotalAmount> {AmountType}{0..*}
 In type {TradeSettlementHeaderMonetarySummationType} removed <ChargeTotalAmount> {AmountType}{0..*}
 In type {TradeSettlementHeaderMonetarySummationType} removed <GrossLineTotalAmount> {AmountType}{0..*}

@@ -153,7 +153,7 @@ public class MultiLineChangeTextReport implements TextReport {
             c.setReportHeader("Modifying " + (c.isElement ? "element: " : "attribute: ") +
                     "\n\told: " + (c.isElement ? "<" + c.oldNode.getName() + ">" : "@" + c.oldNode.getName()) + "{" + c.oldNode.getNextTypeName() + "}{" + c.oldNode.getCardinality() + "} in type {" + c.oldNode.getParent().getNextTypeName() + "}" +
                     "\n\tnew: " + (c.isElement ? "<" + c.newNode.getName() + ">" : "@" + c.newNode.getName()) + "{" + c.newNode.getNextTypeName() + "}{" + c.newNode.getCardinality() + "} in type {" + c.newNode.getParent().getNextTypeName() + "}");
-            c.setReportBody("\t\t\t" + c.newNode.getXPath());
+            c.setReportBody("\t\t\tat " + c.newNode.getXPath());
         /*
             "Changed type namespace from " + oldNode.getTypeNamespace() + " to " + newNode.getTypeNamespace()
             "Changed type from " + oldNode.getTypeName() + " to " + newNode.getTypeName()
@@ -190,6 +190,24 @@ public class MultiLineChangeTextReport implements TextReport {
             }
             if (c.isLengthChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
+            }
+            if (c.isMaxInclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged maxLengthInclusive from " + c.oldNode.getMaxInclusive() + " to " + c.newNode.getMaxInclusive()));
+            }
+            if (c.isMaxExclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged maxLengthExclusive from " + c.oldNode.getMaxExclusive() + " to " + c.newNode.getMaxExclusive()));
+            }
+            if (c.isMinInclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged minLengthInclusive from " + c.oldNode.getMinInclusive() + " to " + c.newNode.getMinInclusive()));
+            }
+            if (c.isMinExclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged minLengthExclusive from " + c.oldNode.getMinExclusive() + " to " + c.newNode.getMinExclusive()));
+            }
+            if (c.isTotalDigitsChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged totalDigits from " + c.oldNode.getTotalDigits() + " to " + c.newNode.getTotalDigits()));
+            }
+            if (c.isFractionDigitsChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fractionDigits from " + c.oldNode.getFractionDigits() + " to " + c.newNode.getFractionDigits()));
             }
             if (c.isEnumerationChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));

@@ -44,12 +44,20 @@ In type {DocumentContextParameterType} modifying element:
 In type {DocumentContextParameterType} removed <SpecifiedDocumentVersion> {DocumentVersionType}{0..1}
 In type {DocumentContextParameterType} removed <Value> {TextType}{0..1}
 In type {DocumentLineDocumentType} modifying element: 
+	old: <IncludedNote>{NoteType}{0..*} in type {DocumentLineDocumentType}
+	new: <IncludedNote>{NoteType}{0..1} in type {DocumentLineDocumentType}
+		Restricted cardinality from 0..* to 0..1
+In type {DocumentLineDocumentType} modifying element: 
 	old: <LineID>{IDType}{0..1} in type {DocumentLineDocumentType}
 	new: <LineID>{IDType}{1..1} in type {DocumentLineDocumentType}
 		Restricted cardinality from 0..1 to 1..1
 In type {DocumentLineDocumentType} removed <LineStatusCode> {LineStatusCodeType}{0..1}
 In type {DocumentLineDocumentType} removed <LineStatusReasonCode> {CodeType}{0..1}
 In type {DocumentLineDocumentType} removed <ParentLineID> {IDType}{0..1}
+In type {ExchangedDocumentContextType} modifying element: 
+	old: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
+	new: <BusinessProcessSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..1} in type {ExchangedDocumentContextType}
+		Restricted cardinality from 0..* to 0..1
 In type {ExchangedDocumentContextType} modifying element: 
 	old: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{0..*} in type {ExchangedDocumentContextType}
 	new: <GuidelineSpecifiedDocumentContextParameter>{DocumentContextParameterType}{1..1} in type {ExchangedDocumentContextType}
@@ -133,9 +141,25 @@ In type {HeaderTradeSettlementType} modifying element:
 	new: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
 		Restricted cardinality from 0..1 to 1..1
 In type {HeaderTradeSettlementType} modifying element: 
+	old: <PaymentReference>{TextType}{0..*} in type {HeaderTradeSettlementType}
+	new: <PaymentReference>{TextType}{0..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..* to 0..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <ReceivableSpecifiedTradeAccountingAccount>{TradeAccountingAccountType}{0..*} in type {HeaderTradeSettlementType}
+	new: <ReceivableSpecifiedTradeAccountingAccount>{TradeAccountingAccountType}{0..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..* to 0..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradePaymentTerms>{TradePaymentTermsType}{0..*} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradePaymentTerms>{TradePaymentTermsType}{0..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..* to 0..1
+In type {HeaderTradeSettlementType} modifying element: 
 	old: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{0..1} in type {HeaderTradeSettlementType}
 	new: <SpecifiedTradeSettlementHeaderMonetarySummation>{TradeSettlementHeaderMonetarySummationType}{1..1} in type {HeaderTradeSettlementType}
 		Restricted cardinality from 0..1 to 1..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..*} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..1} in type {HeaderTradeSettlementType}
+		Restricted cardinality from 0..* to 0..1
 In type {HeaderTradeSettlementType} removed <CreditReason> {TextType}{0..*}
 In type {HeaderTradeSettlementType} removed <CreditReasonCode> {CodeType}{0..1}
 In type {HeaderTradeSettlementType} removed <CreditorReferenceIssuerID> {IDType}{0..*}
@@ -354,6 +378,10 @@ In type {TradeAddressType} modifying element:
 	old: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
 	new: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
 		Restricted cardinality from 0..1 to 1..1
+In type {TradeAddressType} modifying element: 
+	old: <CountrySubDivisionName>{TextType}{0..*} in type {TradeAddressType}
+	new: <CountrySubDivisionName>{TextType}{0..1} in type {TradeAddressType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradeAddressType} removed <AdditionalStreetName> {TextType}{0..1}
 In type {TradeAddressType} removed <AttentionOf> {TextType}{0..1}
 In type {TradeAddressType} removed <BuildingName> {TextType}{0..1}
@@ -373,6 +401,10 @@ In type {TradeAllowanceChargeType} modifying element:
 	new: <ActualAmount>{AmountType}{1..1} in type {TradeAllowanceChargeType}
 		Restricted cardinality from 0..* to 1..1
 In type {TradeAllowanceChargeType} modifying element: 
+	old: <CategoryTradeTax>{TradeTaxType}{0..*} in type {TradeAllowanceChargeType}
+	new: <CategoryTradeTax>{TradeTaxType}{0..1} in type {TradeAllowanceChargeType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeAllowanceChargeType} modifying element: 
 	old: <ChargeIndicator>{IndicatorType}{0..1} in type {TradeAllowanceChargeType}
 	new: <ChargeIndicator>{IndicatorType}{1..1} in type {TradeAllowanceChargeType}
 		Restricted cardinality from 0..1 to 1..1
@@ -383,11 +415,27 @@ In type {TradeAllowanceChargeType} removed <PrepaidIndicator> {IndicatorType}{0.
 In type {TradeAllowanceChargeType} removed <SequenceNumeric> {NumericType}{0..1}
 In type {TradeAllowanceChargeType} removed <TypeCode> {AllowanceChargeIdentificationCodeType}{0..1}
 In type {TradeAllowanceChargeType} removed <UnitBasisAmount> {AmountType}{0..1}
+In type {TradePartyType} modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+		Restricted cardinality from 0..* to 0..2
+In type {TradePartyType} modifying element: 
+	old: <URIUniversalCommunication>{UniversalCommunicationType}{0..*} in type {TradePartyType}
+	new: <URIUniversalCommunication>{UniversalCommunicationType}{0..1} in type {TradePartyType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradePartyType} removed <DefinedTradeContact> {TradeContactType}{0..*}
 In type {TradePartyType} removed <Description> {TextType}{0..*}
 In type {TradePartyType} removed <EndPointURIUniversalCommunication> {UniversalCommunicationType}{0..1}
 In type {TradePartyType} removed <LogoAssociatedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*}
 In type {TradePartyType} removed <RoleCode> {PartyRoleCodeType}{0..*}
+In type {TradePaymentTermsType} modifying element: 
+	old: <Description>{TextType}{0..*} in type {TradePaymentTermsType}
+	new: <Description>{TextType}{0..1} in type {TradePaymentTermsType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradePaymentTermsType} modifying element: 
+	old: <DirectDebitMandateID>{IDType}{0..*} in type {TradePaymentTermsType}
+	new: <DirectDebitMandateID>{IDType}{0..1} in type {TradePaymentTermsType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradePaymentTermsType} removed <ApplicableTradePaymentDiscountTerms> {TradePaymentDiscountTermsType}{0..1}
 In type {TradePaymentTermsType} removed <ApplicableTradePaymentPenaltyTerms> {TradePaymentPenaltyTermsType}{0..1}
 In type {TradePaymentTermsType} removed <FromEventCode> {PaymentTermsEventTimeReferenceCodeType}{0..1}
@@ -399,6 +447,14 @@ In type {TradePaymentTermsType} removed <PayeeTradeParty> {TradePartyType}{0..*}
 In type {TradePaymentTermsType} removed <PaymentMeansID> {IDType}{0..*}
 In type {TradePaymentTermsType} removed <SettlementPeriodMeasure> {MeasureType}{0..1}
 In type {TradePaymentTermsType} removed <TypeCode> {PaymentTermsTypeCodeType}{0..1}
+In type {TradePriceType} modifying element: 
+	old: <AppliedTradeAllowanceCharge>{TradeAllowanceChargeType}{0..*} in type {TradePriceType}
+	new: <AppliedTradeAllowanceCharge>{TradeAllowanceChargeType}{0..1} in type {TradePriceType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradePriceType} modifying element: 
+	old: <ChargeAmount>{AmountType}{1..*} in type {TradePriceType}
+	new: <ChargeAmount>{AmountType}{1..1} in type {TradePriceType}
+		Restricted cardinality from 1..* to 1..1
 In type {TradePriceType} removed <AssociatedReferencedDocument> {ReferencedDocumentType}{0..*}
 In type {TradePriceType} removed <ChangeReason> {TextType}{0..*}
 In type {TradePriceType} removed <DeliveryTradeLocation> {TradeLocationType}{0..*}
@@ -455,6 +511,14 @@ In type {TradeProductType} removed <TypeCode> {CodeType}{0..1}
 In type {TradeProductType} removed <UseDescription> {TextType}{0..*}
 In type {TradeProductType} removed <VariableMeasureIndicator> {IndicatorType}{0..1}
 In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <AllowanceTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <AllowanceTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <ChargeTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <ChargeTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
 	old: <DuePayableAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <DuePayableAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 		Restricted cardinality from 0..* to 1..1
@@ -470,6 +534,14 @@ In type {TradeSettlementHeaderMonetarySummationType} modifying element:
 	old: <TaxBasisTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
 	new: <TaxBasisTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
 		Restricted cardinality from 0..* to 1..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..2} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 0..2
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TotalPrepaidAmount>{AmountType}{0..*} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TotalPrepaidAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradeSettlementHeaderMonetarySummationType} removed <GrossLineTotalAmount> {AmountType}{0..*}
 In type {TradeSettlementHeaderMonetarySummationType} removed <InformationAmount> {AmountType}{0..*}
 In type {TradeSettlementHeaderMonetarySummationType} removed <NetIncludingTaxesLineTotalAmount> {AmountType}{0..*}
@@ -509,6 +581,14 @@ In type {TradeSettlementPaymentMeansType} removed <PayeeSpecifiedCreditorFinanci
 In type {TradeSettlementPaymentMeansType} removed <PayerSpecifiedDebtorFinancialInstitution> {DebtorFinancialInstitutionType}{0..1}
 In type {TradeSettlementPaymentMeansType} removed <PaymentChannelCode> {PaymentMeansChannelCodeType}{0..1}
 In type {TradeSettlementPaymentMeansType} removed <PaymentMethodCode> {CodeType}{0..1}
+In type {TradeTaxType} modifying element: 
+	old: <BasisAmount>{AmountType}{0..*} in type {TradeTaxType}
+	new: <BasisAmount>{AmountType}{0..1} in type {TradeTaxType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeTaxType} modifying element: 
+	old: <CalculatedAmount>{AmountType}{0..*} in type {TradeTaxType}
+	new: <CalculatedAmount>{AmountType}{0..1} in type {TradeTaxType}
+		Restricted cardinality from 0..* to 0..1
 In type {TradeTaxType} modifying element: 
 	old: <CategoryCode>{TaxCategoryCodeType}{0..1} in type {TradeTaxType}
 	new: <CategoryCode>{TaxCategoryCodeType}{1..1} in type {TradeTaxType}

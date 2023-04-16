@@ -49,6 +49,48 @@ public interface XsdNode {
     String getPattern();
 
     /**
+     * Get the maxinclusive value of the node (optional).
+     *
+     * @return Returns the maxinclusive value of the node or null.
+     */
+    Integer getMaxInclusive();
+
+    /**
+     * Get the maxexclusive value of the node (optional).
+     *
+     * @return Returns the maxexclusive value of the node or null.
+     */
+    Integer getMaxExclusive();
+
+    /**
+     * Get the mininclusive value of the node (optional).
+     *
+     * @return Returns the mininclusive value of the node or null.
+     */
+    Integer getMinInclusive();
+
+    /**
+     * Get the minexclusive value of the node (optional).
+     *
+     * @return Returns the minexclusive value of the node or null.
+     */
+    Integer getMinExclusive();
+
+    /**
+     * Get the totaldigits value of the node (optional).
+     *
+     * @return Returns the totaldigits value of the node or null.
+     */
+    Integer getTotalDigits();
+
+    /**
+     * Get the fractionDigits value of the node (optional).
+     *
+     * @return Returns the fractionDigits value of the node or null.
+     */
+    Integer getFractionDigits();
+
+    /**
      * Get the whitespace mode of the node (optional).
      *
      * @return Returns the whitespace mode of the node or null.

@@ -91,6 +91,24 @@ public class SingleLineChangeTextReport implements TextReport {
             if (c.isLengthChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed length from " + c.oldNode.getLength() + " to " + c.newNode.getLength()));
             }
+            if (c.isMaxInclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed maxLengthInclusive from " + c.oldNode.getMaxInclusive() + " to " + c.newNode.getMaxInclusive()));
+            }
+            if (c.isMaxExclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed maxLengthExclusive from " + c.oldNode.getMaxExclusive() + " to " + c.newNode.getMaxExclusive()));
+            }
+            if (c.isMinInclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed minLengthInclusive from " + c.oldNode.getMinInclusive() + " to " + c.newNode.getMinInclusive()));
+            }
+            if (c.isMinExclusiveChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed minLengthExclusive from " + c.oldNode.getMinExclusive() + " to " + c.newNode.getMinExclusive()));
+            }
+            if (c.isTotalDigitsChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed totalDigits from " + c.oldNode.getTotalDigits() + " to " + c.newNode.getTotalDigits()));
+            }
+            if (c.isFractionDigitsChanged()) {
+                c.setReportHeader(c.getReportHeader() + (" changed fractionDigits from " + c.oldNode.getFractionDigits() + " to " + c.newNode.getFractionDigits()));
+            }
             if (c.isEnumerationChanged()) {
                 c.setReportHeader(c.getReportHeader() + (" changed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
             }

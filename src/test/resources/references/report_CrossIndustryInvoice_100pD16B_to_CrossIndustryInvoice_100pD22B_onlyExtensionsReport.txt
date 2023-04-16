@@ -78,12 +78,6 @@ In type {CurrencyCodeType} modifying attribute:
 	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
 		Changed fixed default from 5 to 5
 		Extended enumeration from [] to [5]
-In type {DateOnlyFormattedDateTimeType} modifying attribute: 
-	old: @format{string}{0..1} in type {DateTimeType}
-	new: @format{DateOnlyFormatCodeContentType}{0..1} in type {DateOnlyFormattedDateTimeType}
-In type {DateOnlyFormattedDateTimeType} modifying element: 
-	old: <DateTimeString>{DateTimeType}{0..1} in type {DateTimeType}
-	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
 In type {DeliveryTermsCodeType} modifying attribute: 
 	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
 	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
@@ -121,9 +115,6 @@ In type {ExchangedDocumentType} modifying element:
 		Extended cardinality from 1..1 to 0..1
 In type {FinancialAdjustmentType} added <DirectionCode> {AccountingDebitCreditStatusCodeType}{0..1} 
 In type {FinancialAdjustmentType} added <RelatedTradeTax> {TradeTaxType}{0..*} 
-In type {FormattedDateTimeType} modifying attribute: 
-	old: @format{FormattedDateTimeFormatContentType}{0..1} in type {FormattedDateTimeType}
-	new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType}
 In type {FreightChargeTariffClassCodeType} modifying attribute: 
 	old: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
 	new: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
@@ -152,9 +143,6 @@ In type {LineTradeSettlementType} modifying element:
 	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {LineTradeSettlementType}
 	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {LineTradeSettlementType}
 		Extended cardinality from 0..1 to 0..*
-In type {LinearUnitMeasureType} modifying attribute: 
-	old: @unitCode{LinearUnitMeasureUnitCodeContentType}{0..1} in type {LinearUnitMeasureType}
-	new: @unitCode{MeasurementUnitCommonCodeLinearContentType}{0..1} in type {LinearUnitMeasureType}
 In type {LocationFunctionCodeType} modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {CodeType}
 	new: @listAgencyID{LocationFunctionCodeListAgencyIDContentType}{0..1} in type {LocationFunctionCodeType}
@@ -166,21 +154,12 @@ In type {LogisticsChargeCalculationBasisCodeType} modifying attribute:
 In type {LogisticsLocationType} added <CountryID> {CountryIDType}{0..1} 
 In type {LogisticsLocationType} added <CountrySubDivisionID> {IDType}{0..1} 
 In type {LogisticsLocationType} added <SubordinateLocation> {SubordinateLocationType}{0..1} 
-In type {LogisticsLocationType} modifying element: 
-	old: <TypeCode>{CodeType}{0..1} in type {LogisticsLocationType}
-	new: <TypeCode>{LocationFunctionCodeType}{0..1} in type {LogisticsLocationType}
-In type {LogisticsServiceChargeType} modifying element: 
-	old: <PaymentArrangementCode>{CodeType}{0..1} in type {LogisticsServiceChargeType}
-	new: <PaymentArrangementCode>{TransportServicePaymentArrangementCodeType}{0..1} in type {LogisticsServiceChargeType}
 In type {LogisticsTransportEquipmentType} added <AffixedLogisticsSeal> {LogisticsSealType}{0..*} 
 In type {LogisticsTransportEquipmentType} added <ApplicableNote> {NoteType}{0..*} 
 In type {LogisticsTransportEquipmentType} added <CarrierAssignedBookingID> {IDType}{0..*} 
 In type {LogisticsTransportEquipmentType} added <Characteristic> {TextType}{0..1} 
 In type {LogisticsTransportEquipmentType} added <ReturnableIndicator> {IndicatorType}{0..1} 
 In type {LogisticsTransportEquipmentType} added <SealedIndicator> {IndicatorType}{0..1} 
-In type {LogisticsTransportEquipmentType} modifying element: 
-	old: <CharacteristicCode>{TransportEquipmentSizeTypeCodeType}{0..1} in type {LogisticsTransportEquipmentType}
-	new: <CharacteristicCode>{CodeType}{0..1} in type {LogisticsTransportEquipmentType}
 In type {LogisticsTransportMovementType} added <Cycle> {TextType}{0..1} 
 In type {LogisticsTransportMovementType} added <ID> {IDType}{0..1} 
 In type {LogisticsTransportMovementType} added <Service> {TextType}{0..1} 
@@ -271,9 +250,6 @@ In type {SupplyChainConsignmentItemType} added <ApplicableNote> {NoteType}{0..*}
 In type {SupplyChainConsignmentItemType} added <ApplicableTransportDangerousGoods> {TransportDangerousGoodsType}{0..*} 
 In type {SupplyChainConsignmentItemType} added <GlobalID> {IDType}{0..*} 
 In type {SupplyChainConsignmentItemType} added <PreviousAdministrativeReferencedDocument> {ReferencedDocumentType}{0..*} 
-In type {SupplyChainConsignmentItemType} modifying element: 
-	old: <NetWeightMeasure>{MeasureType}{0..1} in type {SupplyChainConsignmentItemType}
-	new: <NetWeightMeasure>{WeightUnitMeasureType}{0..1} in type {SupplyChainConsignmentItemType}
 In type {SupplyChainConsignmentType} added <ApplicableCrossBorderCustomsValuation> {CrossBorderCustomsValuationType}{0..*} 
 In type {SupplyChainConsignmentType} added <ApplicableCrossBorderRegulatoryProcedure> {CrossBorderRegulatoryProcedureType}{0..*} 
 In type {SupplyChainConsignmentType} added <ApplicableTransportCargoInsurance> {TransportCargoInsuranceType}{0..1} 
@@ -281,9 +257,6 @@ In type {SupplyChainConsignmentType} added <ChargeableWeightMeasure> {WeightUnit
 In type {SupplyChainConsignmentType} added <ID> {IDType}{0..1} 
 In type {SupplyChainConsignmentType} added <NetVolumeMeasure> {VolumeUnitMeasureType}{0..*} 
 In type {SupplyChainConsignmentType} added <TransitLogisticsLocation> {LogisticsLocationType}{0..*} 
-In type {SupplyChainConsignmentType} modifying element: 
-	old: <NetWeightMeasure>{MeasureType}{0..*} in type {SupplyChainConsignmentType}
-	new: <NetWeightMeasure>{WeightUnitMeasureType}{0..*} in type {SupplyChainConsignmentType}
 In type {SupplyChainEventType} added <TimeOccurrenceDateTime> {TimeOnlyFormattedDateTimeType}{0..1} 
 In type {SupplyChainPackagingType} added <AdditionalInstructionCode> {CodeType}{0..*} 
 In type {SupplyChainPackagingType} added <AdditionalInstructionIndicator> {IndicatorType}{0..1} 
@@ -348,9 +321,6 @@ In type {TradeProductType} modifying element:
 	old: <LinearSpatialDimension>{SpatialDimensionType}{0..1} in type {TradeProductType}
 	new: <LinearSpatialDimension>{SpatialDimensionType}{0..*} in type {TradeProductType}
 		Extended cardinality from 0..1 to 0..*
-In type {TradeSettlementFinancialCardType} modifying element: 
-	old: <ValidFromDateTime>{DateTimeType}{0..1} in type {TradeSettlementFinancialCardType}
-	new: <ValidFromDateTime>{DateOnlyFormattedDateTimeType}{0..1} in type {TradeSettlementFinancialCardType}
 In type {TradeSettlementHeaderMonetarySummationType} added <IncludingTaxesLineTotalAmount> {AmountType}{0..*} 
 In type {TradeSettlementHeaderMonetarySummationType} added <InsuranceChargeTotalAmount> {AmountType}{0..*} 
 In type {TradeSettlementLineMonetarySummationType} added <IncludingTaxesLineTotalAmount> {AmountType}{0..*} 
@@ -393,13 +363,3 @@ In type {TransportServicePaymentArrangementCodeType} modifying attribute:
 	old: @listAgencyID{token}{0..1} in type {CodeType}
 	new: @listAgencyID{TransportServicePaymentArrangementCodeListAgencyIDContentType}{0..1} in type {TransportServicePaymentArrangementCodeType}
 		Changed fixed default from null to 6
-In type {VolumeUnitMeasureType} modifying attribute: 
-	old: @unitCode{VolumeUnitMeasureUnitCodeContentType}{0..1} in type {VolumeUnitMeasureType}
-	new: @unitCode{MeasurementUnitCommonCodeVolumeContentType}{0..1} in type {VolumeUnitMeasureType}
-In type {WeightUnitMeasureType} modifying attribute: 
-	old: @unitCode{WeightUnitMeasureUnitCodeContentType}{0..1} in type {WeightUnitMeasureType}
-	new: @unitCode{MeasurementUnitCommonCodeWeightContentType}{0..1} in type {WeightUnitMeasureType}
-In type {WeightUnitMeasureType} modifying attribute: 
-	old: @unitCode{token}{0..1} in type {MeasureType}
-	new: @unitCode{MeasurementUnitCommonCodeWeightContentType}{0..1} in type {WeightUnitMeasureType}
-		Changed minLength from null to 1
