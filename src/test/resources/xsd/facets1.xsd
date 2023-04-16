@@ -3,7 +3,23 @@
 	<xs:element name="MyRootElement0" type="FacetsOwner0" />
 	<xs:element name="MyRootElement1" type="FacetsOwner1" />
 	<xs:element name="MyRootElement2" type="FacetsOwner2" />
+	<xs:element name="MyRootElement" type="ChoiceSequenceChange" />
 
+	<xs:complexType name="ChoiceSequenceChange">
+		<xs:choice>
+			<!-- means A is required and must appear exactly once. -->
+			<xs:element name="A1" />
+
+			<!-- means A is optional and may appear at most once. -->
+			<xs:element name="A2" minOccurs="0" />
+
+			<!-- means A is required and may repeat 1 time. -->
+			<xs:element name="A3" maxOccurs="1" />
+
+			<!-- means A is optional and may repeat 1 time1. -->
+			<xs:element name="A4" minOccurs="0" maxOccurs="1" />
+		</xs:choice>
+	</xs:complexType>	
 	<xs:complexType name="FacetsOwner0">
 		<xs:all>
 			<!-- means A is required and must appear exactly once. -->
@@ -136,5 +152,19 @@
 				</xs:simpleType>
 			</xs:element>
 		</xs:choice>
+		<!-- <xs:element name="SpecificTime" type="SpecificTimeType" />-->
 	</xs:complexType>
+<!-- @xs:explicitTimezone @s:assert and not found in Xerces
+	<xs:complexType name="FacetsOwner3">
+		<xs:attribute name="min" type="xs:int"/>
+		<xs:attribute name="max" type="xs:int"/>
+		<xs:assert test="@min le @max"/>
+	</xs:complexType>
+
+	<xs:simpleType name="SpecificTimeType">
+		<xs:restriction base="xs:time">
+		  <xs:explicitTimezone value="required" />
+		</xs:restriction>
+	  </xs:simpleType>
+	-->  	
 </xs:schema>

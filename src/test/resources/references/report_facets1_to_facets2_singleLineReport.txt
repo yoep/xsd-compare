@@ -1,3 +1,5 @@
+/MyRootElement/A1 modifying element: old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1
+/MyRootElement/A3 modifying element: old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1
 /MyRootElement1/A1 modifying element: old: <A1>{anyType}{1..1} in type {FacetsOwner1}new: <A1>{anyType}{0..1} in type {FacetsOwner1} changed cardinality from 1..1 to 0..1
 /MyRootElement1/A2 modifying element: old: <A2>{anyType}{0..1} in type {FacetsOwner1}new: <A2>{anyType}{1..*} in type {FacetsOwner1} changed cardinality from 0..1 to 1..*
 /MyRootElement1/A3 modifying element: old: <A3>{anyType}{1..*} in type {FacetsOwner1}new: <A3>{anyType}{0..*} in type {FacetsOwner1} changed cardinality from 1..* to 0..*

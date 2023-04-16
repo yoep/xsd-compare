@@ -4,6 +4,12 @@
 
 
 Modifying element: 
+	old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange}
+		Changed cardinality from 0..1 to 1..1
+				at /MyRootElement/A1
+
+Modifying element: 
 	old: <A1>{anyType}{1..1} in type {FacetsOwner1}
 	new: <A1>{anyType}{0..1} in type {FacetsOwner1}
 		Changed cardinality from 1..1 to 0..1
@@ -20,6 +26,12 @@ Modifying element:
 	new: <A2>{anyType}{0..*} in type {FacetsOwner2}
 		Changed cardinality from 0..1 to 0..*
 				at /MyRootElement2/A2
+
+Modifying element: 
+	old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange}
+		Changed cardinality from 0..1 to 1..1
+				at /MyRootElement/A3
 
 Modifying element: 
 	old: <A3>{anyType}{1..*} in type {FacetsOwner1}
@@ -118,8 +130,8 @@ ELEMENTS:
 	Added elements in XSD:	0
 	Added elements in XML:	0
 
-	Modified elements in XSD:	17
-	Modified elements in XML:	17
+	Modified elements in XSD:	19
+	Modified elements in XML:	19
 
 	Removed elements from XSD:	0
 	Removed elements from XML:	0

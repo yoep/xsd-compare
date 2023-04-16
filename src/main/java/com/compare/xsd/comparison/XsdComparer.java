@@ -575,6 +575,25 @@ public class XsdComparer {
         }
         return change;
     }
+/* not found in Xerces
+    private boolean testAssertionChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getAssertion(), newNode.getAssertion()) ||
+                isValueDifferent(oldNode.getAssertion(), newNode.getAssertion());
+        if(change){
+            modification.setAssertionsChanged(true);
+        }
+        return change;
+    }
+
+    private boolean testExplicitTimezoneChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean change = isPresenceDifferent(oldNode.getExclusiveTimezone(), newNode.getExclusiveTimezone()) ||
+                isValueDifferent(oldNode.getExclusiveTimezone(), newNode.getExclusiveTimezone());
+        if(change){
+            modification.setExplicitTimezoneChanged(true);
+        }
+        return change;
+    }
+    */
 
     private boolean isPresenceDifferent(Object oldNode, Object newNode) {
         if((oldNode != null && newNode == null) ){
