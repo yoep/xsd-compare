@@ -2052,6 +2052,7 @@ Modifying attribute:
 	new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B
 		Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
+		Changed enumeration from [] to [102, 203, 205, 209, 502, 602]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/FormattedIssueDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/FormattedIssueDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/FormattedIssueDateTime/DateTimeString/@format
@@ -2134,6 +2135,7 @@ Modifying attribute:
 	new: @format{DateOnlyFormatCodeContentType}{0..1} in type {DateOnlyFormattedDateTimeType}
 		Changed type namespace from http://www.w3.org/2001/XMLSchema to urn:un:unece:uncefact:codelist:standard:UNECE:DateOnlyFormatCode:D21B
 		Changed type from string to DateOnlyFormatCodeContentType
+		Changed enumeration from [] to [2, 3, 4, 101, 102, 105, 106, 107, 110, 609]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/ApplicableTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString/@format
@@ -2141,8 +2143,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
 	new: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/SetTriggerCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/SetTriggerCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/SetTriggerCode/@listAgencyID
@@ -2263,15 +2264,13 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
 	new: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/SpecifiedDeliveryAdjustment/ReasonCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
 	new: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ReasonCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ReasonCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ReasonCode/@listAgencyID
@@ -2282,40 +2281,35 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
 	new: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/AutomaticDataCaptureMethodTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/AutomaticDataCaptureMethodTypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
 	new: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
 	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/OperationalCategoryCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/OperationalCategoryCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
 	new: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/PayingPartyRoleCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/PayingPartyRoleCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
 	new: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/DirectTelephoneUniversalCommunication/ChannelCode/@listAgencyID
 				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/EmailURIUniversalCommunication/ChannelCode/@listAgencyID
 				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/FaxUniversalCommunication/ChannelCode/@listAgencyID
@@ -3560,8 +3554,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
 	new: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/DefinedTradeContact/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/DefinedTradeContact/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAgentTradeParty/DefinedTradeContact/TypeCode/@listAgencyID
@@ -3690,8 +3683,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
 	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
-		Changed fixed default from 5 to 5
-		Changed enumeration from [] to [5]
+		Changed enumeration from [] to [5] (no semantic change, as new single enumeration value existed as previous fixed default: 5)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/CurrencyCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceApplicableTradeCurrencyExchange/SourceCurrencyCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceApplicableTradeCurrencyExchange/TargetCurrencyCode/@listAgencyID
@@ -3736,16 +3728,14 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
 	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ApplicableTradeDeliveryTerms/DeliveryTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ApplicableTradeDeliveryTerms/DeliveryTypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
 	new: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/LinearSpatialDimension/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/LinearSpatialDimension/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/MaximumLinearSpatialDimension/TypeCode/@listAgencyID
@@ -3764,8 +3754,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
 	new: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/ExchangedDocument/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/TypeCode/@listAgencyID
@@ -3842,8 +3831,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
 	new: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/StatusCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/StatusCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/StatusCode/@listAgencyID
@@ -3919,23 +3907,20 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
 	new: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/TariffClassCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/TariffClassCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
 	new: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/AssociatedDocumentLineDocument/LineStatusCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
 	new: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/ExchangedDocument/PurposeCode/@listAgencyID
 
 Modifying attribute: 
@@ -3943,24 +3928,20 @@ Modifying attribute:
 	new: @listAgencyID{token}{0..1} in type {PackageTypeCodeType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to http://www.w3.org/2001/XMLSchema
 		Changed type from PackageTypeCodeListAgencyIDContentType to token
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/IncludedSupplyChainPackaging/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
 	new: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/IncludedSupplyChainPackaging/SpecifiedPackagingMarking/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
 	new: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/RoleCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/RoleCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAgentTradeParty/RoleCode/@listAgencyID
@@ -4089,45 +4070,39 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
 	new: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/GuaranteeMethodCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
 	new: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/PaymentChannelCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
 	new: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
 	new: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/FromEventCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradePaymentTerms/FromEventCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
 	new: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradePaymentTerms/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
 	new: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/TypeCode/@listAgencyID
@@ -4136,8 +4111,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
 	new: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/ReferenceTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/ReferenceTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/ReferenceTypeCode/@listAgencyID
@@ -4213,8 +4187,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
 	new: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/CategoryCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/CategoryCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/CategoryCode/@listAgencyID
@@ -4237,8 +4210,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
 	new: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/TypeCode/@listAgencyID
@@ -4261,8 +4233,7 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
 	new: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/DueDateTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/DueDateTypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/DueDateTypeCode/@listAgencyID
@@ -4285,16 +4256,14 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
 	new: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CategoryCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CategoryCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
 	new: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/UsedCapacityCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/UsedCapacityCode/@listAgencyID
 
@@ -4310,290 +4279,23 @@ Modifying attribute:
 Modifying attribute: 
 	old: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
 	new: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/TypeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
 	new: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/ModeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/ModeCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
 	new: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to [6]
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/StageCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/StageCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
-		Changed fixed default from 210 to 210
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayableSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PurchaseSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ReceivableSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SalesSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/PayableSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/PurchaseSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ReceivableSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SalesSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SpecifiedTradeAccountingAccount/TypeCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
-		Changed fixed default from 210 to 210
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayableSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PurchaseSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ReceivableSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SalesSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/PayableSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/PurchaseSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ReceivableSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SalesSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerNonDeductibleTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/BuyerRepayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SellerPayableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SellerRefundableTaxSpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/SpecifiedTradeAccountingAccount/AmountTypeCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
-	new: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/TypeCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
-	new: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/StatisticalClassificationCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NatureIdentificationTransportCargo/StatisticalClassificationCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {CodeType}
@@ -4601,6 +4303,7 @@ Modifying attribute:
 		Changed type namespace from http://www.w3.org/2001/XMLSchema to urn:un:unece:uncefact:data:standard:QualifiedDataType:100
 		Changed type from token to LocationFunctionCodeListAgencyIDContentType
 		Changed fixed default from null to 6
+		Changed enumeration from [] to [6]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceLogisticsLocation/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDespatchSupplyChainEvent/OccurrenceLogisticsLocation/TypeCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualPickUpSupplyChainEvent/OccurrenceLogisticsLocation/TypeCode/@listAgencyID
@@ -4628,32 +4331,9 @@ Modifying attribute:
 		Changed type namespace from http://www.w3.org/2001/XMLSchema to urn:un:unece:uncefact:data:standard:QualifiedDataType:100
 		Changed type from token to TransportServicePaymentArrangementCodeListAgencyIDContentType
 		Changed fixed default from null to 6
+		Changed enumeration from [] to [6]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentArrangementCode/@listAgencyID
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentArrangementCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
-	new: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeExtensionCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/TypeExtensionCode/@listAgencyID
-
-Modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
-	new: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
-		Changed fixed default from 6 to 6
-		Changed enumeration from [] to []
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/CalculationBasisCode/@listAgencyID
-				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/CalculationBasisCode/@listAgencyID
 
 Modifying attribute: 
 	old: @listID{token}{0..1} in type {TransportEquipmentSizeTypeCodeType}
@@ -4663,10 +4343,342 @@ Modifying attribute:
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/CharacteristicCode/@listID
 
 Modifying attribute: 
+	old: @schemeAgencyID{CountryIDSchemeAgencyIDContentType}{0..1} in type {CountryIDType}
+	new: @schemeAgencyID{CountryIDSchemeAgencyIDContentType}{0..1} in type {CountryIDType}
+		Changed enumeration from [] to [5]
+				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/ExchangedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ApplicableTradeDeliveryTerms/RelevantTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAssignedAccountantTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerAssignedAccountantTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerRequisitionerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerRequisitionerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTaxRepresentativeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTaxRepresentativeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/DemandForecastReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/DemandForecastReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/OrderResponseReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/OrderResponseReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PriceListReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PriceListReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ProductEndUserTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ProductEndUserTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PromotionalDealReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PromotionalDealReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PurchaseConditionsReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/PurchaseConditionsReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/QuotationReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/QuotationReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/RequisitionerReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/RequisitionerReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SalesAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SalesAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerAssignedAccountantTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerAssignedAccountantTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTaxRepresentativeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTaxRepresentativeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SupplyInstructionReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SupplyInstructionReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/UltimateCustomerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/UltimateCustomerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualDespatchSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualPickUpSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ActualReceiptSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ConsumptionReportReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ConsumptionReportReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DeliveryNoteReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DeliveryNoteReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DespatchAdviceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/DespatchAdviceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/PackingListReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/PackingListReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/PreviousDeliverySupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ReceivingAdviceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ReceivingAdviceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CarrierTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CarrierTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/ConsigneeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/ConsigneeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/ConsignorTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/ConsignorTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CustomsExportAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CustomsExportAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CustomsImportAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/CustomsImportAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/DeliveryTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/DeliveryTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/FreightForwarderTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/FreightForwarderTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/GroupingCentreTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/GroupingCentreTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/OwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/OwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/TransportContractReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/TransportContractReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipFromTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipFromTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipToTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/ShipToTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/UltimateShipToTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/UltimateShipToTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ApplicableTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringAgreementReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringAgreementReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringListReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/FactoringListReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoicerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoicerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/LetterOfCreditReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/LetterOfCreditReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayeeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayeeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PayerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PaymentApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/PaymentApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ProFormaInvoiceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/ProFormaInvoiceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedAdvancePayment/IncludedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedFinancialAdjustment/ClaimRelatedTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedFinancialAdjustment/ClaimRelatedTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedFinancialAdjustment/InvoiceReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedFinancialAdjustment/InvoiceReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedFromLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedToLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentPlaceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/PayeeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/PayeeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SubtotalCalculatedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/TaxApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/TaxApplicableTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/UltimatePayeeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/UltimatePayeeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/AdditionalReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/AdditionalReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/BrandOwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/BrandOwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/CertificationEvidenceReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/CertificationEvidenceReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/IndividualTradeProductInstance/PackagingSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/IndividualTradeProductInstance/ProductionSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/InspectionReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/InspectionReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/LegalRightsOwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/LegalRightsOwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/MSDSReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/MSDSReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/ManufacturerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/ManufacturerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/OriginTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/DeliveryTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/DeliveryTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/SpecifiedSubordinateLineTradeSettlement/ApplicableTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ApplicableTradeDeliveryTerms/RelevantTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/BuyerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/BuyerRequisitionerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/BuyerRequisitionerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ContractReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ContractReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/DemandForecastReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/DemandForecastReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/DeliveryTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/GrossPriceProductTradePrice/IncludedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ItemBuyerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ItemBuyerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ItemSellerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/ItemSellerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AppliedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/DeliveryTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/NetPriceProductTradePrice/IncludedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/PromotionalDealReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/PromotionalDealReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/QuotationReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/QuotationReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/RequisitionerReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/RequisitionerReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/SellerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/UltimateCustomerOrderReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeAgreement/UltimateCustomerOrderReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ActualDeliverySupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ActualDespatchSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ActualPickUpSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ActualReceiptSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ConsumptionReportReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ConsumptionReportReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/DeliveryNoteReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/DeliveryNoteReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/DespatchAdviceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/DespatchAdviceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/PackingListReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/PackingListReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ReceivingAdviceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ReceivingAdviceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CarrierTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CarrierTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/ConsigneeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/ConsigneeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/ConsignorTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/ConsignorTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CustomsExportAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CustomsExportAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CustomsImportAgentTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/CustomsImportAgentTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/DeliveryTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/DeliveryTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/FreightForwarderTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/FreightForwarderTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/GroupingCentreTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/GroupingCentreTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/OwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/SpecifiedLogisticsTransportMovement/UsedLogisticsTransportMeans/OwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/TransportContractReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/TransportContractReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RequestedDeliverySupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ShipFromTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ShipFromTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ShipToTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/ShipToTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/UltimateShipToTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/UltimateShipToTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/AdditionalReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/AdditionalReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/ApplicableTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/InvoiceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/InvoiceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedFinancialAdjustment/ClaimRelatedTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedFinancialAdjustment/ClaimRelatedTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedFinancialAdjustment/InvoiceReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedFinancialAdjustment/InvoiceReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedFromLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedToLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/AppliedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/PaymentPlaceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/ActualTradeCurrencyExchange/AssociatedReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeAllowanceCharge/CategoryTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradePaymentTerms/PayeeTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradePaymentTerms/PayeeTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/PlaceApplicableTradeLocation/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SubtotalCalculatedTradeTax/ServiceSupplyTradeCountry/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/AdditionalReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/AdditionalReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/BrandOwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/BrandOwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/CertificationEvidenceReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/CertificationEvidenceReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/IndividualTradeProductInstance/PackagingSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/IndividualTradeProductInstance/ProductionSupplyChainEvent/OccurrenceLogisticsLocation/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/InspectionReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/InspectionReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/LegalRightsOwnerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/LegalRightsOwnerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/MSDSReferenceReferencedDocument/IssuerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/MSDSReferenceReferencedDocument/IssuerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/ManufacturerTradeParty/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/ManufacturerTradeParty/SpecifiedLegalOrganization/PostalTradeAddress/CountryID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedTradeProduct/OriginTradeCountry/ID/@schemeAgencyID
+
+Modifying attribute: 
+	old: @schemeAgencyID{FreightChargeTypeIDSchemeAgencyIDContentType}{0..1} in type {FreightChargeTypeIDType}
+	new: @schemeAgencyID{FreightChargeTypeIDSchemeAgencyIDContentType}{0..1} in type {FreightChargeTypeIDType}
+		Changed enumeration from [] to [6]
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedLogisticsServiceCharge/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedLogisticsServiceCharge/ID/@schemeAgencyID
+
+Modifying attribute: 
+	old: @schemeAgencyID{PaymentTermsIDSchemeAgencyIDContentType}{0..1} in type {PaymentTermsIDType}
+	new: @schemeAgencyID{PaymentTermsIDSchemeAgencyIDContentType}{0..1} in type {PaymentTermsIDType}
+		Changed enumeration from [] to [6]
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradePaymentTerms/ID/@schemeAgencyID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradePaymentTerms/ID/@schemeAgencyID
+
+Modifying attribute: 
 	old: @unitCode{LinearUnitMeasureUnitCodeContentType}{0..1} in type {LinearUnitMeasureType}
 	new: @unitCode{MeasurementUnitCommonCodeLinearContentType}{0..1} in type {LinearUnitMeasureType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:MeasurementUnitCommonCodeLinear:4
 		Changed type from LinearUnitMeasureUnitCodeContentType to MeasurementUnitCommonCodeLinearContentType
+		Changed enumeration from [] to [CMT, FOT, INH, MTR]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/LinearSpatialDimension/DiameterMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/UtilizedLogisticsTransportEquipment/LoadingLengthMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/IncludedSubordinateTradeLineItem/ApplicableTradeProduct/LinearSpatialDimension/DiameterMeasure/@unitCode
@@ -4689,6 +4701,7 @@ Modifying attribute:
 	new: @unitCode{MeasurementUnitCommonCodeVolumeContentType}{0..1} in type {VolumeUnitMeasureType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:MeasurementUnitCommonCodeVolume:4
 		Changed type from VolumeUnitMeasureUnitCodeContentType to MeasurementUnitCommonCodeVolumeContentType
+		Changed enumeration from [] to [CMQ, FTQ, LTR, MMQ, MTQ]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/GrossVolumeMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/GrossVolumeMeasure/@unitCode
 
@@ -4697,6 +4710,7 @@ Modifying attribute:
 	new: @unitCode{MeasurementUnitCommonCodeWeightContentType}{0..1} in type {WeightUnitMeasureType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:MeasurementUnitCommonCodeWeight:4
 		Changed type from WeightUnitMeasureUnitCodeContentType to MeasurementUnitCommonCodeWeightContentType
+		Changed enumeration from [] to [KGM, TNE]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/GrossWeightMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/GrossWeightMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/GrossWeightMeasure/@unitCode
@@ -4712,6 +4726,7 @@ Modifying attribute:
 		Changed type from token to MeasurementUnitCommonCodeWeightContentType
 		Changed maxLength from null to 3
 		Changed minLength from null to 1
+		Changed enumeration from [] to [KGM, TNE]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NetWeightMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeDelivery/RelatedSupplyChainConsignment/NetWeightMeasure/@unitCode
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeDelivery/RelatedSupplyChainConsignment/IncludedSupplyChainConsignmentItem/NetWeightMeasure/@unitCode
@@ -14048,8 +14063,8 @@ ATTRIBUTES:
 	Added attributes in XSD:	5
 	Added attributes in XML:	10
 
-	Modified attributes in XSD:	52
-	Modified attributes in XML:	2352
+	Modified attributes in XSD:	48
+	Modified attributes in XML:	2422
 
 	Removed attributes from XSD:	141
 	Removed attributes from XML:	8703

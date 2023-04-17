@@ -1,0 +1,84 @@
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A1>{anyType}{1..1} in type {ChoiceSequenceChange}
+	new: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from SEQUENCE to CHOICE
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from SEQUENCE to CHOICE
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A3>{anyType}{1..1} in type {ChoiceSequenceChange}
+	new: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from SEQUENCE to CHOICE
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from SEQUENCE to CHOICE
+In type {FacetsOwner0} modifying element: 
+	old: <B1>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B1>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from SEQUENCE to ALL
+In type {FacetsOwner0} modifying element: 
+	old: <B2>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B2>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from SEQUENCE to ALL
+In type {FacetsOwner0} modifying element: 
+	old: <B3>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B3>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from SEQUENCE to ALL
+In type {FacetsOwner0} modifying element: 
+	old: <B4>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B4>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from SEQUENCE to ALL
+In type {FacetsOwner1} modifying element: 
+	old: <C1>{anyType}{0..1} in type {FacetsOwner1}
+	new: <C1>{anyType}{1..1} in type {FacetsOwner1}
+		Restricted cardinality from 0..1 to 1..1
+In type {FacetsOwner1} modifying element: 
+	old: <C2>{anyType}{1..*} in type {FacetsOwner1}
+	new: <C2>{anyType}{0..1} in type {FacetsOwner1}
+		Restricted cardinality from 1..* to 0..1
+In type {FacetsOwner1} modifying element: 
+	old: <C3>{anyType}{0..*} in type {FacetsOwner1}
+	new: <C3>{anyType}{1..*} in type {FacetsOwner1}
+		Restricted cardinality from 0..* to 1..*
+In type {FacetsOwner2} modifying element: 
+	old: <D2>{anyType}{0..*} in type {FacetsOwner2}
+	new: <D2>{anyType}{0..1} in type {FacetsOwner2}
+		Restricted cardinality from 0..* to 0..1
+In type {FacetsOwner2} modifying element: 
+	old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed totalDigits from 52 to 42
+In type {FacetsOwner2} modifying element: 
+	old: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed fractionDigits from 22 to 12
+In type {FacetsOwner2} modifying element: 
+	old: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed whitespace from preserve to replace
+In type {FacetsOwner2} modifying element: 
+	old: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxInclusive from 121 to 120
+In type {FacetsOwner2} modifying element: 
+	old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Narrowed enumeration from [VW, Porsche, Lamborghini] to [Audi, Golf, BMW]
+In type {FacetsOwner2} modifying element: 
+	old: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Narrowed enumeration from [Audi, Golf, BMW, Porsche] to [Audi, Golf]
+In type {FacetsOwner2} modifying element: 
+	old: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed pattern from ([a-z][A-Z])+ to [a-z]
+In type {FacetsOwner2} modifying element: 
+	old: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxLength from 18 to 8
+In type {FacetsOwner2} modifying element: 
+	old: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+	new: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2}
+		Changed maxExclusive from 242 to 121

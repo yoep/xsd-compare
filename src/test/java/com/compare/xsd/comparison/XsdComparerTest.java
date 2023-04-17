@@ -82,9 +82,13 @@ public class XsdComparerTest {
         String simpleAnonymous2 = XSD_DIR + "simple_anonymous2.xsd";
         String facets1 = XSD_DIR + "facets1.xsd";
         String facets2 = XSD_DIR + "facets2.xsd";
+        String fixedValueVariant1 = XSD_DIR + "fixedValueVariant1.xsd";
+        String fixedValueVariant2 = XSD_DIR + "fixedValueVariant2.xsd";
         Boolean compareCorrect = Boolean.TRUE;
         // compareCorrect &= compareTwoXsdGrammars(facets1, facets2, TextReport.implementation.ONLY_EXTENSIONS);
         // compareTwoXsdGrammars(facets1, facets2, TextReport.implementation.MULTI_LINE_CHANGE);
+        //compareTwoXsdGrammars(fixedValueVariant1, fixedValueVariant2, TextReport.implementation.MULTI_LINE_CHANGE);
+
         for(TextReport.implementation reportType : TextReport.implementation.values()){
             compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, CII_D22B_XSD, reportType);
 
@@ -102,6 +106,9 @@ public class XsdComparerTest {
 
             compareCorrect &= compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
             compareCorrect &= compareTwoXsdGrammars(facets1, facets2, reportType);
+            compareCorrect &= compareTwoXsdGrammars(facets2, facets1, reportType);
+            compareCorrect &= compareTwoXsdGrammars(fixedValueVariant1, fixedValueVariant2, reportType);
+            compareCorrect &= compareTwoXsdGrammars(fixedValueVariant2, fixedValueVariant1, reportType);
         }
 
         assertTrue(compareCorrect,"\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + "\n\t\tto" + "\n\t" + REFERENCES_DIR);

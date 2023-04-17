@@ -1,0 +1,25 @@
+/MyRootElement/A1 modifying element: old: <A1>{anyType}{1..1} in type {ChoiceSequenceChange}new: <A1>{anyType}{0..1} in type {ChoiceSequenceChange} changed cardinality from 1..1 to 0..1 changed compositor from SEQUENCE to CHOICE
+/MyRootElement/A2 modifying element: old: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A2>{anyType}{0..1} in type {ChoiceSequenceChange} changed compositor from SEQUENCE to CHOICE
+/MyRootElement/A3 modifying element: old: <A3>{anyType}{1..1} in type {ChoiceSequenceChange}new: <A3>{anyType}{0..1} in type {ChoiceSequenceChange} changed cardinality from 1..1 to 0..1 changed compositor from SEQUENCE to CHOICE
+/MyRootElement/A4 modifying element: old: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A4>{anyType}{0..1} in type {ChoiceSequenceChange} changed compositor from SEQUENCE to CHOICE
+/MyRootElement0/B1 modifying element: old: <B1>{anyType}{1..1} in type {FacetsOwner0}new: <B1>{anyType}{1..1} in type {FacetsOwner0} changed compositor from SEQUENCE to ALL
+/MyRootElement0/B2 modifying element: old: <B2>{anyType}{0..1} in type {FacetsOwner0}new: <B2>{anyType}{0..1} in type {FacetsOwner0} changed compositor from SEQUENCE to ALL
+/MyRootElement0/B3 modifying element: old: <B3>{anyType}{1..1} in type {FacetsOwner0}new: <B3>{anyType}{1..1} in type {FacetsOwner0} changed compositor from SEQUENCE to ALL
+/MyRootElement0/B4 modifying element: old: <B4>{anyType}{0..1} in type {FacetsOwner0}new: <B4>{anyType}{0..1} in type {FacetsOwner0} changed compositor from SEQUENCE to ALL
+/MyRootElement1/C1 modifying element: old: <C1>{anyType}{0..1} in type {FacetsOwner1}new: <C1>{anyType}{1..1} in type {FacetsOwner1} changed cardinality from 0..1 to 1..1
+/MyRootElement1/C2 modifying element: old: <C2>{anyType}{1..*} in type {FacetsOwner1}new: <C2>{anyType}{0..1} in type {FacetsOwner1} changed cardinality from 1..* to 0..1
+/MyRootElement1/C3 modifying element: old: <C3>{anyType}{0..*} in type {FacetsOwner1}new: <C3>{anyType}{1..*} in type {FacetsOwner1} changed cardinality from 0..* to 1..*
+/MyRootElement1/C4 modifying element: old: <C4>{anyType}{1..1} in type {FacetsOwner1}new: <C4>{anyType}{0..*} in type {FacetsOwner1} changed cardinality from 1..1 to 0..*
+/MyRootElement2/D2 modifying element: old: <D2>{anyType}{0..*} in type {FacetsOwner2}new: <D2>{anyType}{0..1} in type {FacetsOwner2} changed cardinality from 0..* to 0..1
+/MyRootElement2/D4 modifying element: old: <D4>{anyType}{0..1} in type {FacetsOwner2}new: <D4>{anyType}{0..*} in type {FacetsOwner2} changed cardinality from 0..1 to 0..*
+/MyRootElement2/Pi1 modifying element: old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed totalDigits from 52 to 42
+/MyRootElement2/Pi2 modifying element: old: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed fractionDigits from 22 to 12
+/MyRootElement2/address modifying element: old: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed whitespace from preserve to replace
+/MyRootElement2/age modifying element: old: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <age>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed maxLengthInclusive from 121 to 120 changed minLengthInclusive from 1 to 0
+/MyRootElement2/car modifying element: old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}changed enumeration from [VW, Porsche, Lamborghini] to [Audi, Golf, BMW]
+/MyRootElement2/carGettingBigger modifying element: old: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}changed enumeration from [Audi, Golf, BMW, Porsche] to [Audi, Golf]
+/MyRootElement2/carGettingSmaller modifying element: old: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}changed enumeration from [Audi, Golf] to [Audi, Golf, BMW, Porsche]
+/MyRootElement2/letter modifying element: old: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed pattern from ([a-z][A-Z])+ to [a-z]
+/MyRootElement2/password1 modifying element: old: <password1>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <password1>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed length from 18 to 8
+/MyRootElement2/password2 modifying element: old: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <password2>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed maxLength from 18 to 8 changed minLength from 15 to 5
+/MyRootElement2/sometime modifying element: old: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <sometime>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed maxLengthExclusive from 242 to 121 changed minLengthExclusive from 2 to 1

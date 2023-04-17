@@ -496,18 +496,9 @@ public class XsdComparer {
     }
 
     private boolean testEnumerationChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = false;
-        if(oldNode instanceof XsdAttribute){
-            change = ((((XsdAttribute) oldNode).getFixedDefaultValue() != null) && ((XsdAttribute) oldNode).getFixedDefaultValue().equals(((XsdAttribute) newNode).getFixedDefaultValue()));
-        }else{
-            change = (isChanged(oldNode.getEnumeration(), newNode.getEnumeration()) ||
+        boolean change = (isChanged(oldNode.getEnumeration(), newNode.getEnumeration()) ||
                     isValueDifferent(oldNode.getEnumeration(), newNode.getEnumeration()));
-        }
         if(change){
-            if(oldNode instanceof XsdAttribute){
-                change = (((XsdAttribute) oldNode).getFixedDefaultValue()).equals(((XsdAttribute) newNode).getFixedDefaultValue());
-                modification.setFixedDefaultChanged(true);
-            }
             modification.setEnumerationChanged(true);
         }
         return change;

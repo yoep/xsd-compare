@@ -63,11 +63,11 @@ In type {FacetsOwner2} modifying element:
 In type {FacetsOwner2} modifying element: 
 	old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
-		Restricted enumeration from [Audi, Golf, BMW] to [VW, Porsche, Lamborghini]
+		Narrowed enumeration from [Audi, Golf, BMW] to [VW, Porsche, Lamborghini]
 In type {FacetsOwner2} modifying element: 
 	old: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}
-		Restricted enumeration from [Audi, Golf, BMW, Porsche] to [Audi, Golf]
+		Narrowed enumeration from [Audi, Golf, BMW, Porsche] to [Audi, Golf]
 In type {FacetsOwner2} modifying element: 
 	old: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}

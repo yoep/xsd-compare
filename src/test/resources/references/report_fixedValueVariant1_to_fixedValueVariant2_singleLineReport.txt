@@ -1,0 +1,4 @@
+/OperationalCategoryCode/@listAgencyID modifying attribute: old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
+/OperationalCategoryCode/@listID removed @listID {token}{0..1} in type {CargoOperationalCategoryCodeType}
+/OperationalCategoryCode/@listVersionID removed @listVersionID {token}{0..1} in type {CargoOperationalCategoryCodeType}
+/OperationalCategoryCode/@name removed @name {string}{0..1} in type {CargoOperationalCategoryCodeType}

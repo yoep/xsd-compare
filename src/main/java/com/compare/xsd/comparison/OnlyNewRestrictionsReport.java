@@ -148,9 +148,26 @@ public class OnlyNewRestrictionsReport implements TextReport {
             }
             if (c.isEnumerationChanged()) {
                 ArrayList<String> oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
+                boolean wasFixedDefaultByEnumeration = oldEnumerationList.size() == 1;
                 oldEnumerationList.removeAll(c.newNode.getEnumeration());
-                if(oldEnumerationList.size() > 0){
-                    getModificationStringBuilder().append("\n\t\tRestricted enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
+                // an enumeration is a restriction of the set of strings
+                // either enumeration old list was longer or did not exist at all
+                if(oldEnumerationList.size() > 0 || (c.oldNode.getEnumeration() == null || c.oldNode.getEnumeration().size() == 0)){
+                    if(oldEnumerationList.size() > 0){
+                        getModificationStringBuilder().append("\n\t\tNarrowed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
+                    }else{
+                        getModificationStringBuilder().append("\n\t\tNew restriction by enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
+                    }
+                    if(wasFixedDefaultByEnumeration){ // if was a single neumeration (old)
+                        if (c.newNode.getFixedValue() != null && c.newNode.getFixedValue().equals(oldEnumerationList.get(0))) {
+                            getModificationStringBuilder().append(" (no semantic change, as removed single enumeration value still exists as fixed default: " + c.newNode.getFixedValue() + ")");
+                        }
+                    }else{
+                        ArrayList<String> newEnumerationList = new ArrayList<>(c.newNode.getEnumeration());
+                        if (c.oldNode.getFixedValue() != null && newEnumerationList.size() == 1 && c.oldNode.getFixedValue().equals(newEnumerationList.get(0))) {
+                            getModificationStringBuilder().append(" (no semantic change, as new single enumeration value existed as previous fixed default: " + c.newNode.getFixedValue() + ")");
+                        }
+                    }
                 }
             }
             if (c.isWhitespaceChanged()) {

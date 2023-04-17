@@ -2818,6 +2818,7 @@ Modifying attribute:
 		Changed type namespace from urn:un:unece:uncefact:data:standard:QualifiedDataType:100 to urn:un:unece:uncefact:codelist:standard:UNECE:TimePointFormatCode:D21B
 		Changed type from FormattedDateTimeFormatContentType to TimePointFormatCodeContentType
 		Changed cardinality from 1..1 to 0..1
+		Changed enumeration from [] to [102, 203, 205, 209, 502, 602]
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument/FormattedIssueDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/FormattedIssueDateTime/DateTimeString/@format
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/ContractReferencedDocument/FormattedIssueDateTime/DateTimeString/@format

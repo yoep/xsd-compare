@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="OperationalCategoryCode" type="CargoOperationalCategoryCodeType"/>
+
+	<!-- D22B  -->
+	<xs:simpleType name="CargoOperationalCategoryCodeListAgencyIDContentType">
+		<xs:restriction base="xs:token">
+		  <xs:enumeration value="6"/>
+		</xs:restriction>
+	  </xs:simpleType>
+	  <xs:complexType name="CargoOperationalCategoryCodeType">
+		<xs:simpleContent>
+		  <xs:extension base="CargoOperationalCategoryCodeContentType">
+			<xs:attribute name="listAgencyID" type="CargoOperationalCategoryCodeListAgencyIDContentType" fixed="6"/>
+		  </xs:extension>
+		</xs:simpleContent>
+	  </xs:complexType>  
+
+	  <xs:simpleType name="CargoOperationalCategoryCodeContentType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+		</xs:restriction>
+	</xs:simpleType>	  	
+</xs:schema>

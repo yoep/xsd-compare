@@ -1,0 +1,47 @@
+**** XSD COMPARISON ****
+	 old grammar: fixedValueVariant1.xsd
+	 new grammar: fixedValueVariant2.xsd
+
+
+Modifying attribute: 
+	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+		Changed enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
+				at /OperationalCategoryCode/@listAgencyID
+
+Removed attribute @listID {token}{0..1} in type {CargoOperationalCategoryCodeType}
+	in OperationalCategoryCode at /OperationalCategoryCode/@listID
+
+Removed attribute @listVersionID {token}{0..1} in type {CargoOperationalCategoryCodeType}
+	in OperationalCategoryCode at /OperationalCategoryCode/@listVersionID
+
+Removed attribute @name {string}{0..1} in type {CargoOperationalCategoryCodeType}
+	in OperationalCategoryCode at /OperationalCategoryCode/@name
+
+
+
+**** STATISTIC ****
+
+
+ELEMENTS:
+
+	Added elements in XSD:	0
+	Added elements in XML:	0
+
+	Modified elements in XSD:	0
+	Modified elements in XML:	0
+
+	Removed elements from XSD:	0
+	Removed elements from XML:	0
+
+
+ATTRIBUTES:
+
+	Added attributes in XSD:	0
+	Added attributes in XML:	0
+
+	Modified attributes in XSD:	1
+	Modified attributes in XML:	1
+
+	Removed attributes from XSD:	3
+	Removed attributes from XML:	3

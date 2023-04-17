@@ -210,7 +210,26 @@ public class MultiLineChangeTextReport implements TextReport {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged fractionDigits from " + c.oldNode.getFractionDigits() + " to " + c.newNode.getFractionDigits()));
             }
             if (c.isEnumerationChanged()) {
-                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration()));
+                c.setReportHeader(c.getReportHeader() + "\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
+                ArrayList<String> newEnumerationList = new ArrayList<>(c.newNode.getEnumeration());
+                boolean isFixedDefaultByEnumeration = newEnumerationList.size() == 1;
+                newEnumerationList.removeAll(c.oldNode.getEnumeration());
+                if(newEnumerationList.size() > 0){
+                    if(isFixedDefaultByEnumeration) {// if single enumeration (new)
+                        if (c.oldNode.getFixedValue() != null && c.oldNode.getFixedValue().equals(newEnumerationList.get(0))) {
+                            c.setReportHeader(c.getReportHeader() + (" (no semantic change, as new single enumeration value existed as previous fixed default: " + c.newNode.getFixedValue() + ")"));
+                        }
+                    }
+                }else{
+                    ArrayList<String> oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
+                    boolean wasFixedDefaultByEnumeration = oldEnumerationList.size() == 1;
+                    oldEnumerationList.removeAll(c.newNode.getEnumeration());
+                    if(wasFixedDefaultByEnumeration){ // if was a single neumeration (old)
+                        if (c.newNode.getFixedValue() != null && c.newNode.getFixedValue().equals(oldEnumerationList.get(0))) {
+                            c.setReportHeader(c.getReportHeader() + (" (no semantic change, as removed single enumeration value still exists as fixed default: " + c.newNode.getFixedValue() + ")"));
+                        }
+                    }
+                }
             }
             if (c.isWhitespaceChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));

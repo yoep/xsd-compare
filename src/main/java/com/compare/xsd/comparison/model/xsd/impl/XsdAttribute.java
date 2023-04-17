@@ -59,7 +59,8 @@ public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
      * NOTE: It might as well be defined via the xs:enumeration of a simple type */
     public String getFixedValue(){
         if(hasFixedDefault()){
-            return getDefaultValue();
+            fixedValue = getDefaultValue();
+            return fixedValue;
         }else{
             return null;
         }
@@ -72,7 +73,7 @@ public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
             fixedDefaultValue = enumeration.get(0);
         }
         if(this.getFixedValue() != null && fixedDefaultValue != null){
-            Assert.isTrue(fixedDefaultValue.equals(this.getFixedValue()), "Simple Node");
+            Assert.isTrue(fixedDefaultValue.equals(this.getFixedValue()), "Fixed default value by single enumeration and @fixed attribute must be the same!");
         }else if(fixedDefaultValue == null){
             fixedDefaultValue = this.getFixedValue();
         }

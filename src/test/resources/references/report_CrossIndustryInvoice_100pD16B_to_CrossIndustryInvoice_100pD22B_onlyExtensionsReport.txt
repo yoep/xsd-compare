@@ -1,55 +1,4 @@
-In type {AccountingAccountTypeCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {AccountingAccountTypeCodeType}
-		Changed fixed default from 210 to 210
-In type {AccountingAmountTypeCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {AccountingAmountTypeCodeType}
-		Changed fixed default from 210 to 210
-In type {AccountingDocumentCodeType} modifying attribute: 
-	old: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
-	new: @listAgencyID{AccountingDocumentCodeListAgencyIDContentType}{0..1} in type {AccountingDocumentCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {AdjustmentReasonCodeType} modifying attribute: 
-	old: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
-	new: @listAgencyID{AdjustmentReasonCodeListAgencyIDContentType}{0..1} in type {AdjustmentReasonCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {AdvancePaymentType} added <InvoiceSpecifiedReferencedDocument> {ReferencedDocumentType}{0..*} 
-In type {AllowanceChargeIdentificationCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
-	new: @listAgencyID{token}{0..1} in type {AllowanceChargeIdentificationCodeType}
-		Changed fixed default from 6 to 6
-In type {AllowanceChargeReasonCodeType} modifying attribute: 
-	old: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
-	new: @listAgencyID{AllowanceChargeReasonCodeListAgencyIDContentType}{0..1} in type {AllowanceChargeReasonCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {AutomaticDataCaptureMethodCodeType} modifying attribute: 
-	old: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
-	new: @listAgencyID{AutomaticDataCaptureMethodCodeListAgencyIDContentType}{0..1} in type {AutomaticDataCaptureMethodCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {CargoCategoryCodeType} modifying attribute: 
-	old: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
-	new: @listAgencyID{CargoCategoryCodeListAgencyIDContentType}{0..1} in type {CargoCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {CargoCommodityCategoryCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
-	new: @listAgencyID{token}{0..1} in type {CargoCommodityCategoryCodeType}
-		Changed fixed default from 6 to 6
-In type {CargoOperationalCategoryCodeType} modifying attribute: 
-	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
-	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {ChargePayingPartyRoleCodeType} modifying attribute: 
-	old: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
-	new: @listAgencyID{ChargePayingPartyRoleCodeListAgencyIDContentType}{0..1} in type {ChargePayingPartyRoleCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {CodeType} added @languageID {token}{0..1} 
 In type {CodeType} added @listAgencyName {string}{0..1} 
 In type {CodeType} added @listName {string}{0..1} 
@@ -63,48 +12,13 @@ In type {CodeType} modifying attribute:
 	old: @listID{token}{0..1} in type {TransportEquipmentSizeTypeCodeType}
 	new: @listID{token}{0..1} in type {CodeType}
 		Changed fixed default from 8155 to null
-In type {CommunicationChannelCodeType} modifying attribute: 
-	old: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
-	new: @listAgencyID{CommunicationChannelCodeListAgencyIDContentType}{0..1} in type {CommunicationChannelCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {ContactTypeCodeType} modifying attribute: 
-	old: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
-	new: @listAgencyID{ContactTypeCodeListAgencyIDContentType}{0..1} in type {ContactTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {CurrencyCodeType} modifying attribute: 
-	old: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
-	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
-		Changed fixed default from 5 to 5
-		Extended enumeration from [] to [5]
 In type {DateOnlyFormattedDateTimeType} modifying element: 
 	old: <DateTimeString>{DateTimeType}{0..1} in type {DateTimeType}
 	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
 		Changed compositor from CHOICE to SEQUENCE
-In type {DeliveryTermsCodeType} modifying attribute: 
-	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
-	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {DimensionTypeCodeType} modifying attribute: 
-	old: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
-	new: @listAgencyID{DimensionTypeCodeListAgencyIDContentType}{0..1} in type {DimensionTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {DocumentCodeType} modifying attribute: 
-	old: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
-	new: @listAgencyID{DocumentCodeListAgencyIDContentType}{0..1} in type {DocumentCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {DocumentLineDocumentType} added <CategoryCode> {CodeType}{0..1} 
 In type {DocumentLineDocumentType} added <ReferenceReferencedDocument> {ReferencedDocumentType}{0..*} 
 In type {DocumentLineDocumentType} added <ResponseReasonCode> {CodeType}{0..1} 
-In type {DocumentStatusCodeType} modifying attribute: 
-	old: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
-	new: @listAgencyID{DocumentStatusCodeListAgencyIDContentType}{0..1} in type {DocumentStatusCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {ExchangedDocumentContextType} added <UserSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
 In type {ExchangedDocumentType} added <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} 
 In type {ExchangedDocumentType} added <CreationDateTime> {FormattedDateTimeType}{0..1} 
@@ -119,29 +33,11 @@ In type {ExchangedDocumentType} modifying element:
 		Extended cardinality from 1..1 to 0..1
 In type {FinancialAdjustmentType} added <DirectionCode> {AccountingDebitCreditStatusCodeType}{0..1} 
 In type {FinancialAdjustmentType} added <RelatedTradeTax> {TradeTaxType}{0..*} 
-In type {FreightChargeTariffClassCodeType} modifying attribute: 
-	old: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
-	new: @listAgencyID{FreightChargeTariffClassCodeListAgencyIDContentType}{0..1} in type {FreightChargeTariffClassCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {GoodsTypeCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {GoodsTypeCodeType}
-		Changed fixed default from 6 to 6
-In type {GoodsTypeExtensionCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
-	new: @listAgencyID{token}{0..1} in type {GoodsTypeExtensionCodeType}
-		Changed fixed default from 6 to 6
 In type {HeaderTradeAgreementType} added <PricingBaseApplicableLogisticsLocation> {LogisticsLocationType}{0..1} 
 In type {HeaderTradeSettlementType} modifying element: 
 	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
 	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
 		Extended cardinality from 0..1 to 0..*
-In type {LineStatusCodeType} modifying attribute: 
-	old: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
-	new: @listAgencyID{LineStatusCodeListAgencyIDContentType}{0..1} in type {LineStatusCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {LineTradeSettlementType} added <InvoiceDateTime> {DateTimeType}{0..1} 
 In type {LineTradeSettlementType} modifying element: 
 	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {LineTradeSettlementType}
@@ -151,10 +47,6 @@ In type {LocationFunctionCodeType} modifying attribute:
 	old: @listAgencyID{token}{0..1} in type {CodeType}
 	new: @listAgencyID{LocationFunctionCodeListAgencyIDContentType}{0..1} in type {LocationFunctionCodeType}
 		Changed fixed default from null to 6
-In type {LogisticsChargeCalculationBasisCodeType} modifying attribute: 
-	old: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
-	new: @listAgencyID{token}{0..1} in type {LogisticsChargeCalculationBasisCodeType}
-		Changed fixed default from 6 to 6
 In type {LogisticsLocationType} added <CountryID> {CountryIDType}{0..1} 
 In type {LogisticsLocationType} added <CountrySubDivisionID> {IDType}{0..1} 
 In type {LogisticsLocationType} added <SubordinateLocation> {SubordinateLocationType}{0..1} 
@@ -170,64 +62,10 @@ In type {LogisticsTransportMovementType} added <Service> {TextType}{0..1}
 In type {LogisticsTransportMovementType} added <ServiceCode> {CodeType}{0..1} 
 In type {LogisticsTransportMovementType} added <StatusCode> {StatusCodeType}{0..1} 
 In type {LogisticsTransportMovementType} added <Type> {TextType}{0..1} 
-In type {MessageFunctionCodeType} modifying attribute: 
-	old: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
-	new: @listAgencyID{MessageFunctionCodeListAgencyIDContentType}{0..1} in type {MessageFunctionCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {NoteType} modifying element: 
 	old: <SubjectCode>{CodeType}{0..1} in type {NoteType}
 	new: <SubjectCode>{CodeType}{0..*} in type {NoteType}
 		Extended cardinality from 0..1 to 0..*
-In type {PackageTypeCodeType} modifying attribute: 
-	old: @listAgencyID{PackageTypeCodeListAgencyIDContentType}{0..1} in type {PackageTypeCodeType}
-	new: @listAgencyID{token}{0..1} in type {PackageTypeCodeType}
-		Changed fixed default from 6 to 6
-In type {PackagingMarkingCodeType} modifying attribute: 
-	old: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
-	new: @listAgencyID{PackagingMarkingCodeListAgencyIDContentType}{0..1} in type {PackagingMarkingCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PartyRoleCodeType} modifying attribute: 
-	old: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
-	new: @listAgencyID{PartyRoleCodeListAgencyIDContentType}{0..1} in type {PartyRoleCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PaymentGuaranteeMeansCodeType} modifying attribute: 
-	old: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
-	new: @listAgencyID{PaymentGuaranteeMeansCodeListAgencyIDContentType}{0..1} in type {PaymentGuaranteeMeansCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PaymentMeansChannelCodeType} modifying attribute: 
-	old: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
-	new: @listAgencyID{PaymentMeansChannelCodeListAgencyIDContentType}{0..1} in type {PaymentMeansChannelCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PaymentMeansCodeType} modifying attribute: 
-	old: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
-	new: @listAgencyID{PaymentMeansCodeListAgencyIDContentType}{0..1} in type {PaymentMeansCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PaymentTermsEventTimeReferenceCodeType} modifying attribute: 
-	old: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
-	new: @listAgencyID{PaymentTermsEventTimeReferenceCodeListAgencyIDContentType}{0..1} in type {PaymentTermsEventTimeReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PaymentTermsTypeCodeType} modifying attribute: 
-	old: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
-	new: @listAgencyID{PaymentTermsTypeCodeListAgencyIDContentType}{0..1} in type {PaymentTermsTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {PriceTypeCodeType} modifying attribute: 
-	old: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
-	new: @listAgencyID{PriceTypeCodeListAgencyIDContentType}{0..1} in type {PriceTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {ReferenceCodeType} modifying attribute: 
-	old: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
-	new: @listAgencyID{ReferenceCodeListAgencyIDContentType}{0..1} in type {ReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {ReferencedDocumentType} added <CategoryCode> {CodeType}{0..1} 
 In type {ReferencedDocumentType} added <IncludedNote> {NoteType}{0..*} 
 In type {ReferencedDocumentType} added <PageID> {IDType}{0..1} 
@@ -269,22 +107,7 @@ In type {SupplyChainTradeLineItemType} modifying element:
 	old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType}
 	new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType}
 		Extended cardinality from 1..1 to 0..1
-In type {TaxCategoryCodeType} modifying attribute: 
-	old: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
-	new: @listAgencyID{TaxCategoryCodeListAgencyIDContentType}{0..1} in type {TaxCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {TaxRegistrationType} added <IOSSID> {IDType}{0..1} 
-In type {TaxTypeCodeType} modifying attribute: 
-	old: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
-	new: @listAgencyID{TaxTypeCodeListAgencyIDContentType}{0..1} in type {TaxTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {TimeReferenceCodeType} modifying attribute: 
-	old: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
-	new: @listAgencyID{TimeReferenceCodeListAgencyIDContentType}{0..1} in type {TimeReferenceCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {TradeAddressType} added <CityID> {IDType}{0..1} 
 In type {TradeAddressType} added <TypeCode> {AddressTypeCodeType}{0..*} 
 In type {TradeDeliveryTermsType} added <DeliveryDiscontinuationCode> {CodeType}{0..1} 
@@ -338,31 +161,6 @@ In type {TransportCargoType} modifying element:
 	old: <Identification>{TextType}{0..1} in type {TransportCargoType}
 	new: <Identification>{TextType}{0..*} in type {TransportCargoType}
 		Extended cardinality from 0..1 to 0..*
-In type {TransportEquipmentCategoryCodeType} modifying attribute: 
-	old: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
-	new: @listAgencyID{TransportEquipmentCategoryCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentCategoryCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {TransportEquipmentFullnessCodeType} modifying attribute: 
-	old: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
-	new: @listAgencyID{TransportEquipmentFullnessCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentFullnessCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {TransportMeansTypeCodeType} modifying attribute: 
-	old: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
-	new: @listAgencyID{TransportMeansTypeCodeListAgencyIDContentType}{0..1} in type {TransportMeansTypeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {TransportModeCodeType} modifying attribute: 
-	old: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
-	new: @listAgencyID{TransportModeCodeListAgencyIDContentType}{0..1} in type {TransportModeCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
-In type {TransportMovementStageCodeType} modifying attribute: 
-	old: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
-	new: @listAgencyID{TransportMovementStageCodeListAgencyIDContentType}{0..1} in type {TransportMovementStageCodeType}
-		Changed fixed default from 6 to 6
-		Extended enumeration from [] to [6]
 In type {TransportServicePaymentArrangementCodeType} modifying attribute: 
 	old: @listAgencyID{token}{0..1} in type {CodeType}
 	new: @listAgencyID{TransportServicePaymentArrangementCodeListAgencyIDContentType}{0..1} in type {TransportServicePaymentArrangementCodeType}

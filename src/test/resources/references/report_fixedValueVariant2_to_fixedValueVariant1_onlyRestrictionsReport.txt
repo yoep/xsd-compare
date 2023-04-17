@@ -1,0 +1,4 @@
+In type {CargoOperationalCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+		Narrowed enumeration from [6] to [] (no semantic change, as removed single enumeration value still exists as fixed default: 6)

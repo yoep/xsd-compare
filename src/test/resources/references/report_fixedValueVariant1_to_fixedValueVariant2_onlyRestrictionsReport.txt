@@ -1,0 +1,7 @@
+In type {CargoOperationalCategoryCodeType} modifying attribute: 
+	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
+		New restriction by enumeration from [] to [6] (no semantic change, as new single enumeration value existed as previous fixed default: 6)
+In type {CargoOperationalCategoryCodeType} removed @listID {token}{0..1}
+In type {CargoOperationalCategoryCodeType} removed @listVersionID {token}{0..1}
+In type {CargoOperationalCategoryCodeType} removed @name {string}{0..1}

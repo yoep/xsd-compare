@@ -1,0 +1,4 @@
+In type {FormattedDateTimeType} modifying attribute: 
+	old: @format{FormattedDateTimeFormatContentType}{1..1} in type {FormattedDateTimeType}
+	new: @format{TimePointFormatCodeContentType}{0..1} in type {FormattedDateTimeType}
+		New restriction by enumeration from [] to [102, 203, 205, 209, 502, 602]
