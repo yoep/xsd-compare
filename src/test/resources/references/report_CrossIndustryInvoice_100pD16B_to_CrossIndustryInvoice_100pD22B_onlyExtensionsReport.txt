@@ -78,6 +78,10 @@ In type {CurrencyCodeType} modifying attribute:
 	new: @listAgencyID{CurrencyCodeListAgencyIDContentType}{0..1} in type {CurrencyCodeType}
 		Changed fixed default from 5 to 5
 		Extended enumeration from [] to [5]
+In type {DateOnlyFormattedDateTimeType} modifying element: 
+	old: <DateTimeString>{DateTimeType}{0..1} in type {DateTimeType}
+	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
+		Changed compositor from CHOICE to SEQUENCE
 In type {DeliveryTermsCodeType} modifying attribute: 
 	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}
 	new: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}

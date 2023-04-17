@@ -2,6 +2,7 @@ package com.compare.xsd.comparison;
 
 import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.ChangeType;
+import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdAttribute;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import lombok.Data;
@@ -10,7 +11,6 @@ import java.util.*;
 
 @Data
 public class MultiLineChangeTextReport implements TextReport {
-
     private String reportHeader = "";
     private String reportFooter = null;
 
@@ -214,6 +214,9 @@ public class MultiLineChangeTextReport implements TextReport {
             }
             if (c.isWhitespaceChanged()) {
                 c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace()));
+            }
+            if (c.isCompositorChanged()) {
+                c.setReportHeader(c.getReportHeader() + ("\n\t\tChanged compositor from " + XsdNode.CompositorType.valueOf(c.oldNode.getCompositor())  + " to " + XsdNode.CompositorType.valueOf(c.newNode.getCompositor())));
             }
         } else if (c.type == ChangeType.REMOVED) {
             if (c.isElement) {

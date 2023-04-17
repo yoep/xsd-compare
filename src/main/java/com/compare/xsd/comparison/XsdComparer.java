@@ -343,6 +343,7 @@ public class XsdComparer {
             testMinExclusiveChange(oldNode, newNode, change);
             testTotalDigitsChange(oldNode, newNode, change);
             testFractionDigitsChange(oldNode, newNode, change);
+            testCompositorChange(oldNode, newNode, change);
 
             if (change.isModified() && !(newNode instanceof XsdDocument)) {
                 modified++;
@@ -406,7 +407,7 @@ public class XsdComparer {
     }
 
     private boolean testNameChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getName(), newNode.getName()) || isValueDifferent(oldNode.getName(), newNode.getName());
+        boolean change = isChanged(oldNode.getName(), newNode.getName()) || isValueDifferent(oldNode.getName(), newNode.getName());
         if(change){
             String item;
             if(oldNode instanceof XsdAttribute){
@@ -426,7 +427,7 @@ public class XsdComparer {
     }
 
     private boolean testTypeNamespaceChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getTypeNamespace(), newNode.getTypeNamespace()) ||
+        boolean change = isChanged(oldNode.getTypeNamespace(), newNode.getTypeNamespace()) ||
                 isValueDifferent(oldNode.getTypeNamespace(), newNode.getTypeNamespace());
         if(change){
             modification.setNamespaceChanged(true);
@@ -435,7 +436,7 @@ public class XsdComparer {
     }
 
     private boolean testTypeChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getTypeName(), newNode.getTypeName()) || isValueDifferent(oldNode.getTypeName(), newNode.getTypeName());
+        boolean change = isChanged(oldNode.getTypeName(), newNode.getTypeName()) || isValueDifferent(oldNode.getTypeName(), newNode.getTypeName());
         if(change){
             modification.setTypeChanged(true);
         }
@@ -443,7 +444,7 @@ public class XsdComparer {
     }
 
     private boolean testCardinalityChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getCardinality(), newNode.getCardinality()) ||
+        boolean change = isChanged(oldNode.getCardinality(), newNode.getCardinality()) ||
                 isValueDifferent(oldNode.getCardinality(), newNode.getCardinality());
         if(change){
             modification.setCardinalityChanged(true);
@@ -452,7 +453,7 @@ public class XsdComparer {
     }
 
     private boolean testFixedValueChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getFixedValue(), newNode.getFixedValue()) ||
+        boolean change = isChanged(oldNode.getFixedValue(), newNode.getFixedValue()) ||
                 isValueDifferent(oldNode.getFixedValue(), newNode.getFixedValue());
         if(change){
             modification.setFixedDefaultChanged(true);
@@ -461,7 +462,7 @@ public class XsdComparer {
     }
 
     private boolean testPatternChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getPattern(), newNode.getPattern()) || isValueDifferent(oldNode.getPattern(), newNode.getPattern());
+        boolean change = isChanged(oldNode.getPattern(), newNode.getPattern()) || isValueDifferent(oldNode.getPattern(), newNode.getPattern());
         if(change){
             modification.setPatternChanged(true);
         }
@@ -469,7 +470,7 @@ public class XsdComparer {
     }
 
     private boolean testMaxLengthChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMaxLength(), newNode.getMaxLength()) ||
+        boolean change = isChanged(oldNode.getMaxLength(), newNode.getMaxLength()) ||
                 isValueDifferent(oldNode.getMaxLength(), newNode.getMaxLength());
         if(change){
             modification.setMaxLengthChanged(true);
@@ -478,7 +479,7 @@ public class XsdComparer {
     }
 
     private boolean testMinLengthChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMinLength(), newNode.getMinLength()) ||
+        boolean change = isChanged(oldNode.getMinLength(), newNode.getMinLength()) ||
                 isValueDifferent(oldNode.getMinLength(), newNode.getMinLength());
         if(change){
             modification.setMinLengthChanged(true);
@@ -487,7 +488,7 @@ public class XsdComparer {
     }
 
     private boolean testLengthChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getLength(), newNode.getLength()) || isValueDifferent(oldNode.getLength(), newNode.getLength());
+        boolean change = isChanged(oldNode.getLength(), newNode.getLength()) || isValueDifferent(oldNode.getLength(), newNode.getLength());
         if(change){
             modification.setLengthChanged(true);
         }
@@ -499,7 +500,7 @@ public class XsdComparer {
         if(oldNode instanceof XsdAttribute){
             change = ((((XsdAttribute) oldNode).getFixedDefaultValue() != null) && ((XsdAttribute) oldNode).getFixedDefaultValue().equals(((XsdAttribute) newNode).getFixedDefaultValue()));
         }else{
-            change = (isPresenceDifferent(oldNode.getEnumeration(), newNode.getEnumeration()) ||
+            change = (isChanged(oldNode.getEnumeration(), newNode.getEnumeration()) ||
                     isValueDifferent(oldNode.getEnumeration(), newNode.getEnumeration()));
         }
         if(change){
@@ -514,7 +515,7 @@ public class XsdComparer {
 
 
     private boolean testWhitespaceChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getWhitespace(), newNode.getWhitespace()) ||
+        boolean change = isChanged(oldNode.getWhitespace(), newNode.getWhitespace()) ||
                 isValueDifferent(oldNode.getWhitespace(), newNode.getWhitespace());
         if(change){
             modification.setWhitespaceChanged(true);
@@ -523,7 +524,7 @@ public class XsdComparer {
     }
 
     private boolean testMaxInclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMaxInclusive(), newNode.getMaxInclusive()) ||
+        boolean change = isChanged(oldNode.getMaxInclusive(), newNode.getMaxInclusive()) ||
                 isValueDifferent(oldNode.getMaxInclusive(), newNode.getMaxInclusive());
         if(change){
             modification.setMaxInclusiveChanged(true);
@@ -532,7 +533,7 @@ public class XsdComparer {
     }
 
     private boolean testMaxExclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMaxExclusive(), newNode.getMaxExclusive()) ||
+        boolean change = isChanged(oldNode.getMaxExclusive(), newNode.getMaxExclusive()) ||
                 isValueDifferent(oldNode.getMaxExclusive(), newNode.getMaxExclusive());
         if(change){
             modification.setMaxExclusiveChanged(true);
@@ -541,7 +542,7 @@ public class XsdComparer {
     }
 
     private boolean testMinInclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMinInclusive(), newNode.getMinInclusive()) ||
+        boolean change = isChanged(oldNode.getMinInclusive(), newNode.getMinInclusive()) ||
                 isValueDifferent(oldNode.getMinInclusive(), newNode.getMinInclusive());
         if(change){
             modification.setMinInclusiveChanged(true);
@@ -550,7 +551,7 @@ public class XsdComparer {
     }
 
     private boolean testMinExclusiveChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getMinExclusive(), newNode.getMinExclusive()) ||
+        boolean change = isChanged(oldNode.getMinExclusive(), newNode.getMinExclusive()) ||
                 isValueDifferent(oldNode.getMinExclusive(), newNode.getMinExclusive());
         if(change){
             modification.setMinExclusiveChanged(true);
@@ -559,7 +560,7 @@ public class XsdComparer {
     }
 
     private boolean testTotalDigitsChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getTotalDigits(), newNode.getTotalDigits()) ||
+        boolean change = isChanged(oldNode.getTotalDigits(), newNode.getTotalDigits()) ||
                 isValueDifferent(oldNode.getTotalDigits(), newNode.getTotalDigits());
         if(change){
             modification.setTotalDigitsChanged(true);
@@ -568,7 +569,7 @@ public class XsdComparer {
     }
 
     private boolean testFractionDigitsChange(XsdNode oldNode, XsdNode newNode, Change modification) {
-        boolean change = isPresenceDifferent(oldNode.getFractionDigits(), newNode.getFractionDigits()) ||
+        boolean change = isChanged(oldNode.getFractionDigits(), newNode.getFractionDigits()) ||
                 isValueDifferent(oldNode.getFractionDigits(), newNode.getFractionDigits());
         if(change){
             modification.setFractionDigitsChanged(true);
@@ -595,7 +596,15 @@ public class XsdComparer {
     }
     */
 
-    private boolean isPresenceDifferent(Object oldNode, Object newNode) {
+    private boolean testCompositorChange(XsdNode oldNode, XsdNode newNode, Change modification) {
+        boolean isChanged = isChanged(oldNode.getCompositor(), newNode.getCompositor()) ||
+                isValueDifferent(oldNode.getCompositor(), newNode.getCompositor());
+        if(isChanged){
+            modification.setCompositorChanged(true);
+        }
+        return isChanged;
+    }
+    private boolean isChanged(Object oldNode, Object newNode) {
         if((oldNode != null && newNode == null) ){
             log.debug(":No longer existent: ");
         }else if(oldNode == null && newNode != null){

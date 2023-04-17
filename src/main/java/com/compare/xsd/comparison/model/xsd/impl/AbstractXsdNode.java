@@ -61,6 +61,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected Integer maxExclusive;
     protected Integer totalDigits;
     protected Integer fractionDigits;
+    protected short compositor;
     protected List<String> enumeration = new ArrayList<>();
 
     protected AbstractXsdNode parent;
@@ -155,6 +156,7 @@ public abstract class AbstractXsdNode implements XsdNode {
             return name;
         }
     }
+
     /**
      * Get the XML value for this node.
      *

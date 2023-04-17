@@ -3,9 +3,43 @@ package com.compare.xsd.comparison.model.xsd;
 import com.compare.xsd.comparison.model.Change;
 import javafx.scene.image.Image;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface XsdNode {
+
+    public enum CompositorType {
+        SEQUENCE(1),
+        CHOICE(2),
+        ALL(3);
+
+        private int compositorType;
+
+        private int value;
+        private static Map map;
+
+        private CompositorType(int value) {
+            this.value = value;
+        }
+
+        static {
+            map = new HashMap<>();
+            for (CompositorType compositorType : CompositorType.values()) {
+                map.put(compositorType.value, compositorType);
+            }
+        }
+
+        public static CompositorType valueOf(int compositorType) {
+            return (CompositorType) map.get(compositorType);
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+
     /**
      * Get the name of the node.
      *
@@ -131,6 +165,17 @@ public interface XsdNode {
      * @return Returns the maximum length of the node or null.
      */
     Integer getMaxLength();
+
+    /**
+     * Get the compositor the node.
+     * of Xerces interface XSModelGroup
+     *     short COMPOSITOR_SEQUENCE = 1;
+     *     short COMPOSITOR_CHOICE = 2;
+     *     short COMPOSITOR_ALL = 3;
+     *
+     * @return Returns the compositor of the node.
+     */
+    short getCompositor();
 
     /**
      * Get the icon of the node.

@@ -4735,6 +4735,7 @@ Modifying element:
 	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
 		Changed type namespace from urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100 to urn:un:unece:uncefact:data:standard:QualifiedDataType:100
 		Changed cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementPaymentMeans/ApplicableTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString
 				at /CrossIndustryInvoice/SupplyChainTradeTransaction/IncludedSupplyChainTradeLineItem/SpecifiedLineTradeSettlement/SpecifiedTradeSettlementFinancialCard/ValidFromDateTime/DateTimeString

@@ -7,49 +7,87 @@ Modifying element:
 	old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}
 	new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange}
 		Changed cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
 				at /MyRootElement/A1
 
 Modifying element: 
-	old: <A1>{anyType}{1..1} in type {FacetsOwner1}
-	new: <A1>{anyType}{0..1} in type {FacetsOwner1}
-		Changed cardinality from 1..1 to 0..1
-				at /MyRootElement1/A1
-
-Modifying element: 
-	old: <A2>{anyType}{0..1} in type {FacetsOwner1}
-	new: <A2>{anyType}{1..*} in type {FacetsOwner1}
-		Changed cardinality from 0..1 to 1..*
-				at /MyRootElement1/A2
-
-Modifying element: 
-	old: <A2>{anyType}{0..1} in type {FacetsOwner2}
-	new: <A2>{anyType}{0..*} in type {FacetsOwner2}
-		Changed cardinality from 0..1 to 0..*
-				at /MyRootElement2/A2
+	old: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from CHOICE to SEQUENCE
+				at /MyRootElement/A2
 
 Modifying element: 
 	old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}
 	new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange}
 		Changed cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
 				at /MyRootElement/A3
 
 Modifying element: 
-	old: <A3>{anyType}{1..*} in type {FacetsOwner1}
-	new: <A3>{anyType}{0..*} in type {FacetsOwner1}
+	old: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from CHOICE to SEQUENCE
+				at /MyRootElement/A4
+
+Modifying element: 
+	old: <B1>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B1>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+				at /MyRootElement0/B1
+
+Modifying element: 
+	old: <B2>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B2>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+				at /MyRootElement0/B2
+
+Modifying element: 
+	old: <B3>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B3>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+				at /MyRootElement0/B3
+
+Modifying element: 
+	old: <B4>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B4>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+				at /MyRootElement0/B4
+
+Modifying element: 
+	old: <C1>{anyType}{1..1} in type {FacetsOwner1}
+	new: <C1>{anyType}{0..1} in type {FacetsOwner1}
+		Changed cardinality from 1..1 to 0..1
+				at /MyRootElement1/C1
+
+Modifying element: 
+	old: <C2>{anyType}{0..1} in type {FacetsOwner1}
+	new: <C2>{anyType}{1..*} in type {FacetsOwner1}
+		Changed cardinality from 0..1 to 1..*
+				at /MyRootElement1/C2
+
+Modifying element: 
+	old: <C3>{anyType}{1..*} in type {FacetsOwner1}
+	new: <C3>{anyType}{0..*} in type {FacetsOwner1}
 		Changed cardinality from 1..* to 0..*
-				at /MyRootElement1/A3
+				at /MyRootElement1/C3
 
 Modifying element: 
-	old: <A4>{anyType}{0..*} in type {FacetsOwner1}
-	new: <A4>{anyType}{1..1} in type {FacetsOwner1}
+	old: <C4>{anyType}{0..*} in type {FacetsOwner1}
+	new: <C4>{anyType}{1..1} in type {FacetsOwner1}
 		Changed cardinality from 0..* to 1..1
-				at /MyRootElement1/A4
+				at /MyRootElement1/C4
 
 Modifying element: 
-	old: <A4>{anyType}{0..*} in type {FacetsOwner2}
-	new: <A4>{anyType}{0..1} in type {FacetsOwner2}
+	old: <D2>{anyType}{0..1} in type {FacetsOwner2}
+	new: <D2>{anyType}{0..*} in type {FacetsOwner2}
+		Changed cardinality from 0..1 to 0..*
+				at /MyRootElement2/D2
+
+Modifying element: 
+	old: <D4>{anyType}{0..*} in type {FacetsOwner2}
+	new: <D4>{anyType}{0..1} in type {FacetsOwner2}
 		Changed cardinality from 0..* to 0..1
-				at /MyRootElement2/A4
+				at /MyRootElement2/D4
 
 Modifying element: 
 	old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}
@@ -130,8 +168,8 @@ ELEMENTS:
 	Added elements in XSD:	0
 	Added elements in XML:	0
 
-	Modified elements in XSD:	19
-	Modified elements in XML:	19
+	Modified elements in XSD:	25
+	Modified elements in XML:	25
 
 	Removed elements from XSD:	0
 	Removed elements from XML:	0

@@ -121,6 +121,7 @@ In type {DateOnlyFormattedDateTimeType} modifying element:
 	old: <DateTimeString>{DateTimeType}{0..1} in type {DateTimeType}
 	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
 		Restricted cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
 In type {DateTimeType} removed <DateTime> {dateTime}{0..1}
 In type {DeliveryTermsCodeType} modifying attribute: 
 	old: @listAgencyID{DeliveryTermsCodeListAgencyIDContentType}{0..1} in type {DeliveryTermsCodeType}

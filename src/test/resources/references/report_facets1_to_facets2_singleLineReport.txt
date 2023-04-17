@@ -1,11 +1,17 @@
-/MyRootElement/A1 modifying element: old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1
-/MyRootElement/A3 modifying element: old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1
-/MyRootElement1/A1 modifying element: old: <A1>{anyType}{1..1} in type {FacetsOwner1}new: <A1>{anyType}{0..1} in type {FacetsOwner1} changed cardinality from 1..1 to 0..1
-/MyRootElement1/A2 modifying element: old: <A2>{anyType}{0..1} in type {FacetsOwner1}new: <A2>{anyType}{1..*} in type {FacetsOwner1} changed cardinality from 0..1 to 1..*
-/MyRootElement1/A3 modifying element: old: <A3>{anyType}{1..*} in type {FacetsOwner1}new: <A3>{anyType}{0..*} in type {FacetsOwner1} changed cardinality from 1..* to 0..*
-/MyRootElement1/A4 modifying element: old: <A4>{anyType}{0..*} in type {FacetsOwner1}new: <A4>{anyType}{1..1} in type {FacetsOwner1} changed cardinality from 0..* to 1..1
-/MyRootElement2/A2 modifying element: old: <A2>{anyType}{0..1} in type {FacetsOwner2}new: <A2>{anyType}{0..*} in type {FacetsOwner2} changed cardinality from 0..1 to 0..*
-/MyRootElement2/A4 modifying element: old: <A4>{anyType}{0..*} in type {FacetsOwner2}new: <A4>{anyType}{0..1} in type {FacetsOwner2} changed cardinality from 0..* to 0..1
+/MyRootElement/A1 modifying element: old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1 changed compositor from CHOICE to SEQUENCE
+/MyRootElement/A2 modifying element: old: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A2>{anyType}{0..1} in type {ChoiceSequenceChange} changed compositor from CHOICE to SEQUENCE
+/MyRootElement/A3 modifying element: old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange} changed cardinality from 0..1 to 1..1 changed compositor from CHOICE to SEQUENCE
+/MyRootElement/A4 modifying element: old: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}new: <A4>{anyType}{0..1} in type {ChoiceSequenceChange} changed compositor from CHOICE to SEQUENCE
+/MyRootElement0/B1 modifying element: old: <B1>{anyType}{1..1} in type {FacetsOwner0}new: <B1>{anyType}{1..1} in type {FacetsOwner0} changed compositor from ALL to SEQUENCE
+/MyRootElement0/B2 modifying element: old: <B2>{anyType}{0..1} in type {FacetsOwner0}new: <B2>{anyType}{0..1} in type {FacetsOwner0} changed compositor from ALL to SEQUENCE
+/MyRootElement0/B3 modifying element: old: <B3>{anyType}{1..1} in type {FacetsOwner0}new: <B3>{anyType}{1..1} in type {FacetsOwner0} changed compositor from ALL to SEQUENCE
+/MyRootElement0/B4 modifying element: old: <B4>{anyType}{0..1} in type {FacetsOwner0}new: <B4>{anyType}{0..1} in type {FacetsOwner0} changed compositor from ALL to SEQUENCE
+/MyRootElement1/C1 modifying element: old: <C1>{anyType}{1..1} in type {FacetsOwner1}new: <C1>{anyType}{0..1} in type {FacetsOwner1} changed cardinality from 1..1 to 0..1
+/MyRootElement1/C2 modifying element: old: <C2>{anyType}{0..1} in type {FacetsOwner1}new: <C2>{anyType}{1..*} in type {FacetsOwner1} changed cardinality from 0..1 to 1..*
+/MyRootElement1/C3 modifying element: old: <C3>{anyType}{1..*} in type {FacetsOwner1}new: <C3>{anyType}{0..*} in type {FacetsOwner1} changed cardinality from 1..* to 0..*
+/MyRootElement1/C4 modifying element: old: <C4>{anyType}{0..*} in type {FacetsOwner1}new: <C4>{anyType}{1..1} in type {FacetsOwner1} changed cardinality from 0..* to 1..1
+/MyRootElement2/D2 modifying element: old: <D2>{anyType}{0..1} in type {FacetsOwner2}new: <D2>{anyType}{0..*} in type {FacetsOwner2} changed cardinality from 0..1 to 0..*
+/MyRootElement2/D4 modifying element: old: <D4>{anyType}{0..*} in type {FacetsOwner2}new: <D4>{anyType}{0..1} in type {FacetsOwner2} changed cardinality from 0..* to 0..1
 /MyRootElement2/Pi1 modifying element: old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed totalDigits from 42 to 52
 /MyRootElement2/Pi2 modifying element: old: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <Pi2>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed fractionDigits from 12 to 22
 /MyRootElement2/address modifying element: old: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2}new: <address>{FacetsOwner2}{0..1} in type {FacetsOwner2} changed whitespace from replace to preserve

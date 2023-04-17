@@ -32,6 +32,7 @@ public class Change {
     private boolean patternChanged;
     private boolean enumerationChanged;
     private boolean whitespaceChanged;
+    private boolean compositorChanged;
     /* not found in Xerces
     private boolean explicitTimezoneChanged;
     private boolean assertionsChanged; */
@@ -77,7 +78,7 @@ public class Change {
      */
     public boolean isModified() {
         return nameChanged || namespaceChanged || typeChanged || cardinalityChanged || fixedDefaultChanged || lengthChanged || maxLengthChanged ||
-                minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged || maxExclusiveChanged  || maxInclusiveChanged  || minExclusiveChanged  || minInclusiveChanged  || totalDigitsChanged  || fractionDigitsChanged;// || explicitTimezoneChanged || assertionsChanged;
+                minLengthChanged || patternChanged || enumerationChanged || whitespaceChanged || maxExclusiveChanged  || maxInclusiveChanged  || minExclusiveChanged  || minInclusiveChanged  || totalDigitsChanged  || fractionDigitsChanged || compositorChanged;// || explicitTimezoneChanged || assertionsChanged;
     }
 
     //endregion

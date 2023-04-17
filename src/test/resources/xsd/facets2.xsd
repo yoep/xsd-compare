@@ -23,47 +23,47 @@
 	<xs:complexType name="FacetsOwner0">
 		<xs:sequence>
 			<!-- means A is required and must appear exactly once. -->
-			<xs:element name="A1" />
+			<xs:element name="B1" />
 
 			<!-- means A is optional and may appear at most once. -->
-			<xs:element name="A2" minOccurs="0" />
+			<xs:element name="B2" minOccurs="0" />
 
 			<!-- means A is required and may repeat 1 time. -->
-			<xs:element name="A3" maxOccurs="1" />
+			<xs:element name="B3" maxOccurs="1" />
 
 			<!-- means A is optional and may repeat 1 time1. -->
-			<xs:element name="A4" minOccurs="0" maxOccurs="1" />
+			<xs:element name="B4" minOccurs="0" maxOccurs="1" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FacetsOwner1">
 		<xs:sequence>
 			<!-- means A is optional and may appear at most once. -->
-			<xs:element name="A1" minOccurs="0" />
+			<xs:element name="C1" minOccurs="0" />
 
 			<!-- means A is required and may repeat an unlimited number of times. -->
-			<xs:element name="A2" maxOccurs="unbounded" />
+			<xs:element name="C2" maxOccurs="unbounded" />
 
 			<!-- means A is optional and may repeat an unlimited number of times. -->
-			<xs:element name="A3" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="C3" minOccurs="0" maxOccurs="unbounded" />
 
 			<!-- means A is required and must appear exactly once. -->
-			<xs:element name="A4" />
+			<xs:element name="C4" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FacetsOwner2">
 		<xs:choice>
 
 			<!-- means A is optional and may appear at most once. -->
-			<xs:element name="A1" minOccurs="0" />
+			<xs:element name="D1" minOccurs="0" />
 
 			<!-- means A is required and may repeat an unlimited number of times. -->
-			<xs:element name="A2" maxOccurs="unbounded" />
+			<xs:element name="D2" maxOccurs="unbounded" />
 
 			<!-- means A is optional and may repeat an unlimited number of times. -->
-			<xs:element name="A3" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="D3" minOccurs="0" maxOccurs="unbounded" />
 
 			<!-- means A is required and must appear exactly once. -->
-			<xs:element name="A4" />
+			<xs:element name="D4" />
 
 			<!-- https://www.w3schools.com/xml/schema_facets.asp -->
 			<xs:element name="age">

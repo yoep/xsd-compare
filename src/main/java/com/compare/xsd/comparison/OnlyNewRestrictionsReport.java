@@ -2,6 +2,7 @@ package com.compare.xsd.comparison;
 
 import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.ChangeType;
+import com.compare.xsd.comparison.model.xsd.XsdNode;
 import com.compare.xsd.comparison.model.xsd.impl.XsdAttribute;
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import lombok.Data;
@@ -154,6 +155,9 @@ public class OnlyNewRestrictionsReport implements TextReport {
             }
             if (c.isWhitespaceChanged()) {
                 getModificationStringBuilder().append("\n\t\tChanged whitespace from " + c.oldNode.getWhitespace() + " to " + c.newNode.getWhitespace());
+            }
+            if (c.isCompositorChanged()) {
+                getModificationStringBuilder().append("\n\t\tChanged compositor from " + XsdNode.CompositorType.valueOf(c.oldNode.getCompositor())  + " to " + XsdNode.CompositorType.valueOf(c.newNode.getCompositor()));
             }
             String writtenModificdations = getModificationStringBuilder().toString();
             if(writtenModificdations != null && !writtenModificdations.isEmpty()){

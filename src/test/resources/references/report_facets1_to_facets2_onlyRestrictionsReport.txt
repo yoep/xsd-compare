@@ -2,21 +2,47 @@ In type {ChoiceSequenceChange} modifying element:
 	old: <A1>{anyType}{0..1} in type {ChoiceSequenceChange}
 	new: <A1>{anyType}{1..1} in type {ChoiceSequenceChange}
 		Restricted cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A2>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from CHOICE to SEQUENCE
 In type {ChoiceSequenceChange} modifying element: 
 	old: <A3>{anyType}{0..1} in type {ChoiceSequenceChange}
 	new: <A3>{anyType}{1..1} in type {ChoiceSequenceChange}
 		Restricted cardinality from 0..1 to 1..1
+		Changed compositor from CHOICE to SEQUENCE
+In type {ChoiceSequenceChange} modifying element: 
+	old: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+	new: <A4>{anyType}{0..1} in type {ChoiceSequenceChange}
+		Changed compositor from CHOICE to SEQUENCE
+In type {FacetsOwner0} modifying element: 
+	old: <B1>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B1>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+In type {FacetsOwner0} modifying element: 
+	old: <B2>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B2>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+In type {FacetsOwner0} modifying element: 
+	old: <B3>{anyType}{1..1} in type {FacetsOwner0}
+	new: <B3>{anyType}{1..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
+In type {FacetsOwner0} modifying element: 
+	old: <B4>{anyType}{0..1} in type {FacetsOwner0}
+	new: <B4>{anyType}{0..1} in type {FacetsOwner0}
+		Changed compositor from ALL to SEQUENCE
 In type {FacetsOwner1} modifying element: 
-	old: <A2>{anyType}{0..1} in type {FacetsOwner1}
-	new: <A2>{anyType}{1..*} in type {FacetsOwner1}
+	old: <C2>{anyType}{0..1} in type {FacetsOwner1}
+	new: <C2>{anyType}{1..*} in type {FacetsOwner1}
 		Restricted cardinality from 0..1 to 1..*
 In type {FacetsOwner1} modifying element: 
-	old: <A4>{anyType}{0..*} in type {FacetsOwner1}
-	new: <A4>{anyType}{1..1} in type {FacetsOwner1}
+	old: <C4>{anyType}{0..*} in type {FacetsOwner1}
+	new: <C4>{anyType}{1..1} in type {FacetsOwner1}
 		Restricted cardinality from 0..* to 1..1
 In type {FacetsOwner2} modifying element: 
-	old: <A4>{anyType}{0..*} in type {FacetsOwner2}
-	new: <A4>{anyType}{0..1} in type {FacetsOwner2}
+	old: <D4>{anyType}{0..*} in type {FacetsOwner2}
+	new: <D4>{anyType}{0..1} in type {FacetsOwner2}
 		Restricted cardinality from 0..* to 0..1
 In type {FacetsOwner2} modifying element: 
 	old: <Pi1>{FacetsOwner2}{0..1} in type {FacetsOwner2}

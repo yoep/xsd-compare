@@ -75,7 +75,8 @@ public class XsdComparerTest {
 
 
     @Test
-    public void recursiveGrammarsComparison() throws IOException {
+    /** Compares several XSDs pairs and compares the result with the saved reference. */
+    public void multiComparisonTest() throws IOException {
 
         String simpleAnonymous1 = XSD_DIR + "simple_anonymous1.xsd";
         String simpleAnonymous2 = XSD_DIR + "simple_anonymous2.xsd";
@@ -102,7 +103,6 @@ public class XsdComparerTest {
             compareCorrect &= compareTwoXsdGrammars(simpleAnonymous1, simpleAnonymous2, reportType);
             compareCorrect &= compareTwoXsdGrammars(facets1, facets2, reportType);
         }
-
 
         assertTrue(compareCorrect,"\nRegression test fails as reference was different!\nNote: If the test fails due to a new output (e.g. programming update) copy the new result over the old reference:\n\t" + TARGET_DIR + "\n\t\tto" + "\n\t" + REFERENCES_DIR);
     }
