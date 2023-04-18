@@ -105,7 +105,7 @@ public class XsdAttribute extends AbstractXsdNode implements XsdAttributeNode {
 
     @Override
     public String getXPath() {
-        return parent.xpath + "/@" + getName();
+        return parent.getXPath() + "/@" + getName();
     }
 
     @Override

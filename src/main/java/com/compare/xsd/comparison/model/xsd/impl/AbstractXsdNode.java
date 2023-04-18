@@ -42,7 +42,7 @@ public abstract class AbstractXsdNode implements XsdNode {
                     break;
 
  */
-    public String xpath;
+    protected StringBuilder sb = new StringBuilder();
     protected String name;
     protected String typeNamespace;
     protected String typeName;
@@ -139,7 +139,20 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getXPath() {
-        return xpath;
+        if(this instanceof XsdDocument){
+            return "/";
+        }else{
+            StringBuilder sb = getXPath(this.parent).append("/").append(this.name);
+            return sb.toString();
+        }
+    }
+
+    public StringBuilder getXPath(AbstractXsdNode node) {
+        if(node instanceof XsdDocument){
+            return ((XsdDocument) node).getStringBuilder();
+        }else {
+            return getXPath(node.parent).append("/").append(node.name);
+        }
     }
 
     //endregion

@@ -53,7 +53,7 @@ public class XsdElement extends AbstractXsdElementNode {
         this.name = elementDecl.getName();
         this.typeNamespace = loadNamespace(this);
         document.xPathStack.push(name);
-        this.xpath = createXPath(this.document.xPathStack);
+//        this.xpath = createXPath(this.document.xPathStack);
     }
 
     /**
@@ -92,7 +92,8 @@ public class XsdElement extends AbstractXsdElementNode {
         this.typeNamespace = loadNamespace(this);
         this.document = parent.getDocument();
         this.document.xPathStack.push(name);
-        this.xpath = createXPath(this.document.xPathStack);
+        //log.debug("Creating new element " + this.name + " at " + xpath);
+        //System.err.println("Creating new element: " + getXPath());
     }
 
     /**
@@ -150,21 +151,13 @@ public class XsdElement extends AbstractXsdElementNode {
         }
     }
 
-    private static String createXPath(Stack<String> ancestorNames){
-        StringBuilder xPath = new StringBuilder();
-        for(String name : ancestorNames){
-            xPath.append("/").append(name);
-        }
-        return xPath.toString();
-    }
-
     public String getUniqueId(){
         return XsdElement.getUniqueId(elementDecl, minOccurrence, maxOccurrence);
     }
 
     static private Boolean hasTooManySameAncestors(XsdDocument document, String elementID){
         Integer count = document.ancestorCountByelementIO.get(elementID);
-        if(count != null && count > 3){
+        if(count != null && count == document.duplicatedAnchestorNoAllowed){
             return Boolean.TRUE;
         }else{
             return Boolean.FALSE;

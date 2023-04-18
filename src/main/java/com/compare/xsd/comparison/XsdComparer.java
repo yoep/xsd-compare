@@ -48,13 +48,24 @@ public class XsdComparer {
      * @param reporterType determines the way the text output is provided
      */
     public XsdComparer(String oldDocument, String newDocument, TextReport.implementation reporterType) {
+        this(oldDocument,newDocument, reporterType, 3);
+    }
+    /**
+     * Initialize a new instance of {@link XsdComparer}.
+     *
+     * @param oldDocument Set the old document.
+     * @param newDocument      Set the new document.
+     * @param reporterType determines the way the text output is provided
+     * @param duplicatedAnchestorNoAllowed Set the recursion depth by limiting same anchestors
+     */
+    public XsdComparer(String oldDocument, String newDocument, TextReport.implementation reporterType, int duplicatedAnchestorNoAllowed) {
         Assert.notNull(oldDocument, "oldDocument cannot be null");
         Assert.notNull(newDocument, "newDocument cannot be null");
         this.textReport = getTextReporter(reporterType);
         XsdLoader xsdLoader = new XsdLoader(null);
-        this.oldDocument = xsdLoader.load(new File(oldDocument));
+        this.oldDocument = xsdLoader.load(new File(oldDocument), duplicatedAnchestorNoAllowed);
         log.debug("Finished loading original grammar!");
-        this.newDocument = xsdLoader.load(new File(newDocument));
+        this.newDocument = xsdLoader.load(new File(newDocument), duplicatedAnchestorNoAllowed);
         log.debug("Finished loading new grammar!");
     }
 
@@ -149,7 +160,7 @@ public class XsdComparer {
         increaseAncestor_OldGrammar(oldNode);
         increaseAncestor_NewGrammar(newNode);
         Assert.notNull(newNode, "newNode cannot be null");
-        assert(oldNode.xpath.equals(newNode.xpath));
+        assert(oldNode.getXPath().equals(newNode.getXPath()));
 
         List<XsdElement> oldElementChildren;
         List<XsdElement> newElementChildren;
@@ -172,7 +183,7 @@ public class XsdComparer {
                 XsdElement newChildElement = newNode.findElement(oldElementChild.getName(), "1: old child in new children: ");
                 compareXsdElementProperties(oldElementChild, newChildElement);
                 compareAbstractElementNodes(oldElementChild, newChildElement);
-                assert(!(oldElementChild == null || newChildElement == null || !oldElementChild.xpath.equals(newChildElement.xpath)));
+                assert(!(oldElementChild == null || newChildElement == null || !oldElementChild.getXPath().equals(newChildElement.getXPath())));
             } catch (NodeNotFoundException ex) {
                 assert(newNode.getXPath().equals(oldNode.getXPath()));
                 removed++;
@@ -230,7 +241,7 @@ public class XsdComparer {
         if(element instanceof XsdElement){
             String elementID = ((XsdElement) element).getUniqueId();
             Integer ancestorCount = ancestorMap.get(elementID);
-            if(ancestorCount != null && ancestorCount > 2){
+            if(ancestorCount != null && ancestorCount == element.getDocument().duplicatedAnchestorNoAllowed){
                 return Boolean.TRUE;
             }else{
                 return Boolean.FALSE;
@@ -272,7 +283,7 @@ public class XsdComparer {
      * @param newNode      Set the new XSD element.
      */
     private void compareXsdElementProperties(XsdElement oldNode, XsdElement newNode) {
-        assert(oldNode.xpath.equals(newNode.xpath));
+        assert(oldNode.getXPath().equals(newNode.getXPath()));
 
         List<XsdAttribute> oldNodeAttributes = new ArrayList<>(oldNode.getAttributes()); //take a copy as the actual list might be modified during comparison
         List<XsdAttribute> newNodeAttributes = new ArrayList<>(newNode.getAttributes());
@@ -349,11 +360,11 @@ public class XsdComparer {
                 modified++;
                 textReport.addChange(change);
                 if(newNode instanceof XsdElement){
-                    assert(( ((AbstractXsdNode) newNode).xpath != null && ((AbstractXsdNode) newNode).xpath != null && ((AbstractXsdNode) newNode).xpath.equals(((AbstractXsdNode) oldNode).xpath)));
+                    assert(( ((AbstractXsdNode) newNode).getXPath() != null && ((AbstractXsdNode) newNode).getXPath() != null && ((AbstractXsdNode) newNode).getXPath().equals(((AbstractXsdNode) oldNode).getXPath())));
                     assert(((XsdElement) newNode).getParent() != null);
 
                 }else if(newNode instanceof XsdAttribute) {
-                    assert ((((AbstractXsdNode) newNode).getParent().xpath != null && ((AbstractXsdNode) newNode).getParent().xpath != null && ((AbstractXsdNode) newNode).getParent().xpath.equals(((AbstractXsdNode) oldNode).getParent().xpath)));
+                    assert ((((AbstractXsdNode) newNode).getParent().getXPath() != null && ((AbstractXsdNode) newNode).getParent().getXPath() != null && ((AbstractXsdNode) newNode).getParent().getXPath().equals(((AbstractXsdNode) oldNode).getParent().getXPath())));
                 }
             }
         }

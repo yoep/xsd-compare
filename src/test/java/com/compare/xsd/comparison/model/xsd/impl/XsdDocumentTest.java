@@ -68,7 +68,7 @@ public class XsdDocumentTest {
     @Test
     public void shouldReturnTheExpectedResultWhenGetXPathIsCalled() {
         //GIVEN
-        final String expectedResult = "//";
+        final String expectedResult = "/";
 
         //WHEN
         XsdDocument result = new XsdDocument(file);
