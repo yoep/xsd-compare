@@ -154,7 +154,8 @@ public class OnlyNewRestrictionsReport implements TextReport {
                 // either enumeration old list was longer or did not exist at all
                 if(oldEnumerationList.size() > 0 || (c.oldNode.getEnumeration() == null || c.oldNode.getEnumeration().size() == 0)){
                     if(oldEnumerationList.size() > 0){
-                        getModificationStringBuilder().append("\n\t\tNarrowed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
+                        getModificationStringBuilder().append("\n\t\tNarrowed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration() +
+                                "\n\t\t\tremoved: " + oldEnumerationList.toString());
                     }else{
                         getModificationStringBuilder().append("\n\t\tNew restriction by enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
                     }

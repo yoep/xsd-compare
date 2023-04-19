@@ -118,18 +118,21 @@ Modifying element:
 	old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 		Changed enumeration from [VW, Porsche, Lamborghini] to [Audi, Golf, BMW]
+			added: [Audi, Golf, BMW]
 				at /MyRootElement2/car
 
 Modifying element: 
 	old: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 		Changed enumeration from [Audi, Golf, BMW, Porsche] to [Audi, Golf]
+			removed: [BMW, Porsche]
 				at /MyRootElement2/carGettingBigger
 
 Modifying element: 
 	old: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <carGettingSmaller>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 		Changed enumeration from [Audi, Golf] to [Audi, Golf, BMW, Porsche]
+			added: [BMW, Porsche]
 				at /MyRootElement2/carGettingSmaller
 
 Modifying element: 

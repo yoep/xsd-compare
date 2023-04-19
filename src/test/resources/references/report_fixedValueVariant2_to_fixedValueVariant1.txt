@@ -15,8 +15,16 @@ Added attribute @name {string}{0..1} in type {CargoOperationalCategoryCodeType}
 Modifying attribute: 
 	old: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
 	new: @listAgencyID{CargoOperationalCategoryCodeListAgencyIDContentType}{0..1} in type {CargoOperationalCategoryCodeType}
-		Changed enumeration from [6] to [] (no semantic change, as removed single enumeration value still exists as fixed default: 6)
+		Changed enumeration from [6] to []
+			removed: [6] (no semantic change, as removed single enumeration value still exists as fixed default: 6)
 				at /OperationalCategoryCode/@listAgencyID
+
+Modifying element: 
+	old: <OperationalCategoryCode>{CargoOperationalCategoryCodeType}{1..1} in type {null}
+	new: <OperationalCategoryCode>{CargoOperationalCategoryCodeType}{1..1} in type {null}
+		Changed enumeration from [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] to []
+			removed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+				at /OperationalCategoryCode
 
 
 
@@ -28,8 +36,8 @@ ELEMENTS:
 	Added elements in XSD:	0
 	Added elements in XML:	0
 
-	Modified elements in XSD:	0
-	Modified elements in XML:	0
+	Modified elements in XSD:	1
+	Modified elements in XML:	1
 
 	Removed elements from XSD:	0
 	Removed elements from XML:	0

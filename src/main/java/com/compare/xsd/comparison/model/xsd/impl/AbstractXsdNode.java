@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.xerces.xs.XSFacet;
-import org.apache.xerces.xs.XSMultiValueFacet;
-import org.apache.xerces.xs.XSSimpleTypeDefinition;
-import org.apache.xerces.xs.XSTypeDefinition;
+import org.apache.xerces.xs.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +59,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected Integer totalDigits;
     protected Integer fractionDigits;
     protected short compositor;
-    protected List<String> enumeration = new ArrayList<>();
+    protected List<String> enumeration;
 
     protected AbstractXsdNode parent;
     protected Change change;
@@ -178,7 +175,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     public String getXmlValue() {
         if (StringUtils.isNotEmpty(getFixedValue())) {
             return getFixedValue();
-        } else if (CollectionUtils.isNotEmpty(getEnumeration())) {
+        } else if (getEnumeration() != null && CollectionUtils.isNotEmpty(getEnumeration())) {
             return getEnumeration().get(0);
         }
 
@@ -193,7 +190,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     public String getXmlComment() {
         String comment = "";
 
-        if (CollectionUtils.isNotEmpty(getEnumeration())) {
+        if (getEnumeration() != null && CollectionUtils.isNotEmpty(getEnumeration())) {
             comment += " Possible values: " + getEnumeration();
         }
         if (StringUtils.isNotEmpty(getPattern())) {
@@ -228,6 +225,23 @@ public abstract class AbstractXsdNode implements XsdNode {
         }
         */
         this.typeName = typeDefinition.getName();
+        if(typeDefinition instanceof XSComplexTypeDefinition){
+            XSComplexTypeDefinition complexTypeDefinition = (XSComplexTypeDefinition) typeDefinition;
+            if(complexTypeDefinition.getContentType() == XSComplexTypeDefinition.CONTENTTYPE_SIMPLE){
+                XSSimpleTypeDefinition st = complexTypeDefinition.getSimpleType();
+                if(this.enumeration == null){
+                    this.enumeration = new ArrayList<>();
+                }
+                this.enumeration = st.getLexicalEnumeration();
+            }
+        }else if(typeDefinition instanceof XSSimpleTypeDefinition){
+            if(this.enumeration == null){
+                this.enumeration = new ArrayList<>();
+            }
+            this.enumeration = ((XSSimpleTypeDefinition)typeDefinition).getLexicalEnumeration();
+        }else {
+            System.out.println("This story does not end up!");
+        }
     }
 
     /**
@@ -323,7 +337,12 @@ FACET_ENUMERATION
 
             switch (facet.getFacetKind()) {
                 case XSSimpleTypeDefinition.FACET_ENUMERATION:
-                    this.enumeration.addAll(facet.getLexicalFacetValues());
+                    if(this.enumeration == null){
+                        this.enumeration = new ArrayList<>();
+                    }
+                    // has already being added earlier
+                    assert(this.enumeration.equals(facet.getLexicalFacetValues()));
+                    //this.enumeration.addAll(facet.getLexicalFacetValues());
                     break;
                 case XSSimpleTypeDefinition.FACET_PATTERN:
                     this.pattern = String.join(", ", facet.getLexicalFacetValues());

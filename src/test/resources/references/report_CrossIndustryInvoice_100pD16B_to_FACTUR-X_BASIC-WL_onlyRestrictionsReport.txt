@@ -62,6 +62,7 @@ In type {ExchangedDocumentType} modifying element:
 	old: <TypeCode>{DocumentCodeType}{0..1} in type {ExchangedDocumentType}
 	new: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [80, 81, 82, 83, 84, 130, 202, 203, 204, 211, 261, 262, 295, 296, 308, 325, 326, 380, 381, 383, 384, 385, 386, 387, 388, 389, 390, 393, 394, 395, 396, 420, 456, 457, 458, 527, 575, 623, 633, 751, 780, 875, 876, 877, 935]
 In type {ExchangedDocumentType} removed <CategoryCode> {CodeType}{0..1}
 In type {ExchangedDocumentType} removed <ControlRequirementIndicator> {IndicatorType}{0..1}
 In type {ExchangedDocumentType} removed <CopyIndicator> {IndicatorType}{0..1}
@@ -129,6 +130,7 @@ In type {HeaderTradeSettlementType} modifying element:
 	old: <InvoiceCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
 	new: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHE, CHF, CHW, CLF, CLP, CNY, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, USN, UYI, UYU, UYW, UZS, VES, VND, VUV, WST, XAF, XAG, XAU, XBA, XBB, XBC, XBD, XCD, XDR, XOF, XPD, XPF, XPT, XSU, XTS, XUA, XXX, YER, ZAR, ZMW, ZWL]
 In type {HeaderTradeSettlementType} modifying element: 
 	old: <PaymentReference>{TextType}{0..*} in type {HeaderTradeSettlementType}
 	new: <PaymentReference>{TextType}{0..1} in type {HeaderTradeSettlementType}
@@ -149,6 +151,10 @@ In type {HeaderTradeSettlementType} modifying element:
 	old: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..*} in type {HeaderTradeSettlementType}
 	new: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..1} in type {HeaderTradeSettlementType}
 		Restricted cardinality from 0..* to 0..1
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <TaxCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+	new: <TaxCurrencyCode>{CurrencyCodeType}{0..1} in type {HeaderTradeSettlementType}
+		New restriction by enumeration from [] to [AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHE, CHF, CHW, CLF, CLP, CNY, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, USN, UYI, UYU, UYW, UZS, VES, VND, VUV, WST, XAF, XAG, XAU, XBA, XBB, XBC, XBD, XCD, XDR, XOF, XPD, XPF, XPT, XSU, XTS, XUA, XXX, YER, ZAR, ZMW, ZWL]
 In type {HeaderTradeSettlementType} removed <CreditReason> {TextType}{0..*}
 In type {HeaderTradeSettlementType} removed <CreditReasonCode> {CodeType}{0..1}
 In type {HeaderTradeSettlementType} removed <CreditorReferenceIssuerID> {IDType}{0..*}
@@ -274,6 +280,7 @@ In type {TradeAddressType} modifying element:
 	old: <CountryID>{CountryIDType}{0..1} in type {TradeAddressType}
 	new: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [1A, AD, AE, AF, AG, AI, AL, AM, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TR, TT, TV, TW, TZ, UA, UG, UM, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, XI, YE, YT, ZA, ZM, ZW]
 In type {TradeAddressType} modifying element: 
 	old: <CountrySubDivisionName>{TextType}{0..*} in type {TradeAddressType}
 	new: <CountrySubDivisionName>{TextType}{0..1} in type {TradeAddressType}
@@ -304,6 +311,10 @@ In type {TradeAllowanceChargeType} modifying element:
 	old: <ChargeIndicator>{IndicatorType}{0..1} in type {TradeAllowanceChargeType}
 	new: <ChargeIndicator>{IndicatorType}{1..1} in type {TradeAllowanceChargeType}
 		Restricted cardinality from 0..1 to 1..1
+In type {TradeAllowanceChargeType} modifying element: 
+	old: <ReasonCode>{AllowanceChargeReasonCodeType}{0..1} in type {TradeAllowanceChargeType}
+	new: <ReasonCode>{AllowanceChargeReasonCodeType}{0..1} in type {TradeAllowanceChargeType}
+		New restriction by enumeration from [] to [AA, AAA, AAC, AAD, AAE, AAF, AAH, AAI, AAS, AAT, AAV, AAY, AAZ, ABA, ABB, ABC, ABD, ABF, ABK, ABL, ABN, ABR, ABS, ABT, ABU, ACF, ACG, ACH, ACI, ACJ, ACK, ACL, ACM, ACS, ADC, ADE, ADJ, ADK, ADL, ADM, ADN, ADO, ADP, ADQ, ADR, ADT, ADW, ADY, ADZ, AEA, AEB, AEC, AED, AEF, AEH, AEI, AEJ, AEK, AEL, AEM, AEN, AEO, AEP, AES, AET, AEU, AEV, AEW, AEX, AEY, AEZ, AJ, AU, CA, CAB, CAD, CAE, CAF, CAI, CAJ, CAK, CAL, CAM, CAN, CAO, CAP, CAQ, CAR, CAS, CAT, CAU, CAV, CAW, CAX, CAY, CAZ, CD, CG, CS, CT, DAB, DAC, DAD, DAF, DAG, DAH, DAI, DAJ, DAK, DAL, DAM, DAN, DAO, DAP, DAQ, DL, EG, EP, ER, FAA, FAB, FAC, FC, FH, FI, GAA, HAA, HD, HH, IAA, IAB, ID, IF, IR, IS, KO, L1, LA, LAA, LAB, LF, MAE, MI, ML, NAA, OA, PA, PAA, PC, PL, RAB, RAC, RAD, RAF, RE, RF, RH, RV, SA, SAA, SAD, SAE, SAI, SG, SH, SM, SU, TAB, TAC, TT, TV, V1, V2, WH, XAA, YY, ZZZ, 41, 42, 60, 62, 63, 64, 65, 66, 67, 68, 70, 71, 88, 95, 100, 102, 103, 104, 105]
 In type {TradeAllowanceChargeType} removed <ActualTradeCurrencyExchange> {TradeCurrencyExchangeType}{0..1}
 In type {TradeAllowanceChargeType} removed <BasisQuantity> {QuantityType}{0..1}
 In type {TradeAllowanceChargeType} removed <ID> {IDType}{0..1}
@@ -390,6 +401,7 @@ In type {TradeSettlementPaymentMeansType} modifying element:
 	old: <TypeCode>{PaymentMeansCodeType}{0..1} in type {TradeSettlementPaymentMeansType}
 	new: <TypeCode>{PaymentMeansCodeType}{1..1} in type {TradeSettlementPaymentMeansType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [10, 20, 30, 42, 48, 49, 57, 58, 59, 97, ZZZ]
 In type {TradeSettlementPaymentMeansType} removed <ApplicableTradeSettlementFinancialCard> {TradeSettlementFinancialCardType}{0..1}
 In type {TradeSettlementPaymentMeansType} removed <GuaranteeMethodCode> {PaymentGuaranteeMeansCodeType}{0..1}
 In type {TradeSettlementPaymentMeansType} removed <ID> {IDType}{0..*}
@@ -410,10 +422,16 @@ In type {TradeTaxType} modifying element:
 	old: <CategoryCode>{TaxCategoryCodeType}{0..1} in type {TradeTaxType}
 	new: <CategoryCode>{TaxCategoryCodeType}{1..1} in type {TradeTaxType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [AE, E, G, K, L, M, O, S, Z]
+In type {TradeTaxType} modifying element: 
+	old: <DueDateTypeCode>{TimeReferenceCodeType}{0..1} in type {TradeTaxType}
+	new: <DueDateTypeCode>{TimeReferenceCodeType}{0..1} in type {TradeTaxType}
+		New restriction by enumeration from [] to [5, 29, 72]
 In type {TradeTaxType} modifying element: 
 	old: <TypeCode>{TaxTypeCodeType}{0..1} in type {TradeTaxType}
 	new: <TypeCode>{TaxTypeCodeType}{1..1} in type {TradeTaxType}
 		Restricted cardinality from 0..1 to 1..1
+		New restriction by enumeration from [] to [VAT]
 In type {TradeTaxType} removed <AllowanceChargeBasisAmount> {AmountType}{0..*}
 In type {TradeTaxType} removed <BasisQuantity> {QuantityType}{0..1}
 In type {TradeTaxType} removed <BuyerDeductibleTaxSpecifiedTradeAccountingAccount> {TradeAccountingAccountType}{0..1}

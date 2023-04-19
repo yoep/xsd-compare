@@ -66,10 +66,12 @@ In type {FacetsOwner2} modifying element:
 	old: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <car>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 		Extended enumeration from [Audi, Golf, BMW] to [VW, Porsche, Lamborghini]
+			added: [VW, Porsche, Lamborghini]
 In type {FacetsOwner2} modifying element: 
 	old: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <carGettingBigger>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 		Extended enumeration from [Audi, Golf] to [Audi, Golf, BMW, Porsche]
+			added: [BMW, Porsche]
 In type {FacetsOwner2} modifying element: 
 	old: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}
 	new: <letter>{FacetsOwner2}{0..1} in type {FacetsOwner2}

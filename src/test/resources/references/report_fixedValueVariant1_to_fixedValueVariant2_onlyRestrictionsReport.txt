@@ -5,3 +5,7 @@ In type {CargoOperationalCategoryCodeType} modifying attribute:
 In type {CargoOperationalCategoryCodeType} removed @listID {token}{0..1}
 In type {CargoOperationalCategoryCodeType} removed @listVersionID {token}{0..1}
 In type {CargoOperationalCategoryCodeType} removed @name {string}{0..1}
+In type {null} modifying element: 
+	old: <OperationalCategoryCode>{CargoOperationalCategoryCodeType}{1..1} in type {null}
+	new: <OperationalCategoryCode>{CargoOperationalCategoryCodeType}{1..1} in type {null}
+		New restriction by enumeration from [] to [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]

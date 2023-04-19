@@ -215,6 +215,7 @@ public class MultiLineChangeTextReport implements TextReport {
                 boolean isFixedDefaultByEnumeration = newEnumerationList.size() == 1;
                 newEnumerationList.removeAll(c.oldNode.getEnumeration());
                 if(newEnumerationList.size() > 0){
+                    c.setReportHeader(c.getReportHeader() + "\n\t\t\tadded: " + newEnumerationList.toString());
                     if(isFixedDefaultByEnumeration) {// if single enumeration (new)
                         if (c.oldNode.getFixedValue() != null && c.oldNode.getFixedValue().equals(newEnumerationList.get(0))) {
                             c.setReportHeader(c.getReportHeader() + (" (no semantic change, as new single enumeration value existed as previous fixed default: " + c.newNode.getFixedValue() + ")"));
@@ -224,6 +225,7 @@ public class MultiLineChangeTextReport implements TextReport {
                     ArrayList<String> oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
                     boolean wasFixedDefaultByEnumeration = oldEnumerationList.size() == 1;
                     oldEnumerationList.removeAll(c.newNode.getEnumeration());
+                    c.setReportHeader(c.getReportHeader() + "\n\t\t\tremoved: " + oldEnumerationList.toString());
                     if(wasFixedDefaultByEnumeration){ // if was a single neumeration (old)
                         if (c.newNode.getFixedValue() != null && c.newNode.getFixedValue().equals(oldEnumerationList.get(0))) {
                             c.setReportHeader(c.getReportHeader() + (" (no semantic change, as removed single enumeration value still exists as fixed default: " + c.newNode.getFixedValue() + ")"));
