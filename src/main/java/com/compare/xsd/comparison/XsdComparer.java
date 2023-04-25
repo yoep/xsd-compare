@@ -510,7 +510,19 @@ public class XsdComparer {
         boolean change = (isChanged(oldNode.getEnumeration(), newNode.getEnumeration()) ||
                     isValueDifferent(oldNode.getEnumeration(), newNode.getEnumeration()));
         if(change){
-            modification.setEnumerationChanged(true);
+            if(oldNode.getEnumeration() == null && newNode.getEnumeration() != null){
+                if(newNode.getEnumeration().size() == 0) {
+                    change = false;
+                }
+            }
+            if(oldNode.getEnumeration() != null && newNode.getEnumeration() == null){
+                if(oldNode.getEnumeration().size() == 0) {
+                    change = false;
+                }
+            }
+            if(change){
+                modification.setEnumerationChanged(true);
+            }
         }
         return change;
     }
