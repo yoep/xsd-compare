@@ -98,12 +98,15 @@
     <xsd:simpleContent>
       <xsd:extension base="xsd:decimal">
         <xsd:attribute name="unitCode" type="xsd:token"/>
+        <xsd:attribute name="unitCodeListVersionID" type="xsd:token"/>
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
   <xsd:complexType name="NumericType">
     <xsd:simpleContent>
-      <xsd:extension base="xsd:decimal"/>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="format" type="xsd:string"/>
+      </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
   <xsd:complexType name="PercentType">
@@ -125,7 +128,9 @@
   </xsd:complexType>
   <xsd:complexType name="RateType">
     <xsd:simpleContent>
-      <xsd:extension base="xsd:decimal"/>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="format" type="xsd:string"/>
+      </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
   <xsd:complexType name="TextType">

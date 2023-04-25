@@ -4252,7 +4252,7 @@
           <xsd:documentation source="BN/BN">Country Sub-Division Code</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
-      <xsd:element name="CountrySubDivisionName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="CountrySubDivisionName" type="udt:TextType" minOccurs="0">
         <xsd:annotation>
           <xsd:documentation source="BN/BN">Country Sub-Division Name</xsd:documentation>
         </xsd:annotation>
@@ -4791,7 +4791,7 @@
       </xsd:element>
       <xsd:element name="DueDateDateTime" type="udt:DateTimeType" minOccurs="0">
         <xsd:annotation>
-          <xsd:documentation source="BN/BN">Deprecated Due Date Date Time</xsd:documentation>
+          <xsd:documentation source="BN/BN">Due Date Date Time</xsd:documentation>
         </xsd:annotation>
       </xsd:element>
       <xsd:element name="TypeCode" type="qdt:PaymentTermsTypeCodeType" minOccurs="0">
