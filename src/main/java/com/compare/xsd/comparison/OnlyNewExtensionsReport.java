@@ -155,7 +155,7 @@ public class OnlyNewExtensionsReport implements TextReport {
                 boolean isFixedDefaultByEnumeration = newEnumerationList.size() == 1;
                 newEnumerationList.removeAll(c.oldNode.getEnumeration());
                 // an enumeration is a restriction of the set of strings
-                // so there have to be some enumeration earlier and if the new enumeration list is longer (it is an extension)
+                // so to be an extension there have to be some enumeration earlier and if the new enumeration list is longer (it is an extension)
                 if((c.oldNode.getEnumeration() != null && c.oldNode.getEnumeration().size() > 0) && newEnumerationList.size() > 0){
                     getModificationStringBuilder().append("\n\t\tExtended enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration() +
                             "\n\t\t\tadded: " + newEnumerationList.toString());

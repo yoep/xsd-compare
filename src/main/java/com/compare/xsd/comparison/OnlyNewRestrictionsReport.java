@@ -147,13 +147,19 @@ public class OnlyNewRestrictionsReport implements TextReport {
                 getModificationStringBuilder().append("\n\t\tChanged fractionDigits from " + c.oldNode.getFractionDigits() + " to " + c.newNode.getFractionDigits());
             }
             if (c.isEnumerationChanged()) {
-                ArrayList<String> oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
-                boolean wasFixedDefaultByEnumeration = oldEnumerationList.size() == 1;
-                oldEnumerationList.removeAll(c.newNode.getEnumeration());
+
+
+                ArrayList<String> oldEnumerationList = null;
+                boolean wasFixedDefaultByEnumeration = false;
+                if(c.oldNode.getEnumeration() != null) {
+                    oldEnumerationList = new ArrayList<>(c.oldNode.getEnumeration());
+                    wasFixedDefaultByEnumeration = oldEnumerationList.size() == 1;
+                    oldEnumerationList.removeAll(c.newNode.getEnumeration());
+                }
                 // an enumeration is a restriction of the set of strings
-                // either enumeration old list was longer or did not exist at all
-                if(oldEnumerationList.size() > 0 || (c.oldNode.getEnumeration() == null || c.oldNode.getEnumeration().size() == 0)){
-                    if(oldEnumerationList.size() > 0){
+                // either enumeration old list was longer (and now shorter being restricted) or did not exist at all (and the new existence is a restriction by the set of values)
+                if(c.oldNode.getEnumeration() == null || oldEnumerationList.size() > 0 && (c.newNode.getEnumeration() != null && c.newNode.getEnumeration().size() > 0) || c.oldNode.getEnumeration().size() == 0){
+                    if(c.oldNode.getEnumeration() != null && oldEnumerationList.size() > 0){
                         getModificationStringBuilder().append("\n\t\tNarrowed enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration() +
                                 "\n\t\t\tremoved: " + oldEnumerationList.toString());
                     }else{

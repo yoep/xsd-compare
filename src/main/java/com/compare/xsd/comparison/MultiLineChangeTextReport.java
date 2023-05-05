@@ -213,8 +213,10 @@ public class MultiLineChangeTextReport implements TextReport {
                 c.setReportHeader(c.getReportHeader() + "\n\t\tChanged enumeration from " + c.oldNode.getEnumeration() + " to " + c.newNode.getEnumeration());
                 ArrayList<String> newEnumerationList = new ArrayList<>(c.newNode.getEnumeration());
                 boolean isFixedDefaultByEnumeration = newEnumerationList.size() == 1;
-                newEnumerationList.removeAll(c.oldNode.getEnumeration());
-                if(newEnumerationList.size() > 0){
+                if(c.oldNode.getEnumeration() != null) {
+                    newEnumerationList.removeAll(c.oldNode.getEnumeration());
+                }
+                if(c.oldNode.getEnumeration() == null || newEnumerationList.size() > 0){
                     c.setReportHeader(c.getReportHeader() + "\n\t\t\tadded: " + newEnumerationList.toString());
                     if(isFixedDefaultByEnumeration) {// if single enumeration (new)
                         if (c.oldNode.getFixedValue() != null && c.oldNode.getFixedValue().equals(newEnumerationList.get(0))) {
