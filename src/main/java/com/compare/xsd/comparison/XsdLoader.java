@@ -2,13 +2,13 @@ package com.compare.xsd.comparison;
 
 import com.compare.xsd.comparison.model.xsd.impl.XsdDocument;
 import com.github.spring.boot.javafx.view.ViewManager;
+import jakarta.annotation.PostConstruct;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Optional;

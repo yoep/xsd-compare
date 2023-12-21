@@ -14,7 +14,22 @@ All dependencies are present in the executables for runtime.
 
 ### Development
 
-* Java 11+
+* Java 17+
+* OpenJFX 21+
+
+#### Development program arguments
+
+When wanting to run this application locally from your IDE, it's recommended to add the following VM options:
+
+```shell
+-Dsun.awt.disablegrab=true 
+-Dprism.verbose=true 
+-Xms100M 
+-XX:+UseG1GC 
+-XX:+HeapDumpOnOutOfMemoryError 
+-p "/path/to/openjfx/21/lib" 
+--add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.web,javafx.swing
+```
 
 ## Features
 

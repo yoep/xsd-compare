@@ -3,14 +3,14 @@ package com.compare.xsd.settings;
 import com.compare.xsd.XsdCompareApplication;
 import com.compare.xsd.settings.model.ApplicationSettings;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
