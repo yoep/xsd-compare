@@ -14,7 +14,8 @@ All dependencies are present in the executables for runtime.
 
 ### Development
 
-* Java 11+
+* Java 17+
+* OpenJFX 21+
 
 #### Development program arguments
 
