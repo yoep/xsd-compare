@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.8.RELEASE</version>
+        <version>3.2.0</version>
     </parent>
 
     <groupId>com.xsd</groupId>
@@ -20,12 +20,12 @@
     </scm>
 
     <properties>
-        <java.version>11</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
-        <spring-boot-starter-javafx.version>1.0.9</spring-boot-starter-javafx.version>
-        <javafx.version>13.0.2</javafx.version>
+        <spring-boot-starter-javafx.version>2.0.0</spring-boot-starter-javafx.version>
+        <javafx.version>21.0.1</javafx.version>
 
         <start-class>com.compare.xsd.XsdCompareStarter</start-class>
     </properties>
