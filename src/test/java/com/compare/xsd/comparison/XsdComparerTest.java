@@ -55,7 +55,7 @@ public class XsdComparerTest {
             + "standard" + File.separator
             + "CrossIndustryInvoice_100pD16B.xsd";
 
-    private static final String CII_D22B_XSD = XSD_DIR + "uncefact_22B_draft" + File.separator
+    private static final String CII_D22B_XSD = XSD_DIR + "uncefact_22B" + File.separator
             + "CrossIndustryInvoice_100pD22B.xsd";
 
 
