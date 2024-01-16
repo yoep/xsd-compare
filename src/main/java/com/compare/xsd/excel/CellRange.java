@@ -31,7 +31,7 @@ public class CellRange {
     @Builder.Default
     private FontFamily fontFamily = FontFamily.MODERN;
     @Builder.Default
-    private Color fontColor = Color.BLACK;
+private Color fontColor = Color.BLACK;
     @Builder.Default
     private Color backgroundColor = new Color(255, 255, 255, 0);
     @Builder.Default

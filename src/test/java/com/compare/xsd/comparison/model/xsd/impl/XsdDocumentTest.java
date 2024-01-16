@@ -68,7 +68,7 @@ public class XsdDocumentTest {
     @Test
     public void shouldReturnTheExpectedResultWhenGetXPathIsCalled() {
         //GIVEN
-        final String expectedResult = "//";
+        final String expectedResult = "/";
 
         //WHEN
         XsdDocument result = new XsdDocument(file);
@@ -83,7 +83,7 @@ public class XsdDocumentTest {
         XsdDocument result = new XsdDocument(file);
 
         //THEN
-        assertNull(result.getType());
+        assertNull(result.getTypeName());
     }
 
     @Test

@@ -1,0 +1,18 @@
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+		Extended cardinality from 0..1 to 0..*
+In type {LineTradeAgreementType} added <SellerOrderReferencedDocument> {ReferencedDocumentType}{0..1} 
+In type {NoteType} modifying element: 
+	old: <Content>{TextType}{1..1} in type {NoteType}
+	new: <Content>{TextType}{0..1} in type {NoteType}
+		Extended cardinality from 1..1 to 0..1
+In type {TaxRegistrationType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+		Extended cardinality from 1..1 to 0..1
+In type {TradeProductType} added <BatchID> {IDType}{0..*} 
+In type {TradeProductType} added <BrandName> {TextType}{0..1} 
+In type {TradeProductType} added <IndustryAssignedID> {IDType}{0..1} 
+In type {TradeProductType} added <ModelID> {IDType}{0..1} 
+In type {TradeProductType} added <ModelName> {TextType}{0..1} 

@@ -1,0 +1,167 @@
+In type {AdvancePaymentType} added <InvoiceSpecifiedReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {CodeType} added @languageID {token}{0..1} 
+In type {CodeType} added @listAgencyName {string}{0..1} 
+In type {CodeType} added @listName {string}{0..1} 
+In type {CodeType} added @listSchemeURI {anyURI}{0..1} 
+In type {CodeType} added @listURI {anyURI}{0..1} 
+In type {CodeType} modifying attribute: 
+	old: @listAgencyID{TransportEquipmentSizeTypeCodeListAgencyIDContentType}{0..1} in type {TransportEquipmentSizeTypeCodeType}
+	new: @listAgencyID{token}{0..1} in type {CodeType}
+		Changed fixed default from 6 to null
+In type {CodeType} modifying attribute: 
+	old: @listID{token}{0..1} in type {TransportEquipmentSizeTypeCodeType}
+	new: @listID{token}{0..1} in type {CodeType}
+		Changed fixed default from 8155 to null
+In type {DateOnlyFormattedDateTimeType} modifying element: 
+	old: <DateTimeString>{DateTimeType}{0..1} in type {DateTimeType}
+	new: <DateTimeString>{DateOnlyFormattedDateTimeType}{1..1} in type {DateOnlyFormattedDateTimeType}
+		Changed compositor from CHOICE to SEQUENCE
+In type {DocumentLineDocumentType} added <CategoryCode> {CodeType}{0..1} 
+In type {DocumentLineDocumentType} added <ReferenceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {DocumentLineDocumentType} added <ResponseReasonCode> {CodeType}{0..1} 
+In type {ExchangedDocumentContextType} added <UserSpecifiedDocumentContextParameter> {DocumentContextParameterType}{0..*} 
+In type {ExchangedDocumentType} added <AttachedSpecifiedBinaryFile> {SpecifiedBinaryFileType}{0..*} 
+In type {ExchangedDocumentType} added <CreationDateTime> {FormattedDateTimeType}{0..1} 
+In type {ExchangedDocumentType} added <FirstVersionIssueDateTime> {DateTimeType}{0..1} 
+In type {ExchangedDocumentType} added <ReferenceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {ExchangedDocumentType} added <RequestedResponseTypeCode> {CodeType}{0..*} 
+In type {ExchangedDocumentType} added <SignatoryDocumentAuthentication> {DocumentAuthenticationType}{0..1} 
+In type {ExchangedDocumentType} added <SubtypeCode> {CodeType}{0..1} 
+In type {ExchangedDocumentType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {ExchangedDocumentType}
+	new: <ID>{IDType}{0..1} in type {ExchangedDocumentType}
+		Extended cardinality from 1..1 to 0..1
+In type {FinancialAdjustmentType} added <DirectionCode> {AccountingDebitCreditStatusCodeType}{0..1} 
+In type {FinancialAdjustmentType} added <RelatedTradeTax> {TradeTaxType}{0..*} 
+In type {HeaderTradeAgreementType} added <PricingBaseApplicableLogisticsLocation> {LogisticsLocationType}{0..1} 
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+		Extended cardinality from 0..1 to 0..*
+In type {LineTradeSettlementType} added <InvoiceDateTime> {DateTimeType}{0..1} 
+In type {LineTradeSettlementType} modifying element: 
+	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {LineTradeSettlementType}
+	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {LineTradeSettlementType}
+		Extended cardinality from 0..1 to 0..*
+In type {LocationFunctionCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {CodeType}
+	new: @listAgencyID{LocationFunctionCodeListAgencyIDContentType}{0..1} in type {LocationFunctionCodeType}
+		Changed fixed default from null to 6
+In type {LogisticsLocationType} added <CountryID> {CountryIDType}{0..1} 
+In type {LogisticsLocationType} added <CountrySubDivisionID> {IDType}{0..1} 
+In type {LogisticsLocationType} added <SubordinateLocation> {SubordinateLocationType}{0..1} 
+In type {LogisticsTransportEquipmentType} added <AffixedLogisticsSeal> {LogisticsSealType}{0..*} 
+In type {LogisticsTransportEquipmentType} added <ApplicableNote> {NoteType}{0..*} 
+In type {LogisticsTransportEquipmentType} added <CarrierAssignedBookingID> {IDType}{0..*} 
+In type {LogisticsTransportEquipmentType} added <Characteristic> {TextType}{0..1} 
+In type {LogisticsTransportEquipmentType} added <ReturnableIndicator> {IndicatorType}{0..1} 
+In type {LogisticsTransportEquipmentType} added <SealedIndicator> {IndicatorType}{0..1} 
+In type {LogisticsTransportMovementType} added <Cycle> {TextType}{0..1} 
+In type {LogisticsTransportMovementType} added <ID> {IDType}{0..1} 
+In type {LogisticsTransportMovementType} added <Service> {TextType}{0..1} 
+In type {LogisticsTransportMovementType} added <ServiceCode> {CodeType}{0..1} 
+In type {LogisticsTransportMovementType} added <StatusCode> {StatusCodeType}{0..1} 
+In type {LogisticsTransportMovementType} added <Type> {TextType}{0..1} 
+In type {NoteType} modifying element: 
+	old: <SubjectCode>{CodeType}{0..1} in type {NoteType}
+	new: <SubjectCode>{CodeType}{0..*} in type {NoteType}
+		Extended cardinality from 0..1 to 0..*
+In type {ReferencedDocumentType} added <CategoryCode> {CodeType}{0..1} 
+In type {ReferencedDocumentType} added <IncludedNote> {NoteType}{0..*} 
+In type {ReferencedDocumentType} added <PageID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <ReceiptDateTime> {DateTimeType}{0..1} 
+In type {ReferencedDocumentType} added <SubordinateLineID> {IDType}{0..1} 
+In type {ReferencedDocumentType} added <SubtypeCode> {CodeType}{0..*} 
+In type {SubordinateLineTradeAgreementType} modifying element: 
+	old: <GrossPriceProductTradePrice>{TradePriceType}{0..1} in type {SubordinateLineTradeAgreementType}
+	new: <GrossPriceProductTradePrice>{TradePriceType}{0..*} in type {SubordinateLineTradeAgreementType}
+		Extended cardinality from 0..1 to 0..*
+In type {SubordinateLineTradeAgreementType} modifying element: 
+	old: <NetPriceProductTradePrice>{TradePriceType}{0..1} in type {SubordinateLineTradeAgreementType}
+	new: <NetPriceProductTradePrice>{TradePriceType}{0..*} in type {SubordinateLineTradeAgreementType}
+		Extended cardinality from 0..1 to 0..*
+In type {SubordinateLineTradeDeliveryType} added <ActualDeliverySupplyChainEvent> {SupplyChainEventType}{0..*} 
+In type {SubordinateLineTradeDeliveryType} added <BilledQuantity> {QuantityType}{0..*} 
+In type {SubordinateLineTradeSettlementType} added <AmountDirectionCode> {CodeType}{0..1} 
+In type {SubordinateLineTradeSettlementType} added <InvoiceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {SubordinateLineTradeSettlementType} added <SpecifiedFinancialAdjustment> {FinancialAdjustmentType}{0..*} 
+In type {SubordinateLineTradeSettlementType} added <SpecifiedTradeAllowanceCharge> {TradeAllowanceChargeType}{0..*} 
+In type {SubordinateTradeLineItemType} added <CategoryCode> {CodeType}{0..1} 
+In type {SubordinateTradeLineItemType} added <ResponseReasonCode> {CodeType}{0..1} 
+In type {SupplyChainConsignmentItemType} added <ApplicableNote> {NoteType}{0..*} 
+In type {SupplyChainConsignmentItemType} added <ApplicableTransportDangerousGoods> {TransportDangerousGoodsType}{0..*} 
+In type {SupplyChainConsignmentItemType} added <GlobalID> {IDType}{0..*} 
+In type {SupplyChainConsignmentItemType} added <PreviousAdministrativeReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {SupplyChainConsignmentType} added <ApplicableCrossBorderCustomsValuation> {CrossBorderCustomsValuationType}{0..*} 
+In type {SupplyChainConsignmentType} added <ApplicableCrossBorderRegulatoryProcedure> {CrossBorderRegulatoryProcedureType}{0..*} 
+In type {SupplyChainConsignmentType} added <ApplicableTransportCargoInsurance> {TransportCargoInsuranceType}{0..1} 
+In type {SupplyChainConsignmentType} added <ChargeableWeightMeasure> {WeightUnitMeasureType}{0..1} 
+In type {SupplyChainConsignmentType} added <ID> {IDType}{0..1} 
+In type {SupplyChainConsignmentType} added <NetVolumeMeasure> {VolumeUnitMeasureType}{0..*} 
+In type {SupplyChainConsignmentType} added <TransitLogisticsLocation> {LogisticsLocationType}{0..*} 
+In type {SupplyChainEventType} added <TimeOccurrenceDateTime> {TimeOnlyFormattedDateTimeType}{0..1} 
+In type {SupplyChainPackagingType} added <AdditionalInstructionCode> {CodeType}{0..*} 
+In type {SupplyChainPackagingType} added <AdditionalInstructionIndicator> {IndicatorType}{0..1} 
+In type {SupplyChainTradeLineItemType} added <AdditionalInformationNote> {NoteType}{0..*} 
+In type {SupplyChainTradeLineItemType} modifying element: 
+	old: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{1..1} in type {SupplyChainTradeLineItemType}
+	new: <AssociatedDocumentLineDocument>{DocumentLineDocumentType}{0..1} in type {SupplyChainTradeLineItemType}
+		Extended cardinality from 1..1 to 0..1
+In type {TaxRegistrationType} added <IOSSID> {IDType}{0..1} 
+In type {TradeAddressType} added <CityID> {IDType}{0..1} 
+In type {TradeAddressType} added <TypeCode> {AddressTypeCodeType}{0..*} 
+In type {TradeDeliveryTermsType} added <DeliveryDiscontinuationCode> {CodeType}{0..1} 
+In type {TradeDeliveryTermsType} added <FunctionCode> {DeliveryTermsFunctionCodeType}{0..1} 
+In type {TradeDeliveryTermsType} added <PartialDeliveryAllowedIndicator> {IndicatorType}{0..1} 
+In type {TradePartyType} added <RegisteredID> {IDType}{0..*} 
+In type {TradePartyType} added <Role> {TextType}{0..*} 
+In type {TradePartyType} added <SpecifiedLogisticsLocation> {LogisticsLocationType}{0..*} 
+In type {TradePartyType} added <TypeCode> {CodeType}{0..*} 
+In type {TradePaymentTermsType} added <BillStartDateTime> {DateTimeType}{0..1} 
+In type {TradePaymentTermsType} added <DueDateTime> {FormattedDateTimeType}{0..1} 
+In type {TradePriceType} added <BasisDateTime> {DateTimeType}{0..1} 
+In type {TradePriceType} added <Type> {TextType}{0..*} 
+In type {TradeProductType} added <AdditionalDescription> {TextType}{0..*} 
+In type {TradeProductType} added <BatchID> {IDType}{0..*} 
+In type {TradeProductType} added <BuyerSuppliedPartsReferenceReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {TradeProductType} added <CommonName> {TextType}{0..1} 
+In type {TradeProductType} added <ConciseDescription> {TextType}{0..*} 
+In type {TradeProductType} added <ConfigurableIndicator> {IndicatorType}{0..1} 
+In type {TradeProductType} added <ContentUnitQuantity> {QuantityType}{0..1} 
+In type {TradeProductType} added <CustomerAssignedID> {IDType}{0..*} 
+In type {TradeProductType} added <ExportIndicator> {IndicatorType}{0..1} 
+In type {TradeProductType} added <GrossVolumeMeasure> {MeasureType}{0..1} 
+In type {TradeProductType} added <IndustryAssignedID> {IDType}{0..1} 
+In type {TradeProductType} added <ModelID> {IDType}{0..1} 
+In type {TradeProductType} added <ModelName> {TextType}{0..1} 
+In type {TradeProductType} added <NetVolumeMeasure> {MeasureType}{0..1} 
+In type {TradeProductType} added <RecyclingTypeCode> {CodeType}{0..1} 
+In type {TradeProductType} added <SizeCode> {CodeType}{0..1} 
+In type {TradeProductType} added <StatusCode> {CodeType}{0..1} 
+In type {TradeProductType} added <UltimateCustomerAssignedExtensionID> {IDType}{0..*} 
+In type {TradeProductType} added <UnitTypeCode> {CodeType}{0..*} 
+In type {TradeProductType} modifying element: 
+	old: <Description>{TextType}{0..1} in type {TradeProductType}
+	new: <Description>{TextType}{0..*} in type {TradeProductType}
+		Extended cardinality from 0..1 to 0..*
+In type {TradeProductType} modifying element: 
+	old: <LinearSpatialDimension>{SpatialDimensionType}{0..1} in type {TradeProductType}
+	new: <LinearSpatialDimension>{SpatialDimensionType}{0..*} in type {TradeProductType}
+		Extended cardinality from 0..1 to 0..*
+In type {TradeSettlementHeaderMonetarySummationType} added <IncludingTaxesLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementHeaderMonetarySummationType} added <InsuranceChargeTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementLineMonetarySummationType} added <IncludingTaxesLineTotalAmount> {AmountType}{0..*} 
+In type {TradeSettlementPaymentMeansType} modifying element: 
+	old: <PayeePartyCreditorFinancialAccount>{CreditorFinancialAccountType}{0..1} in type {TradeSettlementPaymentMeansType}
+	new: <PayeePartyCreditorFinancialAccount>{CreditorFinancialAccountType}{0..*} in type {TradeSettlementPaymentMeansType}
+		Extended cardinality from 0..1 to 0..*
+In type {TradeTaxType} added <CalculationMethodCode> {CodeType}{0..1} 
+In type {TradeTaxType} added <GrandTotalAmount> {AmountType}{0..*} 
+In type {TransportCargoType} modifying element: 
+	old: <Identification>{TextType}{0..1} in type {TransportCargoType}
+	new: <Identification>{TextType}{0..*} in type {TransportCargoType}
+		Extended cardinality from 0..1 to 0..*
+In type {TransportServicePaymentArrangementCodeType} modifying attribute: 
+	old: @listAgencyID{token}{0..1} in type {CodeType}
+	new: @listAgencyID{TransportServicePaymentArrangementCodeListAgencyIDContentType}{0..1} in type {TransportServicePaymentArrangementCodeType}
+		Changed fixed default from null to 6

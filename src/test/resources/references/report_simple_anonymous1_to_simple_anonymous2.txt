@@ -1,0 +1,32 @@
+**** XSD COMPARISON ****
+	 old grammar: simple_anonymous1.xsd
+	 new grammar: simple_anonymous2.xsd
+
+
+
+
+**** STATISTIC ****
+
+
+ELEMENTS:
+
+	Added elements in XSD:	0
+	Added elements in XML:	0
+
+	Modified elements in XSD:	0
+	Modified elements in XML:	0
+
+	Removed elements from XSD:	0
+	Removed elements from XML:	0
+
+
+ATTRIBUTES:
+
+	Added attributes in XSD:	0
+	Added attributes in XML:	0
+
+	Modified attributes in XSD:	0
+	Modified attributes in XML:	0
+
+	Removed attributes from XSD:	0
+	Removed attributes from XML:	0

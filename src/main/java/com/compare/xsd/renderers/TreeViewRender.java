@@ -216,7 +216,7 @@ public class TreeViewRender implements RenderView {
             TreeItem<XsdNode> treeItem = cellData.getValue();
             XsdNode node = treeItem.getValue();
 
-            return new ReadOnlyStringWrapper(node.getType());
+            return new ReadOnlyStringWrapper(node.getTypeName());
         });
 
         column.setCellFactory(treeColumn -> createTextCellFactoryWithTooltip());

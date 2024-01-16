@@ -25,14 +25,12 @@ public class XsdElementTest {
 
     @BeforeEach
     public void setup() {
-        when(elementDecl.getTypeDefinition()).thenReturn(typeDefinition);
-
-        element = new XsdElement(elementDecl, document);
+        element = new XsdEmptyElementNode(document);
     }
 
     @Test
     public void testFindAttributeByName_shouldThrowIllegalArgumentException_whenNameIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> new XsdElement().findAttributeByName(null), "name cannot be null");
+        assertThrows(IllegalArgumentException.class, () -> element.findAttributeByName(null), "name cannot be null");
     }
 
     @Test

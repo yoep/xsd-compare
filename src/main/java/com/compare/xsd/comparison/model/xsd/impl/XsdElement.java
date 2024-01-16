@@ -11,73 +11,208 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.impl.dv.xs.XSSimpleTypeDecl;
 import org.apache.xerces.impl.xs.*;
-import org.apache.xerces.xs.XSElementDeclaration;
-import org.apache.xerces.xs.XSParticle;
-import org.apache.xerces.xs.XSTypeDefinition;
+import org.apache.xerces.xs.*;
 import org.springframework.util.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 @Slf4j
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class XsdElement extends AbstractXsdElementNode {
-    private final XSElementDeclaration element;
-    private final XSParticle definition;
-    private final List<XsdAttribute> attributes = new ArrayList<>();
+    private XSElementDeclaration elementDecl;
+    // particle is not final as an element might have various cardinalites by its surrounding particle
+    // 			<xsd:element name="BuyerRequisitionerTradeParty" type="ram:TradePartyType" minOccurs="0" maxOccurs="unbounded"/>
+    private XSParticle particle;
+    private List<XsdAttribute> attributes = new ArrayList<>();
 
     //region Constructors
 
     /**
      * Initialize a new {@link XsdElement}.
+     * Just used for the glopal root element declaration
      *
-     * @param element Set the element to process.
-     * @param parent  Set the parent document.
+     * @param elementDecl Set the element to process.
+     * @param document  Set the containing document.
      */
-    public XsdElement(XSElementDeclaration element, XsdDocument parent) {
-        Assert.notNull(element, "element cannot be null");
-        this.element = element;
-        this.parent = parent;
-        this.definition = null;
+    private XsdElement(XSElementDeclaration elementDecl, XsdDocument document) {
+        Assert.notNull(elementDecl, "element cannot be null");
+        this.elementDecl = elementDecl;
+        // required for centralized map of already processed elements (to prevent endless loops in recursive grammars)
+        this.document = document;
+        this.parent = document;
+        this.particle = null;
         this.minOccurrence = 1;
         this.maxOccurrence = 1;
-
-        init();
+        this.typeDefinition = this.elementDecl.getTypeDefinition();
+        this.typeName = typeDefinition.getName();
+        this.name = elementDecl.getName();
+        this.typeNamespace = loadNamespace(this);
+        document.xPathStack.push(name);
+//        this.xpath = createXPath(this.document.xPathStack);
     }
 
     /**
      * Initialize a new {@link XsdElement}.
      *
-     * @param elementDefinition Set the definition to process.
-     * @param parent            Set the parent element of this element.
+     * @param particle          Only elementDefinition are supported as term to be process.
+     * @param parent           Set the parent element of this element.
      */
-    public XsdElement(XSParticle elementDefinition, XsdElement parent) {
+    private XsdElement(XSParticle particle, XsdElement parent, short compositor) {
         super(parent);
-        Assert.notNull(elementDefinition, "elementDefinition cannot be null");
-        this.element = (XSElementDecl) elementDefinition.getTerm();
-        this.definition = elementDefinition;
-        this.minOccurrence = elementDefinition.getMinOccurs();
-        this.maxOccurrence = elementDefinition.getMaxOccursUnbounded() ? null : elementDefinition.getMaxOccurs();
-
-        init();
+        Assert.notNull(particle, "elementDefinition cannot be null");
+        /** a term could be as well <code>XSModelGroup</code> and <code>XSWildcard</code> */
+        XSTerm xsTerm = particle.getTerm();
+        if(xsTerm instanceof XSElementDecl){
+            this.elementDecl = (XSElementDecl) xsTerm;
+        }else{
+            this.elementDecl = null;
+            if(xsTerm instanceof XSModelGroup){
+                log.warn("XSModelGroup is not supported!");
+            }else if(xsTerm instanceof XSWildcard){
+                log.warn("XSWildcard is not supported!");
+            } else {
+                log.error("This should not happen!");
+            }
+        }
+        this.particle = particle;
+        this.minOccurrence = particle.getMinOccurs();
+        this.maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
+        if(compositor == XSModelGroup.COMPOSITOR_CHOICE && this.minOccurrence == 1){
+            this.minOccurrence = 0;
+        }
+        this.compositor = compositor;
+        this.typeDefinition = this.elementDecl.getTypeDefinition();
+        this.typeName = typeDefinition.getName();
+        this.name = elementDecl.getName();
+        this.typeNamespace = loadNamespace(this);
+        this.document = parent.getDocument();
+        this.document.xPathStack.push(name);
+        //log.debug("Creating new element " + this.name + " at " + xpath);
+        //System.err.println("Creating new element: " + getXPath());
     }
 
     /**
      * Initialize a new {@link XsdElement}.
-     * This constructor can only be used {@link XsdEmptyElementNode}.
+     * This constructor should only be used {@link XsdEmptyElementNode} or cloning.
      */
-    protected XsdElement() {
-        this.element = null;
-        this.definition = null;
+    protected XsdElement(XsdDocument document, XSParticle particle) {
+        if(particle != null){
+            this.elementDecl = (XSElementDeclaration) particle.getTerm();
+        }else{
+            this.elementDecl = null;
+        }
+        this.particle = particle;
         this.name = "";
+        this.document = document;
     }
 
     //endregion
 
+    /** Just used for the global root element declaration */
+    public static XsdElement newXsdElement(XSElementDeclaration elementDeclaration, XsdDocument document) {
+        /** The map is meant to avoid loop triggered by recursive grammars.
+         * But there may be similar element names having different content/attributes, therefore the key for this already-read map is the name of the type of an element (either simple or complex).
+         * If there is no type the element name is defining a group and is similar unique - but mising test case and certainty, yet ! */
+
+        XsdElement xsdElement = new XsdElement(elementDeclaration, document);
+        String elementID = xsdElement.getUniqueId();
+        document.allElements.put(elementID, xsdElement);
+        raiseAncestorNo(document, elementID);
+        xsdElement.loadDescendants();
+        document.xPathStack.pop();
+        lowerAncestorNo(document, elementID);
+        return xsdElement;
+    }
+
+    /** We have to use particle as parameter, although we allow only particle.term() being ElementDeclaration as Cardinality is only on particle! */
+    public static XsdElement newXsdElement(XSParticle particle, XsdElement parent, short compositor) {
+        // Cast save as we only allow particle as parameter having particle.term() as ElementDeclaration. Require particle as cardinality is only on particle! */
+        XSElementDeclaration elementDeclaration = (XSElementDeclaration) particle.getTerm();
+        /** The map is meant to avoid loop triggered by recursive grammars.
+         * But there may be similar element names having different content/attributes, therefore the key for this already-read map is the name of the type of an element (either simple or complex).
+         * If there is no type the element name is defining a group and is similar unique - but mising test case and certainty, yet ! */
+        String elementID = getUniqueId(elementDeclaration, particle);
+        if(hasTooManySameAncestors(parent.getDocument(), elementID)){
+            return null;
+        }else{
+            XsdElement xsdElement = new XsdElement(particle, parent, compositor);
+            // make sure to add the element before initiating the element & creating subcontents
+            parent.getDocument().allElements.put(elementID, xsdElement);
+            raiseAncestorNo(parent.getDocument(), elementID);
+            xsdElement.loadDescendants();
+            parent.getDocument().xPathStack.pop();
+            lowerAncestorNo(parent.getDocument(), elementID);
+            return xsdElement;
+        }
+    }
+
+    public String getUniqueId(){
+        return XsdElement.getUniqueId(elementDecl, minOccurrence, maxOccurrence);
+    }
+
+    static private Boolean hasTooManySameAncestors(XsdDocument document, String elementID){
+        Integer count = document.ancestorCountByelementIO.get(elementID);
+        if(count != null && count == document.duplicatedAnchestorNoAllowed){
+            return Boolean.TRUE;
+        }else{
+            return Boolean.FALSE;
+        }
+    }
+
+    static private void raiseAncestorNo(XsdDocument document, String elementID){
+        Integer count = document.ancestorCountByelementIO.get(elementID);
+        if(count == null){
+            document.ancestorCountByelementIO.put(elementID, 1);
+        }else{
+            document.ancestorCountByelementIO.put(elementID, ++count);
+        }
+    }
+
+    static private void lowerAncestorNo(XsdDocument document, String elementID){
+        Integer count = document.ancestorCountByelementIO.get(elementID);
+        if(count == 1){
+            document.ancestorCountByelementIO.remove(elementID);
+        }else{
+            document.ancestorCountByelementIO.put(elementID, --count);
+        }
+    }
+
+    private static String getUniqueId(XSElementDeclaration elementDecl, XSParticle particle){
+        Integer minOccurrence = particle.getMinOccurs();
+        Integer maxOccurrence = particle.getMaxOccursUnbounded() ? null : particle.getMaxOccurs();
+        return XsdElement.getUniqueId(elementDecl, minOccurrence, maxOccurrence);
+    }
+
+    private static String getUniqueId(XSElementDeclaration elementDecl, Integer minOcc, Integer maxOcc){
+        String uniqueId = "";
+        if(elementDecl.getTypeDefinition() != null &&  elementDecl.getTypeDefinition().getName() != null){
+            uniqueId += elementDecl.getTypeDefinition().getName();
+        }
+        uniqueId += getUniversalName(elementDecl.getNamespace(), elementDecl.getName());
+        String maxOccurString = maxOcc == null ? "n" : maxOcc.toString();
+        uniqueId += "{" + minOcc + "," + maxOccurString + "}";
+        return uniqueId;
+    }
+
+    /** @return the local name with (optional - if existent) the namespace as prefix within curely brackets: {ns}name
+     * as universal name as described by James Clark - http://www.jclark.com/xml/xmlns.htm  */
+    public static String getUniversalName(String namespace, String name){
+        if(namespace != null && !namespace.isEmpty()){
+            return "{" + namespace + "}" + name;
+        }else{
+            return name;
+        }
+    }
     //region Getters & Setters
+
+    public XsdDocument getDocument(){
+        return document;
+    }
 
     @Override
     public Image getIcon() {
@@ -126,13 +261,8 @@ public class XsdElement extends AbstractXsdElementNode {
 
     //region Functions
 
-    private void init() {
-        var typeDefinition = element.getTypeDefinition();
-
-        this.name = element.getName();
+    private void loadDescendants() {
         log.trace("Processing element " + this.name);
-        loadNamespace();
-
         if (typeDefinition.getTypeCategory() == XSTypeDefinition.COMPLEX_TYPE) {
             loadComplexType((XSComplexTypeDecl) typeDefinition);
         } else if (typeDefinition.getTypeCategory() == XSTypeDefinition.SIMPLE_TYPE) {
@@ -143,12 +273,12 @@ public class XsdElement extends AbstractXsdElementNode {
     }
 
     private void loadComplexType(XSComplexTypeDecl complexType) {
-        var particle = (XSParticleDecl) complexType.getParticle();
+        var particleDecl = (XSParticleDecl) complexType.getParticle();
         var attributes = complexType.getAttributeUses();
 
-        if (particle != null) {
-            var group = (XSModelGroupImpl) particle.getTerm();
-            processComplexGroup(group);
+        if (particleDecl != null) {
+            XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
+            processComplexGroup(modelGroup, modelGroup.getCompositor());
         } else {
             loadType(complexType);
         }
@@ -160,32 +290,38 @@ public class XsdElement extends AbstractXsdElementNode {
         }
     }
 
-    private void processComplexGroup(XSModelGroupImpl group) {
-        var children = group.getParticles();
+    private void processComplexGroup(XSModelGroupImpl group, short compositor) {
+        var particles = group.getParticles();
 
-        for (Object childItem : children) {
-            if (childItem instanceof XSParticle) {
-                XSParticleDecl child = (XSParticleDecl) childItem;
+        for (Object particle : particles) {
+            // before JDK 5 generics - particles are always XSParticleDecl
+            if (particle instanceof XSParticleDecl) {
+                XSParticleDecl particleDecl = (XSParticleDecl) particle;
 
-                if (child.getTerm() instanceof XSElementDeclaration) {
-                    this.elements.add(new XsdElement(child, this));
-                } else if (child.getTerm() instanceof XSModelGroupImpl) {
-                    processComplexGroup((XSModelGroupImpl) child.getTerm());
+                if (particleDecl.getTerm() instanceof XSElementDeclaration) {
+                    //log.debug("##### Parent element " + this.getName() + " gets child element: " + ((XSElementDeclaration) particleDecl.getTerm()).getName());
+                    this.elements.add(newXsdElement(particleDecl, this, compositor));
+                } else if (particleDecl.getTerm() instanceof XSModelGroupImpl) {
+                    XSModelGroupImpl modelGroup= (XSModelGroupImpl) particleDecl.getTerm();
+                    processComplexGroup(modelGroup, modelGroup.getCompositor());
                 }
+            }else{
+                log.error("Particles should be always be of class XSParticleDecl!");
             }
         }
     }
 
-    private void loadNamespace() {
-        this.namespace = element.getNamespace();
+    private static String loadNamespace(XsdElement element) {
+        String namespace = element.elementDecl.getNamespace();
 
-        if (StringUtils.isEmpty(this.namespace)) {
-            this.namespace = element.getTypeDefinition().getNamespace();
+        if (StringUtils.isEmpty(namespace)) {
+            namespace = element.elementDecl.getTypeDefinition().getNamespace();
 
-            if (StringUtils.isEmpty(this.namespace) && this.definition != null) {
-                this.namespace = this.definition.getNamespace();
+            if (StringUtils.isEmpty(namespace) && element.particle != null) {
+                namespace = element.particle.getNamespace();
             }
         }
+        return namespace;
     }
 
     @Override

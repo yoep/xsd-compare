@@ -1,4 +1,0 @@
-logging:
-  level:
-    org.springframework: INFO
-    com.compare.xsd: DEBUG

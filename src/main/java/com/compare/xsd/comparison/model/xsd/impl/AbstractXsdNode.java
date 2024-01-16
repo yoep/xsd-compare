@@ -1,6 +1,6 @@
 package com.compare.xsd.comparison.model.xsd.impl;
 
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import com.compare.xsd.comparison.model.xsd.XsdNode;
 import javafx.scene.image.Image;
 import lombok.AccessLevel;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.xerces.xs.XSFacet;
-import org.apache.xerces.xs.XSMultiValueFacet;
-import org.apache.xerces.xs.XSSimpleTypeDefinition;
-import org.apache.xerces.xs.XSTypeDefinition;
+import org.apache.xerces.xs.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +24,26 @@ import java.util.Objects;
 public abstract class AbstractXsdNode implements XsdNode {
     private static final String SCHEMA_DEFINITION = "http://www.w3.org/2001/XMLSchema";
     private static final String ICON_DIRECTORY = "/images/";
+/*
+                case XSSimpleTypeDefinition.FACET_MAXINCLUSIVE:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_MININCLUSIVE:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_TOTALDIGITS:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
+                case XSSimpleTypeDefinition.FACET_FRACTIONDIGITS:
+                    this.whitespace = facet.getLexicalFacetValue();
+                    break;
 
+ */
+    protected StringBuilder sb = new StringBuilder();
     protected String name;
-    protected String namespace;
-    protected String type;
+    protected String typeNamespace;
+    protected String typeName;
+    protected XSTypeDefinition typeDefinition;
     protected String fixedValue;
     protected String pattern;
     protected String whitespace;
@@ -39,10 +52,17 @@ public abstract class AbstractXsdNode implements XsdNode {
     protected Integer length;
     protected Integer minLength;
     protected Integer maxLength;
-    protected List<String> enumeration = new ArrayList<>();
+    protected Integer minInclusive;
+    protected Integer maxInclusive;
+    protected Integer minExclusive;
+    protected Integer maxExclusive;
+    protected Integer totalDigits;
+    protected Integer fractionDigits;
+    protected short compositor;
+    protected List<String> enumeration;
 
     protected AbstractXsdNode parent;
-    protected Modifications modifications;
+    protected Change change;
 
     //region Constructors
 
@@ -59,6 +79,36 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     //region Implementation of XsdNode
 
+    /** getTypeName() may return null in case of an anonymous type in this case the next typeName of an ancestor is returned
+     For example, the attribute @format would return null as its parent typeName:
+     <xsd:complexType name="FormattedDateTimeType">
+        <xsd:sequence>
+            <xsd:element name="DateTimeString">
+                <xsd:complexType>
+                    <xsd:simpleContent>
+                        <xsd:extension base="xsd:string">
+                            <xsd:attribute name="format" type="qdt:FormattedDateTimeFormatContentType"/>
+                        </xsd:extension>
+                    </xsd:simpleContent>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+     </xsd:complexType>
+    */
+    public String getNextTypeName(){
+        AbstractXsdNode node = this;
+        String typeName = node.getTypeName();
+        while(typeName == null){
+            node = node.getParent();
+            if(node instanceof XsdDocument || node == null){
+                return null;
+            }
+            typeName = node.getTypeName();
+        }
+        return typeName;
+    }
+
+
     @Override
     public String getCardinality() {
         return minOccurrence + ".." + (maxOccurrence != null ? maxOccurrence : "*");
@@ -66,8 +116,8 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public Image getModificationColor() {
-        if (modifications != null) {
-            switch (modifications.getType()) {
+        if (change != null) {
+            switch (change.getType()) {
                 case ADDED:
                     return loadResourceIcon("green.png");
                 case REMOVED:
@@ -86,23 +136,36 @@ public abstract class AbstractXsdNode implements XsdNode {
 
     @Override
     public String getXPath() {
-        String xpath = "";
-        String multiplicity = "";
-
-        if (parent != null) {
-            xpath = parent.getXPath() + "/";
+        if(this instanceof XsdDocument){
+            return "/";
+        }else{
+            StringBuilder sb = getXPath(this.parent).append("/").append(this.name);
+            return sb.toString();
         }
+    }
 
-        if (maxOccurrence == null || maxOccurrence > 1) {
-            multiplicity = "[]";
+    public StringBuilder getXPath(AbstractXsdNode node) {
+        if(node instanceof XsdDocument){
+            return ((XsdDocument) node).getStringBuilder();
+        }else {
+            return getXPath(node.parent).append("/").append(node.name);
         }
-
-        return xpath + "*:" + getName() + multiplicity;
     }
 
     //endregion
 
     //region Methods
+
+
+    /** @return the local name with (optional - if existent) the namespace as prefix within curely brackets: {ns}name
+     * as universal name as described by James Clark - http://www.jclark.com/xml/xmlns.htm  */
+    public static String getUniversalName(String namespace, String name){
+        if(namespace != null && !namespace.isEmpty()){
+            return "{" + namespace + "}" + name;
+        }else{
+            return name;
+        }
+    }
 
     /**
      * Get the XML value for this node.
@@ -112,7 +175,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     public String getXmlValue() {
         if (StringUtils.isNotEmpty(getFixedValue())) {
             return getFixedValue();
-        } else if (CollectionUtils.isNotEmpty(getEnumeration())) {
+        } else if (getEnumeration() != null && CollectionUtils.isNotEmpty(getEnumeration())) {
             return getEnumeration().get(0);
         }
 
@@ -127,7 +190,7 @@ public abstract class AbstractXsdNode implements XsdNode {
     public String getXmlComment() {
         String comment = "";
 
-        if (CollectionUtils.isNotEmpty(getEnumeration())) {
+        if (getEnumeration() != null && CollectionUtils.isNotEmpty(getEnumeration())) {
             comment += " Possible values: " + getEnumeration();
         }
         if (StringUtils.isNotEmpty(getPattern())) {
@@ -151,16 +214,34 @@ public abstract class AbstractXsdNode implements XsdNode {
     //region Functions
 
     /**
-     * Load the base type of the definition and store the value in {@link #type}.
+     * Load the base type of the definition and store the value in {@link #typeName}.
      *
      * @param typeDefinition Set the type definition of the node.
      */
     protected void loadType(XSTypeDefinition typeDefinition) {
+        /* 2DO instead of taking the final type of inheritance tree, when should create a list of all inherited types
         while (typeDefinition.getBaseType() != null && !isTypeDefinitionDefaultXsdSchemaDefinition(typeDefinition)) {
             typeDefinition = typeDefinition.getBaseType();
         }
-
-        this.type = typeDefinition.getName();
+        */
+        this.typeName = typeDefinition.getName();
+        if(typeDefinition instanceof XSComplexTypeDefinition){
+            XSComplexTypeDefinition complexTypeDefinition = (XSComplexTypeDefinition) typeDefinition;
+            if(complexTypeDefinition.getContentType() == XSComplexTypeDefinition.CONTENTTYPE_SIMPLE){
+                XSSimpleTypeDefinition st = complexTypeDefinition.getSimpleType();
+                if(this.enumeration == null){
+                    this.enumeration = new ArrayList<>();
+                }
+                this.enumeration = st.getLexicalEnumeration();
+            }
+        }else if(typeDefinition instanceof XSSimpleTypeDefinition){
+            if(this.enumeration == null){
+                this.enumeration = new ArrayList<>();
+            }
+            this.enumeration = ((XSSimpleTypeDefinition)typeDefinition).getLexicalEnumeration();
+        }else {
+            System.out.println("This story does not end up!");
+        }
     }
 
     /**
@@ -174,13 +255,40 @@ public abstract class AbstractXsdNode implements XsdNode {
     }
 
     /**
-     * Load the simple type definition for this node.
+     * Load facets from the simple type definition for this node.
+     * Examples:
+     *          <xs:pattern value="([a-z])*"/>
      *
      * @param simpleType Set the simple type definition to load.
      */
     protected void loadSimpleType(XSSimpleTypeDefinition simpleType) {
         loadType(simpleType);
+/*
+FACET_NONE
+No facets defined.
 
+
+FACET_MAXINCLUSIVE
+4.3.7 maxInclusive.
+
+FACET_MAXEXCLUSIVE
+4.3.9 maxExclusive.
+
+FACET_MINEXCLUSIVE
+4.3.9 minExclusive.
+
+FACET_MININCLUSIVE
+4.3.10 minInclusive.
+
+FACET_TOTALDIGITS
+4.3.11 totalDigits .
+
+FACET_FRACTIONDIGITS
+4.3.12 fractionDigits.
+
+FACET_ENUMERATION
+4.3.5 enumeration.
+* */
         for (Object facetObject : simpleType.getFacets()) {
             var facet = (XSFacet) facetObject;
 
@@ -200,6 +308,24 @@ public abstract class AbstractXsdNode implements XsdNode {
                 case XSSimpleTypeDefinition.FACET_WHITESPACE:
                     this.whitespace = facet.getLexicalFacetValue();
                     break;
+                case XSSimpleTypeDefinition.FACET_MAXINCLUSIVE:
+                    this.maxInclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MAXEXCLUSIVE:
+                    this.maxExclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MININCLUSIVE:
+                    this.minInclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_MINEXCLUSIVE:
+                    this.minExclusive = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_TOTALDIGITS:
+                    this.totalDigits = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
+                case XSSimpleTypeDefinition.FACET_FRACTIONDIGITS:
+                    this.fractionDigits = Integer.valueOf(facet.getLexicalFacetValue());
+                    break;
                 default:
                     log.warn("Facet type " + facet.getFacetKind() + " is not implemented at the moment");
                     break;
@@ -211,7 +337,12 @@ public abstract class AbstractXsdNode implements XsdNode {
 
             switch (facet.getFacetKind()) {
                 case XSSimpleTypeDefinition.FACET_ENUMERATION:
-                    this.enumeration.addAll(facet.getLexicalFacetValues());
+                    if(this.enumeration == null){
+                        this.enumeration = new ArrayList<>();
+                    }
+                    // has already being added earlier
+                    assert(this.enumeration.equals(facet.getLexicalFacetValues()));
+                    //this.enumeration.addAll(facet.getLexicalFacetValues());
                     break;
                 case XSSimpleTypeDefinition.FACET_PATTERN:
                     this.pattern = String.join(", ", facet.getLexicalFacetValues());
