@@ -1,0 +1,79 @@
+**** XSD COMPARISON ****
+	 old grammar: FACTUR-X_MINIMUM.xsd
+	 new grammar: Factur-X-MINIMUM_1.0.07.xsd
+
+
+Added element <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} in type {HeaderTradeAgreementType}
+	in ApplicableHeaderTradeAgreement at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/AdditionalReferencedDocument
+
+Added element <FormattedIssueDateTime> {FormattedDateTimeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/FormattedIssueDateTime
+
+Added element <ReferenceTypeCode> {ReferenceCodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/ReferenceTypeCode
+
+Added element <TypeCode> {DocumentCodeType}{0..1} in type {ReferencedDocumentType}
+	in BuyerOrderReferencedDocument at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerOrderReferencedDocument/TypeCode
+
+Modifying element: 
+	old: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+	new: <CountryID>{CountryIDType}{1..1} in type {TradeAddressType}
+		Changed enumeration from [1A, AD, AE, AF, AG, AI, AL, AM, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TR, TT, TV, TW, TZ, UA, UG, UM, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, XI, YE, YT, ZA, ZM, ZW] to []
+			removed: [1A, AD, AE, AF, AG, AI, AL, AM, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM, KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO, TR, TT, TV, TW, TZ, UA, UG, UM, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, XI, YE, YT, ZA, ZM, ZW]
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/PostalTradeAddress/CountryID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/PostalTradeAddress/CountryID
+
+Modifying element: 
+	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+		Changed cardinality from 1..1 to 0..1
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/BuyerTradeParty/SpecifiedTaxRegistration/ID
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeAgreement/SellerTradeParty/SpecifiedTaxRegistration/ID
+
+Modifying element: 
+	old: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceCurrencyCode>{CurrencyCodeType}{1..1} in type {HeaderTradeSettlementType}
+		Changed enumeration from [AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHE, CHF, CHW, CLF, CLP, CNY, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, USN, UYI, UYU, UYW, UZS, VES, VND, VUV, WST, XAF, XAG, XAU, XBA, XBB, XBC, XBD, XCD, XDR, XOF, XPD, XPF, XPT, XSU, XTS, XUA, XXX, YER, ZAR, ZMW, ZWL] to []
+			removed: [AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHE, CHF, CHW, CLF, CLP, CNY, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, USN, UYI, UYU, UYW, UZS, VES, VND, VUV, WST, XAF, XAG, XAU, XBA, XBB, XBC, XBD, XCD, XDR, XOF, XPD, XPF, XPT, XSU, XTS, XUA, XXX, YER, ZAR, ZMW, ZWL]
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/InvoiceCurrencyCode
+
+Modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..2} in type {TradeSettlementHeaderMonetarySummationType}
+		Changed cardinality from 0..1 to 0..2
+				at /CrossIndustryInvoice/SupplyChainTradeTransaction/ApplicableHeaderTradeSettlement/SpecifiedTradeSettlementHeaderMonetarySummation/TaxTotalAmount
+
+Modifying element: 
+	old: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+	new: <TypeCode>{DocumentCodeType}{1..1} in type {ExchangedDocumentType}
+		Changed enumeration from [80, 81, 82, 83, 84, 130, 202, 203, 204, 211, 261, 262, 295, 296, 308, 325, 326, 380, 381, 383, 384, 385, 386, 387, 388, 389, 390, 393, 394, 395, 396, 420, 456, 457, 458, 527, 575, 623, 633, 751, 780, 875, 876, 877, 935] to []
+			removed: [80, 81, 82, 83, 84, 130, 202, 203, 204, 211, 261, 262, 295, 296, 308, 325, 326, 380, 381, 383, 384, 385, 386, 387, 388, 389, 390, 393, 394, 395, 396, 420, 456, 457, 458, 527, 575, 623, 633, 751, 780, 875, 876, 877, 935]
+				at /CrossIndustryInvoice/ExchangedDocument/TypeCode
+
+
+
+**** STATISTIC ****
+
+
+ELEMENTS:
+
+	Added elements in XSD:	4
+	Added elements in XML:	4
+
+	Modified elements in XSD:	5
+	Modified elements in XML:	7
+
+	Removed elements from XSD:	0
+	Removed elements from XML:	0
+
+
+ATTRIBUTES:
+
+	Added attributes in XSD:	0
+	Added attributes in XML:	0
+
+	Modified attributes in XSD:	0
+	Modified attributes in XML:	0
+
+	Removed attributes from XSD:	0
+	Removed attributes from XML:	0
