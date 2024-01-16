@@ -66,8 +66,13 @@ public class XsdComparerTest {
     private static final String FACTUR_X_1_0_06_EXTENDED = XSD_DIR + "factur-x" + File.separator + VER_1_0_06 + File.separator + "FACTUR-X_EXTENDED.xsd";
     private static final String FACTUR_X_1_0_06_MINIMUM = XSD_DIR + "factur-x" + File.separator + VER_1_0_06 + File.separator + "FACTUR-X_MINIMUM.xsd";
 
-
-
+    private static final String VER_1_0_07 = "1.0.07";
+    private static final String VER_DRAFT = "_" + VER_1_0_07 + "_draft20240106";
+    private static final String FACTUR_X_1_0_07_BASIC_WL = XSD_DIR + "factur-x" + File.separator + "Factur-X-BasicWL"  + VER_DRAFT + File.separator + "Factur-X_BasicWL_" + VER_1_0_07 + ".xsd";
+    private static final String FACTUR_X_1_0_07_BASIC = XSD_DIR + "factur-x" + File.separator + "Factur-X-Basic"  + VER_DRAFT + File.separator + "Factur-X_BASIC_" + VER_1_0_07 + ".xsd";
+    private static final String FACTUR_X_1_0_07_EN16931 = XSD_DIR + "factur-x" + File.separator + "Factur-X-EN16931" + VER_DRAFT + File.separator + "Factur-X_" + VER_1_0_07 + "_EN16931_Compliant.xsd";
+    private static final String FACTUR_X_1_0_07_EXTENDED = XSD_DIR + "factur-x" + File.separator + "Factur-X_Extended" + VER_DRAFT + File.separator + "Factur-X_" + VER_1_0_07 + "_EN16931_Conformant_Extended.xsd";
+    private static final String FACTUR_X_1_0_07_MINIMUM = XSD_DIR + "factur-x" + File.separator + "Factur-X-Minimum"  + VER_DRAFT + File.separator + "Factur-X-MINIMUM_" + VER_1_0_07 + ".xsd";
 
     @BeforeEach
     public void setup() {
@@ -101,6 +106,18 @@ public class XsdComparerTest {
             compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_BASIC, CII_D22B_XSD, reportType);
             compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_EN16931, CII_D22B_XSD, reportType);
             compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_EXTENDED, CII_D22B_XSD, reportType);
+            
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_MINIMUM, FACTUR_X_1_0_07_MINIMUM, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_BASIC_WL, FACTUR_X_1_0_07_BASIC_WL, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_BASIC, FACTUR_X_1_0_07_BASIC, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_EN16931, FACTUR_X_1_0_07_EN16931, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_06_EXTENDED, FACTUR_X_1_0_07_EXTENDED, reportType);            
+            
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_07_MINIMUM, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_07_BASIC_WL, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_07_BASIC, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_07_EN16931, CII_D22B_XSD, reportType);
+            compareCorrect &= compareTwoXsdGrammars(FACTUR_X_1_0_07_EXTENDED, CII_D22B_XSD, reportType);            
 
             compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_1_0_06_MINIMUM, reportType);
             compareCorrect &= compareTwoXsdGrammars(CII_D16B_XSD, FACTUR_X_1_0_06_BASIC_WL, reportType);
