@@ -1,0 +1,2598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron"
+    schemaVersion="iso">
+  <title>Schema for Factur-X; 1.0.07; No Invoice, MINIMUM</title>
+  <ns uri="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100" prefix="rsm"/>
+  <ns uri="urn:un:unece:uncefact:data:standard:QualifiedDataType:100" prefix="qdt"/>
+  <ns uri="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100" prefix="ram"/>
+  <ns uri="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100" prefix="udt"/>
+  <pattern>
+    <rule context="//ram:ApplicableHeaderTradeSettlement">
+      <assert test="(count(ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount) = 1  and not (ram:TaxCurrencyCode)  and (   ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount/@currencyID = ram:InvoiceCurrencyCode   or   not(ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount/@currencyID) )) or ( count(ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount) = 2 and ram:TaxCurrencyCode and ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount/@currencyID = ram:InvoiceCurrencyCode and ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount/@currencyID = ram:TaxCurrencyCode )">
+	</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax">
+      <assert test="(ram:BasisAmount)">
+	[BR-45]-Each VAT breakdown (BG-23) shall have a VAT category taxable amount (BT-116).</assert>
+      <assert test="(ram:CalculatedAmount)">
+	[BR-46]-Each VAT breakdown (BG-23) shall have a VAT category tax amount (BT-117).</assert>
+      <assert test="(ram:CategoryCode)">
+	[BR-47]-Each VAT breakdown (BG-23) shall be defined through a VAT category code (BT-118).</assert>
+      <assert test="(ram:RateApplicablePercent) or (ram:CategoryCode = &apos;O&apos;)">
+	[BR-48]-Each VAT breakdown (BG-23) shall have a VAT category rate (BT-119), except if the Invoice is not subject to VAT.</assert>
+      <assert test="((ram:TaxPointDate) and not (ram:DueDateTypeCode)) or (not (ram:TaxPointDate) and (ram:DueDateTypeCode)) or (not (ram:TaxPointDate) and not (ram:DueDateTypeCode))">
+	[BR-CO-03]-Value added tax point date (BT-7) and Value added tax point date code (BT-8) are mutually exclusive.</assert>
+      <assert test="(round(.[normalize-space(upper-case(ram:TypeCode)) = &apos;VAT&apos;]/xs:decimal(ram:RateApplicablePercent)) = 0 and (round(xs:decimal(ram:CalculatedAmount)) = 0)) or (round(.[normalize-space(upper-case(ram:TypeCode)) = &apos;VAT&apos;]/xs:decimal(ram:RateApplicablePercent)) != 0 and ((abs(xs:decimal(ram:CalculatedAmount)) - 1  le  round(abs(xs:decimal(ram:BasisAmount)) * (.[normalize-space(upper-case(ram:TypeCode)) = &apos;VAT&apos;]/xs:decimal(ram:RateApplicablePercent) div 100) * 10 * 10) div 100 ) and (abs(xs:decimal(ram:CalculatedAmount)) + 1  ge  round(abs(xs:decimal(ram:BasisAmount)) * (.[normalize-space(upper-case(ram:TypeCode)) = &apos;VAT&apos;]/xs:decimal(ram:RateApplicablePercent) div 100) * 10 * 10) div 100 ))) or (not(exists(.[normalize-space(upper-case(ram:TypeCode))=&apos;VAT&apos;]/xs:decimal(ram:RateApplicablePercent))) and (round(xs:decimal(ram:CalculatedAmount)) = 0))">
+	[BR-CO-17]-VAT category tax amount (BT-117) = VAT category taxable amount (BT-116) x (VAT category rate (BT-119) / 100), rounded to two decimals.</assert>
+      <assert test="string-length(substring-after(ram:BasisAmount,&apos;.&apos;))&lt;=2">
+	[BR-DEC-19]-The allowed maximum number of decimals for the VAT category taxable amount (BT-116) is 2.</assert>
+      <assert test="string-length(substring-after(ram:CalculatedAmount,&apos;.&apos;))&lt;=2">
+	[BR-DEC-20]-The allowed maximum number of decimals for the VAT category tax amount (BT-117) is 2.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:CategoryCode[. = &apos;Z&apos;]">
+      <assert test="(../ram:BasisAmount -1  lt  (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement[ram:ApplicableTradeTax/ram:CategoryCode = &apos;Z&apos;]/ram:SpecifiedTradeSettlementLineMonetarySummation/xs:decimal(ram:LineTotalAmount))*10*10)div 100) + (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[(ram:ChargeIndicator/udt:Indicator cast as xs:boolean)=true() and ram:CategoryTradeTax/ram:CategoryCode=&apos;Z&apos;]/xs:decimal(ram:ActualAmount))*10*10)div 100) - (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[(ram:ChargeIndicator/udt:Indicator cast as xs:boolean)=false() and ram:CategoryTradeTax/ram:CategoryCode=&apos;Z&apos;]/xs:decimal(ram:ActualAmount))*10*10)div 100)) and (../ram:BasisAmount +1  gt  (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement[ram:ApplicableTradeTax/ram:CategoryCode = &apos;Z&apos;]/ram:SpecifiedTradeSettlementLineMonetarySummation/xs:decimal(ram:LineTotalAmount))*10*10)div 100) + (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[(ram:ChargeIndicator/udt:Indicator cast as xs:boolean)=true() and ram:CategoryTradeTax/ram:CategoryCode=&apos;Z&apos;]/xs:decimal(ram:ActualAmount))*10*10)div 100) - (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[(ram:ChargeIndicator/udt:Indicator cast as xs:boolean)=false() and ram:CategoryTradeTax/ram:CategoryCode=&apos;Z&apos;]/xs:decimal(ram:ActualAmount))*10*10)div 100))">
+	[BR-Z-08]-In a VAT breakdown (BG-23) where VAT category code (BT-118) is "Zero rated" the VAT category taxable amount (BT-116) shall equal the sum of Invoice line net amount (BT-131) minus the sum of Document level allowance amounts (BT-92) plus the sum of Document level charge amounts (BT-99) where the VAT category codes (BT-151, BT-95, BT-102) are "Zero rated".</assert>
+      <assert test="../ram:CalculatedAmount = 0">
+	[BR-Z-09]-The VAT category tax amount (BT-117) in a VAT breakdown (BG-23) where VAT category code (BT-118) is "Zero rated" shall equal 0 (zero).</assert>
+      <assert test="not(../ram:ExemptionReason) and not (../ram:ExemptionReasonCode)">
+	[BR-Z-10]-A VAT Breakdown (BG-23) with VAT Category code (BT-118) "Zero rated" shall not have a VAT exemption reason code (BT-121) or VAT exemption reason text (BT-120).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax/ram:CategoryCode[.=&apos;S&apos;]">
+      <assert test="(abs(xs:decimal(../ram:CalculatedAmount)) - 1  lt  round(abs(xs:decimal(../ram:BasisAmount)) * ../ram:RateApplicablePercent) div 100 ) and (abs(xs:decimal(../ram:CalculatedAmount)) + 1  gt  round(abs(xs:decimal(../ram:BasisAmount)) * ../ram:RateApplicablePercent) div 100 )">
+	[BR-S-09]-The VAT category tax amount (BT-117) in a VAT breakdown (BG-23) where VAT category code (BT-118) is "Standard rated" shall equal the VAT category taxable amount (BT-116) multiplied by the VAT category rate (BT-119).</assert>
+      <assert test="not(../ram:ExemptionReason) and not (../ram:ExemptionReasonCode)">
+	[BR-S-10]-A VAT Breakdown (BG-23) with VAT Category code (BT-118) "Standard rate" shall not have a VAT exemption reason code (BT-121) or VAT exemption reason text (BT-120).</assert>
+      <assert test="every $rate in ../ram:RateApplicablePercent/xs:decimal(.) satisfies (../ram:BasisAmount = (round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement[ram:ApplicableTradeTax/ram:CategoryCode = &apos;S&apos; and ram:ApplicableTradeTax/xs:decimal(ram:RateApplicablePercent) =$rate]/ram:SpecifiedTradeSettlementLineMonetarySummation/xs:decimal(ram:LineTotalAmount)) * 10 * 10) div 100 + round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=true() and ram:CategoryTradeTax/ram:CategoryCode=&apos;S&apos; and ram:CategoryTradeTax/xs:decimal(ram:RateApplicablePercent)=$rate]/xs:decimal(ram:ActualAmount)) * 10 * 10) div 100 - round(sum(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=false() and ram:CategoryTradeTax/ram:CategoryCode=&apos;S&apos; and ram:CategoryTradeTax/xs:decimal(ram:RateApplicablePercent)=$rate]/xs:decimal(ram:ActualAmount)) * 10 * 10) div 100))">
+	[BR-S-08]-For each different value of VAT category rate (BT-119) where the VAT category code (BT-118) is "Standard rated", the VAT category taxable amount (BT-116) in a VAT breakdown (BG-23) shall equal the sum of Invoice line net amounts (BT-131) plus the sum of document level charge amounts (BT-99) minus the sum of document level allowance amounts (BT-92) where the VAT category code (BT-151, BT-102, BT-95) is "Standard rated" and the VAT rate (BT-152, BT-103, BT-96) equals the VAT category rate (BT-119).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:AssociatedDocumentLineDocument/ram:IncludedNote[ram:SubjectCode]">
+      <assert test="(ram:ContentCode) or (ram:Content)">
+	</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:SpecifiedTradeAllowanceCharge">
+      <assert test="(ram:ChargeIndicator)">
+	[BR-66]-Each Specified Trade Allowance Charge (BG-20)(BG-21) shall contain a Charge Indicator.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&apos;false&apos;]/ram:CategoryTradeTax[ram:CategoryCode = &apos;S&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-S-03]-An Invoice that contains a Document level allowance (BG-20) where the Document level allowance VAT category code (BT-95) is "Standard rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent &gt; 0">
+	[BR-S-06]-In a Document level allowance (BG-20) where the Document level allowance VAT category code (BT-95) is "Standard rated" the Document level allowance VAT rate (BT-96) shall be greater than zero.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&apos;false&apos;]/ram:CategoryTradeTax[ram:CategoryCode = &apos;Z&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-Z-03]-An Invoice that contains a Document level allowance (BG-20) where the Document level allowance VAT category code (BT-95) is "Zero rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent = 0">
+	[BR-Z-06]-In a Document level allowance (BG-20) where the Document level allowance VAT category code (BT-95) is "Zero rated" the Document level allowance VAT rate (BT-96) shall be 0 (zero).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&apos;true&apos;]/ram:CategoryTradeTax[ram:CategoryCode = &apos;S&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-S-04]-An Invoice that contains a Document level charge (BG-21) where the Document level charge VAT category code (BT-102) is "Standard rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent &gt; 0">
+	[BR-S-07]-In a Document level charge (BG-21) where the Document level charge VAT category code (BT-102) is "Standard rated" the Document level charge VAT rate (BT-103) shall be greater than zero.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&apos;true&apos;]/ram:CategoryTradeTax[ram:CategoryCode = &apos;Z&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-Z-04]-An Invoice that contains a Document level charge where the Document level charge VAT category code (BT-102) is "Zero rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent = 0">
+	[BR-Z-07]-In a Document level charge (BG-21) where the Document level charge VAT category code (BT-102) is "Zero rated" the Document level charge VAT rate (BT-103) shall be 0 (zero).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax[ram:CategoryCode = &apos;O&apos;]">
+      <assert test="not(/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]) and not (/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]) and not (/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;])">
+	[BR-O-02]-An Invoice that contains an Invoice line (BG-25) where the Invoiced item VAT category code (BT-151) is "Not subject to VAT" shall not contain the Seller VAT identifier (BT-31), the Seller tax representative VAT identifier (BT-63) or the Buyer VAT identifier (BT-46).</assert>
+      <assert test="not(ram:RateApplicablePercent)">
+	[BR-O-05]-An Invoice line (BG-25) where the VAT category code (BT-151) is "Not subject to VAT" shall not contain an Invoiced item VAT rate (BT-152).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax[ram:CategoryCode = &apos;S&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-S-02]-An Invoice that contains an Invoice line (BG-25) where the Invoiced item VAT category code (BT-151) is "Standard rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent &gt; 0">
+	[BR-S-05]-In an Invoice line (BG-25) where the Invoiced item VAT category code (BT-151) is "Standard rated" the Invoiced item VAT rate (BT-152) shall be greater than zero.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="//rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem/ram:SpecifiedLineTradeSettlement/ram:ApplicableTradeTax[ram:CategoryCode = &apos;Z&apos;]">
+      <assert test="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = (&apos;VA&apos;, &apos;FC&apos;)] or /rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID = &apos;VA&apos;]">
+	[BR-Z-02]-An Invoice that contains an Invoice line where the Invoiced item VAT category code (BT-151) is "Zero rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).</assert>
+      <assert test="ram:RateApplicablePercent = 0">
+	[BR-Z-05]-In an Invoice line (BG-25) where the Invoiced item VAT category code (BT-151) is "Zero rated" the Invoiced item VAT rate (BT-152) shall be 0 (zero).</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument">
+      <assert test="count(ram:ID)=1">
+	Element 'ram:ID' must occur exactly 1 times.</assert>
+      <assert test="count(ram:TypeCode)=1">
+	Element 'ram:TypeCode' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:AttachedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:AttachedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CategoryCode">
+      <report test="true()">
+	Element 'ram:CategoryCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ControlRequirementIndicator">
+      <report test="true()">
+	Element 'ram:ControlRequirementIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CopyIndicator">
+      <report test="true()">
+	Element 'ram:CopyIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:CreationDateTime">
+      <report test="true()">
+	Element 'ram:CreationDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:EffectiveSpecifiedPeriod">
+      <report test="true()">
+	Element 'ram:EffectiveSpecifiedPeriod' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:FirstVersionIssueDateTime">
+      <report test="true()">
+	Element 'ram:FirstVersionIssueDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote">
+      <report test="true()">
+	Element 'ram:IncludedNote' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IncludedNote[ram:SubjectCode]">
+      <assert test="(ram:ContentCode) or (ram:Content)">
+	</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTime">
+      <report test="true()">
+	Element 'udt:DateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString">
+      <assert test="@format">
+	Attribute '@format' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssueDateTime/udt:DateTimeString[@format]">
+      <let name="codeValue3" value="@format"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=3]/enumeration[@value=$codeValue3]">
+	Value of '@format' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:IssuerTradeParty">
+      <report test="true()">
+	Element 'ram:IssuerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:LanguageID">
+      <report test="true()">
+	Element 'ram:LanguageID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PreviousRevisionID">
+      <report test="true()">
+	Element 'ram:PreviousRevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:Purpose">
+      <report test="true()">
+	Element 'ram:Purpose' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:PurposeCode">
+      <report test="true()">
+	Element 'ram:PurposeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:ReferenceReferencedDocument">
+      <report test="true()">
+	Element 'ram:ReferenceReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RequestedResponseTypeCode">
+      <report test="true()">
+	Element 'ram:RequestedResponseTypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionDateTime">
+      <report test="true()">
+	Element 'ram:RevisionDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:RevisionID">
+      <report test="true()">
+	Element 'ram:RevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:SignatoryDocumentAuthentication">
+      <report test="true()">
+	Element 'ram:SignatoryDocumentAuthentication' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:SubtypeCode">
+      <report test="true()">
+	Element 'ram:SubtypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode">
+      <let name="codeValue2" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=2]/enumeration[@value=$codeValue2]">
+	Value of 'ram:TypeCode' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listAgencyID]">
+      <report test="true()">
+	Attribute @listAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listID]">
+      <report test="true()">
+	Attribute @listID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listURI]">
+      <report test="true()">
+	Attribute @listURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@listVersionID]">
+      <report test="true()">
+	Attribute @listVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:TypeCode[@name]">
+      <report test="true()">
+	Attribute @name' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocument/ram:VersionID">
+      <report test="true()">
+	Element 'ram:VersionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext">
+      <assert test="count(ram:BusinessProcessSpecifiedDocumentContextParameter)&lt;=1">
+	Element 'ram:BusinessProcessSpecifiedDocumentContextParameter' may occur at maximum 1 times.</assert>
+      <assert test="count(ram:GuidelineSpecifiedDocumentContextParameter)=1">
+	Element 'ram:GuidelineSpecifiedDocumentContextParameter' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ApplicationSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:ApplicationSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BIMSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:BIMSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter">
+      <assert test="count(ram:ID)=1">
+	Element 'ram:ID' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion">
+      <report test="true()">
+	Element 'ram:SpecifiedDocumentVersion' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:BusinessProcessSpecifiedDocumentContextParameter/ram:Value">
+      <report test="true()">
+	Element 'ram:Value' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter">
+      <assert test="count(ram:ID)=1">
+	Element 'ram:ID' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID">
+      <let name="codeValue1" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=1]/enumeration[@value=$codeValue1]">
+	Value of 'ram:ID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:ID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:SpecifiedDocumentVersion">
+      <report test="true()">
+	Element 'ram:SpecifiedDocumentVersion' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:GuidelineSpecifiedDocumentContextParameter/ram:Value">
+      <report test="true()">
+	Element 'ram:Value' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:MessageStandardSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:MessageStandardSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:ScenarioSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:ScenarioSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SpecifiedTransactionID">
+      <report test="true()">
+	Element 'ram:SpecifiedTransactionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:SubsetSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:SubsetSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:TestIndicator">
+      <report test="true()">
+	Element 'ram:TestIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ExchangedDocumentContext/ram:UserSpecifiedDocumentContextParameter">
+      <report test="true()">
+	Element 'ram:UserSpecifiedDocumentContextParameter' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement">
+      <assert test="count(ram:SellerTradeParty)=1">
+	Element 'ram:SellerTradeParty' must occur exactly 1 times.</assert>
+      <assert test="count(ram:BuyerTradeParty)=1">
+	Element 'ram:BuyerTradeParty' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[ not(TypeCode=&quot;916&quot;) and  not(TypeCode=&quot;50&quot;) and  not(TypeCode=&quot;130&quot;)]">
+      <report test="true()">
+	Element variant 'ram:AdditionalReferencedDocument[ not(TypeCode="916") and  not(TypeCode="50") and  not(TypeCode="130")]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]">
+      <assert test="count(ram:IssuerAssignedID)=1">
+	Element 'ram:IssuerAssignedID' must occur exactly 1 times.</assert>
+      <assert test="count(ram:TypeCode)=1">
+	Element 'ram:TypeCode' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:AttachedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:AttachedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:AttachmentBinaryObject">
+      <report test="true()">
+	Element 'ram:AttachmentBinaryObject' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:CategoryCode">
+      <report test="true()">
+	Element 'ram:CategoryCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:CopyIndicator">
+      <report test="true()">
+	Element 'ram:CopyIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:EffectiveSpecifiedPeriod">
+      <report test="true()">
+	Element 'ram:EffectiveSpecifiedPeriod' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:FormattedIssueDateTime/qdt:DateTimeString">
+      <assert test="@format">
+	Attribute '@format' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:FormattedIssueDateTime/qdt:DateTimeString[@format]">
+      <let name="codeValue8" value="@format"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=8]/enumeration[@value=$codeValue8]">
+	Value of '@format' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IncludedNote">
+      <report test="true()">
+	Element 'ram:IncludedNote' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:Information">
+      <report test="true()">
+	Element 'ram:Information' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerAssignedID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:IssuerTradeParty">
+      <report test="true()">
+	Element 'ram:IssuerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:LineID">
+      <report test="true()">
+	Element 'ram:LineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:PageID">
+      <report test="true()">
+	Element 'ram:PageID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:PreviousRevisionID">
+      <report test="true()">
+	Element 'ram:PreviousRevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReceiptDateTime">
+      <report test="true()">
+	Element 'ram:ReceiptDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReferenceTypeCode">
+      <let name="codeValue9" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=9]/enumeration[@value=$codeValue9]">
+	Value of 'ram:ReferenceTypeCode' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReferenceTypeCode[@listAgencyID]">
+      <report test="true()">
+	Attribute @listAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReferenceTypeCode[@listID]">
+      <report test="true()">
+	Attribute @listID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReferenceTypeCode[@listVersionID]">
+      <report test="true()">
+	Attribute @listVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:ReferenceTypeCode[@name]">
+      <report test="true()">
+	Attribute @name' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:RevisionID">
+      <report test="true()">
+	Element 'ram:RevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:SectionName">
+      <report test="true()">
+	Element 'ram:SectionName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:StatusCode">
+      <report test="true()">
+	Element 'ram:StatusCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:SubordinateLineID">
+      <report test="true()">
+	Element 'ram:SubordinateLineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:SubtypeCode">
+      <report test="true()">
+	Element 'ram:SubtypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode">
+      <let name="codeValue2" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=2]/enumeration[@value=$codeValue2]">
+	Value of 'ram:TypeCode' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode[@listAgencyID]">
+      <report test="true()">
+	Attribute @listAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode[@listID]">
+      <report test="true()">
+	Attribute @listID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode[@listURI]">
+      <report test="true()">
+	Attribute @listURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode[@listVersionID]">
+      <report test="true()">
+	Attribute @listVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:TypeCode[@name]">
+      <report test="true()">
+	Attribute @name' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;130&quot;]/ram:URIID">
+      <report test="true()">
+	Element 'ram:URIID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]">
+      <assert test="count(ram:IssuerAssignedID)=1">
+	Element 'ram:IssuerAssignedID' must occur exactly 1 times.</assert>
+      <assert test="count(ram:TypeCode)=1">
+	Element 'ram:TypeCode' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:AttachedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:AttachedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:AttachmentBinaryObject">
+      <report test="true()">
+	Element 'ram:AttachmentBinaryObject' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:CategoryCode">
+      <report test="true()">
+	Element 'ram:CategoryCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:CopyIndicator">
+      <report test="true()">
+	Element 'ram:CopyIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:EffectiveSpecifiedPeriod">
+      <report test="true()">
+	Element 'ram:EffectiveSpecifiedPeriod' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:FormattedIssueDateTime/qdt:DateTimeString">
+      <assert test="@format">
+	Attribute '@format' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:FormattedIssueDateTime/qdt:DateTimeString[@format]">
+      <let name="codeValue8" value="@format"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=8]/enumeration[@value=$codeValue8]">
+	Value of '@format' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IncludedNote">
+      <report test="true()">
+	Element 'ram:IncludedNote' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:Information">
+      <report test="true()">
+	Element 'ram:Information' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerAssignedID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:IssuerTradeParty">
+      <report test="true()">
+	Element 'ram:IssuerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:LineID">
+      <report test="true()">
+	Element 'ram:LineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:PageID">
+      <report test="true()">
+	Element 'ram:PageID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:PreviousRevisionID">
+      <report test="true()">
+	Element 'ram:PreviousRevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:ReceiptDateTime">
+      <report test="true()">
+	Element 'ram:ReceiptDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:ReferenceTypeCode">
+      <report test="true()">
+	Element 'ram:ReferenceTypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:RevisionID">
+      <report test="true()">
+	Element 'ram:RevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:SectionName">
+      <report test="true()">
+	Element 'ram:SectionName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:StatusCode">
+      <report test="true()">
+	Element 'ram:StatusCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:SubordinateLineID">
+      <report test="true()">
+	Element 'ram:SubordinateLineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:SubtypeCode">
+      <report test="true()">
+	Element 'ram:SubtypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode">
+      <let name="codeValue2" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=2]/enumeration[@value=$codeValue2]">
+	Value of 'ram:TypeCode' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode[@listAgencyID]">
+      <report test="true()">
+	Attribute @listAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode[@listID]">
+      <report test="true()">
+	Attribute @listID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode[@listURI]">
+      <report test="true()">
+	Attribute @listURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode[@listVersionID]">
+      <report test="true()">
+	Attribute @listVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:TypeCode[@name]">
+      <report test="true()">
+	Attribute @name' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;50&quot;]/ram:URIID">
+      <report test="true()">
+	Element 'ram:URIID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:AdditionalReferencedDocument[TypeCode=&quot;916&quot;]">
+      <report test="true()">
+	Element variant 'ram:AdditionalReferencedDocument[TypeCode="916"]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ApplicableTradeDeliveryTerms">
+      <report test="true()">
+	Element 'ram:ApplicableTradeDeliveryTerms' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAgentTradeParty">
+      <report test="true()">
+	Element 'ram:BuyerAgentTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerAssignedAccountantTradeParty">
+      <report test="true()">
+	Element 'ram:BuyerAssignedAccountantTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument">
+      <assert test="count(ram:IssuerAssignedID)=1">
+	Element 'ram:IssuerAssignedID' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:AttachedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:AttachmentBinaryObject">
+      <report test="true()">
+	Element 'ram:AttachmentBinaryObject' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:CategoryCode">
+      <report test="true()">
+	Element 'ram:CategoryCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:CopyIndicator">
+      <report test="true()">
+	Element 'ram:CopyIndicator' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:EffectiveSpecifiedPeriod">
+      <report test="true()">
+	Element 'ram:EffectiveSpecifiedPeriod' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:FormattedIssueDateTime">
+      <report test="true()">
+	Element 'ram:FormattedIssueDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IncludedNote">
+      <report test="true()">
+	Element 'ram:IncludedNote' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Information">
+      <report test="true()">
+	Element 'ram:Information' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerAssignedID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:IssuerTradeParty">
+      <report test="true()">
+	Element 'ram:IssuerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:LineID">
+      <report test="true()">
+	Element 'ram:LineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:PageID">
+      <report test="true()">
+	Element 'ram:PageID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:PreviousRevisionID">
+      <report test="true()">
+	Element 'ram:PreviousRevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:ReceiptDateTime">
+      <report test="true()">
+	Element 'ram:ReceiptDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:ReferenceTypeCode">
+      <report test="true()">
+	Element 'ram:ReferenceTypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:RevisionID">
+      <report test="true()">
+	Element 'ram:RevisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SectionName">
+      <report test="true()">
+	Element 'ram:SectionName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:StatusCode">
+      <report test="true()">
+	Element 'ram:StatusCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SubordinateLineID">
+      <report test="true()">
+	Element 'ram:SubordinateLineID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:SubtypeCode">
+      <report test="true()">
+	Element 'ram:SubtypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:TypeCode">
+      <report test="true()">
+	Element 'ram:TypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerOrderReferencedDocument/ram:URIID">
+      <report test="true()">
+	Element 'ram:URIID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageID]">
+      <report test="true()">
+	Attribute @languageID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerReference[@languageLocaleID]">
+      <report test="true()">
+	Attribute @languageLocaleID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerRequisitionerTradeParty">
+      <report test="true()">
+	Element 'ram:BuyerRequisitionerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTaxRepresentativeTradeParty">
+      <report test="true()">
+	Element 'ram:BuyerTaxRepresentativeTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty">
+      <assert test="count(ram:Name)=1">
+	Element 'ram:Name' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:DefinedTradeContact">
+      <report test="true()">
+	Element 'ram:DefinedTradeContact' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Description">
+      <report test="true()">
+	Element 'ram:Description' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:EndPointURIUniversalCommunication">
+      <report test="true()">
+	Element 'ram:EndPointURIUniversalCommunication' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:ID">
+      <report test="true()">
+	Element 'ram:ID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:LogoAssociatedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageID]">
+      <report test="true()">
+	Attribute @languageID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Name[@languageLocaleID]">
+      <report test="true()">
+	Attribute @languageLocaleID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:PostalTradeAddress">
+      <report test="true()">
+	Element 'ram:PostalTradeAddress' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RegisteredID">
+      <report test="true()">
+	Element 'ram:RegisteredID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:Role">
+      <report test="true()">
+	Element 'ram:Role' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:RoleCode">
+      <report test="true()">
+	Element 'ram:RoleCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization">
+      <assert test="count(ram:ID)=1">
+	Element 'ram:ID' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration">
+      <report test="true()">
+	Element 'ram:AuthorizedLegalRegistration' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]">
+      <let name="codeValue4" value="@schemeID"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=4]/enumeration[@value=$codeValue4]">
+	Value of '@schemeID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode">
+      <report test="true()">
+	Element 'ram:LegalClassificationCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress">
+      <report test="true()">
+	Element 'ram:PostalTradeAddress' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName">
+      <report test="true()">
+	Element 'ram:TradingBusinessName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedLogisticsLocation">
+      <report test="true()">
+	Element 'ram:SpecifiedLogisticsLocation' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:SpecifiedTaxRegistration">
+      <report test="true()">
+	Element 'ram:SpecifiedTaxRegistration' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:TypeCode">
+      <report test="true()">
+	Element 'ram:TypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:BuyerTradeParty/ram:URIUniversalCommunication">
+      <report test="true()">
+	Element 'ram:URIUniversalCommunication' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ContractReferencedDocument">
+      <report test="true()">
+	Element 'ram:ContractReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:DemandForecastReferencedDocument">
+      <report test="true()">
+	Element 'ram:DemandForecastReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:OrderResponseReferencedDocument">
+      <report test="true()">
+	Element 'ram:OrderResponseReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PriceListReferencedDocument">
+      <report test="true()">
+	Element 'ram:PriceListReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PricingBaseApplicableLogisticsLocation">
+      <report test="true()">
+	Element 'ram:PricingBaseApplicableLogisticsLocation' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:ProductEndUserTradeParty">
+      <report test="true()">
+	Element 'ram:ProductEndUserTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PromotionalDealReferencedDocument">
+      <report test="true()">
+	Element 'ram:PromotionalDealReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:PurchaseConditionsReferencedDocument">
+      <report test="true()">
+	Element 'ram:PurchaseConditionsReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:QuotationReferencedDocument">
+      <report test="true()">
+	Element 'ram:QuotationReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:Reference">
+      <report test="true()">
+	Element 'ram:Reference' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:RequisitionerReferencedDocument">
+      <report test="true()">
+	Element 'ram:RequisitionerReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SalesAgentTradeParty">
+      <report test="true()">
+	Element 'ram:SalesAgentTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerAssignedAccountantTradeParty">
+      <report test="true()">
+	Element 'ram:SellerAssignedAccountantTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerOrderReferencedDocument">
+      <report test="true()">
+	Element 'ram:SellerOrderReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTaxRepresentativeTradeParty">
+      <report test="true()">
+	Element 'ram:SellerTaxRepresentativeTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty">
+      <assert test="count(ram:Name)=1">
+	Element 'ram:Name' must occur exactly 1 times.</assert>
+      <assert test="count(ram:PostalTradeAddress)=1">
+	Element 'ram:PostalTradeAddress' must occur exactly 1 times.</assert>
+      <assert test="count(ram:SpecifiedTaxRegistration)&lt;=2">
+	Element 'ram:SpecifiedTaxRegistration' may occur at maximum 2 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:DefinedTradeContact">
+      <report test="true()">
+	Element 'ram:DefinedTradeContact' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Description">
+      <report test="true()">
+	Element 'ram:Description' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:EndPointURIUniversalCommunication">
+      <report test="true()">
+	Element 'ram:EndPointURIUniversalCommunication' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:GlobalID">
+      <report test="true()">
+	Element 'ram:GlobalID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:ID">
+      <report test="true()">
+	Element 'ram:ID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:LogoAssociatedSpecifiedBinaryFile">
+      <report test="true()">
+	Element 'ram:LogoAssociatedSpecifiedBinaryFile' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageID]">
+      <report test="true()">
+	Attribute @languageID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Name[@languageLocaleID]">
+      <report test="true()">
+	Attribute @languageLocaleID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress">
+      <assert test="count(ram:CountryID)=1">
+	Element 'ram:CountryID' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AdditionalStreetName">
+      <report test="true()">
+	Element 'ram:AdditionalStreetName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:AttentionOf">
+      <report test="true()">
+	Element 'ram:AttentionOf' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingName">
+      <report test="true()">
+	Element 'ram:BuildingName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:BuildingNumber">
+      <report test="true()">
+	Element 'ram:BuildingNumber' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CareOf">
+      <report test="true()">
+	Element 'ram:CareOf' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityID">
+      <report test="true()">
+	Element 'ram:CityID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CityName">
+      <report test="true()">
+	Element 'ram:CityName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CitySubDivisionName">
+      <report test="true()">
+	Element 'ram:CitySubDivisionName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID">
+      <let name="codeValue5" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=5]/enumeration[@value=$codeValue5]">
+	Value of 'ram:CountryID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeID]">
+      <report test="true()">
+	Attribute @schemeID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountryName">
+      <report test="true()">
+	Element 'ram:CountryName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionID">
+      <report test="true()">
+	Element 'ram:CountrySubDivisionID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:CountrySubDivisionName">
+      <report test="true()">
+	Element 'ram:CountrySubDivisionName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:DepartmentName">
+      <report test="true()">
+	Element 'ram:DepartmentName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:ID">
+      <report test="true()">
+	Element 'ram:ID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFive">
+      <report test="true()">
+	Element 'ram:LineFive' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineFour">
+      <report test="true()">
+	Element 'ram:LineFour' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineOne">
+      <report test="true()">
+	Element 'ram:LineOne' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineThree">
+      <report test="true()">
+	Element 'ram:LineThree' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:LineTwo">
+      <report test="true()">
+	Element 'ram:LineTwo' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostOfficeBox">
+      <report test="true()">
+	Element 'ram:PostOfficeBox' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:PostcodeCode">
+      <report test="true()">
+	Element 'ram:PostcodeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:StreetName">
+      <report test="true()">
+	Element 'ram:StreetName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:PostalTradeAddress/ram:TypeCode">
+      <report test="true()">
+	Element 'ram:TypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RegisteredID">
+      <report test="true()">
+	Element 'ram:RegisteredID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:Role">
+      <report test="true()">
+	Element 'ram:Role' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:RoleCode">
+      <report test="true()">
+	Element 'ram:RoleCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:AuthorizedLegalRegistration">
+      <report test="true()">
+	Element 'ram:AuthorizedLegalRegistration' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID">
+      <assert test="@schemeID">
+	Attribute '@schemeID' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeID]">
+      <let name="codeValue4" value="@schemeID"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=4]/enumeration[@value=$codeValue4]">
+	Value of '@schemeID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID[@schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:LegalClassificationCode">
+      <report test="true()">
+	Element 'ram:LegalClassificationCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:Name">
+      <report test="true()">
+	Element 'ram:Name' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:PostalTradeAddress">
+      <report test="true()">
+	Element 'ram:PostalTradeAddress' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:TradingBusinessName">
+      <report test="true()">
+	Element 'ram:TradingBusinessName' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedLogisticsLocation">
+      <report test="true()">
+	Element 'ram:SpecifiedLogisticsLocation' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration">
+      <assert test="count(ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;)])=1">
+	Element variant 'ram:ID[ not(@schemeID="VA") and  not(@schemeID="FC")]' must occur exactly 1 times.</assert>
+      <assert test="count(ram:ID[@schemeID=&quot;VA&quot;])=1">
+	Element variant 'ram:ID[@schemeID="VA"]' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:AssociatedRegisteredTax">
+      <report test="true()">
+	Element 'ram:AssociatedRegisteredTax' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeID]">
+      <let name="codeValue6" value="@schemeID"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=6]/enumeration[@value=$codeValue6]">
+	Value of '@schemeID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;) and @schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[ not(@schemeID=&quot;VA&quot;) and  not(@schemeID=&quot;FC&quot;)]">
+      <assert test="@schemeID">
+	Attribute '@schemeID' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;FC&quot;]">
+      <report test="true()">
+	Element variant 'ram:ID[@schemeID="FC"]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeAgencyID]">
+      <report test="true()">
+	Attribute @schemeAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeAgencyName]">
+      <report test="true()">
+	Attribute @schemeAgencyName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeDataURI]">
+      <report test="true()">
+	Attribute @schemeDataURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeID]">
+      <let name="codeValue7" value="@schemeID"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=7]/enumeration[@value=$codeValue7]">
+	Value of '@schemeID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeName]">
+      <report test="true()">
+	Attribute @schemeName' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeURI]">
+      <report test="true()">
+	Attribute @schemeURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot; and @schemeVersionID]">
+      <report test="true()">
+	Attribute @schemeVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:ID[@schemeID=&quot;VA&quot;]">
+      <assert test="@schemeID">
+	Attribute '@schemeID' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:SpecifiedTaxRegistration/ram:IOSSID">
+      <report test="true()">
+	Element 'ram:IOSSID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:TypeCode">
+      <report test="true()">
+	Element 'ram:TypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SellerTradeParty/ram:URIUniversalCommunication">
+      <report test="true()">
+	Element 'ram:URIUniversalCommunication' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SpecifiedProcuringProject">
+      <report test="true()">
+	Element 'ram:SpecifiedProcuringProject' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:SupplyInstructionReferencedDocument">
+      <report test="true()">
+	Element 'ram:SupplyInstructionReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeAgreement/ram:UltimateCustomerOrderReferencedDocument">
+      <report test="true()">
+	Element 'ram:UltimateCustomerOrderReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDeliverySupplyChainEvent">
+      <report test="true()">
+	Element 'ram:ActualDeliverySupplyChainEvent' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualDespatchSupplyChainEvent">
+      <report test="true()">
+	Element 'ram:ActualDespatchSupplyChainEvent' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualPickUpSupplyChainEvent">
+      <report test="true()">
+	Element 'ram:ActualPickUpSupplyChainEvent' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ActualReceiptSupplyChainEvent">
+      <report test="true()">
+	Element 'ram:ActualReceiptSupplyChainEvent' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:AdditionalReferencedDocument">
+      <report test="true()">
+	Element 'ram:AdditionalReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ConsumptionReportReferencedDocument">
+      <report test="true()">
+	Element 'ram:ConsumptionReportReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DeliveryNoteReferencedDocument">
+      <report test="true()">
+	Element 'ram:DeliveryNoteReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:DespatchAdviceReferencedDocument">
+      <report test="true()">
+	Element 'ram:DespatchAdviceReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PackingListReferencedDocument">
+      <report test="true()">
+	Element 'ram:PackingListReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:PreviousDeliverySupplyChainEvent">
+      <report test="true()">
+	Element 'ram:PreviousDeliverySupplyChainEvent' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ReceivingAdviceReferencedDocument">
+      <report test="true()">
+	Element 'ram:ReceivingAdviceReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:RelatedSupplyChainConsignment">
+      <report test="true()">
+	Element 'ram:RelatedSupplyChainConsignment' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipFromTradeParty">
+      <report test="true()">
+	Element 'ram:ShipFromTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:ShipToTradeParty">
+      <report test="true()">
+	Element 'ram:ShipToTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeDelivery/ram:UltimateShipToTradeParty">
+      <report test="true()">
+	Element 'ram:UltimateShipToTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement">
+      <assert test="count(ram:InvoiceCurrencyCode)=1">
+	Element 'ram:InvoiceCurrencyCode' must occur exactly 1 times.</assert>
+      <assert test="count(ram:SpecifiedTradeSettlementHeaderMonetarySummation)=1">
+	Element 'ram:SpecifiedTradeSettlementHeaderMonetarySummation' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ApplicableTradeTax">
+      <report test="true()">
+	Element 'ram:ApplicableTradeTax' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod">
+      <report test="true()">
+	Element 'ram:BillingSpecifiedPeriod' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReason">
+      <report test="true()">
+	Element 'ram:CreditReason' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditReasonCode">
+      <report test="true()">
+	Element 'ram:CreditReasonCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceID">
+      <report test="true()">
+	Element 'ram:CreditorReferenceID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceIssuerID">
+      <report test="true()">
+	Element 'ram:CreditorReferenceIssuerID' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceType">
+      <report test="true()">
+	Element 'ram:CreditorReferenceType' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:CreditorReferenceTypeCode">
+      <report test="true()">
+	Element 'ram:CreditorReferenceTypeCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:DuePayableAmount">
+      <report test="true()">
+	Element 'ram:DuePayableAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringAgreementReferencedDocument">
+      <report test="true()">
+	Element 'ram:FactoringAgreementReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:FactoringListReferencedDocument">
+      <report test="true()">
+	Element 'ram:FactoringListReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceApplicableTradeCurrencyExchange">
+      <report test="true()">
+	Element 'ram:InvoiceApplicableTradeCurrencyExchange' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode">
+      <let name="codeValue10" value="."/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=10]/enumeration[@value=$codeValue10]">
+	Value of 'ram:InvoiceCurrencyCode' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listAgencyID]">
+      <report test="true()">
+	Attribute @listAgencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listID]">
+      <report test="true()">
+	Attribute @listID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listURI]">
+      <report test="true()">
+	Attribute @listURI' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceCurrencyCode[@listVersionID]">
+      <report test="true()">
+	Attribute @listVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceDateTime">
+      <report test="true()">
+	Element 'ram:InvoiceDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceIssuerReference">
+      <report test="true()">
+	Element 'ram:InvoiceIssuerReference' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceReferencedDocument">
+      <report test="true()">
+	Element 'ram:InvoiceReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoiceeTradeParty">
+      <report test="true()">
+	Element 'ram:InvoiceeTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:InvoicerTradeParty">
+      <report test="true()">
+	Element 'ram:InvoicerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:LetterOfCreditReferencedDocument">
+      <report test="true()">
+	Element 'ram:LetterOfCreditReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:NextInvoiceDateTime">
+      <report test="true()">
+	Element 'ram:NextInvoiceDateTime' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayableSpecifiedTradeAccountingAccount">
+      <report test="true()">
+	Element 'ram:PayableSpecifiedTradeAccountingAccount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayeeTradeParty">
+      <report test="true()">
+	Element 'ram:PayeeTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PayerTradeParty">
+      <report test="true()">
+	Element 'ram:PayerTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentApplicableTradeCurrencyExchange">
+      <report test="true()">
+	Element 'ram:PaymentApplicableTradeCurrencyExchange' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentCurrencyCode">
+      <report test="true()">
+	Element 'ram:PaymentCurrencyCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PaymentReference">
+      <report test="true()">
+	Element 'ram:PaymentReference' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ProFormaInvoiceReferencedDocument">
+      <report test="true()">
+	Element 'ram:ProFormaInvoiceReferencedDocument' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:PurchaseSpecifiedTradeAccountingAccount">
+      <report test="true()">
+	Element 'ram:PurchaseSpecifiedTradeAccountingAccount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:ReceivableSpecifiedTradeAccountingAccount">
+      <report test="true()">
+	Element 'ram:ReceivableSpecifiedTradeAccountingAccount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SalesSpecifiedTradeAccountingAccount">
+      <report test="true()">
+	Element 'ram:SalesSpecifiedTradeAccountingAccount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedAdvancePayment">
+      <report test="true()">
+	Element 'ram:SpecifiedAdvancePayment' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedFinancialAdjustment">
+      <report test="true()">
+	Element 'ram:SpecifiedFinancialAdjustment' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedLogisticsServiceCharge">
+      <report test="true()">
+	Element 'ram:SpecifiedLogisticsServiceCharge' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ not(ram:ChargeIndicator/udt:Indicator=&quot;false&quot;) and  not(ram:ChargeIndicator/udt:Indicator=&quot;true&quot;)]">
+      <report test="true()">
+	Element variant 'ram:SpecifiedTradeAllowanceCharge[ not(ram:ChargeIndicator/udt:Indicator="false") and  not(ram:ChargeIndicator/udt:Indicator="true")]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&quot;false&quot;]">
+      <report test="true()">
+	Element variant 'ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="false"]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator=&quot;true&quot;]">
+      <report test="true()">
+	Element variant 'ram:SpecifiedTradeAllowanceCharge[ram:ChargeIndicator/udt:Indicator="true"]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradePaymentTerms">
+      <report test="true()">
+	Element 'ram:SpecifiedTradePaymentTerms' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementFinancialCard">
+      <report test="true()">
+	Element 'ram:SpecifiedTradeSettlementFinancialCard' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation">
+      <assert test="count(ram:TaxBasisTotalAmount)=1">
+	Element 'ram:TaxBasisTotalAmount' must occur exactly 1 times.</assert>
+      <assert test="count(ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode])&lt;=2">
+	Element variant 'ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode]' may occur at maximum 2 times.</assert>
+      <assert test="count(ram:GrandTotalAmount)=1">
+	Element 'ram:GrandTotalAmount' must occur exactly 1 times.</assert>
+      <assert test="count(ram:DuePayableAmount)=1">
+	Element 'ram:DuePayableAmount' must occur exactly 1 times.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:AllowanceTotalAmount">
+      <report test="true()">
+	Element 'ram:AllowanceTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ChargeTotalAmount">
+      <report test="true()">
+	Element 'ram:ChargeTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyCodeListVersionID]">
+      <report test="true()">
+	Attribute @currencyCodeListVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:DuePayableAmount[@currencyID]">
+      <report test="true()">
+	Attribute @currencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyCodeListVersionID]">
+      <report test="true()">
+	Attribute @currencyCodeListVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount[@currencyID]">
+      <report test="true()">
+	Attribute @currencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrossLineTotalAmount">
+      <report test="true()">
+	Element 'ram:GrossLineTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:IncludingTaxesLineTotalAmount">
+      <report test="true()">
+	Element 'ram:IncludingTaxesLineTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:InformationAmount">
+      <report test="true()">
+	Element 'ram:InformationAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:InsuranceChargeTotalAmount">
+      <report test="true()">
+	Element 'ram:InsuranceChargeTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:LineTotalAmount">
+      <report test="true()">
+	Element 'ram:LineTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetIncludingTaxesLineTotalAmount">
+      <report test="true()">
+	Element 'ram:NetIncludingTaxesLineTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:NetLineTotalAmount">
+      <report test="true()">
+	Element 'ram:NetLineTotalAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:ProductValueExcludingTobaccoTaxInformationAmount">
+      <report test="true()">
+	Element 'ram:ProductValueExcludingTobaccoTaxInformationAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RetailValueExcludingTaxInformationAmount">
+      <report test="true()">
+	Element 'ram:RetailValueExcludingTaxInformationAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:RoundingAmount">
+      <report test="true()">
+	Element 'ram:RoundingAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyCodeListVersionID]">
+      <report test="true()">
+	Attribute @currencyCodeListVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxBasisTotalAmount[@currencyID]">
+      <report test="true()">
+	Attribute @currencyID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[ not(@currencyID=../../ram:InvoiceCurrencyCode) and  not(@currencyID=../../ram:TaxCurrencyCode)]">
+      <report test="true()">
+	Element variant 'ram:TaxTotalAmount[ not(@currencyID=../../ram:InvoiceCurrencyCode) and  not(@currencyID=../../ram:TaxCurrencyCode)]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode and @currencyCodeListVersionID]">
+      <report test="true()">
+	Attribute @currencyCodeListVersionID' marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode and @currencyID]">
+      <let name="codeValue11" value="@currencyID"/>
+      <assert test="document(&apos;Factur-X-Minimum_1.0.07_codedb.xml&apos;)//cl[@id=11]/enumeration[@value=$codeValue11]">
+	Value of '@currencyID' is not allowed.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:InvoiceCurrencyCode]">
+      <assert test="@currencyID">
+	Attribute '@currencyID' is required in this context.</assert>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TaxTotalAmount[@currencyID=../../ram:TaxCurrencyCode]">
+      <report test="true()">
+	Element variant 'ram:TaxTotalAmount[@currencyID=../../ram:TaxCurrencyCode]' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalAllowanceChargeAmount">
+      <report test="true()">
+	Element 'ram:TotalAllowanceChargeAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDepositFeeInformationAmount">
+      <report test="true()">
+	Element 'ram:TotalDepositFeeInformationAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalDiscountAmount">
+      <report test="true()">
+	Element 'ram:TotalDiscountAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalPrepaidAmount">
+      <report test="true()">
+	Element 'ram:TotalPrepaidAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:TotalRetailValueInformationAmount">
+      <report test="true()">
+	Element 'ram:TotalRetailValueInformationAmount' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SpecifiedTradeSettlementPaymentMeans">
+      <report test="true()">
+	Element 'ram:SpecifiedTradeSettlementPaymentMeans' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:SubtotalCalculatedTradeTax">
+      <report test="true()">
+	Element 'ram:SubtotalCalculatedTradeTax' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxApplicableTradeCurrencyExchange">
+      <report test="true()">
+	Element 'ram:TaxApplicableTradeCurrencyExchange' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:TaxCurrencyCode">
+      <report test="true()">
+	Element 'ram:TaxCurrencyCode' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:ApplicableHeaderTradeSettlement/ram:UltimatePayeeTradeParty">
+      <report test="true()">
+	Element 'ram:UltimatePayeeTradeParty' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:SupplyChainTradeTransaction/ram:IncludedSupplyChainTradeLineItem">
+      <report test="true()">
+	Element 'ram:IncludedSupplyChainTradeLineItem' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+  <pattern>
+    <rule context="/rsm:CrossIndustryInvoice/rsm:ValuationBreakdownStatement">
+      <report test="true()">
+	Element 'rsm:ValuationBreakdownStatement' is marked as not used in the given context.</report>
+    </rule>
+  </pattern>
+</schema>

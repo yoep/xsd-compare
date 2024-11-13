@@ -1,11 +1,45 @@
 package com.compare.xsd.comparison.model.xsd;
 
-import com.compare.xsd.comparison.model.Modifications;
+import com.compare.xsd.comparison.model.Change;
 import javafx.scene.image.Image;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface XsdNode {
+
+    public enum CompositorType {
+        SEQUENCE(1),
+        CHOICE(2),
+        ALL(3);
+
+        private int compositorType;
+
+        private int value;
+        private static Map map;
+
+        private CompositorType(int value) {
+            this.value = value;
+        }
+
+        static {
+            map = new HashMap<>();
+            for (CompositorType compositorType : CompositorType.values()) {
+                map.put(compositorType.value, compositorType);
+            }
+        }
+
+        public static CompositorType valueOf(int compositorType) {
+            return (CompositorType) map.get(compositorType);
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+
     /**
      * Get the name of the node.
      *
@@ -18,14 +52,14 @@ public interface XsdNode {
      *
      * @return Returns the namespace of the node.
      */
-    String getNamespace();
+    String getTypeNamespace();
 
     /**
      * Get the type of the node (optional).
      *
-     * @return Returns the type of the node or null.
+     * @return Returns the name of the type of the node or null.
      */
-    String getType();
+    String getTypeName();
 
     /**
      * Get the cardinality of the node (optional).
@@ -47,6 +81,48 @@ public interface XsdNode {
      * @return Returns the pattern of the node or null.
      */
     String getPattern();
+
+    /**
+     * Get the maxinclusive value of the node (optional).
+     *
+     * @return Returns the maxinclusive value of the node or null.
+     */
+    Integer getMaxInclusive();
+
+    /**
+     * Get the maxexclusive value of the node (optional).
+     *
+     * @return Returns the maxexclusive value of the node or null.
+     */
+    Integer getMaxExclusive();
+
+    /**
+     * Get the mininclusive value of the node (optional).
+     *
+     * @return Returns the mininclusive value of the node or null.
+     */
+    Integer getMinInclusive();
+
+    /**
+     * Get the minexclusive value of the node (optional).
+     *
+     * @return Returns the minexclusive value of the node or null.
+     */
+    Integer getMinExclusive();
+
+    /**
+     * Get the totaldigits value of the node (optional).
+     *
+     * @return Returns the totaldigits value of the node or null.
+     */
+    Integer getTotalDigits();
+
+    /**
+     * Get the fractionDigits value of the node (optional).
+     *
+     * @return Returns the fractionDigits value of the node or null.
+     */
+    Integer getFractionDigits();
 
     /**
      * Get the whitespace mode of the node (optional).
@@ -91,6 +167,17 @@ public interface XsdNode {
     Integer getMaxLength();
 
     /**
+     * Get the compositor the node.
+     * of Xerces interface XSModelGroup
+     *     short COMPOSITOR_SEQUENCE = 1;
+     *     short COMPOSITOR_CHOICE = 2;
+     *     short COMPOSITOR_ALL = 3;
+     *
+     * @return Returns the compositor of the node.
+     */
+    short getCompositor();
+
+    /**
      * Get the icon of the node.
      *
      * @return Returns the image icon of the node.
@@ -123,12 +210,12 @@ public interface XsdNode {
      *
      * @return Returns the modifications.
      */
-    Modifications getModifications();
+    Change getChange();
 
     /**
      * Set the modifications of this node.
      *
-     * @param modifications Set the modifications.
+     * @param change Set the modifications.
      */
-    void setModifications(Modifications modifications);
+    void setChange(Change change);
 }

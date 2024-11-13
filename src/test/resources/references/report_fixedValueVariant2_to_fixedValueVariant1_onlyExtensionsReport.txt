@@ -1,0 +1,3 @@
+In type {CargoOperationalCategoryCodeType} added @listID {token}{0..1} 
+In type {CargoOperationalCategoryCodeType} added @listVersionID {token}{0..1} 
+In type {CargoOperationalCategoryCodeType} added @name {string}{0..1} 

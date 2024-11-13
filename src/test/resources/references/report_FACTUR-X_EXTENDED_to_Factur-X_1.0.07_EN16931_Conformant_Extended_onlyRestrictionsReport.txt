@@ -1,0 +1,28 @@
+In type {LogisticsServiceChargeType} modifying element: 
+	old: <AppliedTradeTax>{TradeTaxType}{0..*} in type {LogisticsServiceChargeType}
+	new: <AppliedTradeTax>{TradeTaxType}{1..*} in type {LogisticsServiceChargeType}
+		Restricted cardinality from 0..* to 1..*
+In type {ReferencedDocumentType} modifying element: 
+	old: <Name>{TextType}{0..*} in type {ReferencedDocumentType}
+	new: <Name>{TextType}{0..1} in type {ReferencedDocumentType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeAddressType} modifying element: 
+	old: <CountrySubDivisionName>{TextType}{0..*} in type {TradeAddressType}
+	new: <CountrySubDivisionName>{TextType}{0..1} in type {TradeAddressType}
+		Restricted cardinality from 0..* to 0..1
+In type {TradeCountryType} modifying element: 
+	old: <ID>{CountryIDType}{0..1} in type {TradeCountryType}
+	new: <ID>{CountryIDType}{1..1} in type {TradeCountryType}
+		Restricted cardinality from 0..1 to 1..1
+In type {TradePartyType} modifying element: 
+	old: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..*} in type {TradePartyType}
+	new: <SpecifiedTaxRegistration>{TaxRegistrationType}{0..2} in type {TradePartyType}
+		Restricted cardinality from 0..* to 0..2
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <GrandTotalAmount>{AmountType}{1..2} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <GrandTotalAmount>{AmountType}{1..1} in type {TradeSettlementHeaderMonetarySummationType}
+		Restricted cardinality from 1..2 to 1..1
+In type {TradeTaxType} modifying element: 
+	old: <TypeCode>{TaxTypeCodeType}{0..1} in type {TradeTaxType}
+	new: <TypeCode>{TaxTypeCodeType}{1..1} in type {TradeTaxType}
+		Restricted cardinality from 0..1 to 1..1

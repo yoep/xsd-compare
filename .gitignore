@@ -1,5 +1,7 @@
+.vscode/
+nb-configuration.xml
 .idea/
 target/
-buid/
-
+build/
+logs/
 **/*.iml

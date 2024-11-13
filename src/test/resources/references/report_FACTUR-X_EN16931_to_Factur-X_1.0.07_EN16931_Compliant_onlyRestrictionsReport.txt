@@ -1,0 +1,4 @@
+In type {TradeCountryType} modifying element: 
+	old: <ID>{CountryIDType}{0..1} in type {TradeCountryType}
+	new: <ID>{CountryIDType}{1..1} in type {TradeCountryType}
+		Restricted cardinality from 0..1 to 1..1

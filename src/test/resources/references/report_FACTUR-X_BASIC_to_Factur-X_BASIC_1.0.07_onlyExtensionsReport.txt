@@ -1,0 +1,11 @@
+In type {HeaderTradeAgreementType} added <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..1} in type {HeaderTradeSettlementType}
+	new: <InvoiceReferencedDocument>{ReferencedDocumentType}{0..*} in type {HeaderTradeSettlementType}
+		Extended cardinality from 0..1 to 0..*
+In type {HeaderTradeSettlementType} modifying element: 
+	old: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..1} in type {HeaderTradeSettlementType}
+	new: <SpecifiedTradeSettlementPaymentMeans>{TradeSettlementPaymentMeansType}{0..*} in type {HeaderTradeSettlementType}
+		Extended cardinality from 0..1 to 0..*
+In type {ReferencedDocumentType} added <ReferenceTypeCode> {ReferenceCodeType}{0..1} 
+In type {ReferencedDocumentType} added <TypeCode> {DocumentCodeType}{0..1} 

@@ -1,0 +1,12 @@
+In type {HeaderTradeAgreementType} added <AdditionalReferencedDocument> {ReferencedDocumentType}{0..*} 
+In type {ReferencedDocumentType} added <FormattedIssueDateTime> {FormattedDateTimeType}{0..1} 
+In type {ReferencedDocumentType} added <ReferenceTypeCode> {ReferenceCodeType}{0..1} 
+In type {ReferencedDocumentType} added <TypeCode> {DocumentCodeType}{0..1} 
+In type {TaxRegistrationType} modifying element: 
+	old: <ID>{IDType}{1..1} in type {TaxRegistrationType}
+	new: <ID>{IDType}{0..1} in type {TaxRegistrationType}
+		Extended cardinality from 1..1 to 0..1
+In type {TradeSettlementHeaderMonetarySummationType} modifying element: 
+	old: <TaxTotalAmount>{AmountType}{0..1} in type {TradeSettlementHeaderMonetarySummationType}
+	new: <TaxTotalAmount>{AmountType}{0..2} in type {TradeSettlementHeaderMonetarySummationType}
+		Extended cardinality from 0..1 to 0..2

@@ -126,8 +126,8 @@ public class Worksheet {
             newFont.setFamily(cell.getFontFamily());
             newFont.setBold(cell.isBold());
             newFont.setItalic(cell.isItalic());
-            newFont.setColor(new XSSFColor(cell.getFontColor()));
-            cellStyle.setFillForegroundColor(new XSSFColor(cell.getBackgroundColor()));
+            newFont.setColor(new XSSFColor(cell.getFontColor(), null));
+            cellStyle.setFillForegroundColor(new XSSFColor(cell.getBackgroundColor(), null));
             cellStyle.setFillPattern(cell.getFillPattern());
 
             if (cell.isAutoSizeColumn()) {
@@ -148,8 +148,8 @@ public class Worksheet {
     public void createTable(String name, CellRange.Range range) {
         log.debug("Creating table '" + name + "' within '" + worksheet.getSheetName() + "' [" + range.toRange() + "]");
         final int totalColumns = (range.getColumnEndIndex() - range.getColumnStartIndex()) + 1;
-        XSSFTable table = worksheet.createTable();
         AreaReference tableArea = new AreaReference(getSheetReference(range), SpreadsheetVersion.EXCEL2007);
+        XSSFTable table = worksheet.createTable(tableArea);
 
         table.getCTTable().addNewTableStyleInfo();
         table.getCTTable().getTableStyleInfo().setName("TableStyleMedium2");
@@ -167,7 +167,7 @@ public class Worksheet {
         style.setShowColumnStripes(true);
 
         for (int i = 0; i < totalColumns; i++) {
-            table.addColumn();
+            table.createColumn(Integer.toString(i));
         }
 
         table.setCellReferences(tableArea);

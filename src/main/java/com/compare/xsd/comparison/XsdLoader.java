@@ -71,6 +71,17 @@ public class XsdLoader {
      * @return Returns the loaded {@link XsdDocument}.
      */
     public XsdDocument load(File file) {
+        return load(file, 3);
+    }
+
+    /**
+     * Load the given XSD file into a {@link XsdDocument}.
+     *
+     * @param file Set the XSD file to load.
+     * @param duplicatedAnchestorNoAllowed Set the recursion depth by limiting same anchestors     *
+     * @return Returns the loaded {@link XsdDocument}.
+     */
+    public XsdDocument load(File file, int duplicatedAnchestorNoAllowed) {
         Assert.notNull(file, "file cannot be null");
 
         // verify if the file exists
@@ -81,6 +92,7 @@ public class XsdLoader {
         }
 
         log.debug("Loading xsd file " + file);
-        return new XsdDocument(file);
+        return new XsdDocument(file, duplicatedAnchestorNoAllowed);
     }
+
 }

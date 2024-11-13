@@ -5,7 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.xsd</groupId>
@@ -20,9 +21,9 @@
     </scm>
 
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
 
         <spring-boot-starter-javafx.version>2.0.0</spring-boot-starter-javafx.version>
         <javafx.version>21.0.1</javafx.version>
@@ -41,17 +42,12 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.6</version>
+                <version>2.17.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>3.17</version>
-            </dependency>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>2.12.0</version>
+                <version>5.3.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -77,13 +73,18 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
+            <version>2.12.2</version>
         </dependency>
-
         <!-- JavaFX -->
         <dependency>
             <groupId>com.github.yoep</groupId>
             <artifactId>spring-boot-starter-javafx</artifactId>
             <version>${spring-boot-starter-javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -131,6 +132,12 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -139,12 +146,12 @@
                 <plugin>
                     <groupId>io.github.fvarrui</groupId>
                     <artifactId>javapackager</artifactId>
-                    <version>1.1.0</version>
+                    <version>1.7.6</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.1.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -165,7 +172,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -183,11 +190,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.5.1</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <!-- see https://cwiki.apache.org/confluence/display/MAVEN/Maven+Properties+Guide -->
+                        <xsd.compare.base.dir>${project.basedir}</xsd.compare.base.dir>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.1</version>
                 <configuration>
                     <finalName>xsd-compare</finalName>
                     <keepDependenciesWithProvidedScope>false</keepDependenciesWithProvidedScope>
@@ -200,21 +215,62 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/spring.handlers</resource>
                                 </transformer>
-                                <transformer implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
+                                <transformer
+                                        implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
                                     <resource>META-INF/spring.factories</resource>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/spring.schemas</resource>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>${start-class}</mainClass>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>${start-class}</Main-Class>
+                                        <X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+                                        <X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <mainClass>${start-class}</mainClass>
+                            <!-- does not compile with the following:
+                            <vmArgs>
+                                <param>-Dsun.awt.disablegrab=true</param>
+                                <param>-XX:+UseG1GC</param>
+                            </vmArgs>-->
+                        </manifest>
+                        <manifestEntries>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>single</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -229,7 +285,7 @@
                         </goals>
                         <configuration>
                             <mainClass>${start-class}</mainClass>
-                            <runnableJar>${project.build.directory}/xsd-compare.jar</runnableJar>
+                            <runnableJar>${project.build.directory}/xsd-compare-${project.version}-jar-with-dependencies.jar</runnableJar>
                             <bundleJre>true</bundleJre>
                             <copyDependencies>false</copyDependencies>
                             <generateInstaller>true</generateInstaller>
@@ -267,15 +323,69 @@
             <properties>
                 <platform>windows</platform>
             </properties>
-
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>nexus</id>
+                    <name>nexus-snapshot-repository</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>io.github.fvarrui</groupId>
                         <artifactId>javapackager</artifactId>
-                        <configuration>
-                            <createZipball>true</createZipball>
-                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>${start-class}</mainClass>
+                                    <runnableJar>${project.build.directory}/xsd-compare-${project.version}-jar-with-dependencies.jar</runnableJar>
+                                    <bundleJre>true</bundleJre>
+                                    <copyDependencies>false</copyDependencies>
+                                    <generateInstaller>true</generateInstaller>
+                                    <administratorRequired>false</administratorRequired>
+                                    <platform>auto</platform>
+                                    <customizedJre>false</customizedJre>
+                                    <name>xsd-compare</name>
+                                    <displayName>XSD Compare</displayName>
+                                    <organizationName>XSD Compare</organizationName>
+                                    <licenseFile>LICENSE</licenseFile>
+                                    <version>${project.version}</version>
+                                    <vmArgs>
+                                        <param>-Dsun.awt.disablegrab=true</param>
+                                        <param>-XX:+UseG1GC</param>
+                                    </vmArgs>
+                                </configuration>
+                                    <!-- mandatory 
+                                    <mainClass>com.compare.xsd.XsdCompareStarter</mainClass>                                    
+                                    <!- optional >
+                                    <bundleJre>true|false</bundleJre>
+                                    <generateInstaller>true|false</generateInstaller>
+                                    <administratorRequired>true|false</administratorRequired>
+                                    <platform>auto|linux|mac|windows</platform>
+                                    <additionalResources>
+                                        <additionalResource>file path</additionalResource>
+                                        <additionalResource>folder path</additionalResource>
+                                        <additionalResource>...</additionalResource>
+                                    </additionalResources>
+
+                                    <winConfig><createZipball>true</createZipball></winConfig>
+                                    [...]
+
+                                </configuration>-->
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -286,18 +396,57 @@
             <properties>
                 <platform>linux</platform>
             </properties>
-
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>nexus</id>
+                    <name>nexus-snapshot-repository</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>io.github.fvarrui</groupId>
                         <artifactId>javapackager</artifactId>
-                        <configuration>
-                            <createTarball>true</createTarball>
-                            <linuxConfig>
-                                <generateRpm>false</generateRpm>
-                            </linuxConfig>
-                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- mandatory -->
+                                    <mainClass>com.compare.xsd.XsdCompareStarter</mainClass>
+                                    <!-- optional ->
+                                    <bundleJre>true|false</bundleJre>
+                                    <generateInstaller>true|false</generateInstaller>
+                                    <administratorRequired>true|false</administratorRequired>
+                                    <platform>auto|linux|mac|windows</platform>
+                                    <additionalResources>
+                                        <additionalResource>file path</additionalResource>
+                                        <additionalResource>folder path</additionalResource>
+                                        <additionalResource>...</additionalResource>
+                                    </additionalResources>
+                                    -->
+                                    <linuxConfig>
+                                        <createTarball>true</createTarball>
+                                        <linuxConfig>
+                                            <generateRpm>false</generateRpm>
+                                        </linuxConfig>
+                                    </linuxConfig>
+                                    <macConfig><createTarball>true</createTarball></macConfig>
+                                    <winConfig><createZipball>true</createZipball></winConfig>
+                                    <!--[...]-->
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

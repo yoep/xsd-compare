@@ -3,11 +3,17 @@ spring:
     name: XSD Compare
 
 logging:
+  pattern:
+    console: %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+    file: %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
   level:
     org.springframework: WARN
-    com.compare.xsd: INFO
-  file:
+    com.compare.xsd: DEBUG
+  file:    
     clean-history-on-start: true
     name: '${app.dir}/logs/xsd-compare.log'
     max-size: 25MB
-    total-size-cap: 100MB
+    total-size-cap: 100MB    
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
